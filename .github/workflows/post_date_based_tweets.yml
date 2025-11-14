@@ -1,22 +1,17 @@
-# GitHub Actions Workflow for Automated Tweet Posting
-# This file should be placed at: .github/workflows/post_tweets.yml
-# in the PUBLIC repository (potterpedia_bot_runner)
+# GitHub Actions Workflow for Date-Based Tweet Posting
+# Posts birthdays, deathdays, and events at 0:00 JST (15:00 UTC)
 
-name: Post Daily Tweets
+name: Post Date-Based Tweets
 
 on:
   schedule:
     # Post date-based tweets at 0:00 JST (15:00 UTC previous day)
     - cron: '0 15 * * *'
-    # Post glossary tweets at 21:00 JST (12:00 UTC)
-    - cron: '0 12 * * *'
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
   post-date-based-tweets:
     runs-on: ubuntu-latest
-    # Only run on schedule at 15:00 UTC (0:00 JST)
-    if: github.event.schedule == '0 15 * * *' || github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout repository
@@ -53,32 +48,3 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
         run: |
           python scripts/post_tweet.py today
-
-  post-glossary-tweet:
-    runs-on: ubuntu-latest
-    # Only run on schedule at 12:00 UTC (21:00 JST)
-    if: github.event.schedule == '0 12 * * *' || github.event_name == 'workflow_dispatch'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Post glossary tweet
-        env:
-          X_API_KEY: ${{ secrets.X_API_KEY }}
-          X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
-          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
-        run: |
-          python scripts/post_tweet.py glossary
