@@ -1,0 +1,11 @@
+# Core dependencies
+requests>=2.31.0
+
+# Twitter/X API
+tweepy>=4.14.0
+
+# Data handling
+python-dotenv>=1.0.0
+
+# Scheduling (for future use)
+schedule>=1.2.0
