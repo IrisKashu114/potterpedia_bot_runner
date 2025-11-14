@@ -6,14 +6,16 @@ name: Post Daily Tweets
 
 on:
   schedule:
-    # Post date-based tweets at 0:00 JST (15:00 UTC previous day)
+    # Post birthday/deathday tweets at 0:00 JST (15:00 UTC previous day)
     - cron: '0 15 * * *'
+    # Post event tweets at 12:00 JST (3:00 UTC)
+    - cron: '0 3 * * *'
     # Post glossary tweets at 21:00 JST (12:00 UTC)
     - cron: '0 12 * * *'
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
-  post-date-based-tweets:
+  post-birthday-deathday-tweets:
     runs-on: ubuntu-latest
     # Only run on schedule at 15:00 UTC (0:00 JST)
     if: github.event.schedule == '0 15 * * *' || github.event_name == 'workflow_dispatch'
@@ -45,14 +47,43 @@ jobs:
             exit 0
           fi
 
-      - name: Post today's tweets
+      - name: Post birthday and deathday tweets
         env:
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
         run: |
-          python scripts/post_tweet.py today
+          python scripts/post_tweet.py today --categories birthday deathday
+
+  post-event-tweets:
+    runs-on: ubuntu-latest
+    # Only run on schedule at 3:00 UTC (12:00 JST)
+    if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Post event tweets
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: |
+          python scripts/post_tweet.py today --categories event
 
   post-glossary-tweet:
     runs-on: ubuntu-latest

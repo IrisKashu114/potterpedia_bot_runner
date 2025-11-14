@@ -267,35 +267,45 @@ def post_event(date_str: str, dry_run: bool = False) -> bool:
     return success
 
 
-def post_today(dry_run: bool = False) -> bool:
+def post_today(dry_run: bool = False, categories: Optional[list] = None) -> bool:
     """
     今日の誕生日・命日・イベントツイートを投稿
 
     Args:
         dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        categories: 投稿するカテゴリーのリスト。Noneの場合はすべて投稿
+                   例: ['birthday', 'deathday', 'event']
 
     Returns:
         投稿成功時はTrue
     """
+    # デフォルトではすべてのカテゴリーを投稿
+    if categories is None:
+        categories = ['birthday', 'deathday', 'event']
+
     today = datetime.now().strftime('%Y-%m-%d')
     print(f"今日の日付: {today}")
+    print(f"投稿カテゴリー: {', '.join(categories)}")
 
     success = True
 
     # 誕生日ツイート
-    print("\n=== 誕生日ツイート ===")
-    if not post_birthday(today, dry_run=dry_run):
-        print("該当なし")
+    if 'birthday' in categories:
+        print("\n=== 誕生日ツイート ===")
+        if not post_birthday(today, dry_run=dry_run):
+            print("該当なし")
 
     # 命日ツイート
-    print("\n=== 命日ツイート ===")
-    if not post_deathday(today, dry_run=dry_run):
-        print("該当なし")
+    if 'deathday' in categories:
+        print("\n=== 命日ツイート ===")
+        if not post_deathday(today, dry_run=dry_run):
+            print("該当なし")
 
     # イベントツイート
-    print("\n=== イベントツイート ===")
-    if not post_event(today, dry_run=dry_run):
-        print("該当なし")
+    if 'event' in categories:
+        print("\n=== イベントツイート ===")
+        if not post_event(today, dry_run=dry_run):
+            print("該当なし")
 
     return success
 
@@ -452,9 +462,15 @@ def main():
     subparsers = parser.add_subparsers(dest='command', help='実行するコマンド')
 
     # todayコマンド
-    subparsers.add_parser(
+    today_parser = subparsers.add_parser(
         'today',
-        help='今日の誕生日・命日ツイートを投稿'
+        help='今日の誕生日・命日・イベントツイートを投稿'
+    )
+    today_parser.add_argument(
+        '--categories',
+        nargs='+',
+        choices=['birthday', 'deathday', 'event'],
+        help='投稿するカテゴリーを指定（複数可）。指定しない場合はすべて投稿'
     )
 
     # birthdayコマンド
@@ -534,7 +550,7 @@ def main():
 
     try:
         if args.command == 'today':
-            post_today(dry_run=args.dry_run)
+            post_today(dry_run=args.dry_run, categories=args.categories)
 
         elif args.command == 'birthday':
             post_birthday(args.date, dry_run=args.dry_run)
