@@ -17,6 +17,12 @@ X (Twitter) 投稿スクリプト
     # ランダムにポーションを投稿
     python scripts/post_tweet.py potion
 
+    # ランダムに魔法生物を投稿
+    python scripts/post_tweet.py creature
+
+    # ランダムに用語集（呪文・ポーション・魔法生物）を投稿
+    python scripts/post_tweet.py glossary
+
     # テスト投稿
     python scripts/post_tweet.py test "テストツイート"
 """
@@ -424,9 +430,66 @@ def post_potion(potion_id: Optional[str] = None, dry_run: bool = False, use_stat
     return False
 
 
+def post_creature(creature_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
+    """
+    魔法生物ツイートを投稿
+
+    Args:
+        creature_id: 特定の魔法生物ID（UUIDまたはslug）。Noneの場合はランダム選択
+        dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        use_state: 状態管理を使用するかどうか（重複投稿防止）
+
+    Returns:
+        投稿成功時はTrue
+    """
+    # プロジェクトルートディレクトリを取得
+    project_root = Path(__file__).parent.parent
+    creatures_file = project_root / 'data' / 'posts' / 'creatures.json'
+
+    # データファイル読み込み
+    data = load_data_file(creatures_file)
+
+    # 魔法生物を選択
+    if creature_id:
+        # ID指定の場合、該当する魔法生物を検索
+        matches = [
+            entry for entry in data['data']
+            if entry.get('id') == creature_id or entry.get('slug') == creature_id
+        ]
+        if not matches:
+            print(f"指定されたID（{creature_id}）の魔法生物が見つかりません")
+            return False
+        entry = matches[0]
+    else:
+        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
+        if use_state and STATE_MANAGEMENT_AVAILABLE:
+            state_manager = StateManager()
+            entry = state_manager.get_random_available_item('creature', data['data'])
+            if not entry:
+                print("利用可能な魔法生物がありません")
+                return False
+        else:
+            entry = random.choice(data['data'])
+
+    # ツイート投稿
+    poster = XPoster(dry_run=dry_run)
+    result = poster.post_tweet(entry['tweet_text_ja'])
+
+    if result:
+        print(f"✓ 魔法生物: {entry.get('name_ja') or entry.get('name_en')}")
+
+        # 投稿成功時、状態を更新
+        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
+            state_manager = StateManager()
+            state_manager.mark_as_posted('creature', entry['id'])
+
+        return True
+    return False
+
+
 def post_glossary(dry_run: bool = False) -> bool:
     """
-    用語集（呪文またはポーション）をランダムに投稿
+    用語集（呪文・ポーション・魔法生物）をランダムに投稿
 
     Args:
         dry_run: Trueの場合、実際には投稿せずログ出力のみ
@@ -435,14 +498,17 @@ def post_glossary(dry_run: bool = False) -> bool:
         投稿成功時はTrue
     """
     # ランダムにカテゴリを選択
-    category = random.choice(['spell', 'potion'])
+    category = random.choice(['spell', 'potion', 'creature'])
 
     if category == 'spell':
         print("カテゴリ: 呪文")
         return post_spell(dry_run=dry_run)
-    else:
+    elif category == 'potion':
         print("カテゴリ: ポーション")
         return post_potion(dry_run=dry_run)
+    else:
+        print("カテゴリ: 魔法生物")
+        return post_creature(dry_run=dry_run)
 
 
 def main():
@@ -525,10 +591,21 @@ def main():
         help='特定のポーションID（UUID）を指定'
     )
 
+    # creatureコマンド
+    creature_parser = subparsers.add_parser(
+        'creature',
+        help='魔法生物ツイートを投稿（ランダムまたはID指定）'
+    )
+    creature_parser.add_argument(
+        '--id',
+        dest='creature_id',
+        help='特定の魔法生物ID（UUID）を指定'
+    )
+
     # glossaryコマンド
     subparsers.add_parser(
         'glossary',
-        help='用語集（呪文またはポーション）をランダムに投稿'
+        help='用語集（呪文・ポーション・魔法生物）をランダムに投稿'
     )
 
     # testコマンド
@@ -566,6 +643,9 @@ def main():
 
         elif args.command == 'potion':
             post_potion(potion_id=args.potion_id, dry_run=args.dry_run)
+
+        elif args.command == 'creature':
+            post_creature(creature_id=args.creature_id, dry_run=args.dry_run)
 
         elif args.command == 'glossary':
             post_glossary(dry_run=args.dry_run)
