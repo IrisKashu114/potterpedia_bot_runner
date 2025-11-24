@@ -487,9 +487,237 @@ def post_creature(creature_id: Optional[str] = None, dry_run: bool = False, use_
     return False
 
 
+def post_object(object_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
+    """
+    魔法道具ツイートを投稿
+
+    Args:
+        object_id: 特定の魔法道具ID（UUIDまたはslug）。Noneの場合はランダム選択
+        dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        use_state: 状態管理を使用するかどうか（重複投稿防止）
+
+    Returns:
+        投稿成功時はTrue
+    """
+    # プロジェクトルートディレクトリを取得
+    project_root = Path(__file__).parent.parent
+    objects_file = project_root / 'data' / 'posts' / 'objects.json'
+
+    # データファイル読み込み
+    data = load_data_file(objects_file)
+
+    # 魔法道具を選択
+    if object_id:
+        # ID指定の場合、該当する魔法道具を検索
+        matches = [
+            entry for entry in data['data']
+            if entry.get('id') == object_id or entry.get('slug') == object_id
+        ]
+        if not matches:
+            print(f"指定されたID（{object_id}）の魔法道具が見つかりません")
+            return False
+        entry = matches[0]
+    else:
+        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
+        if use_state and STATE_MANAGEMENT_AVAILABLE:
+            state_manager = StateManager()
+            entry = state_manager.get_random_available_item('object', data['data'])
+            if not entry:
+                print("利用可能な魔法道具がありません")
+                return False
+        else:
+            entry = random.choice(data['data'])
+
+    # ツイート投稿
+    poster = XPoster(dry_run=dry_run)
+    result = poster.post_tweet(entry['tweet_text_ja'])
+
+    if result:
+        print(f"✓ 魔法道具: {entry.get('name_ja') or entry.get('name_en')}")
+
+        # 投稿成功時、状態を更新
+        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
+            state_manager = StateManager()
+            state_manager.mark_as_posted('object', entry['id'])
+
+        return True
+    return False
+
+
+def post_location(location_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
+    """
+    場所ツイートを投稿
+
+    Args:
+        location_id: 特定の場所ID（UUIDまたはslug）。Noneの場合はランダム選択
+        dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        use_state: 状態管理を使用するかどうか（重複投稿防止）
+
+    Returns:
+        投稿成功時はTrue
+    """
+    # プロジェクトルートディレクトリを取得
+    project_root = Path(__file__).parent.parent
+    locations_file = project_root / 'data' / 'posts' / 'locations.json'
+
+    # データファイル読み込み
+    data = load_data_file(locations_file)
+
+    # 場所を選択
+    if location_id:
+        # ID指定の場合、該当する場所を検索
+        matches = [
+            entry for entry in data['data']
+            if entry.get('id') == location_id or entry.get('slug') == location_id
+        ]
+        if not matches:
+            print(f"指定されたID（{location_id}）の場所が見つかりません")
+            return False
+        entry = matches[0]
+    else:
+        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
+        if use_state and STATE_MANAGEMENT_AVAILABLE:
+            state_manager = StateManager()
+            entry = state_manager.get_random_available_item('location', data['data'])
+            if not entry:
+                print("利用可能な場所がありません")
+                return False
+        else:
+            entry = random.choice(data['data'])
+
+    # ツイート投稿
+    poster = XPoster(dry_run=dry_run)
+    result = poster.post_tweet(entry['tweet_text_ja'])
+
+    if result:
+        print(f"✓ 場所: {entry.get('name_ja') or entry.get('name_en')}")
+
+        # 投稿成功時、状態を更新
+        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
+            state_manager = StateManager()
+            state_manager.mark_as_posted('location', entry['id'])
+
+        return True
+    return False
+
+
+def post_organization(organization_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
+    """
+    組織ツイートを投稿
+
+    Args:
+        organization_id: 特定の組織ID（UUIDまたはslug）。Noneの場合はランダム選択
+        dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        use_state: 状態管理を使用するかどうか（重複投稿防止）
+
+    Returns:
+        投稿成功時はTrue
+    """
+    # プロジェクトルートディレクトリを取得
+    project_root = Path(__file__).parent.parent
+    organizations_file = project_root / 'data' / 'posts' / 'organizations.json'
+
+    # データファイル読み込み
+    data = load_data_file(organizations_file)
+
+    # 組織を選択
+    if organization_id:
+        # ID指定の場合、該当する組織を検索
+        matches = [
+            entry for entry in data['data']
+            if entry.get('id') == organization_id or entry.get('slug') == organization_id
+        ]
+        if not matches:
+            print(f"指定されたID（{organization_id}）の組織が見つかりません")
+            return False
+        entry = matches[0]
+    else:
+        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
+        if use_state and STATE_MANAGEMENT_AVAILABLE:
+            state_manager = StateManager()
+            entry = state_manager.get_random_available_item('organization', data['data'])
+            if not entry:
+                print("利用可能な組織がありません")
+                return False
+        else:
+            entry = random.choice(data['data'])
+
+    # ツイート投稿
+    poster = XPoster(dry_run=dry_run)
+    result = poster.post_tweet(entry['tweet_text_ja'])
+
+    if result:
+        print(f"✓ 組織: {entry.get('name_ja') or entry.get('name_en')}")
+
+        # 投稿成功時、状態を更新
+        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
+            state_manager = StateManager()
+            state_manager.mark_as_posted('organization', entry['id'])
+
+        return True
+    return False
+
+
+def post_concept(concept_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
+    """
+    魔法概念ツイートを投稿
+
+    Args:
+        concept_id: 特定の魔法概念ID（UUIDまたはslug）。Noneの場合はランダム選択
+        dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        use_state: 状態管理を使用するかどうか（重複投稿防止）
+
+    Returns:
+        投稿成功時はTrue
+    """
+    # プロジェクトルートディレクトリを取得
+    project_root = Path(__file__).parent.parent
+    concepts_file = project_root / 'data' / 'posts' / 'concepts.json'
+
+    # データファイル読み込み
+    data = load_data_file(concepts_file)
+
+    # 魔法概念を選択
+    if concept_id:
+        # ID指定の場合、該当する魔法概念を検索
+        matches = [
+            entry for entry in data['data']
+            if entry.get('id') == concept_id or entry.get('slug') == concept_id
+        ]
+        if not matches:
+            print(f"指定されたID（{concept_id}）の魔法概念が見つかりません")
+            return False
+        entry = matches[0]
+    else:
+        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
+        if use_state and STATE_MANAGEMENT_AVAILABLE:
+            state_manager = StateManager()
+            entry = state_manager.get_random_available_item('concept', data['data'])
+            if not entry:
+                print("利用可能な魔法概念がありません")
+                return False
+        else:
+            entry = random.choice(data['data'])
+
+    # ツイート投稿
+    poster = XPoster(dry_run=dry_run)
+    result = poster.post_tweet(entry['tweet_text_ja'])
+
+    if result:
+        print(f"✓ 魔法概念: {entry.get('name_ja') or entry.get('name_en')}")
+
+        # 投稿成功時、状態を更新
+        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
+            state_manager = StateManager()
+            state_manager.mark_as_posted('concept', entry['id'])
+
+        return True
+    return False
+
+
 def post_glossary(dry_run: bool = False) -> bool:
     """
-    用語集（呪文・ポーション・魔法生物）をランダムに投稿
+    用語集（呪文・ポーション・魔法生物・魔法道具・場所・組織・魔法概念）をランダムに投稿
 
     Args:
         dry_run: Trueの場合、実際には投稿せずログ出力のみ
@@ -498,7 +726,7 @@ def post_glossary(dry_run: bool = False) -> bool:
         投稿成功時はTrue
     """
     # ランダムにカテゴリを選択
-    category = random.choice(['spell', 'potion', 'creature'])
+    category = random.choice(['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept'])
 
     if category == 'spell':
         print("カテゴリ: 呪文")
@@ -506,9 +734,21 @@ def post_glossary(dry_run: bool = False) -> bool:
     elif category == 'potion':
         print("カテゴリ: ポーション")
         return post_potion(dry_run=dry_run)
-    else:
+    elif category == 'creature':
         print("カテゴリ: 魔法生物")
         return post_creature(dry_run=dry_run)
+    elif category == 'object':
+        print("カテゴリ: 魔法道具")
+        return post_object(dry_run=dry_run)
+    elif category == 'location':
+        print("カテゴリ: 場所")
+        return post_location(dry_run=dry_run)
+    elif category == 'organization':
+        print("カテゴリ: 組織")
+        return post_organization(dry_run=dry_run)
+    else:
+        print("カテゴリ: 魔法概念")
+        return post_concept(dry_run=dry_run)
 
 
 def main():
@@ -602,10 +842,54 @@ def main():
         help='特定の魔法生物ID（UUID）を指定'
     )
 
+    # objectコマンド
+    object_parser = subparsers.add_parser(
+        'object',
+        help='魔法道具ツイートを投稿（ランダムまたはID指定）'
+    )
+    object_parser.add_argument(
+        '--id',
+        dest='object_id',
+        help='特定の魔法道具ID（UUID）を指定'
+    )
+
+    # locationコマンド
+    location_parser = subparsers.add_parser(
+        'location',
+        help='場所ツイートを投稿（ランダムまたはID指定）'
+    )
+    location_parser.add_argument(
+        '--id',
+        dest='location_id',
+        help='特定の場所ID（UUID）を指定'
+    )
+
+    # organizationコマンド
+    organization_parser = subparsers.add_parser(
+        'organization',
+        help='組織ツイートを投稿（ランダムまたはID指定）'
+    )
+    organization_parser.add_argument(
+        '--id',
+        dest='organization_id',
+        help='特定の組織ID（UUID）を指定'
+    )
+
+    # conceptコマンド
+    concept_parser = subparsers.add_parser(
+        'concept',
+        help='魔法概念ツイートを投稿（ランダムまたはID指定）'
+    )
+    concept_parser.add_argument(
+        '--id',
+        dest='concept_id',
+        help='特定の魔法概念ID（UUID）を指定'
+    )
+
     # glossaryコマンド
     subparsers.add_parser(
         'glossary',
-        help='用語集（呪文・ポーション・魔法生物）をランダムに投稿'
+        help='用語集（呪文・ポーション・魔法生物・魔法道具・場所・組織・魔法概念）をランダムに投稿'
     )
 
     # testコマンド
@@ -646,6 +930,18 @@ def main():
 
         elif args.command == 'creature':
             post_creature(creature_id=args.creature_id, dry_run=args.dry_run)
+
+        elif args.command == 'object':
+            post_object(object_id=args.object_id, dry_run=args.dry_run)
+
+        elif args.command == 'location':
+            post_location(location_id=args.location_id, dry_run=args.dry_run)
+
+        elif args.command == 'organization':
+            post_organization(organization_id=args.organization_id, dry_run=args.dry_run)
+
+        elif args.command == 'concept':
+            post_concept(concept_id=args.concept_id, dry_run=args.dry_run)
 
         elif args.command == 'glossary':
             post_glossary(dry_run=args.dry_run)

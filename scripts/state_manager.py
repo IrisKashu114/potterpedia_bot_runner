@@ -56,7 +56,9 @@ class StateManager:
             if response.status_code == 200:
                 gist_data = response.json()
                 state_content = gist_data['files']['glossary_state.json']['content']
-                return json.loads(state_content)
+                state = json.loads(state_content)
+                # 古い状態データをマイグレーション
+                return self._migrate_state(state)
             elif response.status_code == 404:
                 print("Gistが見つかりません。新しい状態を作成します。")
                 return self._create_initial_state()
@@ -80,9 +82,56 @@ class StateManager:
 
         if state_file.exists():
             with open(state_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                state = json.load(f)
+                # 古い状態データをマイグレーション
+                return self._migrate_state(state)
         else:
             return self._create_initial_state()
+
+    def _migrate_state(self, state: Dict) -> Dict:
+        """
+        古い状態データを新しい形式にマイグレーション
+
+        Args:
+            state: 既存の状態データ
+
+        Returns:
+            マイグレーション済み状態データ
+        """
+        # 新しいカテゴリを追加（存在しない場合のみ）
+        if "posted_objects" not in state:
+            state["posted_objects"] = []
+        if "posted_locations" not in state:
+            state["posted_locations"] = []
+        if "posted_organizations" not in state:
+            state["posted_organizations"] = []
+        if "posted_concepts" not in state:
+            state["posted_concepts"] = []
+
+        if "last_object_posted" not in state:
+            state["last_object_posted"] = None
+        if "last_location_posted" not in state:
+            state["last_location_posted"] = None
+        if "last_organization_posted" not in state:
+            state["last_organization_posted"] = None
+        if "last_concept_posted" not in state:
+            state["last_concept_posted"] = None
+
+        # cycle_countが存在しない場合は初期化
+        if "cycle_count" not in state:
+            state["cycle_count"] = {}
+
+        # 新しいカテゴリのcycle_countを追加
+        if "objects" not in state["cycle_count"]:
+            state["cycle_count"]["objects"] = 0
+        if "locations" not in state["cycle_count"]:
+            state["cycle_count"]["locations"] = 0
+        if "organizations" not in state["cycle_count"]:
+            state["cycle_count"]["organizations"] = 0
+        if "concepts" not in state["cycle_count"]:
+            state["cycle_count"]["concepts"] = 0
+
+        return state
 
     def _create_initial_state(self) -> Dict:
         """
@@ -95,14 +144,26 @@ class StateManager:
             "posted_spells": [],
             "posted_potions": [],
             "posted_creatures": [],
+            "posted_objects": [],
+            "posted_locations": [],
+            "posted_organizations": [],
+            "posted_concepts": [],
             "last_spell_posted": None,
             "last_potion_posted": None,
             "last_creature_posted": None,
+            "last_object_posted": None,
+            "last_location_posted": None,
+            "last_organization_posted": None,
+            "last_concept_posted": None,
             "last_updated": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             "cycle_count": {
                 "spells": 0,
                 "potions": 0,
-                "creatures": 0
+                "creatures": 0,
+                "objects": 0,
+                "locations": 0,
+                "organizations": 0,
+                "concepts": 0
             }
         }
 
@@ -240,6 +301,26 @@ class StateManager:
                 "cycles": self.state.get('cycle_count', {}).get('creatures', 0),
                 "last_posted": self.state.get('last_creature_posted')
             },
+            "objects": {
+                "posted": len(self.state.get('posted_objects', [])),
+                "cycles": self.state.get('cycle_count', {}).get('objects', 0),
+                "last_posted": self.state.get('last_object_posted')
+            },
+            "locations": {
+                "posted": len(self.state.get('posted_locations', [])),
+                "cycles": self.state.get('cycle_count', {}).get('locations', 0),
+                "last_posted": self.state.get('last_location_posted')
+            },
+            "organizations": {
+                "posted": len(self.state.get('posted_organizations', [])),
+                "cycles": self.state.get('cycle_count', {}).get('organizations', 0),
+                "last_posted": self.state.get('last_organization_posted')
+            },
+            "concepts": {
+                "posted": len(self.state.get('posted_concepts', [])),
+                "cycles": self.state.get('cycle_count', {}).get('concepts', 0),
+                "last_posted": self.state.get('last_concept_posted')
+            },
             "last_updated": self.state.get('last_updated')
         }
 
@@ -340,7 +421,7 @@ class StateManager:
                 result["is_identical"] = False
 
         # 各カテゴリーの投稿済みID比較
-        categories = ['spells', 'potions', 'creatures']
+        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']
 
         for category in categories:
             posted_key = f"posted_{category}"
@@ -395,7 +476,7 @@ class StateManager:
         newer_state = state1 if ts1 >= ts2 else state2
 
         # posted_* 配列はunion（重複なし結合）
-        categories = ['spells', 'potions', 'creatures']
+        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']
 
         for category in categories:
             posted_key = f"posted_{category}"
@@ -404,7 +485,7 @@ class StateManager:
             merged[posted_key] = list(set1 | set2)
 
         # last_*_posted は新しいタイムスタンプを優先
-        for category in ['spell', 'potion', 'creature']:
+        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept']:
             last_key = f"last_{category}_posted"
             last1 = state1.get(last_key)
             last2 = state2.get(last_key)
@@ -663,7 +744,7 @@ class StateManager:
 
         # マージ結果の統計
         print("マージ結果:")
-        for category in ['spells', 'potions', 'creatures']:
+        for category in ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']:
             posted_key = f"posted_{category}"
             gist_count = len(gist_state.get(posted_key, []))
             local_count = len(local_state.get(posted_key, []))
@@ -829,7 +910,7 @@ class StateManager:
         print("=== 状態検証 ===\n")
 
         # 検証するカテゴリを決定
-        categories_to_check = [category] if category else ['spells', 'potions', 'creatures']
+        categories_to_check = [category] if category else ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']
 
         # 検証実行
         validation_result = {
@@ -954,18 +1035,18 @@ class StateManager:
 
         # cycle_count の内容チェック
         if 'cycle_count' in self.state and isinstance(self.state['cycle_count'], dict):
-            for category in ['spells', 'potions', 'creatures']:
+            for category in ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']:
                 if category not in self.state['cycle_count']:
-                    if category == 'creatures' and verbose:
-                        # creaturesは古いバージョンにはない可能性がある
-                        print(f"  ⚠️  cycle_count に 'creatures' が存在しません（古いバージョン）")
-                    elif category != 'creatures':
+                    if category in ['creatures', 'objects', 'locations', 'organizations', 'concepts'] and verbose:
+                        # 新しいカテゴリは古いバージョンにはない可能性がある
+                        print(f"  ⚠️  cycle_count に '{category}' が存在しません（古いバージョン）")
+                    elif category not in ['creatures', 'objects', 'locations', 'organizations', 'concepts']:
                         issues.append(f"cycle_count に '{category}' が存在しません")
                 elif not isinstance(self.state['cycle_count'][category], (int, float)):
                     issues.append(f"cycle_count['{category}'] の型が不正です")
 
         # last_*_posted の内容チェック
-        for category in ['spell', 'potion', 'creature']:
+        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept']:
             last_key = f"last_{category}_posted"
             if last_key in self.state and self.state[last_key] is not None:
                 last_posted = self.state[last_key]
@@ -1586,7 +1667,7 @@ if __name__ == '__main__':
     parser_validate.add_argument('--verbose', action='store_true', help='詳細情報を表示')
     parser_validate.add_argument('--fix', action='store_true', help='軽微な問題を自動修正（孤立IDの削除など）')
     parser_validate.add_argument('--report-file', type=str, help='検証レポートの出力先ファイルパス')
-    parser_validate.add_argument('--category', choices=['spells', 'potions', 'creatures'], help='特定のカテゴリのみ検証')
+    parser_validate.add_argument('--category', choices=['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts'], help='特定のカテゴリのみ検証')
 
     args = parser.parse_args()
 
