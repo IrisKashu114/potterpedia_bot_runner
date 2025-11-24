@@ -52,7 +52,7 @@
       "name_ja": null,
       "name_ja_alt": [],
       "incantation": "Cave inimicum(CAH-vay uh-NIM-i-kuhm)",
-      "incantation_ja": "カーベ・イミニカム",
+      "incantation_ja": "カーベ・イニミカム",
       "incantation_ja_alt": ["敵を警戒せよ"],
       "category": "Charm",
       "effect_en": "Concealment",
@@ -62,7 +62,7 @@
       "creator": null,
       "wiki_url": "https://harrypotter.fandom.com/wiki/Cave_inimicum",
       "image_url": "https://static.wikia.nocookie.net/harrypotter/images/c/cf/Cave_Inimicum_HM.png",
-      "tweet_text_ja": "【カーベ・イミニカム】防御呪文の一つ。ハーマイオニーが7巻でテントの周囲に防御呪文を張る際に使用しました。他の防御呪文と組み合わせることで強力な守りとなります。"
+      "tweet_text_ja": "【カーベ・イニミカム】防御呪文の一つ。ハーマイオニーが7巻でテントの周囲に防御呪文を張る際に使用しました。他の防御呪文と組み合わせることで強力な守りとなります。"
     },
     {
       "id": "13974742-c436-4435-bc91-063c21e3e521",
@@ -166,8 +166,8 @@
       "name_ja": null,
       "name_ja_alt": [],
       "incantation": "Finite(fi-NEE-tay), Finite Incantatem'(fi-NEE-tay in-can-TAH-tem)",
-      "incantation_ja": "フィニート",
-      "incantation_ja_alt": ["終われ"],
+      "incantation_ja": "フィニート・インカンターテム",
+      "incantation_ja_alt": ["呪文よ終われ"],
       "category": "Counter-spell",
       "effect_en": "Terminates all spell effects",
       "effect_ja": "全ての呪文効果を終了させる",
@@ -176,7 +176,7 @@
       "creator": null,
       "wiki_url": "https://harrypotter.fandom.com/wiki/General_Counter-Spell",
       "image_url": "https://static.wikia.nocookie.net/harrypotter/images/e/e7/Finite_Incantatem0.gif",
-      "tweet_text_ja": "【フィニート】全ての呪文効果を終了させる呪文。決闘クラブでスネイプがロックハートの呪文を解除する際に使用しました。様々な呪文の効果を打ち消すことができます。"
+      "tweet_text_ja": "【フィニート・インカンターテム】全ての呪文効果を終了させる呪文。決闘クラブでスネイプがロックハートの呪文を解除する際に使用しました。様々な呪文の効果を打ち消すことができます。フィニートという短い呪文も存在します。"
     },
     {
       "id": "15dccf8b-7d2f-49e9-bdde-55f002460186",
@@ -243,7 +243,7 @@
       "name_ja_alt": [],
       "incantation": "Wingardium Leviosa(wing-GAR-dee-um leh-vee-OH-sa)",
       "incantation_ja": "ウィンガーディアム・レヴィオーサ",
-      "incantation_ja_alt": [],
+      "incantation_ja_alt": ["浮遊せよ"],
       "category": "Charm",
       "effect_en": "Made objects levitate",
       "effect_ja": "物を浮遊させる",
@@ -411,7 +411,7 @@
       "type": "spell",
       "name_en": "Stunning Spell",
       "name_ja": "失神呪文",
-      "name_ja_alt": [],
+      "name_ja_alt": ["麻痺呪文"],
       "incantation": "Stupefy(STEW-puh-fye)",
       "incantation_ja": "ステューピファイ",
       "incantation_ja_alt": ["麻痺せよ"],
@@ -430,7 +430,7 @@
       "type": "spell",
       "name_en": "Summoning Charm",
       "name_ja": "呼び寄せ呪文",
-      "name_ja_alt": [],
+      "name_ja_alt": ["召喚魔法"],
       "incantation": "Accio(AH-kee-oh)",
       "incantation_ja": "アクシオ",
       "incantation_ja_alt": ["来い"],
@@ -509,7 +509,7 @@
       "name_ja_alt": [],
       "incantation": "Nox(NOKSS)",
       "incantation_ja": "ノックス",
-      "incantation_ja_alt": ["消えよ"],
+      "incantation_ja_alt": ["消えよ", "闇よ"],
       "category": "Charm",
       "effect_en": "Extinguished the Wand-Lighting Charm",
       "effect_ja": "杖の明かりを消す",

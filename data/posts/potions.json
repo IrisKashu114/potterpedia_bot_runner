@@ -4,7 +4,7 @@
     "category": "potions",
     "created_at": "2025-11-09T01:55:29.575789",
     "total_count": 12,
-    "note": "このファイルは原作7巻に登場する重要なポーションの本番用データです。MediaWiki APIで検証済み。"
+    "note": "このファイルは原作7巻に登場する重要なポーションの下書きです。MediaWiki APIで検証済み。name_ja, name_ja_alt, effect_ja, tweet_text_ja フィールドは手動で追加する必要があります。name_ja_altは翻訳ゆれや別名がある場合に使用します。"
   },
   "data": [
     {

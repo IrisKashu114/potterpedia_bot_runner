@@ -1,20 +1,17 @@
 {
   "metadata": {
-    "source": "Potter-DB API (filtered and grouped)",
+    "source": "Potter-DB API (filtered by wiki_character_index.json)",
     "filtered_at": "2025-11-08T21:24:27.087870",
-    "grouped_at": "2025-11-08T22:32:43.746768",
-    "total_dates": 9,
-    "total_casualties": 17,
-    "note": "同じ日に複数の犠牲者がいる場合はグループ化されています。tweet_text_ja フィールドは手動で追加する必要があります"
+    "total_count": 17,
+    "note": "不確定な日付（Between, Before, After等）を除外し、正確な月日のみを保持しています。映画限定の死亡（ラベンダー・ブラウン等）も除外。name_ja と tweet_text_ja フィールドは手動で追加する必要があります"
   },
   "data": [
     {
-      "death_date": "1981-10-31",
-      "type": "individual",
       "id": "00a14b36-1b72-4790-82a4-a431eaf6abaf",
       "slug": "james-potter-i",
       "name_en": "James Potter",
       "name_ja": "ジェームズ・ポッター",
+      "death_date": "1981-10-31",
       "death_date_original": "31 October 1981 (aged 21), Godric's Hollow, West Country, England, Great Britain",
       "house": "Gryffindor",
       "species": "Human",
@@ -24,12 +21,11 @@
       "tweet_text_ja": "今日はジェームズ・ポッターの命日です。家族を守るため命を捧げた勇敢な父。彼の愛は永遠に。"
     },
     {
-      "death_date": "1992-06-04",
-      "type": "individual",
       "id": "e67890e2-6a5a-420a-8e2b-7db2b035716f",
       "slug": "quirinus-quirrell",
       "name_en": "Quirinus Quirrell",
       "name_ja": "クィリナス・クィレル",
+      "death_date": "1992-06-04",
       "death_date_original": "4 June 1992, Underground Chambers, Hogwarts Castle, Highlands, Scotland, Great Britain",
       "house": "Ravenclaw",
       "species": "Human",
@@ -39,12 +35,11 @@
       "tweet_text_ja": "今日はクィリナス・クィレルの命日です。闇の魔術に魅入られた元ホグワーツ教授。"
     },
     {
-      "death_date": "1994-08-16",
-      "type": "individual",
       "id": "695688ef-43e5-4a06-91f9-9cf798b80eee",
       "slug": "frank-bryce",
       "name_en": "Frank Bryce",
       "name_ja": "フランク・ブライス",
+      "death_date": "1994-08-16",
       "death_date_original": "16 August 1994 (aged 76), Riddle House, Little Hangleton, England, Great Britain",
       "house": null,
       "species": "Human",
@@ -54,12 +49,11 @@
       "tweet_text_ja": "今日はフランク・ブライスの命日です。リドル家の庭師、無実の罪で疑われ続けた彼に。"
     },
     {
-      "death_date": "1995-05-27",
-      "type": "individual",
       "id": "88df8d7e-6d9b-451e-be60-0a6e8a37791f",
       "slug": "bartemius-crouch-senior",
       "name_en": "Bartemius Crouch Senior",
       "name_ja": "バーテミウス・クラウチ・シニア",
+      "death_date": "1995-05-27",
       "death_date_original": "27 May 1995, Forbidden Forest, Hogwarts grounds, Highlands, Scotland, Great Britain",
       "house": null,
       "species": "Human",
@@ -69,12 +63,11 @@
       "tweet_text_ja": "今日はバーテミウス・クラウチ・シニアの命日です。魔法省国際魔法協力部部長、悲劇の最期を遂げた彼に。"
     },
     {
-      "death_date": "1995-06-24",
-      "type": "individual",
       "id": "f21418ac-c5f2-4279-a7eb-673f94c1da56",
       "slug": "cedric-diggory",
       "name_en": "Cedric Diggory",
       "name_ja": "セドリック・ディゴリー",
+      "death_date": "1995-06-24",
       "death_date_original": "24 June 1995 (aged 17), Little Hangleton graveyard, England, Great Britain",
       "house": "Hufflepuff",
       "species": "Human",
@@ -84,90 +77,67 @@
       "tweet_text_ja": "今日はセドリック・ディゴリーの命日です。三大魔法学校対抗試合の真の勇者。彼の死を忘れません。"
     },
     {
+      "id": "51bdb221-8b63-4a6b-8746-7b147ffbcd95",
+      "slug": "albus-dumbledore",
+      "name_en": "Albus Percival Wulfric Brian Dumbledore",
+      "name_ja": "アルバス・パーシバル・ウルフリック・ブライアン・ダンブルドア",
       "death_date": "1997-06-30",
-      "type": "group",
-      "event_en": "Battle of the Astronomy Tower",
-      "event_ja": "天文台の塔の戦い",
-      "total_casualties": 2,
-      "mentioned_casualties": [
-        {
-          "id": "51bdb221-8b63-4a6b-8746-7b147ffbcd95",
-          "slug": "albus-dumbledore",
-          "name_en": "Albus Percival Wulfric Brian Dumbledore",
-          "name_ja": "アルバス・パーシバル・ウルフリック・ブライアン・ダンブルドア",
-          "house": "Gryffindor",
-          "importance": "main"
-        }
-      ],
-      "all_casualties": [
-        {
-          "id": "51bdb221-8b63-4a6b-8746-7b147ffbcd95",
-          "slug": "albus-dumbledore",
-          "name_en": "Albus Percival Wulfric Brian Dumbledore",
-          "name_ja": "アルバス・パーシバル・ウルフリック・ブライアン・ダンブルドア"
-        },
-        {
-          "id": "bfab67d9-3f15-4da1-83ee-a599bd2f524b",
-          "slug": "gibbon",
-          "name_en": "Gibbon",
-          "name_ja": "ギボン"
-        }
-      ],
-      "location": "Great Britain",
+      "death_date_original": "30 June 1997 (aged 115), Astronomy Tower, Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": "Gryffindor",
+      "species": "Human",
+      "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/7/75/Albus_Dumbledore_%28HBPF_promo%29.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Albus_Dumbledore",
-      "tweet_text_ja": "今日は天文台の塔の戦いの日です。アルバス・ダンブルドアがその生涯を終えました。敵味方合わせて2名が犠牲となったこの夜、ホグワーツの守護者は最期まで生徒たちを守り抜きました。"
+      "tweet_text_ja": "今日はアルバス・ダンブルドアの命日です。偉大なる魔法使い、ホグワーツの守護者。彼の知恵と勇気を忘れません。"
     },
     {
+      "id": "bfab67d9-3f15-4da1-83ee-a599bd2f524b",
+      "slug": "gibbon",
+      "name_en": "Gibbon",
+      "name_ja": "ギボン",
+      "death_date": "1997-06-30",
+      "death_date_original": "30 June 1997, Astronomy Tower, Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": null,
+      "species": "Human",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/1/13/Gibbon.jpg",
+      "wiki": "https://harrypotter.fandom.com/wiki/Gibbon",
+      "tweet_text_ja": "今日はギボンの命日です。死喰い人の一人、天文台の塔での戦いで命を落としました。"
+    },
+    {
+      "id": "9c682e4a-0dd4-4abe-a6a4-b2ba6f2f5e2c",
+      "slug": "alastor-moody",
+      "name_en": "Alastor Moody",
+      "name_ja": "アラスター・ムーディ",
       "death_date": "1997-07-27",
-      "type": "group",
-      "event_en": "Battle of the Seven Potters",
-      "event_ja": "七人のポッター作戦",
-      "total_casualties": 2,
-      "mentioned_casualties": [
-        {
-          "id": "1a8048f7-17b5-4a06-82ed-0b4b5186d072",
-          "slug": "hedwig",
-          "name_en": "Hedwig",
-          "name_ja": "ヘドウィグ",
-          "house": null,
-          "importance": "main"
-        },
-        {
-          "id": "9c682e4a-0dd4-4abe-a6a4-b2ba6f2f5e2c",
-          "slug": "alastor-moody",
-          "name_en": "Alastor Moody",
-          "name_ja": "アラスター・ムーディ",
-          "house": "Unknown",
-          "importance": "important"
-        }
-      ],
-      "all_casualties": [
-        {
-          "id": "1a8048f7-17b5-4a06-82ed-0b4b5186d072",
-          "slug": "hedwig",
-          "name_en": "Hedwig",
-          "name_ja": "ヘドウィグ"
-        },
-        {
-          "id": "9c682e4a-0dd4-4abe-a6a4-b2ba6f2f5e2c",
-          "slug": "alastor-moody",
-          "name_en": "Alastor Moody",
-          "name_ja": "アラスター・ムーディ"
-        }
-      ],
-      "location": "Great Britain",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/1/1e/Hedwig_Snowy_Owl_PM.png",
+      "death_date_original": "27 July 1997 (aged at least 38), South England, Great Britain",
+      "house": "Unknown",
+      "species": "Human",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/4/4d/MoodyProfile.png",
       "wiki": "https://harrypotter.fandom.com/wiki/Alastor_Moody",
-      "tweet_text_ja": "今日は七人のポッター作戦の日です。ハリーを守るための危険な作戦で、ヘドウィグとアラスター・ムーディが命を落としました。忠実なるシロフクロウと「油断大敵」の闇祓い、2名の犠牲を忘れません。"
+      "tweet_text_ja": "今日はアラスター・ムーディの命日です。「油断大敵」伝説の闇祓い。彼の警戒心は永遠に。"
     },
     {
-      "death_date": "1997-08-01",
-      "type": "individual",
+      "id": "1a8048f7-17b5-4a06-82ed-0b4b5186d072",
+      "slug": "hedwig",
+      "name_en": "Hedwig",
+      "name_ja": "ヘドウィグ",
+      "death_date": "1997-07-27",
+      "death_date_original": "27 July 1997 (aged at least 5), England",
+      "house": null,
+      "species": "Snowy owl",
+      "gender": "Female",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/1/1e/Hedwig_Snowy_Owl_PM.png",
+      "wiki": "https://harrypotter.fandom.com/wiki/Hedwig",
+      "tweet_text_ja": "今日はヘドウィグの命日です。ハリーの忠実な相棒、美しきシロフクロウ。彼女の献身を忘れません。"
+    },
+    {
       "id": "c5a1808e-cf54-48cf-baac-826cb79e480f",
       "slug": "rufus-scrimgeour",
       "name_en": "Rufus Scrimgeour",
       "name_ja": "ルーファス・スクリムジョール",
+      "death_date": "1997-08-01",
       "death_date_original": "1 August 1997, Great Britain",
       "house": null,
       "species": "Human",
@@ -177,93 +147,102 @@
       "tweet_text_ja": "今日はルーファス・スクリムジョールの命日です。魔法大臣、最後まで情報を守り抜いた勇者。"
     },
     {
+      "id": "33389823-2912-4d53-be2d-7428d0212f78",
+      "slug": "colin-creevey",
+      "name_en": "Colin Creevey",
+      "name_ja": "コリン・クリービー",
       "death_date": "1998-05-02",
-      "type": "group",
-      "event_en": "Battle of Hogwarts",
-      "event_ja": "ホグワーツの戦い",
-      "total_casualties": 7,
-      "mentioned_casualties": [
-        {
-          "id": "d7f7efc2-ffba-48c7-aab5-4f2fbc99bab0",
-          "slug": "remus-lupin",
-          "name_en": "Remus John Lupin",
-          "name_ja": "リーマス・ジョン・ルーピン",
-          "house": "Gryffindor",
-          "importance": "main"
-        },
-        {
-          "id": "c8969c84-0a22-44c1-bc40-067bdb3def0c",
-          "slug": "severus-snape",
-          "name_en": "Severus Snape",
-          "name_ja": "セブルス・スネイプ",
-          "house": "Slytherin",
-          "importance": "main"
-        },
-        {
-          "id": "33389823-2912-4d53-be2d-7428d0212f78",
-          "slug": "colin-creevey",
-          "name_en": "Colin Creevey",
-          "name_ja": "コリン・クリービー",
-          "house": "Gryffindor",
-          "importance": "important"
-        },
-        {
-          "id": "83512b73-0464-4bef-961a-67dd8cbd967c",
-          "slug": "tom-riddle",
-          "name_en": "Tom Marvolo Riddle",
-          "name_ja": "トム・マールヴォロ・リドル",
-          "house": "Slytherin",
-          "importance": "important"
-        }
-      ],
-      "all_casualties": [
-        {
-          "id": "d7f7efc2-ffba-48c7-aab5-4f2fbc99bab0",
-          "slug": "remus-lupin",
-          "name_en": "Remus John Lupin",
-          "name_ja": "リーマス・ジョン・ルーピン"
-        },
-        {
-          "id": "c8969c84-0a22-44c1-bc40-067bdb3def0c",
-          "slug": "severus-snape",
-          "name_en": "Severus Snape",
-          "name_ja": "セブルス・スネイプ"
-        },
-        {
-          "id": "33389823-2912-4d53-be2d-7428d0212f78",
-          "slug": "colin-creevey",
-          "name_en": "Colin Creevey",
-          "name_ja": "コリン・クリービー"
-        },
-        {
-          "id": "83512b73-0464-4bef-961a-67dd8cbd967c",
-          "slug": "tom-riddle",
-          "name_en": "Tom Marvolo Riddle",
-          "name_ja": "トム・マールヴォロ・リドル"
-        },
-        {
-          "id": "95b627ae-ce70-4ab4-ba10-491fd5fcf4e4",
-          "slug": "nagini",
-          "name_en": "Nagini",
-          "name_ja": "ナギニ"
-        },
-        {
-          "id": "ba48a873-cb19-4e84-a46e-4876dccd8983",
-          "slug": "scabior",
-          "name_en": "Scabior",
-          "name_ja": "スカビオール"
-        },
-        {
-          "id": "0add4271-3fc8-4c07-ba43-6145f5ca1f4f",
-          "slug": "vincent-crabbe",
-          "name_en": "Vincent Crabbe",
-          "name_ja": "ビンセント・クラッブ"
-        }
-      ],
-      "location": "Great Britain",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/e/e2/Remus_Lupin_Deathly_Hallows_promo_image.jpg",
+      "death_date_original": "2 May 1998 (aged 16), Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": "Gryffindor",
+      "species": "Human",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/4/48/Colin_Creevey.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Colin_Creevey",
-      "tweet_text_ja": "今日はホグワーツの戦いの日です。ルーピン、スネイプ、コリンを含む約50名がホグワーツを守るため命を落としました。ヴォルデモートが滅び、魔法界に平和が戻った日。すべての犠牲者に哀悼を。"
+      "tweet_text_ja": "今日はコリン・クリービーの命日です。ホグワーツの戦いで散った若き勇者。カメラを持つ少年の笑顔を忘れません。"
+    },
+    {
+      "id": "95b627ae-ce70-4ab4-ba10-491fd5fcf4e4",
+      "slug": "nagini",
+      "name_en": "Nagini",
+      "name_ja": "ナギニ",
+      "death_date": "1998-05-02",
+      "death_date_original": "2 May 1998, Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": null,
+      "species": "Human (Maledictus affliction; originally), Snake",
+      "gender": "Female",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/7/70/Nagini_PM.png",
+      "wiki": "https://harrypotter.fandom.com/wiki/Nagini",
+      "tweet_text_ja": "今日はナギニの命日です。ヴォルデモートの最後の分霊箱、ネビルによって滅ぼされました。"
+    },
+    {
+      "id": "d7f7efc2-ffba-48c7-aab5-4f2fbc99bab0",
+      "slug": "remus-lupin",
+      "name_en": "Remus John Lupin",
+      "name_ja": "リーマス・ジョン・ルーピン",
+      "death_date": "1998-05-02",
+      "death_date_original": "2 May 1998 (aged 38), Hogwarts Castle, South Hogwarts Region, Highlands, Scotland, Great Britain",
+      "house": "Gryffindor",
+      "species": "Human (werewolf)",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/e/e2/Remus_Lupin_Deathly_Hallows_promo_image.jpg",
+      "wiki": "https://harrypotter.fandom.com/wiki/Remus_Lupin",
+      "tweet_text_ja": "今日はリーマス・ルーピンの命日です。親愛なるムーニー、最後まで戦い抜いた勇者。彼の優しさを忘れません。"
+    },
+    {
+      "id": "ba48a873-cb19-4e84-a46e-4876dccd8983",
+      "slug": "scabior",
+      "name_en": "Scabior",
+      "name_ja": "スカビオール",
+      "death_date": "1998-05-02",
+      "death_date_original": "2 May 1998, Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": "Slytherin",
+      "species": "Human",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/9/93/ScabiorDH2.png",
+      "wiki": "https://harrypotter.fandom.com/wiki/Scabior",
+      "tweet_text_ja": "今日はスカビオールの命日です。人さらいのリーダー、ホグワーツの戦いで命を落としました。"
+    },
+    {
+      "id": "c8969c84-0a22-44c1-bc40-067bdb3def0c",
+      "slug": "severus-snape",
+      "name_en": "Severus Snape",
+      "name_ja": "セブルス・スネイプ",
+      "death_date": "1998-05-02",
+      "death_date_original": "2 May 1998 (aged 38), Shrieking Shack, Hogsmeade, Highlands, Scotland, Great Britain",
+      "house": "Slytherin",
+      "species": "Human",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/a/a3/Severus_Snape.jpg",
+      "wiki": "https://harrypotter.fandom.com/wiki/Severus_Snape",
+      "tweet_text_ja": "今日はセブルス・スネイプの命日です。最も勇敢な男。リリーへの愛を貫き、真実を守り抜きました。Always."
+    },
+    {
+      "id": "83512b73-0464-4bef-961a-67dd8cbd967c",
+      "slug": "tom-riddle",
+      "name_en": "Tom Marvolo Riddle",
+      "name_ja": "トム・マールヴォロ・リドル",
+      "death_date": "1998-05-02",
+      "death_date_original": "2 May 1998 (aged 71), Great Hall, Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": "Slytherin",
+      "species": "Human",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/9/97/Voldemort_Headshot_DHF1.png",
+      "wiki": "https://harrypotter.fandom.com/wiki/Tom_Riddle",
+      "tweet_text_ja": "今日はトム・マールヴォロ・リドル、ヴォルデモート卿の命日です。闇の帝王の終焉、魔法界に平和が戻った日。"
+    },
+    {
+      "id": "0add4271-3fc8-4c07-ba43-6145f5ca1f4f",
+      "slug": "vincent-crabbe",
+      "name_en": "Vincent Crabbe",
+      "name_ja": "ビンセント・クラッブ",
+      "death_date": "1998-05-02",
+      "death_date_original": "2 May 1998 (aged 17/18), Room of Requirement, Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": "Slytherin",
+      "species": "Human",
+      "gender": "Male",
+      "image": "https://static.wikia.nocookie.net/harrypotter/images/b/ba/Vincent_Crabbe.jpg",
+      "wiki": "https://harrypotter.fandom.com/wiki/Vincent_Crabbe",
+      "tweet_text_ja": "今日はビンセント・クラッブの命日です。必要の部屋で自らの悪霊の火に飲み込まれました。"
     }
   ]
 }
