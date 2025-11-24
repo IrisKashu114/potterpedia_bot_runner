@@ -2,7 +2,7 @@
 """
 用語集投稿の状態管理モジュール
 
-このモジュールは、用語集（spells/potions）の投稿履歴を管理し、
+このモジュールは、用語集（spells/potions/creatures）の投稿履歴を管理し、
 重複投稿を防ぐために使用されます。
 
 状態はGitHub Gistに保存され、すべての用語を投稿したらリセットされます。
@@ -11,8 +11,9 @@
 import os
 import json
 import random
-from typing import Dict, List, Optional, Set
-from datetime import datetime
+import shutil
+from typing import Dict, List, Optional, Set, Tuple
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -93,18 +94,21 @@ class StateManager:
         return {
             "posted_spells": [],
             "posted_potions": [],
+            "posted_creatures": [],
             "last_spell_posted": None,
             "last_potion_posted": None,
-            "last_updated": datetime.utcnow().isoformat() + "Z",
+            "last_creature_posted": None,
+            "last_updated": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             "cycle_count": {
                 "spells": 0,
-                "potions": 0
+                "potions": 0,
+                "creatures": 0
             }
         }
 
     def _save_state(self):
         """状態をGitHub Gistまたはローカルファイルに保存"""
-        self.state['last_updated'] = datetime.utcnow().isoformat() + "Z"
+        self.state['last_updated'] = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
 
         if not self.gist_id or not self.github_token:
             self._save_local_state()
@@ -190,7 +194,7 @@ class StateManager:
 
         self.state[last_posted_key] = {
             "id": item_id,
-            "timestamp": datetime.utcnow().isoformat() + "Z"
+            "timestamp": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
         }
 
         self._save_state()
@@ -231,8 +235,1226 @@ class StateManager:
                 "cycles": self.state.get('cycle_count', {}).get('potions', 0),
                 "last_posted": self.state.get('last_potion_posted')
             },
+            "creatures": {
+                "posted": len(self.state.get('posted_creatures', [])),
+                "cycles": self.state.get('cycle_count', {}).get('creatures', 0),
+                "last_posted": self.state.get('last_creature_posted')
+            },
             "last_updated": self.state.get('last_updated')
         }
+
+    def _load_gist_state(self) -> Optional[Dict]:
+        """
+        GitHub Gistから状態を直接読み込む（同期用）
+
+        Returns:
+            Gistから読み込んだ状態データ。失敗した場合はNone
+        """
+        if not self.gist_id or not self.github_token:
+            return None
+
+        try:
+            url = f"https://api.github.com/gists/{self.gist_id}"
+            headers = {
+                "Authorization": f"token {self.github_token}",
+                "Accept": "application/vnd.github.v3+json"
+            }
+            response = requests.get(url, headers=headers, timeout=10)
+
+            if response.status_code == 200:
+                gist_data = response.json()
+                state_content = gist_data['files']['glossary_state.json']['content']
+                return json.loads(state_content)
+            else:
+                return None
+
+        except Exception as e:
+            print(f"Error: Gist読み込みエラー: {e}")
+            return None
+
+    def _get_local_state_path(self) -> Path:
+        """
+        ローカル状態ファイルのパスを取得
+
+        Returns:
+            ローカル状態ファイルのPath
+        """
+        project_root = Path(__file__).parent.parent
+        return project_root / 'data' / 'glossary_state.json'
+
+    def _backup_local_state(self) -> bool:
+        """
+        ローカル状態ファイルをバックアップ
+
+        Returns:
+            バックアップが成功した場合はTrue
+        """
+        state_file = self._get_local_state_path()
+
+        if not state_file.exists():
+            return True  # ファイルが存在しない場合はバックアップ不要
+
+        backup_file = state_file.parent / 'glossary_state.backup.json'
+
+        try:
+            shutil.copy2(state_file, backup_file)
+            print(f"✓ バックアップを作成しました: {backup_file}")
+            return True
+        except Exception as e:
+            print(f"Warning: バックアップ作成に失敗しました: {e}")
+            return False
+
+    def compare_states(self, state1: Dict, state2: Dict) -> Dict:
+        """
+        2つの状態を比較して差異を検出
+
+        Args:
+            state1: 比較する状態1（例: Gist）
+            state2: 比較する状態2（例: ローカル）
+
+        Returns:
+            比較結果を含む辞書:
+            {
+                "has_conflict": bool,
+                "timestamp_diff": str,
+                "posted_diff": {category: {"only_in_1": [...], "only_in_2": [...]}},
+                "cycle_diff": {category: {"state1": int, "state2": int}},
+                "is_identical": bool
+            }
+        """
+        result = {
+            "has_conflict": False,
+            "timestamp_diff": None,
+            "posted_diff": {},
+            "cycle_diff": {},
+            "is_identical": True
+        }
+
+        # タイムスタンプ比較
+        ts1 = state1.get('last_updated')
+        ts2 = state2.get('last_updated')
+
+        if ts1 and ts2:
+            if ts1 != ts2:
+                result["timestamp_diff"] = f"State1: {ts1}, State2: {ts2}"
+                result["is_identical"] = False
+
+        # 各カテゴリーの投稿済みID比較
+        categories = ['spells', 'potions', 'creatures']
+
+        for category in categories:
+            posted_key = f"posted_{category}"
+            set1 = set(state1.get(posted_key, []))
+            set2 = set(state2.get(posted_key, []))
+
+            only_in_1 = list(set1 - set2)
+            only_in_2 = list(set2 - set1)
+
+            if only_in_1 or only_in_2:
+                result["posted_diff"][category] = {
+                    "only_in_1": only_in_1,
+                    "only_in_2": only_in_2
+                }
+                result["is_identical"] = False
+
+                # 両方に異なるIDがある場合は競合
+                if only_in_1 and only_in_2:
+                    result["has_conflict"] = True
+
+        # サイクルカウント比較
+        for category in categories:
+            count1 = state1.get('cycle_count', {}).get(category, 0)
+            count2 = state2.get('cycle_count', {}).get(category, 0)
+
+            if count1 != count2:
+                result["cycle_diff"][category] = {
+                    "state1": count1,
+                    "state2": count2
+                }
+                result["is_identical"] = False
+
+        return result
+
+    def merge_states(self, state1: Dict, state2: Dict, prefer_newer: bool = True) -> Dict:
+        """
+        2つの状態をマージ
+
+        Args:
+            state1: マージする状態1
+            state2: マージする状態2
+            prefer_newer: Trueの場合、新しいタイムスタンプを優先
+
+        Returns:
+            マージされた状態
+        """
+        merged = self._create_initial_state()
+
+        # タイムスタンプで新しい方を判定
+        ts1 = state1.get('last_updated', '')
+        ts2 = state2.get('last_updated', '')
+        newer_state = state1 if ts1 >= ts2 else state2
+
+        # posted_* 配列はunion（重複なし結合）
+        categories = ['spells', 'potions', 'creatures']
+
+        for category in categories:
+            posted_key = f"posted_{category}"
+            set1 = set(state1.get(posted_key, []))
+            set2 = set(state2.get(posted_key, []))
+            merged[posted_key] = list(set1 | set2)
+
+        # last_*_posted は新しいタイムスタンプを優先
+        for category in ['spell', 'potion', 'creature']:
+            last_key = f"last_{category}_posted"
+            last1 = state1.get(last_key)
+            last2 = state2.get(last_key)
+
+            if last1 and last2:
+                ts1 = last1.get('timestamp', '')
+                ts2 = last2.get('timestamp', '')
+                merged[last_key] = last1 if ts1 >= ts2 else last2
+            elif last1:
+                merged[last_key] = last1
+            elif last2:
+                merged[last_key] = last2
+
+        # cycle_count は大きい方を採用
+        for category in categories:
+            count1 = state1.get('cycle_count', {}).get(category, 0)
+            count2 = state2.get('cycle_count', {}).get(category, 0)
+            merged['cycle_count'][category] = max(count1, count2)
+
+        # last_updated は prefer_newer に応じて設定
+        if prefer_newer:
+            merged['last_updated'] = max(ts1, ts2) if (ts1 and ts2) else (ts1 or ts2)
+        else:
+            merged['last_updated'] = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+
+        return merged
+
+    def sync_from_gist(self, force: bool = False, dry_run: bool = False) -> bool:
+        """
+        Gistからローカルに同期
+
+        Args:
+            force: Trueの場合、競合があっても強制的に上書き
+            dry_run: Trueの場合、実際の変更は行わずシミュレートのみ
+
+        Returns:
+            同期が成功した場合はTrue
+        """
+        print("=== Gist → ローカル同期 ===\n")
+
+        # Gistから読み込み
+        gist_state = self._load_gist_state()
+        if not gist_state:
+            print("✗ Gistから状態を読み込めませんでした")
+            return False
+
+        # ローカルから読み込み
+        state_file = self._get_local_state_path()
+        if state_file.exists():
+            with open(state_file, 'r', encoding='utf-8') as f:
+                local_state = json.load(f)
+        else:
+            print("ℹ ローカルファイルが存在しません。Gistから新規作成します。")
+            local_state = self._create_initial_state()
+
+        # 状態比較
+        comparison = self.compare_states(gist_state, local_state)
+
+        if comparison["is_identical"]:
+            print("✓ Gistとローカルはすでに同期されています")
+            return True
+
+        # タイムスタンプ比較
+        gist_ts = gist_state.get('last_updated', '')
+        local_ts = local_state.get('last_updated', '')
+
+        print(f"Gist タイムスタンプ: {gist_ts}")
+        print(f"ローカル タイムスタンプ: {local_ts}\n")
+
+        # 競合チェック
+        if comparison["has_conflict"] and not force:
+            print("⚠️  競合が検出されました:")
+            for category, diff in comparison["posted_diff"].items():
+                if diff["only_in_1"] and diff["only_in_2"]:
+                    print(f"  {category}: Gistのみ {len(diff['only_in_1'])} 件, ローカルのみ {len(diff['only_in_2'])} 件")
+            print("\n--force オプションを使用して強制的に同期するか、")
+            print("sync --auto でマージしてください")
+            return False
+
+        if gist_ts < local_ts and not force:
+            print(f"⚠️  警告: Gistの状態がローカルより古いです")
+            print(f"  Gist: {gist_ts}")
+            print(f"  ローカル: {local_ts}")
+            print("\n--force オプションを使用して強制的に上書きしてください")
+            return False
+
+        # Dry-runモード
+        if dry_run:
+            print("[DRY-RUN] 以下の変更が行われます:\n")
+            print(f"  ローカルファイル: {state_file}")
+            print(f"  Gistの状態で上書き")
+            return True
+
+        # バックアップ作成
+        self._backup_local_state()
+
+        # ローカルに保存
+        state_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(state_file, 'w', encoding='utf-8') as f:
+            json.dump(gist_state, f, indent=2, ensure_ascii=False)
+
+        print(f"✓ Gistからローカルに同期しました: {state_file}")
+        return True
+
+    def sync_to_gist(self, force: bool = False, dry_run: bool = False) -> bool:
+        """
+        ローカルからGistに同期
+
+        Args:
+            force: Trueの場合、競合があっても強制的に上書き
+            dry_run: Trueの場合、実際の変更は行わずシミュレートのみ
+
+        Returns:
+            同期が成功した場合はTrue
+        """
+        print("=== ローカル → Gist同期 ===\n")
+
+        if not self.gist_id or not self.github_token:
+            print("✗ Gist設定がありません")
+            return False
+
+        # ローカルから読み込み
+        state_file = self._get_local_state_path()
+        if not state_file.exists():
+            print(f"✗ ローカルファイルが存在しません: {state_file}")
+            return False
+
+        with open(state_file, 'r', encoding='utf-8') as f:
+            local_state = json.load(f)
+
+        # Gistから読み込み
+        gist_state = self._load_gist_state()
+        if not gist_state:
+            print("ℹ Gistが存在しません。ローカルから新規作成します。")
+            gist_state = self._create_initial_state()
+
+        # 状態比較
+        comparison = self.compare_states(local_state, gist_state)
+
+        if comparison["is_identical"]:
+            print("✓ ローカルとGistはすでに同期されています")
+            return True
+
+        # タイムスタンプ比較
+        local_ts = local_state.get('last_updated', '')
+        gist_ts = gist_state.get('last_updated', '')
+
+        print(f"ローカル タイムスタンプ: {local_ts}")
+        print(f"Gist タイムスタンプ: {gist_ts}\n")
+
+        # 競合チェック
+        if comparison["has_conflict"] and not force:
+            print("⚠️  競合が検出されました:")
+            for category, diff in comparison["posted_diff"].items():
+                if diff["only_in_1"] and diff["only_in_2"]:
+                    print(f"  {category}: ローカルのみ {len(diff['only_in_1'])} 件, Gistのみ {len(diff['only_in_2'])} 件")
+            print("\n--force オプションを使用して強制的に同期するか、")
+            print("sync --auto でマージしてください")
+            return False
+
+        if local_ts < gist_ts and not force:
+            print(f"⚠️  警告: ローカルの状態がGistより古いです")
+            print(f"  ローカル: {local_ts}")
+            print(f"  Gist: {gist_ts}")
+            print("\n--force オプションを使用して強制的に上書きしてください")
+            return False
+
+        # Dry-runモード
+        if dry_run:
+            print("[DRY-RUN] 以下の変更が行われます:\n")
+            print(f"  Gist ID: {self.gist_id}")
+            print(f"  ローカルの状態で上書き")
+            return True
+
+        # Gistに保存
+        try:
+            url = f"https://api.github.com/gists/{self.gist_id}"
+            headers = {
+                "Authorization": f"token {self.github_token}",
+                "Accept": "application/vnd.github.v3+json"
+            }
+            data = {
+                "files": {
+                    "glossary_state.json": {
+                        "content": json.dumps(local_state, indent=2, ensure_ascii=False)
+                    }
+                }
+            }
+            response = requests.patch(url, headers=headers, json=data, timeout=10)
+
+            if response.status_code == 200:
+                print(f"✓ ローカルからGistに同期しました")
+                return True
+            else:
+                print(f"✗ Gist更新エラー（ステータス: {response.status_code}）")
+                return False
+
+        except Exception as e:
+            print(f"✗ Gist更新中にエラーが発生しました: {e}")
+            return False
+
+    def sync_auto(self, dry_run: bool = False) -> bool:
+        """
+        自動同期（タイムスタンプで最新を選択、または賢くマージ）
+
+        Args:
+            dry_run: Trueの場合、実際の変更は行わずシミュレートのみ
+
+        Returns:
+            同期が成功した場合はTrue
+        """
+        print("=== 自動同期（スマートマージ） ===\n")
+
+        # Gistから読み込み
+        gist_state = self._load_gist_state()
+
+        # ローカルから読み込み
+        state_file = self._get_local_state_path()
+        local_state = None
+        if state_file.exists():
+            with open(state_file, 'r', encoding='utf-8') as f:
+                local_state = json.load(f)
+
+        # 片方のみ存在する場合
+        if gist_state and not local_state:
+            print("ℹ ローカルファイルが存在しません。Gistから同期します。")
+            return self.sync_from_gist(dry_run=dry_run)
+
+        if not gist_state and local_state:
+            print("ℹ Gistが存在しません。ローカルから同期します。")
+            return self.sync_to_gist(dry_run=dry_run)
+
+        if not gist_state and not local_state:
+            print("✗ Gistもローカルファイルも存在しません")
+            return False
+
+        # 状態比較
+        comparison = self.compare_states(gist_state, local_state)
+
+        if comparison["is_identical"]:
+            print("✓ Gistとローカルはすでに同期されています")
+            return True
+
+        # タイムスタンプ表示
+        gist_ts = gist_state.get('last_updated', '')
+        local_ts = local_state.get('last_updated', '')
+
+        print(f"Gist タイムスタンプ: {gist_ts}")
+        print(f"ローカル タイムスタンプ: {local_ts}\n")
+
+        # スマートマージ
+        if comparison["has_conflict"]:
+            print("ℹ 競合を検出しました。スマートマージを実行します...\n")
+
+        merged_state = self.merge_states(gist_state, local_state, prefer_newer=True)
+
+        # マージ結果の統計
+        print("マージ結果:")
+        for category in ['spells', 'potions', 'creatures']:
+            posted_key = f"posted_{category}"
+            gist_count = len(gist_state.get(posted_key, []))
+            local_count = len(local_state.get(posted_key, []))
+            merged_count = len(merged_state.get(posted_key, []))
+            print(f"  {category}: Gist {gist_count} 件 + ローカル {local_count} 件 → マージ {merged_count} 件")
+
+        print(f"\nマージ後のタイムスタンプ: {merged_state.get('last_updated')}")
+
+        # Dry-runモード
+        if dry_run:
+            print("\n[DRY-RUN] 以下の変更が行われます:")
+            print(f"  ローカルファイル: マージ結果で更新")
+            print(f"  Gist: マージ結果で更新")
+            return True
+
+        # バックアップ作成
+        self._backup_local_state()
+
+        # ローカルに保存
+        state_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(state_file, 'w', encoding='utf-8') as f:
+            json.dump(merged_state, f, indent=2, ensure_ascii=False)
+        print(f"\n✓ ローカルファイルを更新しました: {state_file}")
+
+        # Gistに保存
+        try:
+            url = f"https://api.github.com/gists/{self.gist_id}"
+            headers = {
+                "Authorization": f"token {self.github_token}",
+                "Accept": "application/vnd.github.v3+json"
+            }
+            data = {
+                "files": {
+                    "glossary_state.json": {
+                        "content": json.dumps(merged_state, indent=2, ensure_ascii=False)
+                    }
+                }
+            }
+            response = requests.patch(url, headers=headers, json=data, timeout=10)
+
+            if response.status_code == 200:
+                print(f"✓ Gistを更新しました")
+                return True
+            else:
+                print(f"Warning: Gist更新エラー（ステータス: {response.status_code}）")
+                print(f"  ローカルファイルは更新されました")
+                return False
+
+        except Exception as e:
+            print(f"Warning: Gist更新中にエラーが発生しました: {e}")
+            print(f"  ローカルファイルは更新されました")
+            return False
+
+    def sync_status(self, verbose: bool = False) -> Dict:
+        """
+        同期状態を確認
+
+        Args:
+            verbose: 詳細情報を表示
+
+        Returns:
+            状態比較結果
+        """
+        print("=== 同期状態確認 ===\n")
+
+        # Gistから読み込み
+        gist_state = self._load_gist_state()
+
+        # ローカルから読み込み
+        state_file = self._get_local_state_path()
+        local_state = None
+        if state_file.exists():
+            with open(state_file, 'r', encoding='utf-8') as f:
+                local_state = json.load(f)
+
+        # 存在チェック
+        print(f"Gist: {'✓ 存在' if gist_state else '✗ 存在しない'}")
+        print(f"ローカル: {'✓ 存在' if local_state else '✗ 存在しない'}")
+
+        if gist_state:
+            print(f"  タイムスタンプ: {gist_state.get('last_updated')}")
+        if local_state:
+            print(f"  タイムスタンプ: {local_state.get('last_updated')}")
+
+        if not gist_state or not local_state:
+            print("\n同期が必要です")
+            return {}
+
+        # 状態比較
+        comparison = self.compare_states(gist_state, local_state)
+
+        print()
+        if comparison["is_identical"]:
+            print("✓ Gistとローカルは完全に同期されています")
+        else:
+            print("⚠️  Gistとローカルに差異があります\n")
+
+            # 投稿済みIDの差異
+            if comparison["posted_diff"]:
+                print("投稿済みIDの差異:")
+                for category, diff in comparison["posted_diff"].items():
+                    gist_only = len(diff["only_in_1"])
+                    local_only = len(diff["only_in_2"])
+                    if gist_only or local_only:
+                        print(f"  {category}: Gistのみ {gist_only} 件, ローカルのみ {local_only} 件")
+                        if verbose and gist_only:
+                            print(f"    Gistのみ: {diff['only_in_1'][:5]}{'...' if gist_only > 5 else ''}")
+                        if verbose and local_only:
+                            print(f"    ローカルのみ: {diff['only_in_2'][:5]}{'...' if local_only > 5 else ''}")
+
+            # サイクルカウントの差異
+            if comparison["cycle_diff"]:
+                print("\nサイクルカウントの差異:")
+                for category, diff in comparison["cycle_diff"].items():
+                    print(f"  {category}: Gist {diff['state1']} 周, ローカル {diff['state2']} 周")
+
+            # 競合の有無
+            if comparison["has_conflict"]:
+                print("\n⚠️  競合が存在します（両方に異なる変更）")
+                print("  推奨: python scripts/state_manager.py sync --auto")
+            else:
+                print("\n競合なし（マージ可能）")
+
+        return comparison
+
+    def validate(
+        self,
+        verbose: bool = False,
+        fix: bool = False,
+        category: Optional[str] = None,
+        report_file: Optional[str] = None
+    ) -> Dict:
+        """
+        状態データの整合性を検証
+
+        Args:
+            verbose: 詳細情報を表示
+            fix: 軽微な問題を自動修正（例: 孤立IDの削除）
+            category: 特定のカテゴリのみ検証（'spells', 'potions', 'creatures'）
+            report_file: 検証レポートの出力先ファイルパス
+
+        Returns:
+            検証結果の辞書:
+            {
+                "valid": bool,
+                "timestamp": str,
+                "checks": {
+                    "id_existence": {"passed": bool, "issues": [...]},
+                    "cycle_counts": {"passed": bool, "issues": [...]},
+                    "timestamps": {"passed": bool, "issues": [...]},
+                    "structure": {"passed": bool, "issues": [...]},
+                    "consistency": {"passed": bool, "issues": [...]},
+                    "sync_status": {"passed": bool, "issues": [...]}
+                },
+                "summary": {
+                    "total_checks": int,
+                    "passed": int,
+                    "failed": int,
+                    "warnings": int
+                }
+            }
+        """
+        print("=== 状態検証 ===\n")
+
+        # 検証するカテゴリを決定
+        categories_to_check = [category] if category else ['spells', 'potions', 'creatures']
+
+        # 検証実行
+        validation_result = {
+            "valid": True,
+            "timestamp": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+            "checks": {},
+            "summary": {
+                "total_checks": 0,
+                "passed": 0,
+                "failed": 0,
+                "warnings": 0
+            }
+        }
+
+        # データ構造検証
+        structure_result = self._validate_structure(verbose=verbose)
+        validation_result["checks"]["structure"] = structure_result
+        validation_result["summary"]["total_checks"] += 1
+        if structure_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # ID存在チェック
+        id_result = self._validate_ids(categories_to_check, verbose=verbose, fix=fix)
+        validation_result["checks"]["id_existence"] = id_result
+        validation_result["summary"]["total_checks"] += 1
+        if id_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # サイクルカウント検証
+        cycle_result = self._validate_cycle_counts(categories_to_check, verbose=verbose)
+        validation_result["checks"]["cycle_counts"] = cycle_result
+        validation_result["summary"]["total_checks"] += 1
+        if cycle_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # タイムスタンプ検証
+        timestamp_result = self._validate_timestamps(verbose=verbose)
+        validation_result["checks"]["timestamps"] = timestamp_result
+        validation_result["summary"]["total_checks"] += 1
+        if timestamp_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        elif timestamp_result.get("warning"):
+            validation_result["summary"]["warnings"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # 論理的整合性検証
+        consistency_result = self._validate_consistency(categories_to_check, verbose=verbose)
+        validation_result["checks"]["consistency"] = consistency_result
+        validation_result["summary"]["total_checks"] += 1
+        if consistency_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # Gist-ローカル同期状態検証
+        sync_result = self._validate_sync_status(verbose=verbose)
+        validation_result["checks"]["sync_status"] = sync_result
+        validation_result["summary"]["total_checks"] += 1
+        if sync_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        elif sync_result.get("warning"):
+            validation_result["summary"]["warnings"] += 1
+
+        # 結果出力
+        self._print_validation_result(validation_result, verbose=verbose)
+
+        # レポート生成
+        if report_file:
+            self._generate_validation_report(validation_result, report_file)
+
+        return validation_result
+
+    def _validate_structure(self, verbose: bool = False) -> Dict:
+        """
+        データ構造の検証
+
+        Args:
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+
+        # 必須フィールドの存在チェック
+        required_fields = {
+            'posted_spells': list,
+            'posted_potions': list,
+            'posted_creatures': list,
+            'last_spell_posted': (dict, type(None)),
+            'last_potion_posted': (dict, type(None)),
+            'last_creature_posted': (dict, type(None)),
+            'last_updated': str,
+            'cycle_count': dict
+        }
+
+        # 旧バージョンのstateではcreaturesがない可能性があるため警告のみ
+        optional_fields = {'posted_creatures', 'last_creature_posted'}
+
+        for field, expected_type in required_fields.items():
+            if field not in self.state:
+                if field in optional_fields or (field == 'cycle_count' and 'creatures' not in self.state.get('cycle_count', {})):
+                    # 警告のみ（古いstateファイル）
+                    if verbose:
+                        print(f"  ⚠️  フィールド '{field}' が存在しません（古いバージョン）")
+                else:
+                    issues.append(f"必須フィールド '{field}' が存在しません")
+            elif not isinstance(self.state[field], expected_type):
+                issues.append(f"フィールド '{field}' の型が不正です（期待: {expected_type}, 実際: {type(self.state[field])}）")
+
+        # cycle_count の内容チェック
+        if 'cycle_count' in self.state and isinstance(self.state['cycle_count'], dict):
+            for category in ['spells', 'potions', 'creatures']:
+                if category not in self.state['cycle_count']:
+                    if category == 'creatures' and verbose:
+                        # creaturesは古いバージョンにはない可能性がある
+                        print(f"  ⚠️  cycle_count に 'creatures' が存在しません（古いバージョン）")
+                    elif category != 'creatures':
+                        issues.append(f"cycle_count に '{category}' が存在しません")
+                elif not isinstance(self.state['cycle_count'][category], (int, float)):
+                    issues.append(f"cycle_count['{category}'] の型が不正です")
+
+        # last_*_posted の内容チェック
+        for category in ['spell', 'potion', 'creature']:
+            last_key = f"last_{category}_posted"
+            if last_key in self.state and self.state[last_key] is not None:
+                last_posted = self.state[last_key]
+                if not isinstance(last_posted, dict):
+                    issues.append(f"'{last_key}' の型が不正です")
+                elif 'id' not in last_posted or 'timestamp' not in last_posted:
+                    issues.append(f"'{last_key}' に 'id' または 'timestamp' が存在しません")
+
+        passed = len(issues) == 0
+
+        if verbose or not passed:
+            print(f"{'✓' if passed else '✗'} データ構造: {'合格' if passed else '不合格'}")
+            for issue in issues:
+                print(f"  - {issue}")
+
+        return {
+            "passed": passed,
+            "issues": issues
+        }
+
+    def _validate_ids(self, categories: List[str], verbose: bool = False, fix: bool = False) -> Dict:
+        """
+        posted_* 配列内のIDが実際のデータファイルに存在するか検証
+
+        Args:
+            categories: 検証するカテゴリのリスト
+            verbose: 詳細情報を表示
+            fix: 孤立IDを自動削除
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        fixed_count = 0
+        project_root = Path(__file__).parent.parent
+
+        print(f"{'✓' if True else '✗'} ID存在チェック:")
+
+        for category in categories:
+            # 古いstateではcreaturesフィールドがない可能性がある
+            posted_key = f"posted_{category}"
+            if posted_key not in self.state:
+                if verbose:
+                    print(f"  ⚠️  {category}: state に '{posted_key}' が存在しません（スキップ）")
+                continue
+
+            # データファイル読み込み
+            data_file = project_root / 'data' / 'posts' / f'{category}.json'
+
+            if not data_file.exists():
+                issues.append(f"{category}: データファイルが見つかりません: {data_file}")
+                print(f"  ✗ {category}: データファイルが見つかりません")
+                continue
+
+            with open(data_file, 'r', encoding='utf-8') as f:
+                file_content = json.load(f)
+
+            # ファイル構造の判定（配列 or metadata+data構造）
+            if isinstance(file_content, list):
+                data_items = file_content
+            elif isinstance(file_content, dict) and 'data' in file_content:
+                data_items = file_content['data']
+            else:
+                issues.append(f"{category}: データファイルの構造が不正です")
+                print(f"  ✗ {category}: データファイルの構造が不正です")
+                continue
+
+            valid_ids = {item['id'] for item in data_items}
+            posted_ids = set(self.state.get(posted_key, []))
+
+            # 孤立ID（データファイルに存在しないID）を検出
+            orphaned_ids = posted_ids - valid_ids
+
+            if orphaned_ids:
+                issues.append(f"{category}: 孤立ID {len(orphaned_ids)} 件検出")
+                print(f"  ⚠️  {category}: 孤立ID {len(orphaned_ids)} 件検出")
+                if verbose:
+                    for orphaned_id in list(orphaned_ids)[:5]:
+                        print(f"      - {orphaned_id}")
+                    if len(orphaned_ids) > 5:
+                        print(f"      ... (他 {len(orphaned_ids) - 5} 件)")
+
+                # 自動修正
+                if fix:
+                    self.state[posted_key] = [pid for pid in self.state[posted_key] if pid not in orphaned_ids]
+                    fixed_count += len(orphaned_ids)
+                    print(f"      → {len(orphaned_ids)} 件の孤立IDを削除しました")
+            else:
+                print(f"  ✓ {category}: {len(posted_ids)}/{len(valid_ids)} (全て有効)")
+
+        if fix and fixed_count > 0:
+            self._save_state()
+            print(f"\n✓ {fixed_count} 件の孤立IDを削除し、状態を保存しました")
+
+        passed = len(issues) == 0
+
+        return {
+            "passed": passed,
+            "issues": issues,
+            "fixed": fixed_count if fix else 0
+        }
+
+    def _validate_cycle_counts(self, categories: List[str], verbose: bool = False) -> Dict:
+        """
+        サイクルカウントの妥当性を検証
+
+        Args:
+            categories: 検証するカテゴリのリスト
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        MAX_CYCLE_COUNT = 1000  # 合理的な上限
+
+        print(f"\n{'✓' if True else '✗'} サイクルカウント:")
+
+        for category in categories:
+            cycle_count = self.state.get('cycle_count', {}).get(category)
+
+            # 古いstateではcreaturesがない可能性がある
+            if cycle_count is None:
+                if verbose:
+                    print(f"  ⚠️  {category}: cycle_count が存在しません（スキップ）")
+                continue
+
+            cycle_count = cycle_count or 0
+
+            # 非負数チェック
+            if cycle_count < 0:
+                issues.append(f"{category}: サイクルカウントが負数です: {cycle_count}")
+                print(f"  ✗ {category}: {cycle_count} (負数)")
+                continue
+
+            # 上限チェック
+            if cycle_count > MAX_CYCLE_COUNT:
+                issues.append(f"{category}: サイクルカウントが上限を超えています: {cycle_count} > {MAX_CYCLE_COUNT}")
+                print(f"  ✗ {category}: {cycle_count} (上限超過)")
+                continue
+
+            print(f"  ✓ {category}: {cycle_count} (範囲内)")
+
+        passed = len(issues) == 0
+
+        return {
+            "passed": passed,
+            "issues": issues
+        }
+
+    def _validate_timestamps(self, verbose: bool = False) -> Dict:
+        """
+        タイムスタンプの妥当性を検証
+
+        Args:
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        warnings = []
+
+        print(f"\n{'✓' if True else '✗'} タイムスタンプ:")
+
+        # 現在時刻
+        now = datetime.now(timezone.utc)
+        one_year_ago = now.replace(year=now.year - 1)
+        future_tolerance = now.replace(minute=now.minute + 5)  # 5分の時刻ずれ許容
+
+        # last_updated 検証
+        last_updated_str = self.state.get('last_updated')
+        if not last_updated_str:
+            issues.append("last_updated が存在しません")
+            print(f"  ✗ last_updated: 存在しません")
+        else:
+            try:
+                last_updated = datetime.fromisoformat(last_updated_str.replace('Z', '+00:00'))
+
+                # 未来日時チェック
+                if last_updated > future_tolerance:
+                    issues.append(f"last_updated が未来日時です: {last_updated_str}")
+                    print(f"  ✗ last_updated: {last_updated_str} (未来日時)")
+                # 極端に古いチェック
+                elif last_updated < one_year_ago:
+                    warnings.append(f"last_updated が1年以上前です: {last_updated_str}")
+                    print(f"  ⚠️  last_updated: {last_updated_str} (1年以上前)")
+                else:
+                    print(f"  ✓ last_updated: {last_updated_str} (有効)")
+
+            except (ValueError, AttributeError) as e:
+                issues.append(f"last_updated のフォーマットが不正です: {last_updated_str}")
+                print(f"  ✗ last_updated: {last_updated_str} (フォーマット不正)")
+
+        # last_*_posted 検証
+        for category in ['spell', 'potion', 'creature']:
+            last_key = f"last_{category}_posted"
+            last_posted = self.state.get(last_key)
+
+            if last_posted is None:
+                continue
+
+            timestamp_str = last_posted.get('timestamp')
+            if not timestamp_str:
+                issues.append(f"{last_key} に timestamp が存在しません")
+                print(f"  ✗ {last_key}: timestamp が存在しません")
+                continue
+
+            try:
+                timestamp = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+
+                # 未来日時チェック
+                if timestamp > future_tolerance:
+                    issues.append(f"{last_key}.timestamp が未来日時です: {timestamp_str}")
+                    print(f"  ✗ {last_key}: {timestamp_str} (未来日時)")
+                # last_updated との整合性チェック
+                elif last_updated_str:
+                    try:
+                        last_updated = datetime.fromisoformat(last_updated_str.replace('Z', '+00:00'))
+                        if timestamp > last_updated:
+                            issues.append(f"{last_key}.timestamp が last_updated より新しいです")
+                            print(f"  ✗ {last_key}: {timestamp_str} (last_updated より新しい)")
+                        else:
+                            if verbose:
+                                print(f"  ✓ {last_key}: {timestamp_str} (有効)")
+                    except:
+                        pass
+                else:
+                    if verbose:
+                        print(f"  ✓ {last_key}: {timestamp_str} (有効)")
+
+            except (ValueError, AttributeError):
+                issues.append(f"{last_key}.timestamp のフォーマットが不正です: {timestamp_str}")
+                print(f"  ✗ {last_key}: {timestamp_str} (フォーマット不正)")
+
+        passed = len(issues) == 0
+        warning = len(warnings) > 0 and passed
+
+        return {
+            "passed": passed,
+            "warning": warning,
+            "issues": issues,
+            "warnings": warnings
+        }
+
+    def _validate_consistency(self, categories: List[str], verbose: bool = False) -> Dict:
+        """
+        論理的整合性を検証
+
+        Args:
+            categories: 検証するカテゴリのリスト
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        project_root = Path(__file__).parent.parent
+
+        print(f"\n{'✓' if True else '✗'} 論理的整合性:")
+
+        for category in categories:
+            # データファイル読み込み
+            data_file = project_root / 'data' / 'posts' / f'{category}.json'
+
+            if not data_file.exists():
+                continue
+
+            with open(data_file, 'r', encoding='utf-8') as f:
+                file_content = json.load(f)
+
+            # ファイル構造の判定（配列 or metadata+data構造）
+            if isinstance(file_content, list):
+                data_items = file_content
+            elif isinstance(file_content, dict) and 'data' in file_content:
+                data_items = file_content['data']
+            else:
+                continue
+
+            total_count = len(data_items)
+            posted_key = f"posted_{category}"
+            posted_ids = set(self.state.get(posted_key, []))
+            posted_count = len(posted_ids)
+
+            # posted数が総数を超えていないかチェック
+            if posted_count > total_count:
+                issues.append(f"{category}: posted数({posted_count})が総数({total_count})を超えています")
+                print(f"  ✗ {category}: posted数 {posted_count} > 総数 {total_count}")
+                continue
+
+            # last_*_posted.id が posted_* に含まれているかチェック
+            last_key = f"last_{category[:-1]}_posted"  # 'spells' -> 'spell'
+            last_posted = self.state.get(last_key)
+
+            if last_posted and 'id' in last_posted:
+                last_id = last_posted['id']
+                if last_id not in posted_ids:
+                    issues.append(f"{category}: last_posted.id が posted配列に含まれていません: {last_id}")
+                    print(f"  ✗ {category}: last_posted.id が posted配列に含まれていません")
+                    continue
+
+            print(f"  ✓ {category}: 整合性OK (posted {posted_count}/{total_count})")
+
+        passed = len(issues) == 0
+
+        return {
+            "passed": passed,
+            "issues": issues
+        }
+
+    def _validate_sync_status(self, verbose: bool = False) -> Dict:
+        """
+        Gist-ローカル同期状態を検証
+
+        Args:
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        warnings = []
+
+        print(f"\n{'✓' if True else '✗'} 同期状態:")
+
+        # Gistから読み込み
+        gist_state = self._load_gist_state()
+
+        # ローカルから読み込み
+        state_file = self._get_local_state_path()
+        local_state = None
+        if state_file.exists():
+            with open(state_file, 'r', encoding='utf-8') as f:
+                local_state = json.load(f)
+
+        # Gistが存在しない場合
+        if not gist_state:
+            warnings.append("Gistが存在しません")
+            print(f"  ⚠️  Gistが存在しません")
+            return {
+                "passed": True,
+                "warning": True,
+                "issues": issues,
+                "warnings": warnings
+            }
+
+        # ローカルが存在しない場合
+        if not local_state:
+            warnings.append("ローカルファイルが存在しません")
+            print(f"  ⚠️  ローカルファイルが存在しません")
+            return {
+                "passed": True,
+                "warning": True,
+                "issues": issues,
+                "warnings": warnings
+            }
+
+        # 状態比較
+        comparison = self.compare_states(gist_state, local_state)
+
+        if comparison["is_identical"]:
+            print(f"  ✓ Gistとローカルは同期されています")
+        else:
+            warnings.append("Gistとローカルに差異があります")
+            print(f"  ⚠️  Gistとローカルに差異があります")
+
+            if verbose:
+                # 差異の詳細表示
+                if comparison["posted_diff"]:
+                    for category, diff in comparison["posted_diff"].items():
+                        gist_only = len(diff["only_in_1"])
+                        local_only = len(diff["only_in_2"])
+                        if gist_only or local_only:
+                            print(f"      {category}: Gist専用 {gist_only} 件, ローカル専用 {local_only} 件")
+
+            print(f"      推奨: python scripts/state_manager.py sync --auto")
+
+        passed = len(issues) == 0
+        warning = len(warnings) > 0 and passed
+
+        return {
+            "passed": passed,
+            "warning": warning,
+            "issues": issues,
+            "warnings": warnings
+        }
+
+    def _print_validation_result(self, result: Dict, verbose: bool = False):
+        """
+        検証結果を出力
+
+        Args:
+            result: 検証結果
+            verbose: 詳細情報を表示
+        """
+        summary = result["summary"]
+
+        print(f"\n{'='*40}")
+        print(f"検証結果: {summary['passed']}/{summary['total_checks']} 合格", end="")
+
+        if summary['failed'] > 0:
+            print(f", {summary['failed']} エラー", end="")
+        if summary['warnings'] > 0:
+            print(f", {summary['warnings']} 警告", end="")
+
+        print()
+
+        if result["valid"]:
+            print("✓ 状態は正常です")
+        else:
+            print("✗ 状態に問題があります")
+
+        print(f"{'='*40}\n")
+
+    def _generate_validation_report(self, result: Dict, report_file: str):
+        """
+        検証レポートをMarkdown形式で生成
+
+        Args:
+            result: 検証結果
+            report_file: レポートファイルパス
+        """
+        lines = [
+            "# 状態検証レポート",
+            "",
+            f"**検証日時:** {result['timestamp']}",
+            "",
+            "## 概要",
+            "",
+            f"- **総チェック数:** {result['summary']['total_checks']}",
+            f"- **合格:** {result['summary']['passed']}",
+            f"- **エラー:** {result['summary']['failed']}",
+            f"- **警告:** {result['summary']['warnings']}",
+            f"- **判定:** {'✓ 正常' if result['valid'] else '✗ 異常'}",
+            "",
+            "## 詳細",
+            ""
+        ]
+
+        # 各チェックの詳細
+        check_names = {
+            "structure": "データ構造",
+            "id_existence": "ID存在チェック",
+            "cycle_counts": "サイクルカウント",
+            "timestamps": "タイムスタンプ",
+            "consistency": "論理的整合性",
+            "sync_status": "同期状態"
+        }
+
+        for check_key, check_name in check_names.items():
+            check_result = result["checks"].get(check_key, {})
+            passed = check_result.get("passed", False)
+            warning = check_result.get("warning", False)
+
+            if passed and not warning:
+                lines.append(f"### ✓ {check_name}: 合格")
+            elif warning:
+                lines.append(f"### ⚠️ {check_name}: 警告")
+            else:
+                lines.append(f"### ✗ {check_name}: 不合格")
+
+            lines.append("")
+
+            # Issues
+            issues = check_result.get("issues", [])
+            if issues:
+                lines.append("**問題:**")
+                lines.append("")
+                for issue in issues:
+                    lines.append(f"- {issue}")
+                lines.append("")
+
+            # Warnings
+            warnings = check_result.get("warnings", [])
+            if warnings:
+                lines.append("**警告:**")
+                lines.append("")
+                for warning in warnings:
+                    lines.append(f"- {warning}")
+                lines.append("")
+
+        # ファイルに書き込み
+        report_path = Path(report_file)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(lines))
+
+        print(f"✓ 検証レポートを生成しました: {report_file}")
 
 
 def create_gist(github_token: str, description: str = "Potterpedia Bot Glossary State") -> str:
@@ -258,12 +1480,15 @@ def create_gist(github_token: str, description: str = "Potterpedia Bot Glossary 
     initial_state = {
         "posted_spells": [],
         "posted_potions": [],
+        "posted_creatures": [],
         "last_spell_posted": None,
         "last_potion_posted": None,
+        "last_creature_posted": None,
         "last_updated": datetime.utcnow().isoformat() + "Z",
         "cycle_count": {
             "spells": 0,
-            "potions": 0
+            "potions": 0,
+            "creatures": 0
         }
     }
 
@@ -293,14 +1518,79 @@ def create_gist(github_token: str, description: str = "Potterpedia Bot Glossary 
 
 if __name__ == '__main__':
     """
-    スタンドアロン実行時の動作（初回セットアップ用）
+    スタンドアロン実行時の動作
     """
     import sys
+    import argparse
     from dotenv import load_dotenv
 
     load_dotenv()
 
-    if len(sys.argv) > 1 and sys.argv[1] == 'create-gist':
+    parser = argparse.ArgumentParser(
+        description='用語集投稿の状態管理',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+使用例:
+  # 状態確認
+  python scripts/state_manager.py
+
+  # Gist作成
+  python scripts/state_manager.py create-gist
+
+  # Gistからローカルに同期
+  python scripts/state_manager.py sync --from-gist
+  python scripts/state_manager.py sync --from-gist --force
+
+  # ローカルからGistに同期
+  python scripts/state_manager.py sync --to-gist
+  python scripts/state_manager.py sync --to-gist --force
+
+  # 自動同期（スマートマージ）
+  python scripts/state_manager.py sync --auto
+
+  # 同期状態確認
+  python scripts/state_manager.py sync --status
+  python scripts/state_manager.py sync --status --verbose
+
+  # Dry-run（変更せずシミュレート）
+  python scripts/state_manager.py sync --from-gist --dry-run
+  python scripts/state_manager.py sync --auto --dry-run
+
+  # 状態検証
+  python scripts/state_manager.py validate
+  python scripts/state_manager.py validate --verbose
+  python scripts/state_manager.py validate --report-file docs/validation_report.md
+  python scripts/state_manager.py validate --category spells
+  python scripts/state_manager.py validate --fix
+        """
+    )
+
+    subparsers = parser.add_subparsers(dest='command', help='コマンド')
+
+    # create-gist コマンド
+    parser_create = subparsers.add_parser('create-gist', help='新しいGistを作成')
+
+    # sync コマンド
+    parser_sync = subparsers.add_parser('sync', help='Gistとローカルを同期')
+    sync_group = parser_sync.add_mutually_exclusive_group(required=True)
+    sync_group.add_argument('--from-gist', action='store_true', help='Gistからローカルに同期')
+    sync_group.add_argument('--to-gist', action='store_true', help='ローカルからGistに同期')
+    sync_group.add_argument('--auto', action='store_true', help='自動同期（スマートマージ）')
+    sync_group.add_argument('--status', action='store_true', help='同期状態を確認')
+    parser_sync.add_argument('--force', action='store_true', help='競合があっても強制的に同期')
+    parser_sync.add_argument('--dry-run', action='store_true', help='変更せずシミュレートのみ')
+    parser_sync.add_argument('--verbose', action='store_true', help='詳細情報を表示')
+
+    # validate コマンド
+    parser_validate = subparsers.add_parser('validate', help='状態データの整合性を検証')
+    parser_validate.add_argument('--verbose', action='store_true', help='詳細情報を表示')
+    parser_validate.add_argument('--fix', action='store_true', help='軽微な問題を自動修正（孤立IDの削除など）')
+    parser_validate.add_argument('--report-file', type=str, help='検証レポートの出力先ファイルパス')
+    parser_validate.add_argument('--category', choices=['spells', 'potions', 'creatures'], help='特定のカテゴリのみ検証')
+
+    args = parser.parse_args()
+
+    if args.command == 'create-gist':
         # Gist作成モード
         token = os.getenv('GIST_TOKEN') or os.getenv('GITHUB_TOKEN')
         if not token:
@@ -314,8 +1604,39 @@ if __name__ == '__main__':
             print(f"✗ エラー: {e}")
             sys.exit(1)
 
+    elif args.command == 'sync':
+        # 同期モード
+        manager = StateManager()
+
+        if args.from_gist:
+            success = manager.sync_from_gist(force=args.force, dry_run=args.dry_run)
+            sys.exit(0 if success else 1)
+
+        elif args.to_gist:
+            success = manager.sync_to_gist(force=args.force, dry_run=args.dry_run)
+            sys.exit(0 if success else 1)
+
+        elif args.auto:
+            success = manager.sync_auto(dry_run=args.dry_run)
+            sys.exit(0 if success else 1)
+
+        elif args.status:
+            manager.sync_status(verbose=args.verbose)
+            sys.exit(0)
+
+    elif args.command == 'validate':
+        # 検証モード
+        manager = StateManager()
+        result = manager.validate(
+            verbose=args.verbose,
+            fix=args.fix,
+            category=args.category,
+            report_file=args.report_file
+        )
+        sys.exit(0 if result["valid"] else 1)
+
     else:
-        # 状態確認モード
+        # 状態確認モード（デフォルト）
         manager = StateManager()
         stats = manager.get_stats()
 
@@ -331,5 +1652,11 @@ if __name__ == '__main__':
         print(f"  サイクル数: {stats['potions']['cycles']} 周")
         if stats['potions']['last_posted']:
             print(f"  最終投稿: {stats['potions']['last_posted']['timestamp']}")
+
+        print(f"\n魔法生物:")
+        print(f"  投稿済み: {stats['creatures']['posted']} 個")
+        print(f"  サイクル数: {stats['creatures']['cycles']} 周")
+        if stats['creatures']['last_posted']:
+            print(f"  最終投稿: {stats['creatures']['last_posted']['timestamp']}")
 
         print(f"\n最終更新: {stats['last_updated']}")
