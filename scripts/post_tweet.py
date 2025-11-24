@@ -211,7 +211,7 @@ def post_deathday(date_str: str, dry_run: bool = False) -> bool:
 
     matches = [
         entry for entry in data['data']
-        if entry['death_date'].endswith(date_key)
+        if entry['deathday'].endswith(date_key)
     ]
 
     if not matches:
