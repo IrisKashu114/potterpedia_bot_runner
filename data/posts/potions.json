@@ -8,7 +8,7 @@
   },
   "data": [
     {
-      "id": "f4463b68-af7a-496b-b8e1-3c583fdc9fd2",
+      "id": "wiki_potion_amortentia",
       "type": "potion",
       "name_en": "Amortentia",
       "name_ja": "アモルテンシア",
@@ -28,7 +28,7 @@
       "tweet_text_ja": "【アモルテンシア（魅惑万能薬）】飲んだ者は特定の人物に強烈にのぼせ上がったり、執着心を抱いたりする魔法薬。誰に惹かれているかによって、感じる香りが異なります。"
     },
     {
-      "id": "dd5c3abd-a57c-4a7a-9613-31e259ffffd7",
+      "id": "wiki_potion_antidote_to_veritaserum",
       "type": "potion",
       "name_en": "Antidote to Veritaserum",
       "name_ja": "「真実薬」の解毒剤",
@@ -46,7 +46,7 @@
       "tweet_text_ja": "【「真実薬」の解毒剤】ベリタセラム（真実薬の一種）に対する解毒剤です。アルバス・ダンブルドアは、ホラス・スラグホーンがこれを持ち歩いていても無理はない、と述べたことがあります。"
     },
     {
-      "id": "c6c77cc0-a687-47cb-8f3f-df7efe6dbf18",
+      "id": "wiki_potion_draught_of_living_death",
       "type": "potion",
       "name_en": "Draught of Living Death",
       "name_ja": "生ける屍の水薬",
@@ -64,7 +64,7 @@
       "tweet_text_ja": "【生ける屍の水薬】飲んだ者を死んだように深い眠りに陥らせる魔法薬です。高度な魔法薬で、ハリーは「プリンス」の古い教科書のメモのおかげで、見事に完成させることができました。"
     },
     {
-      "id": "b0f230ca-e157-4a51-a25d-21755a9f2c70",
+      "id": "wiki_potion_elixir_of_life",
       "type": "potion",
       "name_en": "Elixir of Life",
       "name_ja": "命の水",
@@ -82,7 +82,7 @@
       "tweet_text_ja": "【命の水】賢者の石から作られる魔法薬で、飲んだ者に不老不死をもたらします。ニコラス・フラメルは665歳まで生きましたが、最後は賢者の石を破壊し、妻と共に死を受け入れました。"
     },
     {
-      "id": "9b94b1c8-0ab1-434b-a158-efb43e081d41",
+      "id": "wiki_potion_felix_felicis",
       "type": "potion",
       "name_en": "Felix Felicis",
       "name_ja": "フェリックス・フェリシス",
@@ -102,7 +102,7 @@
       "tweet_text_ja": "【フェリックス・フェリシス（幸運の液体）】飲んだ者に幸運をもたらす魔法薬です。調合には6か月かかり、大量に飲むと有毒で、飲みすぎると無謀さや軽率さを引き起こします。金色で、金魚のように飛び跳ねる雫が特徴です。"
     },
     {
-      "id": "6ee03dd5-3ba3-43e9-bf8a-582e1034e10d",
+      "id": "wiki_potion_love_potion_antidote",
       "type": "potion",
       "name_en": "Love Potion Antidote",
       "name_ja": "惚れ薬の解毒剤",
@@ -120,7 +120,7 @@
       "tweet_text_ja": "【惚れ薬の解毒剤】惚れ薬の効果を打ち消す解毒剤です。ホラス・スラグホーンは、ロン・ウィーズリーがロミルダ・ベインの惚れ薬を飲んでしまった時、この解毒剤で治療しました。無色透明の液体です。"
     },
     {
-      "id": "5c146c79-ca76-4439-a639-36f10c4fa72c",
+      "id": "wiki_potion_pepperup_potion",
       "type": "potion",
       "name_en": "Pepperup Potion",
       "name_ja": "元気爆発薬",
@@ -138,7 +138,7 @@
       "tweet_text_ja": "【元気爆発薬】風邪を治し、飲んだ者を温める魔法薬です。副作用として、飲んだ者の耳から数時間、湯気が出ます。マダム・ポンフリーは、風邪が流行った時に生徒たちにこの薬を与えました。"
     },
     {
-      "id": "feb77e52-4b50-475d-9df6-03f70a5d5e9e",
+      "id": "wiki_potion_polyjuice_potion",
       "type": "potion",
       "name_en": "Polyjuice Potion",
       "name_ja": "ポリジュース薬",
@@ -156,11 +156,13 @@
       "tweet_text_ja": "【ポリジュース薬】飲んだ者が一時的に別の人の姿を取ることを可能にする魔法薬です。動物への変身には使ってはいけません。"
     },
     {
-      "id": "b094ee50-419d-4599-9512-a5920479a696",
+      "id": "wiki_potion_skele-gro",
       "type": "potion",
       "name_en": "Skele-Gro",
       "name_ja": "「骨生え薬のスケレ・グロ」",
-      "name_ja_alt": ["「スケレ・グロ」"],
+      "name_ja_alt": [
+        "「スケレ・グロ」"
+      ],
       "effect_en": "Restored bones",
       "effect_ja": "骨を再生させる",
       "characteristics": "Smoked when poured, Vile taste, Burned on the way down, Yellow in colour",
@@ -174,7 +176,7 @@
       "tweet_text_ja": "【骨生え薬のスケレ・グロ】骨を再生させる魔法薬です。ハリーはクィディッチの試合で骨が折れた際、ギルデロイ・ロックハートの失敗により腕の骨が全て消えてしまい、一晩かけて骨生え薬で治療しました。非常に不味く、飲むと焼けるような痛みがあります。"
     },
     {
-      "id": "7200456e-8c00-4e53-b660-1f7840e7fdd0",
+      "id": "wiki_potion_truth_serum",
       "type": "potion",
       "name_en": "Truth Serum",
       "name_ja": "真実薬",
@@ -192,7 +194,7 @@
       "tweet_text_ja": "【真実薬】飲んだ者に真実を語らせる魔法薬の総称です。最も有名な真実薬は「ベリタセラム」で、無色透明で水のように見えます。"
     },
     {
-      "id": "9cd3c3e5-e8fc-4d2d-aed8-88dc766baceb",
+      "id": "wiki_potion_veritaserum",
       "type": "potion",
       "name_en": "Veritaserum",
       "name_ja": "ベリタセラム",
@@ -210,11 +212,13 @@
       "tweet_text_ja": "【ベリタセラム】非常に強力な真実薬で、飲んだ者に真実を語らせる魔法薬です。"
     },
     {
-      "id": "4a5f38e3-4ce6-4e06-8f9c-4e3da3680d32",
+      "id": "wiki_potion_wolfsbane_potion",
       "type": "potion",
       "name_en": "Wolfsbane Potion",
       "name_ja": "脱狼薬",
-      "name_ja_alt": ["トリカブト系の脱狼薬"],
+      "name_ja_alt": [
+        "トリカブト系の脱狼薬"
+      ],
       "effect_en": "Allowed werewolves to keep their minds post-transformation",
       "effect_ja": "狼人間が変身後も理性を保つことを可能にする",
       "characteristics": "Blue smoke, Unpleasant taste, Rendered useless with sugar",
