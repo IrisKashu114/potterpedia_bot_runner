@@ -107,6 +107,8 @@ class StateManager:
             state["posted_organizations"] = []
         if "posted_concepts" not in state:
             state["posted_concepts"] = []
+        if "posted_characters" not in state:
+            state["posted_characters"] = []
 
         if "last_object_posted" not in state:
             state["last_object_posted"] = None
@@ -116,6 +118,8 @@ class StateManager:
             state["last_organization_posted"] = None
         if "last_concept_posted" not in state:
             state["last_concept_posted"] = None
+        if "last_character_posted" not in state:
+            state["last_character_posted"] = None
 
         # cycle_countが存在しない場合は初期化
         if "cycle_count" not in state:
@@ -130,6 +134,8 @@ class StateManager:
             state["cycle_count"]["organizations"] = 0
         if "concepts" not in state["cycle_count"]:
             state["cycle_count"]["concepts"] = 0
+        if "characters" not in state["cycle_count"]:
+            state["cycle_count"]["characters"] = 0
 
         return state
 
@@ -148,6 +154,7 @@ class StateManager:
             "posted_locations": [],
             "posted_organizations": [],
             "posted_concepts": [],
+            "posted_characters": [],
             "last_spell_posted": None,
             "last_potion_posted": None,
             "last_creature_posted": None,
@@ -155,6 +162,7 @@ class StateManager:
             "last_location_posted": None,
             "last_organization_posted": None,
             "last_concept_posted": None,
+            "last_character_posted": None,
             "last_updated": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             "cycle_count": {
                 "spells": 0,
@@ -163,7 +171,8 @@ class StateManager:
                 "objects": 0,
                 "locations": 0,
                 "organizations": 0,
-                "concepts": 0
+                "concepts": 0,
+                "characters": 0
             }
         }
 
@@ -321,6 +330,11 @@ class StateManager:
                 "cycles": self.state.get('cycle_count', {}).get('concepts', 0),
                 "last_posted": self.state.get('last_concept_posted')
             },
+            "characters": {
+                "posted": len(self.state.get('posted_characters', [])),
+                "cycles": self.state.get('cycle_count', {}).get('characters', 0),
+                "last_posted": self.state.get('last_character_posted')
+            },
             "last_updated": self.state.get('last_updated')
         }
 
@@ -421,7 +435,7 @@ class StateManager:
                 result["is_identical"] = False
 
         # 各カテゴリーの投稿済みID比較
-        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']
+        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']
 
         for category in categories:
             posted_key = f"posted_{category}"
@@ -476,7 +490,7 @@ class StateManager:
         newer_state = state1 if ts1 >= ts2 else state2
 
         # posted_* 配列はunion（重複なし結合）
-        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']
+        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']
 
         for category in categories:
             posted_key = f"posted_{category}"
@@ -485,7 +499,7 @@ class StateManager:
             merged[posted_key] = list(set1 | set2)
 
         # last_*_posted は新しいタイムスタンプを優先
-        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept']:
+        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character']:
             last_key = f"last_{category}_posted"
             last1 = state1.get(last_key)
             last2 = state2.get(last_key)
@@ -744,7 +758,7 @@ class StateManager:
 
         # マージ結果の統計
         print("マージ結果:")
-        for category in ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']:
+        for category in ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']:
             posted_key = f"posted_{category}"
             gist_count = len(gist_state.get(posted_key, []))
             local_count = len(local_state.get(posted_key, []))
@@ -910,7 +924,7 @@ class StateManager:
         print("=== 状態検証 ===\n")
 
         # 検証するカテゴリを決定
-        categories_to_check = [category] if category else ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']
+        categories_to_check = [category] if category else ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']
 
         # 検証実行
         validation_result = {
@@ -1046,7 +1060,7 @@ class StateManager:
                     issues.append(f"cycle_count['{category}'] の型が不正です")
 
         # last_*_posted の内容チェック
-        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept']:
+        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character']:
             last_key = f"last_{category}_posted"
             if last_key in self.state and self.state[last_key] is not None:
                 last_posted = self.state[last_key]
@@ -1667,7 +1681,7 @@ if __name__ == '__main__':
     parser_validate.add_argument('--verbose', action='store_true', help='詳細情報を表示')
     parser_validate.add_argument('--fix', action='store_true', help='軽微な問題を自動修正（孤立IDの削除など）')
     parser_validate.add_argument('--report-file', type=str, help='検証レポートの出力先ファイルパス')
-    parser_validate.add_argument('--category', choices=['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts'], help='特定のカテゴリのみ検証')
+    parser_validate.add_argument('--category', choices=['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters'], help='特定のカテゴリのみ検証')
 
     args = parser.parse_args()
 

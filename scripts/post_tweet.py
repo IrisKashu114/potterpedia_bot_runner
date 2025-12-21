@@ -27,16 +27,14 @@ X (Twitter) 投稿スクリプト
     python scripts/post_tweet.py test "テストツイート"
 """
 
-import os
-import sys
-import json
 import random
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional
 
-import tweepy
-from dotenv import load_dotenv
+# 内部モジュールのインポート
+from twitter_client import XPoster
+from data_loader import load_data_file
 
 # 状態管理モジュールをインポート
 try:
@@ -45,103 +43,6 @@ try:
 except ImportError:
     STATE_MANAGEMENT_AVAILABLE = False
     print("Warning: state_manager.py が見つかりません。状態管理機能は無効です。")
-
-
-class XPoster:
-    """X (Twitter) への投稿を管理するクラス"""
-
-    def __init__(self, dry_run: bool = False):
-        """
-        初期化
-
-        Args:
-            dry_run: Trueの場合、実際には投稿せずログ出力のみ
-        """
-        self.dry_run = dry_run
-        self.client = None
-
-        if not dry_run:
-            self._setup_client()
-
-    def _setup_client(self):
-        """X APIクライアントのセットアップ"""
-        # 環境変数の読み込み
-        load_dotenv()
-
-        # 必須の環境変数をチェック
-        required_vars = [
-            'X_API_KEY',
-            'X_API_KEY_SECRET',
-            'X_ACCESS_TOKEN',
-            'X_ACCESS_TOKEN_SECRET'
-        ]
-
-        missing_vars = [var for var in required_vars if not os.getenv(var)]
-        if missing_vars:
-            raise ValueError(
-                f"必要な環境変数が設定されていません: {', '.join(missing_vars)}\n"
-                f".envファイルを作成してください（.env.exampleを参考に）"
-            )
-
-        # Tweepy v2 クライアントの作成
-        try:
-            self.client = tweepy.Client(
-                bearer_token=os.getenv('X_BEARER_TOKEN'),
-                consumer_key=os.getenv('X_API_KEY'),
-                consumer_secret=os.getenv('X_API_KEY_SECRET'),
-                access_token=os.getenv('X_ACCESS_TOKEN'),
-                access_token_secret=os.getenv('X_ACCESS_TOKEN_SECRET')
-            )
-            print("✓ X APIクライアントの初期化に成功しました")
-        except Exception as e:
-            raise Exception(f"X APIクライアントの初期化に失敗しました: {e}")
-
-    def post_tweet(self, text: str) -> Optional[Dict[str, Any]]:
-        """
-        ツイートを投稿
-
-        Args:
-            text: 投稿するテキスト
-
-        Returns:
-            投稿成功時はレスポンスデータ、失敗時はNone
-        """
-        if self.dry_run:
-            print(f"\n[DRY RUN] 以下の内容を投稿します:")
-            print(f"{'='*50}")
-            print(text)
-            print(f"{'='*50}")
-            print(f"文字数: {len(text)} 文字")
-            return {"dry_run": True, "text": text}
-
-        try:
-            # ツイート文字数チェック（Xは280文字まで、日本語は全角1文字=1文字）
-            if len(text) > 280:
-                raise ValueError(f"ツイートが長すぎます（{len(text)}文字 > 280文字）")
-
-            # ツイート投稿
-            response = self.client.create_tweet(text=text)
-
-            print(f"✓ ツイートの投稿に成功しました")
-            print(f"  ID: {response.data['id']}")
-
-            return response.data
-
-        except tweepy.TweepyException as e:
-            print(f"✗ ツイートの投稿に失敗しました: {e}", file=sys.stderr)
-            return None
-        except Exception as e:
-            print(f"✗ 予期しないエラーが発生しました: {e}", file=sys.stderr)
-            return None
-
-
-def load_data_file(file_path: Path) -> Dict[str, Any]:
-    """JSONデータファイルを読み込む"""
-    if not file_path.exists():
-        raise FileNotFoundError(f"データファイルが見つかりません: {file_path}")
-
-    with open(file_path, 'r', encoding='utf-8') as f:
-        return json.load(f)
 
 
 def post_birthday(date_str: str, dry_run: bool = False) -> bool:
@@ -715,9 +616,66 @@ def post_concept(concept_id: Optional[str] = None, dry_run: bool = False, use_st
     return False
 
 
+def post_character(character_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
+    """
+    キャラクタープロフィールツイートを投稿
+
+    Args:
+        character_id: 特定のキャラクターID（UUIDまたはslug）。Noneの場合はランダム選択
+        dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        use_state: 状態管理を使用するかどうか（重複投稿防止）
+
+    Returns:
+        投稿成功時はTrue
+    """
+    # プロジェクトルートディレクトリを取得
+    project_root = Path(__file__).parent.parent
+    characters_file = project_root / 'data' / 'posts' / 'characters.json'
+
+    # データファイル読み込み
+    data = load_data_file(characters_file)
+
+    # キャラクターを選択
+    if character_id:
+        # ID指定の場合、該当するキャラクターを検索
+        matches = [
+            entry for entry in data['data']
+            if entry.get('id') == character_id or entry.get('slug') == character_id
+        ]
+        if not matches:
+            print(f"指定されたID（{character_id}）のキャラクターが見つかりません")
+            return False
+        entry = matches[0]
+    else:
+        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
+        if use_state and STATE_MANAGEMENT_AVAILABLE:
+            state_manager = StateManager()
+            entry = state_manager.get_random_available_item('character', data['data'])
+            if not entry:
+                print("利用可能なキャラクターがありません")
+                return False
+        else:
+            entry = random.choice(data['data'])
+
+    # ツイート投稿
+    poster = XPoster(dry_run=dry_run)
+    result = poster.post_tweet(entry['tweet_text_ja'])
+
+    if result:
+        print(f"✓ キャラクター: {entry.get('name_ja') or entry.get('name_en')}")
+
+        # 投稿成功時、状態を更新
+        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
+            state_manager = StateManager()
+            state_manager.mark_as_posted('character', entry['id'])
+
+        return True
+    return False
+
+
 def post_glossary(dry_run: bool = False) -> bool:
     """
-    用語集（呪文・ポーション・魔法生物・魔法道具・場所・組織・魔法概念）をランダムに投稿
+    用語集（呪文・ポーション・魔法生物・魔法道具・場所・組織・魔法概念・キャラクター）をランダムに投稿
 
     Args:
         dry_run: Trueの場合、実際には投稿せずログ出力のみ
@@ -726,7 +684,7 @@ def post_glossary(dry_run: bool = False) -> bool:
         投稿成功時はTrue
     """
     # ランダムにカテゴリを選択
-    category = random.choice(['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept'])
+    category = random.choice(['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character'])
 
     if category == 'spell':
         print("カテゴリ: 呪文")
@@ -746,9 +704,12 @@ def post_glossary(dry_run: bool = False) -> bool:
     elif category == 'organization':
         print("カテゴリ: 組織")
         return post_organization(dry_run=dry_run)
-    else:
+    elif category == 'concept':
         print("カテゴリ: 魔法概念")
         return post_concept(dry_run=dry_run)
+    else:
+        print("カテゴリ: キャラクター")
+        return post_character(dry_run=dry_run)
 
 
 def main():
@@ -886,10 +847,21 @@ def main():
         help='特定の魔法概念ID（UUID）を指定'
     )
 
+    # characterコマンド
+    character_parser = subparsers.add_parser(
+        'character',
+        help='キャラクタープロフィールツイートを投稿（ランダムまたはID指定）'
+    )
+    character_parser.add_argument(
+        '--id',
+        dest='character_id',
+        help='特定のキャラクターID（UUID）を指定'
+    )
+
     # glossaryコマンド
     subparsers.add_parser(
         'glossary',
-        help='用語集（呪文・ポーション・魔法生物・魔法道具・場所・組織・魔法概念）をランダムに投稿'
+        help='用語集（呪文・ポーション・魔法生物・魔法道具・場所・組織・魔法概念・キャラクター）をランダムに投稿'
     )
 
     # testコマンド
@@ -942,6 +914,9 @@ def main():
 
         elif args.command == 'concept':
             post_concept(concept_id=args.concept_id, dry_run=args.dry_run)
+
+        elif args.command == 'character':
+            post_character(character_id=args.character_id, dry_run=args.dry_run)
 
         elif args.command == 'glossary':
             post_glossary(dry_run=args.dry_run)
