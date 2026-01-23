@@ -1108,7 +1108,7 @@ class StateManager:
                 continue
 
             # データファイル読み込み
-            data_file = project_root / 'data' / 'posts' / f'{category}.json'
+            data_file = project_root / 'data' / 'production' / 'glossary' / f'{category}.json'
 
             if not data_file.exists():
                 issues.append(f"{category}: データファイルが見つかりません: {data_file}")
@@ -1324,7 +1324,7 @@ class StateManager:
 
         for category in categories:
             # データファイル読み込み
-            data_file = project_root / 'data' / 'posts' / f'{category}.json'
+            data_file = project_root / 'data' / 'production' / 'glossary' / f'{category}.json'
 
             if not data_file.exists():
                 continue
