@@ -1,69 +1,90 @@
 # Potterpedia Bot Runner
 
-⚠️ **This repository is automatically synchronized from a private repository.**
+⚠️ **このリポジトリは非公開リポジトリから自動的に同期されています。**
 
-**DO NOT make changes directly in this repository** - they will be overwritten by the next sync.
+**このリポジトリで直接変更を行わないでください** - 次回の同期で上書きされます。
 
-## About
+## 概要
 
-This is the public execution environment for the Potterpedia Twitter Bot. The bot posts:
-- Character birthdays from the Harry Potter series
-- Character deathdays (commemorations)
-- Important events from the books
-- Glossary posts (spells and potions)
+このリポジトリは、Potterpedia Twitter Botの公開実行環境です。ボットは以下の内容を投稿します：
 
-## Contents
+- ハリー・ポッターシリーズのキャラクターの誕生日
+- キャラクターの命日（追悼）
+- 原作の重要なイベント
+- 用語集の投稿（呪文、ポーション、魔法生物、魔法道具、場所、組織、魔法概念、キャラクタープロフィール）
 
-This repository contains only the files needed to run the bot:
+## 内容
 
-- [scripts/post_tweet.py](scripts/post_tweet.py) - Main tweet posting script
-- `data/posts/birthdays.json` - Character birthday data (14 characters)
-- `data/posts/deathdays.json` - Character deathday data (9 grouped posts)
-- `data/posts/events.json` - Harry Potter event data (13 major events)
-- `data/posts/spells.json` - Spell glossary data (29 spells)
-- `data/posts/potions.json` - Potion glossary data (12 potions)
-- [requirements.txt](requirements.txt) - Python dependencies
+このリポジトリには、ボットの実行に必要なファイルのみが含まれています：
 
-## How It Works
+### スクリプト
 
-### Automated Posting Schedule
+- [scripts/post_tweet.py](scripts/post_tweet.py) - メインのツイート投稿スクリプト
+- [scripts/twitter_client.py](scripts/twitter_client.py) - X (Twitter) API クライアント
+- [scripts/data_loader.py](scripts/data_loader.py) - データファイル読み込み機能
+- [scripts/state_manager.py](scripts/state_manager.py) - 投稿状態管理（重複防止）
 
-The bot runs automatically via GitHub Actions:
-- **0:00 JST (15:00 UTC)**: Posts birthday/deathday/event tweets for the current date
-- **21:00 JST (12:00 UTC)**: Posts a random glossary entry (spell or potion)
+### データファイル
 
-### Data Sync
+- `data/posts/birthdays.json` - キャラクター誕生日データ
+- `data/posts/deathdays.json` - キャラクター命日データ
+- `data/posts/events.json` - ハリー・ポッターのイベントデータ
+- `data/posts/spells.json` - 呪文用語集データ
+- `data/posts/potions.json` - ポーション用語集データ
+- `data/posts/creatures.json` - 魔法生物用語集データ
+- `data/posts/objects.json` - 魔法道具用語集データ
+- `data/posts/locations.json` - 場所用語集データ
+- `data/posts/organizations.json` - 組織用語集データ
+- `data/posts/concepts.json` - 魔法概念用語集データ
+- `data/posts/characters.json` - キャラクタープロフィールデータ
 
-Files are automatically synced from the private development repository when changes are pushed. All data files contain Japanese translations ready for posting.
+### その他
 
-## Manual Execution (For Testing)
+- [requirements.txt](requirements.txt) - Python依存関係
 
-If you want to run the bot locally for testing:
+## 動作の仕組み
 
-### Prerequisites
-- Python 3.11+
-- X (Twitter) API credentials
+### 自動投稿スケジュール
 
-### Setup
+ボットはGitHub Actionsを通じて自動的に実行されます：
 
-1. **Clone this repository:**
+- **0:00 JST (15:00 UTC)**: その日の誕生日・命日ツイートを投稿
+- **12:00 JST (3:00 UTC)**: その日のイベントツイートを投稿
+- **21:00 JST (12:00 UTC)**: ランダムな用語集エントリ（呪文、ポーション、魔法生物、魔法道具、場所、組織、魔法概念、キャラクター）を投稿
+
+### データ同期
+
+ファイルは、非公開の開発リポジトリから変更がプッシュされると自動的に同期されます。すべてのデータファイルには、投稿用の日本語訳が含まれています。
+
+## 手動実行（テスト用）
+
+ローカルでボットをテスト実行したい場合：
+
+### 前提条件
+
+- Python 3.11以上
+- X (Twitter) API認証情報
+
+### セットアップ
+
+1. **このリポジトリをクローン:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/potterpedia_bot_runner.git
+   git clone https://github.com/IrisKashu114/potterpedia_bot_runner.git
    cd potterpedia_bot_runner
    ```
 
-2. **Create virtual environment:**
+2. **仮想環境を作成:**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  # Windowsの場合: venv\Scripts\activate
    ```
 
-3. **Install dependencies:**
+3. **依存関係をインストール:**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Create `.env` file with your X API credentials:**
+4. **X API認証情報を含む`.env`ファイルを作成:**
    ```bash
    X_API_KEY=your_api_key_here
    X_API_KEY_SECRET=your_api_key_secret_here
@@ -71,39 +92,61 @@ If you want to run the bot locally for testing:
    X_ACCESS_TOKEN_SECRET=your_access_token_secret_here
    ```
 
-### Run Commands
+### 実行コマンド
 
 ```bash
-# Post all tweets for today (birthdays, deathdays, events)
+# 今日のすべてのツイート（誕生日、命日、イベント）を投稿
 python scripts/post_tweet.py today
 
-# Post birthday tweets for a specific date
+# 特定の日付の誕生日ツイートを投稿
 python scripts/post_tweet.py birthday 1980-07-31
 
-# Post deathday tweets for a specific date
+# 特定の日付の命日ツイートを投稿
 python scripts/post_tweet.py deathday 1998-05-02
 
-# Post event tweets for a specific date
+# 特定の日付のイベントツイートを投稿
 python scripts/post_tweet.py event 1991-09-01
 
-# Post random glossary entry (spell or potion)
+# ランダムな用語集エントリを投稿（すべてのカテゴリから）
 python scripts/post_tweet.py glossary
 
-# Post specific spell by ID
-python scripts/post_tweet.py spell SPELL_ID
+# 呪文をランダムに投稿
+python scripts/post_tweet.py spell
 
-# Post specific potion by ID
-python scripts/post_tweet.py potion POTION_ID
+# ポーションをランダムに投稿
+python scripts/post_tweet.py potion
 
-# Dry run (test without actually posting)
+# 魔法生物をランダムに投稿
+python scripts/post_tweet.py creature
+
+# 魔法道具をランダムに投稿
+python scripts/post_tweet.py object
+
+# 場所をランダムに投稿
+python scripts/post_tweet.py location
+
+# 組織をランダムに投稿
+python scripts/post_tweet.py organization
+
+# 魔法概念をランダムに投稿
+python scripts/post_tweet.py concept
+
+# キャラクタープロフィールをランダムに投稿
+python scripts/post_tweet.py character
+
+# 特定のIDで呪文を投稿
+python scripts/post_tweet.py spell --id SPELL_ID
+
+# ドライラン（実際には投稿せずにテスト）
 python scripts/post_tweet.py --dry-run today
 ```
 
-## Data Structure
+## データ構造
 
-All data files are in JSON format with Japanese translations:
+すべてのデータファイルはJSON形式で、日本語訳が含まれています：
 
-### Birthdays (`data/posts/birthdays.json`)
+### 誕生日 (`data/posts/birthdays.json`)
+
 ```json
 {
   "id": "uuid",
@@ -114,10 +157,12 @@ All data files are in JSON format with Japanese translations:
 }
 ```
 
-### Deathdays (`data/posts/deathdays.json`)
-Includes both individual and grouped entries for characters who died on the same date.
+### 命日 (`data/posts/deathdays.json`)
 
-### Events (`data/posts/events.json`)
+同じ日に亡くなったキャラクターの個別エントリとグループエントリの両方が含まれます。
+
+### イベント (`data/posts/events.json`)
+
 ```json
 {
   "id": "uuid",
@@ -128,25 +173,26 @@ Includes both individual and grouped entries for characters who died on the same
 }
 ```
 
-### Glossary (`spells.json`, `potions.json`)
-Contains detailed information about spells and potions from the Harry Potter series, including Japanese names and effects.
+### 用語集 (`spells.json`, `potions.json`, `creatures.json`, など)
 
-## X API Rate Limits
+ハリー・ポッターシリーズの呪文、ポーション、魔法生物、魔法道具、場所、組織、魔法概念、キャラクターに関する詳細情報（日本語名と効果を含む）が含まれています。
 
-- **Free Tier**: 500 posts/month, 17 posts/24 hours
-- **Current Usage**: ~30-60 posts/month (well within limits)
-  - Date-based posts: 0-30/month (depending on calendar)
-  - Glossary posts: 30/month (1 per day at 21:00 JST)
+## X API レート制限
 
-## License
+- **無料プラン**: 月500投稿、24時間あたり17投稿
+- **現在の使用量**: 月あたり約60-90投稿（制限内に余裕あり）
+  - 日付ベースの投稿: 月あたり0-30投稿（カレンダーに依存）
+  - 用語集投稿: 月あたり30投稿（21:00 JSTに1日1回）
 
-Data is sourced from the Harry Potter series by J.K. Rowling. This bot is a fan project and not affiliated with or endorsed by J.K. Rowling or Warner Bros.
+## ライセンス
 
-## Contact
+データはJ.K.ローリング著のハリー・ポッターシリーズから取得されています。このボットはファンプロジェクトであり、J.K.ローリングやワーナーブラザーズとは関係がなく、承認も受けていません。
 
-For issues or questions about this bot, please open an issue in this repository.
+## お問い合わせ
+
+このボットに関する問題や質問がある場合は、このリポジトリでissueを開いてください。
 
 ---
 
-**Last Sync**: Automatically updated by GitHub Actions
-**Source Repository**: Private (development and data management)
+**最終同期**: GitHub Actionsによって自動更新
+**ソースリポジトリ**: 非公開（開発およびデータ管理用）
