@@ -7,7 +7,7 @@ JSONデータファイルの読み込み機能を提供します。
 
 import json
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 
 
 def load_data_file(file_path: Path) -> Dict[str, Any]:

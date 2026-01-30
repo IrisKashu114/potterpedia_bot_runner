@@ -8,13 +8,13 @@
 状態はGitHub Gistに保存され、すべての用語を投稿したらリセットされます。
 """
 
-import os
 import json
+import os
 import random
 import shutil
-from typing import Dict, List, Optional, Set, Tuple
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Dict, List, Optional
 
 import requests
 
@@ -1251,7 +1251,7 @@ class StateManager:
                 else:
                     print(f"  ✓ last_updated: {last_updated_str} (有効)")
 
-            except (ValueError, AttributeError) as e:
+            except (ValueError, AttributeError):
                 issues.append(f"last_updated のフォーマットが不正です: {last_updated_str}")
                 print(f"  ✗ last_updated: {last_updated_str} (フォーマット不正)")
 
@@ -1615,8 +1615,9 @@ if __name__ == '__main__':
     """
     スタンドアロン実行時の動作
     """
-    import sys
     import argparse
+    import sys
+
     from dotenv import load_dotenv
 
     load_dotenv()

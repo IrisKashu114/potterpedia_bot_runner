@@ -7,10 +7,10 @@ XPosterクラスを提供し、X (Twitter) への投稿を管理します。
 
 import os
 import sys
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 
-from dotenv import load_dotenv
 import tweepy
+from dotenv import load_dotenv
 
 
 class XPoster:
