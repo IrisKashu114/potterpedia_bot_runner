@@ -29,8 +29,16 @@ class XPoster:
         if not dry_run:
             self._setup_client()
 
-    def _setup_client(self):
-        """X APIクライアントのセットアップ"""
+    def _setup_client(self) -> None:
+        """
+        X APIクライアントのセットアップ
+
+        環境変数から認証情報を読み込み、Tweepy v2クライアントを初期化します。
+
+        Raises:
+            ValueError: 必要な環境変数が設定されていない場合
+            Exception: X APIクライアントの初期化に失敗した場合
+        """
         # 環境変数の読み込み
         load_dotenv()
 

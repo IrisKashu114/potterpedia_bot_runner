@@ -711,8 +711,10 @@ def post_glossary(dry_run: bool = False) -> bool:
         return post_character(dry_run=dry_run)
 
 
-def main():
-    """メイン関数"""
+def main() -> None:
+    """
+    メイン関数 - コマンドライン引数を解析してツイート投稿処理を実行
+    """
     import argparse
 
     parser = argparse.ArgumentParser(
