@@ -32,7 +32,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-# 内部モジュールのインポート
 from twitter_client import XPoster
 from data_loader import load_data_file
 

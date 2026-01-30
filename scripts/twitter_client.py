@@ -9,8 +9,8 @@ import os
 import sys
 from typing import Optional, Dict, Any
 
-import tweepy
 from dotenv import load_dotenv
+import tweepy
 
 
 class XPoster:
