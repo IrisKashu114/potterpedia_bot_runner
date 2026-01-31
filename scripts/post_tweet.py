@@ -28,6 +28,7 @@ X (Twitter) 投稿スクリプト
 """
 
 import random
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Optional

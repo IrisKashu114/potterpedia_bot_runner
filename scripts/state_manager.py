@@ -259,6 +259,10 @@ class StateManager:
         posted_key = f"posted_{category}s"
         last_posted_key = f"last_{category}_posted"
 
+        # 古い状態データのために posted_key が存在しない場合は初期化
+        if posted_key not in self.state:
+            self.state[posted_key] = []
+
         if item_id not in self.state[posted_key]:
             self.state[posted_key].append(item_id)
 
