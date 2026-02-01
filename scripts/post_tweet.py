@@ -44,6 +44,32 @@ except ImportError:
     STATE_MANAGEMENT_AVAILABLE = False
     print("Warning: state_manager.py が見つかりません。状態管理機能は無効です。")
 
+# ============================================================
+# 定数定義
+# ============================================================
+
+# データディレクトリ
+DATA_DIR = Path(__file__).parent.parent / 'data' / 'posts'
+
+# データファイルパス
+BIRTHDAYS_FILE = DATA_DIR / 'birthdays.json'
+DEATHDAYS_FILE = DATA_DIR / 'deathdays.json'
+EVENTS_FILE = DATA_DIR / 'events.json'
+SPELLS_FILE = DATA_DIR / 'spells.json'
+POTIONS_FILE = DATA_DIR / 'potions.json'
+CREATURES_FILE = DATA_DIR / 'creatures.json'
+OBJECTS_FILE = DATA_DIR / 'objects.json'
+LOCATIONS_FILE = DATA_DIR / 'locations.json'
+ORGANIZATIONS_FILE = DATA_DIR / 'organizations.json'
+CONCEPTS_FILE = DATA_DIR / 'concepts.json'
+CHARACTERS_FILE = DATA_DIR / 'characters.json'
+
+# 用語集カテゴリリスト
+GLOSSARY_CATEGORIES = ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character']
+
+# ツイート最大文字数（全角半角関係なく140字）
+TWEET_MAX_LENGTH = 140
+
 
 def post_birthday(date_str: str, dry_run: bool = False) -> bool:
     """
@@ -56,12 +82,8 @@ def post_birthday(date_str: str, dry_run: bool = False) -> bool:
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    birthdays_file = project_root / 'data' / 'posts' / 'birthdays.json'
-
     # データファイル読み込み
-    data = load_data_file(birthdays_file)
+    data = load_data_file(BIRTHDAYS_FILE)
 
     # 該当する誕生日を検索
     target_date = datetime.strptime(date_str, '%Y-%m-%d')
@@ -99,12 +121,8 @@ def post_deathday(date_str: str, dry_run: bool = False) -> bool:
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    deathdays_file = project_root / 'data' / 'posts' / 'deathdays.json'
-
     # データファイル読み込み
-    data = load_data_file(deathdays_file)
+    data = load_data_file(DEATHDAYS_FILE)
 
     # 該当する命日を検索
     target_date = datetime.strptime(date_str, '%Y-%m-%d')
@@ -142,12 +160,8 @@ def post_event(date_str: str, dry_run: bool = False) -> bool:
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    events_file = project_root / 'data' / 'posts' / 'events.json'
-
     # データファイル読み込み
-    data = load_data_file(events_file)
+    data = load_data_file(EVENTS_FILE)
 
     # 該当するイベントを検索
     target_date = datetime.strptime(date_str, '%Y-%m-%d')
@@ -229,12 +243,8 @@ def post_spell(spell_id: Optional[str] = None, dry_run: bool = False, use_state:
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    spells_file = project_root / 'data' / 'posts' / 'spells.json'
-
     # データファイル読み込み
-    data = load_data_file(spells_file)
+    data = load_data_file(SPELLS_FILE)
 
     # 呪文を選択
     if spell_id:
@@ -286,12 +296,8 @@ def post_potion(potion_id: Optional[str] = None, dry_run: bool = False, use_stat
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    potions_file = project_root / 'data' / 'posts' / 'potions.json'
-
     # データファイル読み込み
-    data = load_data_file(potions_file)
+    data = load_data_file(POTIONS_FILE)
 
     # ポーションを選択
     if potion_id:
@@ -343,12 +349,8 @@ def post_creature(creature_id: Optional[str] = None, dry_run: bool = False, use_
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    creatures_file = project_root / 'data' / 'posts' / 'creatures.json'
-
     # データファイル読み込み
-    data = load_data_file(creatures_file)
+    data = load_data_file(CREATURES_FILE)
 
     # 魔法生物を選択
     if creature_id:
@@ -400,12 +402,8 @@ def post_object(object_id: Optional[str] = None, dry_run: bool = False, use_stat
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    objects_file = project_root / 'data' / 'posts' / 'objects.json'
-
     # データファイル読み込み
-    data = load_data_file(objects_file)
+    data = load_data_file(OBJECTS_FILE)
 
     # 魔法道具を選択
     if object_id:
@@ -457,12 +455,8 @@ def post_location(location_id: Optional[str] = None, dry_run: bool = False, use_
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    locations_file = project_root / 'data' / 'posts' / 'locations.json'
-
     # データファイル読み込み
-    data = load_data_file(locations_file)
+    data = load_data_file(LOCATIONS_FILE)
 
     # 場所を選択
     if location_id:
@@ -514,12 +508,8 @@ def post_organization(organization_id: Optional[str] = None, dry_run: bool = Fal
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    organizations_file = project_root / 'data' / 'posts' / 'organizations.json'
-
     # データファイル読み込み
-    data = load_data_file(organizations_file)
+    data = load_data_file(ORGANIZATIONS_FILE)
 
     # 組織を選択
     if organization_id:
@@ -571,12 +561,8 @@ def post_concept(concept_id: Optional[str] = None, dry_run: bool = False, use_st
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    concepts_file = project_root / 'data' / 'posts' / 'concepts.json'
-
     # データファイル読み込み
-    data = load_data_file(concepts_file)
+    data = load_data_file(CONCEPTS_FILE)
 
     # 魔法概念を選択
     if concept_id:
@@ -628,12 +614,8 @@ def post_character(character_id: Optional[str] = None, dry_run: bool = False, us
     Returns:
         投稿成功時はTrue
     """
-    # プロジェクトルートディレクトリを取得
-    project_root = Path(__file__).parent.parent
-    characters_file = project_root / 'data' / 'posts' / 'characters.json'
-
     # データファイル読み込み
-    data = load_data_file(characters_file)
+    data = load_data_file(CHARACTERS_FILE)
 
     # キャラクターを選択
     if character_id:
@@ -684,7 +666,7 @@ def post_glossary(dry_run: bool = False) -> bool:
         投稿成功時はTrue
     """
     # ランダムにカテゴリを選択
-    category = random.choice(['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character'])
+    category = random.choice(GLOSSARY_CATEGORIES)
 
     if category == 'spell':
         print("カテゴリ: 呪文")
