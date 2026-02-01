@@ -19,6 +19,34 @@ from typing import Dict, List, Optional
 import requests
 
 
+# カテゴリ設定
+CATEGORY_CONFIG = {
+    'spells': {'singular': 'spell', 'display_name': '呪文'},
+    'potions': {'singular': 'potion', 'display_name': 'ポーション'},
+    'creatures': {'singular': 'creature', 'display_name': '魔法生物'},
+    'objects': {'singular': 'object', 'display_name': '物体'},
+    'locations': {'singular': 'location', 'display_name': '場所'},
+    'organizations': {'singular': 'organization', 'display_name': '組織'},
+    'concepts': {'singular': 'concept', 'display_name': '概念'},
+    'characters': {'singular': 'character', 'display_name': 'キャラクター'}
+}
+
+# ファイルパス設定
+DATA_DIR = 'data'
+PRODUCTION_DIR = 'production'
+GLOSSARY_DIR = 'glossary'
+STATE_FILE_NAME = 'glossary_state.json'
+GIST_FILE_NAME = 'glossary_state.json'
+
+# 検証設定
+MAX_CYCLE_COUNT = 1000  # サイクルカウントの合理的な上限
+TIMESTAMP_PAST_TOLERANCE_YEARS = 1  # タイムスタンプの過去許容範囲（年）
+TIMESTAMP_FUTURE_TOLERANCE_MINUTES = 5  # タイムスタンプの未来許容範囲（分）
+
+# API設定
+GIST_API_TIMEOUT = 10  # Gist API タイムアウト（秒）
+
+
 class StateManager:
     """用語集投稿の状態を管理するクラス"""
 
@@ -51,11 +79,11 @@ class StateManager:
                 "Authorization": f"token {self.github_token}",
                 "Accept": "application/vnd.github.v3+json"
             }
-            response = requests.get(url, headers=headers, timeout=10)
+            response = requests.get(url, headers=headers, timeout=GIST_API_TIMEOUT)
 
             if response.status_code == 200:
                 gist_data = response.json()
-                state_content = gist_data['files']['glossary_state.json']['content']
+                state_content = gist_data['files'][GIST_FILE_NAME]['content']
                 state = json.loads(state_content)
                 # 古い状態データをマイグレーション
                 return self._migrate_state(state)
@@ -78,7 +106,7 @@ class StateManager:
             状態データ
         """
         project_root = Path(__file__).parent.parent
-        state_file = project_root / 'data' / 'glossary_state.json'
+        state_file = project_root / DATA_DIR / STATE_FILE_NAME
 
         if state_file.exists():
             with open(state_file, 'r', encoding='utf-8') as f:
@@ -99,43 +127,23 @@ class StateManager:
             マイグレーション済み状態データ
         """
         # 新しいカテゴリを追加（存在しない場合のみ）
-        if "posted_objects" not in state:
-            state["posted_objects"] = []
-        if "posted_locations" not in state:
-            state["posted_locations"] = []
-        if "posted_organizations" not in state:
-            state["posted_organizations"] = []
-        if "posted_concepts" not in state:
-            state["posted_concepts"] = []
-        if "posted_characters" not in state:
-            state["posted_characters"] = []
+        for category in CATEGORY_CONFIG.keys():
+            posted_key = f"posted_{category}"
+            if posted_key not in state:
+                state[posted_key] = []
 
-        if "last_object_posted" not in state:
-            state["last_object_posted"] = None
-        if "last_location_posted" not in state:
-            state["last_location_posted"] = None
-        if "last_organization_posted" not in state:
-            state["last_organization_posted"] = None
-        if "last_concept_posted" not in state:
-            state["last_concept_posted"] = None
-        if "last_character_posted" not in state:
-            state["last_character_posted"] = None
+            last_posted_key = f"last_{CATEGORY_CONFIG[category]['singular']}_posted"
+            if last_posted_key not in state:
+                state[last_posted_key] = None
 
         # cycle_countが存在しない場合は初期化
         if "cycle_count" not in state:
             state["cycle_count"] = {}
 
         # 新しいカテゴリのcycle_countを追加
-        if "objects" not in state["cycle_count"]:
-            state["cycle_count"]["objects"] = 0
-        if "locations" not in state["cycle_count"]:
-            state["cycle_count"]["locations"] = 0
-        if "organizations" not in state["cycle_count"]:
-            state["cycle_count"]["organizations"] = 0
-        if "concepts" not in state["cycle_count"]:
-            state["cycle_count"]["concepts"] = 0
-        if "characters" not in state["cycle_count"]:
-            state["cycle_count"]["characters"] = 0
+        for category in CATEGORY_CONFIG.keys():
+            if category not in state["cycle_count"]:
+                state["cycle_count"][category] = 0
 
         return state
 
@@ -146,35 +154,23 @@ class StateManager:
         Returns:
             初期状態データ
         """
-        return {
-            "posted_spells": [],
-            "posted_potions": [],
-            "posted_creatures": [],
-            "posted_objects": [],
-            "posted_locations": [],
-            "posted_organizations": [],
-            "posted_concepts": [],
-            "posted_characters": [],
-            "last_spell_posted": None,
-            "last_potion_posted": None,
-            "last_creature_posted": None,
-            "last_object_posted": None,
-            "last_location_posted": None,
-            "last_organization_posted": None,
-            "last_concept_posted": None,
-            "last_character_posted": None,
-            "last_updated": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
-            "cycle_count": {
-                "spells": 0,
-                "potions": 0,
-                "creatures": 0,
-                "objects": 0,
-                "locations": 0,
-                "organizations": 0,
-                "concepts": 0,
-                "characters": 0
-            }
-        }
+        state = {}
+
+        # posted_* 配列の初期化
+        for category in CATEGORY_CONFIG.keys():
+            state[f"posted_{category}"] = []
+
+        # last_*_posted の初期化
+        for category, config in CATEGORY_CONFIG.items():
+            state[f"last_{config['singular']}_posted"] = None
+
+        # メタデータ
+        state["last_updated"] = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+
+        # サイクルカウントの初期化
+        state["cycle_count"] = {category: 0 for category in CATEGORY_CONFIG.keys()}
+
+        return state
 
     def _save_state(self):
         """状態をGitHub Gistまたはローカルファイルに保存"""
@@ -192,12 +188,12 @@ class StateManager:
             }
             data = {
                 "files": {
-                    "glossary_state.json": {
+                    GIST_FILE_NAME: {
                         "content": json.dumps(self.state, indent=2, ensure_ascii=False)
                     }
                 }
             }
-            response = requests.patch(url, headers=headers, json=data, timeout=10)
+            response = requests.patch(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
 
             if response.status_code == 200:
                 print("✓ 状態をGistに保存しました")
@@ -212,7 +208,7 @@ class StateManager:
     def _save_local_state(self):
         """ローカルファイルに状態を保存（フォールバック）"""
         project_root = Path(__file__).parent.parent
-        state_file = project_root / 'data' / 'glossary_state.json'
+        state_file = project_root / DATA_DIR / STATE_FILE_NAME
 
         # data ディレクトリが存在しない場合は作成
         state_file.parent.mkdir(parents=True, exist_ok=True)
@@ -298,49 +294,18 @@ class StateManager:
         Returns:
             統計情報の辞書
         """
-        return {
-            "spells": {
-                "posted": len(self.state.get('posted_spells', [])),
-                "cycles": self.state.get('cycle_count', {}).get('spells', 0),
-                "last_posted": self.state.get('last_spell_posted')
-            },
-            "potions": {
-                "posted": len(self.state.get('posted_potions', [])),
-                "cycles": self.state.get('cycle_count', {}).get('potions', 0),
-                "last_posted": self.state.get('last_potion_posted')
-            },
-            "creatures": {
-                "posted": len(self.state.get('posted_creatures', [])),
-                "cycles": self.state.get('cycle_count', {}).get('creatures', 0),
-                "last_posted": self.state.get('last_creature_posted')
-            },
-            "objects": {
-                "posted": len(self.state.get('posted_objects', [])),
-                "cycles": self.state.get('cycle_count', {}).get('objects', 0),
-                "last_posted": self.state.get('last_object_posted')
-            },
-            "locations": {
-                "posted": len(self.state.get('posted_locations', [])),
-                "cycles": self.state.get('cycle_count', {}).get('locations', 0),
-                "last_posted": self.state.get('last_location_posted')
-            },
-            "organizations": {
-                "posted": len(self.state.get('posted_organizations', [])),
-                "cycles": self.state.get('cycle_count', {}).get('organizations', 0),
-                "last_posted": self.state.get('last_organization_posted')
-            },
-            "concepts": {
-                "posted": len(self.state.get('posted_concepts', [])),
-                "cycles": self.state.get('cycle_count', {}).get('concepts', 0),
-                "last_posted": self.state.get('last_concept_posted')
-            },
-            "characters": {
-                "posted": len(self.state.get('posted_characters', [])),
-                "cycles": self.state.get('cycle_count', {}).get('characters', 0),
-                "last_posted": self.state.get('last_character_posted')
-            },
-            "last_updated": self.state.get('last_updated')
-        }
+        stats = {}
+
+        for category, config in CATEGORY_CONFIG.items():
+            stats[category] = {
+                "posted": len(self.state.get(f'posted_{category}', [])),
+                "cycles": self.state.get('cycle_count', {}).get(category, 0),
+                "last_posted": self.state.get(f'last_{config["singular"]}_posted')
+            }
+
+        stats["last_updated"] = self.state.get('last_updated')
+
+        return stats
 
     def _load_gist_state(self) -> Optional[Dict]:
         """
@@ -358,11 +323,11 @@ class StateManager:
                 "Authorization": f"token {self.github_token}",
                 "Accept": "application/vnd.github.v3+json"
             }
-            response = requests.get(url, headers=headers, timeout=10)
+            response = requests.get(url, headers=headers, timeout=GIST_API_TIMEOUT)
 
             if response.status_code == 200:
                 gist_data = response.json()
-                state_content = gist_data['files']['glossary_state.json']['content']
+                state_content = gist_data['files'][GIST_FILE_NAME]['content']
                 return json.loads(state_content)
             else:
                 return None
@@ -379,7 +344,7 @@ class StateManager:
             ローカル状態ファイルのPath
         """
         project_root = Path(__file__).parent.parent
-        return project_root / 'data' / 'glossary_state.json'
+        return project_root / DATA_DIR / STATE_FILE_NAME
 
     def _backup_local_state(self) -> bool:
         """
@@ -393,7 +358,7 @@ class StateManager:
         if not state_file.exists():
             return True  # ファイルが存在しない場合はバックアップ不要
 
-        backup_file = state_file.parent / 'glossary_state.backup.json'
+        backup_file = state_file.parent / f'{STATE_FILE_NAME.replace(".json", ".backup.json")}'
 
         try:
             shutil.copy2(state_file, backup_file)
@@ -439,9 +404,7 @@ class StateManager:
                 result["is_identical"] = False
 
         # 各カテゴリーの投稿済みID比較
-        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']
-
-        for category in categories:
+        for category in CATEGORY_CONFIG.keys():
             posted_key = f"posted_{category}"
             set1 = set(state1.get(posted_key, []))
             set2 = set(state2.get(posted_key, []))
@@ -461,7 +424,7 @@ class StateManager:
                     result["has_conflict"] = True
 
         # サイクルカウント比較
-        for category in categories:
+        for category in CATEGORY_CONFIG.keys():
             count1 = state1.get('cycle_count', {}).get(category, 0)
             count2 = state2.get('cycle_count', {}).get(category, 0)
 
@@ -494,16 +457,15 @@ class StateManager:
         newer_state = state1 if ts1 >= ts2 else state2
 
         # posted_* 配列はunion（重複なし結合）
-        categories = ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']
-
-        for category in categories:
+        for category in CATEGORY_CONFIG.keys():
             posted_key = f"posted_{category}"
             set1 = set(state1.get(posted_key, []))
             set2 = set(state2.get(posted_key, []))
             merged[posted_key] = list(set1 | set2)
 
         # last_*_posted は新しいタイムスタンプを優先
-        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character']:
+        for config in CATEGORY_CONFIG.values():
+            category = config['singular']
             last_key = f"last_{category}_posted"
             last1 = state1.get(last_key)
             last2 = state2.get(last_key)
@@ -518,7 +480,7 @@ class StateManager:
                 merged[last_key] = last2
 
         # cycle_count は大きい方を採用
-        for category in categories:
+        for category in CATEGORY_CONFIG.keys():
             count1 = state1.get('cycle_count', {}).get(category, 0)
             count2 = state2.get('cycle_count', {}).get(category, 0)
             merged['cycle_count'][category] = max(count1, count2)
@@ -687,12 +649,12 @@ class StateManager:
             }
             data = {
                 "files": {
-                    "glossary_state.json": {
+                    GIST_FILE_NAME: {
                         "content": json.dumps(local_state, indent=2, ensure_ascii=False)
                     }
                 }
             }
-            response = requests.patch(url, headers=headers, json=data, timeout=10)
+            response = requests.patch(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
 
             if response.status_code == 200:
                 print(f"✓ ローカルからGistに同期しました")
@@ -762,7 +724,7 @@ class StateManager:
 
         # マージ結果の統計
         print("マージ結果:")
-        for category in ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']:
+        for category in CATEGORY_CONFIG.keys():
             posted_key = f"posted_{category}"
             gist_count = len(gist_state.get(posted_key, []))
             local_count = len(local_state.get(posted_key, []))
@@ -796,12 +758,12 @@ class StateManager:
             }
             data = {
                 "files": {
-                    "glossary_state.json": {
+                    GIST_FILE_NAME: {
                         "content": json.dumps(merged_state, indent=2, ensure_ascii=False)
                     }
                 }
             }
-            response = requests.patch(url, headers=headers, json=data, timeout=10)
+            response = requests.patch(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
 
             if response.status_code == 200:
                 print(f"✓ Gistを更新しました")
@@ -928,7 +890,7 @@ class StateManager:
         print("=== 状態検証 ===\n")
 
         # 検証するカテゴリを決定
-        categories_to_check = [category] if category else ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters']
+        categories_to_check = [category] if category else list(CATEGORY_CONFIG.keys())
 
         # 検証実行
         validation_result = {
@@ -1053,7 +1015,7 @@ class StateManager:
 
         # cycle_count の内容チェック
         if 'cycle_count' in self.state and isinstance(self.state['cycle_count'], dict):
-            for category in ['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts']:
+            for category in CATEGORY_CONFIG.keys():
                 if category not in self.state['cycle_count']:
                     if category in ['creatures', 'objects', 'locations', 'organizations', 'concepts'] and verbose:
                         # 新しいカテゴリは古いバージョンにはない可能性がある
@@ -1064,7 +1026,8 @@ class StateManager:
                     issues.append(f"cycle_count['{category}'] の型が不正です")
 
         # last_*_posted の内容チェック
-        for category in ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character']:
+        for config in CATEGORY_CONFIG.values():
+            category = config['singular']
             last_key = f"last_{category}_posted"
             if last_key in self.state and self.state[last_key] is not None:
                 last_posted = self.state[last_key]
@@ -1112,7 +1075,7 @@ class StateManager:
                 continue
 
             # データファイル読み込み
-            data_file = project_root / 'data' / 'production' / 'glossary' / f'{category}.json'
+            data_file = project_root / DATA_DIR / PRODUCTION_DIR / GLOSSARY_DIR / f'{category}.json'
 
             if not data_file.exists():
                 issues.append(f"{category}: データファイルが見つかりません: {data_file}")
@@ -1179,7 +1142,6 @@ class StateManager:
             検証結果
         """
         issues = []
-        MAX_CYCLE_COUNT = 1000  # 合理的な上限
 
         print(f"\n{'✓' if True else '✗'} サイクルカウント:")
 
@@ -1232,8 +1194,8 @@ class StateManager:
 
         # 現在時刻
         now = datetime.now(timezone.utc)
-        one_year_ago = now.replace(year=now.year - 1)
-        future_tolerance = now.replace(minute=now.minute + 5)  # 5分の時刻ずれ許容
+        one_year_ago = now.replace(year=now.year - TIMESTAMP_PAST_TOLERANCE_YEARS)
+        future_tolerance = now.replace(minute=now.minute + TIMESTAMP_FUTURE_TOLERANCE_MINUTES)
 
         # last_updated 検証
         last_updated_str = self.state.get('last_updated')
@@ -1260,7 +1222,8 @@ class StateManager:
                 print(f"  ✗ last_updated: {last_updated_str} (フォーマット不正)")
 
         # last_*_posted 検証
-        for category in ['spell', 'potion', 'creature']:
+        for config in CATEGORY_CONFIG.values():
+            category = config['singular']
             last_key = f"last_{category}_posted"
             last_posted = self.state.get(last_key)
 
@@ -1328,7 +1291,7 @@ class StateManager:
 
         for category in categories:
             # データファイル読み込み
-            data_file = project_root / 'data' / 'production' / 'glossary' / f'{category}.json'
+            data_file = project_root / DATA_DIR / PRODUCTION_DIR / GLOSSARY_DIR / f'{category}.json'
 
             if not data_file.exists():
                 continue
@@ -1576,32 +1539,21 @@ def create_gist(github_token: str, description: str = "Potterpedia Bot Glossary 
         "Accept": "application/vnd.github.v3+json"
     }
 
-    initial_state = {
-        "posted_spells": [],
-        "posted_potions": [],
-        "posted_creatures": [],
-        "last_spell_posted": None,
-        "last_potion_posted": None,
-        "last_creature_posted": None,
-        "last_updated": datetime.utcnow().isoformat() + "Z",
-        "cycle_count": {
-            "spells": 0,
-            "potions": 0,
-            "creatures": 0
-        }
-    }
+    # StateManagerの_create_initial_stateを使用
+    temp_manager = StateManager.__new__(StateManager)
+    initial_state = temp_manager._create_initial_state()
 
     data = {
         "description": description,
         "public": False,  # プライベートGist
         "files": {
-            "glossary_state.json": {
+            GIST_FILE_NAME: {
                 "content": json.dumps(initial_state, indent=2, ensure_ascii=False)
             }
         }
     }
 
-    response = requests.post(url, headers=headers, json=data, timeout=10)
+    response = requests.post(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
 
     if response.status_code == 201:
         gist_data = response.json()
@@ -1686,7 +1638,7 @@ if __name__ == '__main__':
     parser_validate.add_argument('--verbose', action='store_true', help='詳細情報を表示')
     parser_validate.add_argument('--fix', action='store_true', help='軽微な問題を自動修正（孤立IDの削除など）')
     parser_validate.add_argument('--report-file', type=str, help='検証レポートの出力先ファイルパス')
-    parser_validate.add_argument('--category', choices=['spells', 'potions', 'creatures', 'objects', 'locations', 'organizations', 'concepts', 'characters'], help='特定のカテゴリのみ検証')
+    parser_validate.add_argument('--category', choices=list(CATEGORY_CONFIG.keys()), help='特定のカテゴリのみ検証')
 
     args = parser.parse_args()
 
@@ -1741,22 +1693,13 @@ if __name__ == '__main__':
         stats = manager.get_stats()
 
         print("=== 用語集投稿状態 ===\n")
-        print(f"呪文:")
-        print(f"  投稿済み: {stats['spells']['posted']} 個")
-        print(f"  サイクル数: {stats['spells']['cycles']} 周")
-        if stats['spells']['last_posted']:
-            print(f"  最終投稿: {stats['spells']['last_posted']['timestamp']}")
+        for category, config in CATEGORY_CONFIG.items():
+            if category in stats:
+                print(f"{config['display_name']}:")
+                print(f"  投稿済み: {stats[category]['posted']} 個")
+                print(f"  サイクル数: {stats[category]['cycles']} 周")
+                if stats[category]['last_posted']:
+                    print(f"  最終投稿: {stats[category]['last_posted']['timestamp']}")
+                print()
 
-        print(f"\nポーション:")
-        print(f"  投稿済み: {stats['potions']['posted']} 個")
-        print(f"  サイクル数: {stats['potions']['cycles']} 周")
-        if stats['potions']['last_posted']:
-            print(f"  最終投稿: {stats['potions']['last_posted']['timestamp']}")
-
-        print(f"\n魔法生物:")
-        print(f"  投稿済み: {stats['creatures']['posted']} 個")
-        print(f"  サイクル数: {stats['creatures']['cycles']} 周")
-        if stats['creatures']['last_posted']:
-            print(f"  最終投稿: {stats['creatures']['last_posted']['timestamp']}")
-
-        print(f"\n最終更新: {stats['last_updated']}")
+        print(f"最終更新: {stats['last_updated']}")
