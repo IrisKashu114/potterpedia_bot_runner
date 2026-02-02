@@ -12,11 +12,50 @@ import json
 import os
 import random
 import shutil
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
 import requests
+
+
+# エラークラス定義
+class GistAPIError(Exception):
+    """Gist API操作に関する基底エラークラス"""
+    pass
+
+
+class GistAuthenticationError(GistAPIError):
+    """Gist API認証エラー (401, 403)"""
+    pass
+
+
+class GistNotFoundError(GistAPIError):
+    """Gist が見つからない (404)"""
+    pass
+
+
+class GistRateLimitError(GistAPIError):
+    """Gist API レート制限エラー (429)"""
+    def __init__(self, message: str, retry_after: Optional[int] = None):
+        super().__init__(message)
+        self.retry_after = retry_after
+
+
+class GistNetworkError(GistAPIError):
+    """ネットワーク接続エラー"""
+    pass
+
+
+class GistTimeoutError(GistAPIError):
+    """タイムアウトエラー"""
+    pass
+
+
+class GistServerError(GistAPIError):
+    """Gist API サーバーエラー (5xx)"""
+    pass
 
 
 # カテゴリ設定
@@ -45,6 +84,9 @@ TIMESTAMP_FUTURE_TOLERANCE_MINUTES = 5  # タイムスタンプの未来許容�
 
 # API設定
 GIST_API_TIMEOUT = 10  # Gist API タイムアウト（秒）
+GIST_API_MAX_RETRIES = 3  # 最大リトライ回数
+GIST_API_RETRY_DELAY = 1  # 初回リトライ遅延（秒）
+GIST_API_RETRY_BACKOFF = 2  # バックオフ係数（指数関数的増加）
 
 
 class StateManager:
@@ -61,6 +103,92 @@ class StateManager:
         self.gist_id = gist_id or os.getenv('GLOSSARY_STATE_GIST_ID')
         self.github_token = github_token or os.getenv('GIST_TOKEN') or os.getenv('GITHUB_TOKEN')
         self.state = self._load_state()
+
+    def _gist_api_call_with_retry(self, method: str, url: str, **kwargs) -> requests.Response:
+        """
+        リトライロジック付きGist API呼び出し
+
+        Args:
+            method: HTTPメソッド ('GET', 'PATCH', 'POST')
+            url: API URL
+            **kwargs: requests.request に渡す引数
+
+        Returns:
+            レスポンスオブジェクト
+
+        Raises:
+            GistAuthenticationError: 認証エラー
+            GistNotFoundError: Gist が見つからない
+            GistRateLimitError: レート制限エラー
+            GistServerError: サーバーエラー
+            GistNetworkError: ネットワークエラー
+            GistTimeoutError: タイムアウトエラー
+        """
+        retry_delay = GIST_API_RETRY_DELAY
+
+        for attempt in range(GIST_API_MAX_RETRIES):
+            try:
+                response = requests.request(method, url, **kwargs)
+
+                # ステータスコードによる分岐
+                if response.status_code in (200, 201):
+                    return response
+                elif response.status_code == 401:
+                    raise GistAuthenticationError(f"認証エラー: トークンが無効です (ステータス: {response.status_code})")
+                elif response.status_code == 403:
+                    raise GistAuthenticationError(f"アクセス拒否: 権限が不足しています (ステータス: {response.status_code})")
+                elif response.status_code == 404:
+                    raise GistNotFoundError(f"Gist が見つかりません (ステータス: {response.status_code})")
+                elif response.status_code == 429:
+                    # レート制限エラー - Retry-After ヘッダーを確認
+                    retry_after = response.headers.get('Retry-After')
+                    retry_after_int = int(retry_after) if retry_after else retry_delay
+                    if attempt < GIST_API_MAX_RETRIES - 1:
+                        print(f"⚠️  レート制限に達しました。{retry_after_int}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                        time.sleep(retry_after_int)
+                        continue
+                    else:
+                        raise GistRateLimitError(
+                            f"レート制限エラー: 再試行回数の上限に達しました",
+                            retry_after=retry_after_int
+                        )
+                elif response.status_code >= 500:
+                    # サーバーエラー - リトライ可能
+                    if attempt < GIST_API_MAX_RETRIES - 1:
+                        print(f"⚠️  サーバーエラー (ステータス: {response.status_code})。{retry_delay}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                        time.sleep(retry_delay)
+                        retry_delay *= GIST_API_RETRY_BACKOFF
+                        continue
+                    else:
+                        raise GistServerError(f"サーバーエラー: リトライ回数の上限に達しました (ステータス: {response.status_code})")
+                else:
+                    # その他のエラー
+                    raise GistAPIError(f"Gist API エラー (ステータス: {response.status_code}): {response.text}")
+
+            except requests.exceptions.Timeout:
+                if attempt < GIST_API_MAX_RETRIES - 1:
+                    print(f"⚠️  タイムアウトしました。{retry_delay}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                    time.sleep(retry_delay)
+                    retry_delay *= GIST_API_RETRY_BACKOFF
+                    continue
+                else:
+                    raise GistTimeoutError(f"タイムアウト: リトライ回数の上限に達しました")
+
+            except requests.exceptions.ConnectionError as e:
+                if attempt < GIST_API_MAX_RETRIES - 1:
+                    print(f"⚠️  ネットワークエラーが発生しました。{retry_delay}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                    time.sleep(retry_delay)
+                    retry_delay *= GIST_API_RETRY_BACKOFF
+                    continue
+                else:
+                    raise GistNetworkError(f"ネットワークエラー: リトライ回数の上限に達しました - {str(e)}")
+
+            except requests.exceptions.RequestException as e:
+                # その他の requests エラー
+                raise GistNetworkError(f"リクエストエラー: {str(e)}")
+
+        # 理論的にはここには到達しないが、念のため
+        raise GistAPIError("予期しないエラー: リトライループを抜けました")
 
     def _load_state(self) -> Dict:
         """
@@ -79,23 +207,50 @@ class StateManager:
                 "Authorization": f"token {self.github_token}",
                 "Accept": "application/vnd.github.v3+json"
             }
-            response = requests.get(url, headers=headers, timeout=GIST_API_TIMEOUT)
 
-            if response.status_code == 200:
-                gist_data = response.json()
-                state_content = gist_data['files'][GIST_FILE_NAME]['content']
-                state = json.loads(state_content)
-                # 古い状態データをマイグレーション
-                return self._migrate_state(state)
-            elif response.status_code == 404:
-                print("Gistが見つかりません。新しい状態を作成します。")
-                return self._create_initial_state()
-            else:
-                print(f"Warning: Gist読み込みエラー（ステータス: {response.status_code}）")
-                return self._load_local_state()
+            response = self._gist_api_call_with_retry('GET', url, headers=headers, timeout=GIST_API_TIMEOUT)
+
+            gist_data = response.json()
+            state_content = gist_data['files'][GIST_FILE_NAME]['content']
+            state = json.loads(state_content)
+            # 古い状態データをマイグレーション
+            return self._migrate_state(state)
+
+        except GistNotFoundError:
+            print("Gistが見つかりません。新しい状態を作成します。")
+            return self._create_initial_state()
+
+        except GistAuthenticationError as e:
+            print(f"Warning: Gist認証エラー - {e}")
+            print("  → ローカルファイルを使用します。トークンと権限を確認してください。")
+            return self._load_local_state()
+
+        except (GistTimeoutError, GistNetworkError) as e:
+            print(f"Warning: Gist接続エラー - {e}")
+            print("  → ローカルファイルを使用します。")
+            return self._load_local_state()
+
+        except GistRateLimitError as e:
+            print(f"Warning: Gistレート制限エラー - {e}")
+            if e.retry_after:
+                print(f"  → {e.retry_after}秒後に再試行してください。")
+            print("  → ローカルファイルを使用します。")
+            return self._load_local_state()
+
+        except GistServerError as e:
+            print(f"Warning: Gistサーバーエラー - {e}")
+            print("  → ローカルファイルを使用します。")
+            return self._load_local_state()
+
+        except GistAPIError as e:
+            print(f"Warning: Gist読み込みエラー - {e}")
+            print("  → ローカルファイルを使用します。")
+            return self._load_local_state()
 
         except Exception as e:
-            print(f"Warning: Gist読み込み中にエラーが発生しました: {e}")
+            # 予期しないエラー（JSONパースエラーなど）
+            print(f"Warning: Gist読み込み中に予期しないエラーが発生しました: {e}")
+            print("  → ローカルファイルを使用します。")
             return self._load_local_state()
 
     def _load_local_state(self) -> Dict:
@@ -193,16 +348,41 @@ class StateManager:
                     }
                 }
             }
-            response = requests.patch(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
 
-            if response.status_code == 200:
-                print("✓ 状態をGistに保存しました")
-            else:
-                print(f"Warning: Gist保存エラー（ステータス: {response.status_code}）")
-                self._save_local_state()
+            self._gist_api_call_with_retry('PATCH', url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
+            print("✓ 状態をGistに保存しました")
+
+        except GistAuthenticationError as e:
+            print(f"Warning: Gist認証エラー - {e}")
+            print("  → ローカルファイルに保存します。トークンと権限を確認してください。")
+            self._save_local_state()
+
+        except (GistTimeoutError, GistNetworkError) as e:
+            print(f"Warning: Gist接続エラー - {e}")
+            print("  → ローカルファイルに保存します。")
+            self._save_local_state()
+
+        except GistRateLimitError as e:
+            print(f"Warning: Gistレート制限エラー - {e}")
+            if e.retry_after:
+                print(f"  → {e.retry_after}秒後に再試行してください。")
+            print("  → ローカルファイルに保存します。")
+            self._save_local_state()
+
+        except GistServerError as e:
+            print(f"Warning: Gistサーバーエラー - {e}")
+            print("  → ローカルファイルに保存します。")
+            self._save_local_state()
+
+        except GistAPIError as e:
+            print(f"Warning: Gist保存エラー - {e}")
+            print("  → ローカルファイルに保存します。")
+            self._save_local_state()
 
         except Exception as e:
-            print(f"Warning: Gist保存中にエラーが発生しました: {e}")
+            # 予期しないエラー
+            print(f"Warning: Gist保存中に予期しないエラーが発生しました: {e}")
+            print("  → ローカルファイルに保存します。")
             self._save_local_state()
 
     def _save_local_state(self):
@@ -323,17 +503,42 @@ class StateManager:
                 "Authorization": f"token {self.github_token}",
                 "Accept": "application/vnd.github.v3+json"
             }
-            response = requests.get(url, headers=headers, timeout=GIST_API_TIMEOUT)
 
-            if response.status_code == 200:
-                gist_data = response.json()
-                state_content = gist_data['files'][GIST_FILE_NAME]['content']
-                return json.loads(state_content)
-            else:
-                return None
+            response = self._gist_api_call_with_retry('GET', url, headers=headers, timeout=GIST_API_TIMEOUT)
+
+            gist_data = response.json()
+            state_content = gist_data['files'][GIST_FILE_NAME]['content']
+            return json.loads(state_content)
+
+        except GistNotFoundError:
+            print("Error: Gistが見つかりません")
+            return None
+
+        except GistAuthenticationError as e:
+            print(f"Error: Gist認証エラー - {e}")
+            return None
+
+        except (GistTimeoutError, GistNetworkError) as e:
+            print(f"Error: Gist接続エラー - {e}")
+            return None
+
+        except GistRateLimitError as e:
+            print(f"Error: Gistレート制限エラー - {e}")
+            if e.retry_after:
+                print(f"  → {e.retry_after}秒後に再試行してください。")
+            return None
+
+        except GistServerError as e:
+            print(f"Error: Gistサーバーエラー - {e}")
+            return None
+
+        except GistAPIError as e:
+            print(f"Error: Gist読み込みエラー - {e}")
+            return None
 
         except Exception as e:
-            print(f"Error: Gist読み込みエラー: {e}")
+            # 予期しないエラー（JSONパースエラーなど）
+            print(f"Error: Gist読み込み中に予期しないエラーが発生しました: {e}")
             return None
 
     def _get_local_state_path(self) -> Path:
@@ -654,17 +859,36 @@ class StateManager:
                     }
                 }
             }
-            response = requests.patch(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
 
-            if response.status_code == 200:
-                print(f"✓ ローカルからGistに同期しました")
-                return True
-            else:
-                print(f"✗ Gist更新エラー（ステータス: {response.status_code}）")
-                return False
+            self._gist_api_call_with_retry('PATCH', url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
+            print(f"✓ ローカルからGistに同期しました")
+            return True
+
+        except GistAuthenticationError as e:
+            print(f"✗ Gist認証エラー: {e}")
+            return False
+
+        except (GistTimeoutError, GistNetworkError) as e:
+            print(f"✗ Gist接続エラー: {e}")
+            return False
+
+        except GistRateLimitError as e:
+            print(f"✗ Gistレート制限エラー: {e}")
+            if e.retry_after:
+                print(f"  → {e.retry_after}秒後に再試行してください。")
+            return False
+
+        except GistServerError as e:
+            print(f"✗ Gistサーバーエラー: {e}")
+            return False
+
+        except GistAPIError as e:
+            print(f"✗ Gist更新エラー: {e}")
+            return False
 
         except Exception as e:
-            print(f"✗ Gist更新中にエラーが発生しました: {e}")
+            # 予期しないエラー
+            print(f"✗ Gist更新中に予期しないエラーが発生しました: {e}")
             return False
 
     def sync_auto(self, dry_run: bool = False) -> bool:
@@ -763,18 +987,41 @@ class StateManager:
                     }
                 }
             }
-            response = requests.patch(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
 
-            if response.status_code == 200:
-                print(f"✓ Gistを更新しました")
-                return True
-            else:
-                print(f"Warning: Gist更新エラー（ステータス: {response.status_code}）")
-                print(f"  ローカルファイルは更新されました")
-                return False
+            self._gist_api_call_with_retry('PATCH', url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
+            print(f"✓ Gistを更新しました")
+            return True
+
+        except GistAuthenticationError as e:
+            print(f"Warning: Gist認証エラー - {e}")
+            print(f"  ローカルファイルは更新されました")
+            return False
+
+        except (GistTimeoutError, GistNetworkError) as e:
+            print(f"Warning: Gist接続エラー - {e}")
+            print(f"  ローカルファイルは更新されました")
+            return False
+
+        except GistRateLimitError as e:
+            print(f"Warning: Gistレート制限エラー - {e}")
+            if e.retry_after:
+                print(f"  → {e.retry_after}秒後に再試行してください。")
+            print(f"  ローカルファイルは更新されました")
+            return False
+
+        except GistServerError as e:
+            print(f"Warning: Gistサーバーエラー - {e}")
+            print(f"  ローカルファイルは更新されました")
+            return False
+
+        except GistAPIError as e:
+            print(f"Warning: Gist更新エラー - {e}")
+            print(f"  ローカルファイルは更新されました")
+            return False
 
         except Exception as e:
-            print(f"Warning: Gist更新中にエラーが発生しました: {e}")
+            # 予期しないエラー
+            print(f"Warning: Gist更新中に予期しないエラーが発生しました: {e}")
             print(f"  ローカルファイルは更新されました")
             return False
 
@@ -1531,7 +1778,10 @@ def create_gist(github_token: str, description: str = "Potterpedia Bot Glossary 
         作成されたGistのID
 
     Raises:
-        Exception: Gist作成に失敗した場合
+        GistAuthenticationError: 認証エラー
+        GistRateLimitError: レート制限エラー
+        GistServerError: サーバーエラー
+        GistAPIError: その他のAPIエラー
     """
     url = "https://api.github.com/gists"
     headers = {
@@ -1553,18 +1803,73 @@ def create_gist(github_token: str, description: str = "Potterpedia Bot Glossary 
         }
     }
 
-    response = requests.post(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
+    # リトライロジック付きAPI呼び出し
+    retry_delay = GIST_API_RETRY_DELAY
 
-    if response.status_code == 201:
-        gist_data = response.json()
-        gist_id = gist_data['id']
-        print(f"✓ Gistを作成しました: {gist_id}")
-        print(f"  URL: {gist_data['html_url']}")
-        print(f"\n環境変数に以下を追加してください:")
-        print(f"GLOSSARY_STATE_GIST_ID={gist_id}")
-        return gist_id
-    else:
-        raise Exception(f"Gist作成に失敗しました: {response.status_code} - {response.text}")
+    for attempt in range(GIST_API_MAX_RETRIES):
+        try:
+            response = requests.post(url, headers=headers, json=data, timeout=GIST_API_TIMEOUT)
+
+            if response.status_code == 201:
+                gist_data = response.json()
+                gist_id = gist_data['id']
+                print(f"✓ Gistを作成しました: {gist_id}")
+                print(f"  URL: {gist_data['html_url']}")
+                print(f"\n環境変数に以下を追加してください:")
+                print(f"GLOSSARY_STATE_GIST_ID={gist_id}")
+                return gist_id
+            elif response.status_code == 401:
+                raise GistAuthenticationError(f"認証エラー: トークンが無効です")
+            elif response.status_code == 403:
+                raise GistAuthenticationError(f"アクセス拒否: 権限が不足しています")
+            elif response.status_code == 429:
+                # レート制限エラー
+                retry_after = response.headers.get('Retry-After')
+                retry_after_int = int(retry_after) if retry_after else retry_delay
+                if attempt < GIST_API_MAX_RETRIES - 1:
+                    print(f"⚠️  レート制限に達しました。{retry_after_int}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                    time.sleep(retry_after_int)
+                    continue
+                else:
+                    raise GistRateLimitError(
+                        f"レート制限エラー: 再試行回数の上限に達しました",
+                        retry_after=retry_after_int
+                    )
+            elif response.status_code >= 500:
+                # サーバーエラー - リトライ可能
+                if attempt < GIST_API_MAX_RETRIES - 1:
+                    print(f"⚠️  サーバーエラー (ステータス: {response.status_code})。{retry_delay}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                    time.sleep(retry_delay)
+                    retry_delay *= GIST_API_RETRY_BACKOFF
+                    continue
+                else:
+                    raise GistServerError(f"サーバーエラー: リトライ回数の上限に達しました (ステータス: {response.status_code})")
+            else:
+                raise GistAPIError(f"Gist作成に失敗しました: {response.status_code} - {response.text}")
+
+        except requests.exceptions.Timeout:
+            if attempt < GIST_API_MAX_RETRIES - 1:
+                print(f"⚠️  タイムアウトしました。{retry_delay}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                time.sleep(retry_delay)
+                retry_delay *= GIST_API_RETRY_BACKOFF
+                continue
+            else:
+                raise GistTimeoutError(f"タイムアウト: リトライ回数の上限に達しました")
+
+        except requests.exceptions.ConnectionError as e:
+            if attempt < GIST_API_MAX_RETRIES - 1:
+                print(f"⚠️  ネットワークエラーが発生しました。{retry_delay}秒後にリトライします... (試行 {attempt + 1}/{GIST_API_MAX_RETRIES})")
+                time.sleep(retry_delay)
+                retry_delay *= GIST_API_RETRY_BACKOFF
+                continue
+            else:
+                raise GistNetworkError(f"ネットワークエラー: リトライ回数の上限に達しました - {str(e)}")
+
+        except requests.exceptions.RequestException as e:
+            raise GistNetworkError(f"リクエストエラー: {str(e)}")
+
+    # 理論的にはここには到達しないが、念のため
+    raise GistAPIError("予期しないエラー: リトライループを抜けました")
 
 
 if __name__ == '__main__':
