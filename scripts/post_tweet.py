@@ -67,6 +67,42 @@ CHARACTERS_FILE = DATA_DIR / 'characters.json'
 # 用語集カテゴリリスト
 GLOSSARY_CATEGORIES = ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character']
 
+# カテゴリー情報のマッピング
+CATEGORY_CONFIG = {
+    'spell': {
+        'file': SPELLS_FILE,
+        'display_name': '呪文',
+    },
+    'potion': {
+        'file': POTIONS_FILE,
+        'display_name': 'ポーション',
+    },
+    'creature': {
+        'file': CREATURES_FILE,
+        'display_name': '魔法生物',
+    },
+    'object': {
+        'file': OBJECTS_FILE,
+        'display_name': '魔法道具',
+    },
+    'location': {
+        'file': LOCATIONS_FILE,
+        'display_name': '場所',
+    },
+    'organization': {
+        'file': ORGANIZATIONS_FILE,
+        'display_name': '組織',
+    },
+    'concept': {
+        'file': CONCEPTS_FILE,
+        'display_name': '魔法概念',
+    },
+    'character': {
+        'file': CHARACTERS_FILE,
+        'display_name': 'キャラクター',
+    },
+}
+
 # ツイート最大文字数（全角半角関係なく140字）
 TWEET_MAX_LENGTH = 140
 
@@ -231,6 +267,74 @@ def post_today(dry_run: bool = False, categories: Optional[list] = None) -> bool
     return success
 
 
+def post_glossary_item(
+    category: str,
+    item_id: Optional[str] = None,
+    dry_run: bool = False,
+    use_state: bool = True
+) -> bool:
+    """
+    用語集アイテムを投稿（汎用関数）
+
+    Args:
+        category: カテゴリー（'spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character'）
+        item_id: 特定のアイテムID（UUIDまたはslug）。Noneの場合はランダム選択
+        dry_run: Trueの場合、実際には投稿せずログ出力のみ
+        use_state: 状態管理を使用するかどうか（重複投稿防止）
+
+    Returns:
+        投稿成功時はTrue
+    """
+    # カテゴリー設定を取得
+    if category not in CATEGORY_CONFIG:
+        print(f"無効なカテゴリーです: {category}")
+        return False
+
+    config = CATEGORY_CONFIG[category]
+    data_file = config['file']
+    display_name = config['display_name']
+
+    # データファイル読み込み
+    data = load_data_file(data_file)
+
+    # アイテムを選択
+    if item_id:
+        # ID指定の場合、該当するアイテムを検索
+        matches = [
+            entry for entry in data['data']
+            if entry.get('id') == item_id or entry.get('slug') == item_id
+        ]
+        if not matches:
+            print(f"指定されたID（{item_id}）の{display_name}が見つかりません")
+            return False
+        entry = matches[0]
+    else:
+        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
+        if use_state and STATE_MANAGEMENT_AVAILABLE:
+            state_manager = StateManager()
+            entry = state_manager.get_random_available_item(category, data['data'])
+            if not entry:
+                print(f"利用可能な{display_name}がありません")
+                return False
+        else:
+            entry = random.choice(data['data'])
+
+    # ツイート投稿
+    poster = XPoster(dry_run=dry_run)
+    result = poster.post_tweet(entry['tweet_text_ja'])
+
+    if result:
+        print(f"✓ {display_name}: {entry.get('name_ja') or entry.get('name_en')}")
+
+        # 投稿成功時、状態を更新
+        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
+            state_manager = StateManager()
+            state_manager.mark_as_posted(category, entry['id'])
+
+        return True
+    return False
+
+
 def post_spell(spell_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
     """
     呪文ツイートを投稿
@@ -243,45 +347,7 @@ def post_spell(spell_id: Optional[str] = None, dry_run: bool = False, use_state:
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(SPELLS_FILE)
-
-    # 呪文を選択
-    if spell_id:
-        # ID指定の場合、該当する呪文を検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == spell_id or entry.get('slug') == spell_id
-        ]
-        if not matches:
-            print(f"指定されたID（{spell_id}）の呪文が見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('spell', data['data'])
-            if not entry:
-                print("利用可能な呪文がありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ 呪文: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('spell', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('spell', spell_id, dry_run, use_state)
 
 
 def post_potion(potion_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
@@ -296,45 +362,7 @@ def post_potion(potion_id: Optional[str] = None, dry_run: bool = False, use_stat
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(POTIONS_FILE)
-
-    # ポーションを選択
-    if potion_id:
-        # ID指定の場合、該当するポーションを検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == potion_id or entry.get('slug') == potion_id
-        ]
-        if not matches:
-            print(f"指定されたID（{potion_id}）のポーションが見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('potion', data['data'])
-            if not entry:
-                print("利用可能なポーションがありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ ポーション: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('potion', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('potion', potion_id, dry_run, use_state)
 
 
 def post_creature(creature_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
@@ -349,45 +377,7 @@ def post_creature(creature_id: Optional[str] = None, dry_run: bool = False, use_
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(CREATURES_FILE)
-
-    # 魔法生物を選択
-    if creature_id:
-        # ID指定の場合、該当する魔法生物を検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == creature_id or entry.get('slug') == creature_id
-        ]
-        if not matches:
-            print(f"指定されたID（{creature_id}）の魔法生物が見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('creature', data['data'])
-            if not entry:
-                print("利用可能な魔法生物がありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ 魔法生物: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('creature', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('creature', creature_id, dry_run, use_state)
 
 
 def post_object(object_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
@@ -402,45 +392,7 @@ def post_object(object_id: Optional[str] = None, dry_run: bool = False, use_stat
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(OBJECTS_FILE)
-
-    # 魔法道具を選択
-    if object_id:
-        # ID指定の場合、該当する魔法道具を検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == object_id or entry.get('slug') == object_id
-        ]
-        if not matches:
-            print(f"指定されたID（{object_id}）の魔法道具が見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('object', data['data'])
-            if not entry:
-                print("利用可能な魔法道具がありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ 魔法道具: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('object', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('object', object_id, dry_run, use_state)
 
 
 def post_location(location_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
@@ -455,45 +407,7 @@ def post_location(location_id: Optional[str] = None, dry_run: bool = False, use_
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(LOCATIONS_FILE)
-
-    # 場所を選択
-    if location_id:
-        # ID指定の場合、該当する場所を検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == location_id or entry.get('slug') == location_id
-        ]
-        if not matches:
-            print(f"指定されたID（{location_id}）の場所が見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('location', data['data'])
-            if not entry:
-                print("利用可能な場所がありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ 場所: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('location', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('location', location_id, dry_run, use_state)
 
 
 def post_organization(organization_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
@@ -508,45 +422,7 @@ def post_organization(organization_id: Optional[str] = None, dry_run: bool = Fal
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(ORGANIZATIONS_FILE)
-
-    # 組織を選択
-    if organization_id:
-        # ID指定の場合、該当する組織を検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == organization_id or entry.get('slug') == organization_id
-        ]
-        if not matches:
-            print(f"指定されたID（{organization_id}）の組織が見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('organization', data['data'])
-            if not entry:
-                print("利用可能な組織がありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ 組織: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('organization', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('organization', organization_id, dry_run, use_state)
 
 
 def post_concept(concept_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
@@ -561,45 +437,7 @@ def post_concept(concept_id: Optional[str] = None, dry_run: bool = False, use_st
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(CONCEPTS_FILE)
-
-    # 魔法概念を選択
-    if concept_id:
-        # ID指定の場合、該当する魔法概念を検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == concept_id or entry.get('slug') == concept_id
-        ]
-        if not matches:
-            print(f"指定されたID（{concept_id}）の魔法概念が見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('concept', data['data'])
-            if not entry:
-                print("利用可能な魔法概念がありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ 魔法概念: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('concept', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('concept', concept_id, dry_run, use_state)
 
 
 def post_character(character_id: Optional[str] = None, dry_run: bool = False, use_state: bool = True) -> bool:
@@ -614,45 +452,7 @@ def post_character(character_id: Optional[str] = None, dry_run: bool = False, us
     Returns:
         投稿成功時はTrue
     """
-    # データファイル読み込み
-    data = load_data_file(CHARACTERS_FILE)
-
-    # キャラクターを選択
-    if character_id:
-        # ID指定の場合、該当するキャラクターを検索
-        matches = [
-            entry for entry in data['data']
-            if entry.get('id') == character_id or entry.get('slug') == character_id
-        ]
-        if not matches:
-            print(f"指定されたID（{character_id}）のキャラクターが見つかりません")
-            return False
-        entry = matches[0]
-    else:
-        # ランダム選択（状態管理を使用する場合は未投稿のものから選択）
-        if use_state and STATE_MANAGEMENT_AVAILABLE:
-            state_manager = StateManager()
-            entry = state_manager.get_random_available_item('character', data['data'])
-            if not entry:
-                print("利用可能なキャラクターがありません")
-                return False
-        else:
-            entry = random.choice(data['data'])
-
-    # ツイート投稿
-    poster = XPoster(dry_run=dry_run)
-    result = poster.post_tweet(entry['tweet_text_ja'])
-
-    if result:
-        print(f"✓ キャラクター: {entry.get('name_ja') or entry.get('name_en')}")
-
-        # 投稿成功時、状態を更新
-        if use_state and STATE_MANAGEMENT_AVAILABLE and not dry_run:
-            state_manager = StateManager()
-            state_manager.mark_as_posted('character', entry['id'])
-
-        return True
-    return False
+    return post_glossary_item('character', character_id, dry_run, use_state)
 
 
 def post_glossary(dry_run: bool = False) -> bool:
