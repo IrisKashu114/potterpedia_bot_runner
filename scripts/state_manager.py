@@ -89,6 +89,712 @@ GIST_API_RETRY_DELAY = 1  # 初回リトライ遅延（秒）
 GIST_API_RETRY_BACKOFF = 2  # バックオフ係数（指数関数的増加）
 
 
+class StateValidator:
+    """状態データの検証を行うクラス"""
+
+    def __init__(self, state: Dict, gist_id: Optional[str] = None, github_token: Optional[str] = None):
+        """
+        初期化
+
+        Args:
+            state: 検証対象の状態データ
+            gist_id: GitHub Gist ID（同期状態検証に使用）
+            github_token: GitHub Personal Access Token（同期状態検証に使用）
+        """
+        self.state = state
+        self.gist_id = gist_id
+        self.github_token = github_token
+
+    def validate(
+        self,
+        verbose: bool = False,
+        fix: bool = False,
+        category: Optional[str] = None,
+        report_file: Optional[str] = None,
+        load_gist_state_func: Optional[callable] = None,
+        save_state_func: Optional[callable] = None
+    ) -> Dict:
+        """
+        状態データの整合性を検証
+
+        Args:
+            verbose: 詳細情報を表示
+            fix: 軽微な問題を自動修正（例: 孤立IDの削除）
+            category: 特定のカテゴリのみ検証（'spells', 'potions', 'creatures'）
+            report_file: 検証レポートの出力先ファイルパス
+            load_gist_state_func: Gist状態を読み込む関数（同期状態検証用）
+            save_state_func: 状態を保存する関数（自動修正用）
+
+        Returns:
+            検証結果の辞書:
+            {
+                "valid": bool,
+                "timestamp": str,
+                "checks": {
+                    "id_existence": {"passed": bool, "issues": [...]},
+                    "cycle_counts": {"passed": bool, "issues": [...]},
+                    "timestamps": {"passed": bool, "issues": [...]},
+                    "structure": {"passed": bool, "issues": [...]},
+                    "consistency": {"passed": bool, "issues": [...]},
+                    "sync_status": {"passed": bool, "issues": [...]}
+                },
+                "summary": {
+                    "total_checks": int,
+                    "passed": int,
+                    "failed": int,
+                    "warnings": int
+                }
+            }
+        """
+        print("=== 状態検証 ===\n")
+
+        # 検証するカテゴリを決定
+        categories_to_check = [category] if category else list(CATEGORY_CONFIG.keys())
+
+        # 検証実行
+        validation_result = {
+            "valid": True,
+            "timestamp": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+            "checks": {},
+            "summary": {
+                "total_checks": 0,
+                "passed": 0,
+                "failed": 0,
+                "warnings": 0
+            }
+        }
+
+        # データ構造検証
+        structure_result = self.validate_structure(verbose=verbose)
+        validation_result["checks"]["structure"] = structure_result
+        validation_result["summary"]["total_checks"] += 1
+        if structure_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # ID存在チェック
+        id_result = self.validate_ids(categories_to_check, verbose=verbose, fix=fix, save_state_func=save_state_func)
+        validation_result["checks"]["id_existence"] = id_result
+        validation_result["summary"]["total_checks"] += 1
+        if id_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # サイクルカウント検証
+        cycle_result = self.validate_cycle_counts(categories_to_check, verbose=verbose)
+        validation_result["checks"]["cycle_counts"] = cycle_result
+        validation_result["summary"]["total_checks"] += 1
+        if cycle_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # タイムスタンプ検証
+        timestamp_result = self.validate_timestamps(verbose=verbose)
+        validation_result["checks"]["timestamps"] = timestamp_result
+        validation_result["summary"]["total_checks"] += 1
+        if timestamp_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        elif timestamp_result.get("warning"):
+            validation_result["summary"]["warnings"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # 論理的整合性検証
+        consistency_result = self.validate_consistency(categories_to_check, verbose=verbose)
+        validation_result["checks"]["consistency"] = consistency_result
+        validation_result["summary"]["total_checks"] += 1
+        if consistency_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        else:
+            validation_result["summary"]["failed"] += 1
+            validation_result["valid"] = False
+
+        # Gist-ローカル同期状態検証
+        sync_result = self.validate_sync_status(verbose=verbose, load_gist_state_func=load_gist_state_func)
+        validation_result["checks"]["sync_status"] = sync_result
+        validation_result["summary"]["total_checks"] += 1
+        if sync_result["passed"]:
+            validation_result["summary"]["passed"] += 1
+        elif sync_result.get("warning"):
+            validation_result["summary"]["warnings"] += 1
+
+        # 結果出力
+        self._print_validation_result(validation_result, verbose=verbose)
+
+        # レポート生成
+        if report_file:
+            self._generate_validation_report(validation_result, report_file)
+
+        return validation_result
+
+    def validate_structure(self, verbose: bool = False) -> Dict:
+        """
+        データ構造の検証
+
+        Args:
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+
+        # 必須フィールドの存在チェック
+        required_fields = {
+            'posted_spells': list,
+            'posted_potions': list,
+            'posted_creatures': list,
+            'last_spell_posted': (dict, type(None)),
+            'last_potion_posted': (dict, type(None)),
+            'last_creature_posted': (dict, type(None)),
+            'last_updated': str,
+            'cycle_count': dict
+        }
+
+        # 旧バージョンのstateではcreaturesがない可能性があるため警告のみ
+        optional_fields = {'posted_creatures', 'last_creature_posted'}
+
+        for field, expected_type in required_fields.items():
+            if field not in self.state:
+                if field in optional_fields or (field == 'cycle_count' and 'creatures' not in self.state.get('cycle_count', {})):
+                    # 警告のみ（古いstateファイル）
+                    if verbose:
+                        print(f"  ⚠️  フィールド '{field}' が存在しません（古いバージョン）")
+                else:
+                    issues.append(f"必須フィールド '{field}' が存在しません")
+            elif not isinstance(self.state[field], expected_type):
+                issues.append(f"フィールド '{field}' の型が不正です（期待: {expected_type}, 実際: {type(self.state[field])}）")
+
+        # cycle_count の内容チェック
+        if 'cycle_count' in self.state and isinstance(self.state['cycle_count'], dict):
+            for category in CATEGORY_CONFIG.keys():
+                if category not in self.state['cycle_count']:
+                    if category in ['creatures', 'objects', 'locations', 'organizations', 'concepts'] and verbose:
+                        # 新しいカテゴリは古いバージョンにはない可能性がある
+                        print(f"  ⚠️  cycle_count に '{category}' が存在しません（古いバージョン）")
+                    elif category not in ['creatures', 'objects', 'locations', 'organizations', 'concepts']:
+                        issues.append(f"cycle_count に '{category}' が存在しません")
+                elif not isinstance(self.state['cycle_count'][category], (int, float)):
+                    issues.append(f"cycle_count['{category}'] の型が不正です")
+
+        # last_*_posted の内容チェック
+        for config in CATEGORY_CONFIG.values():
+            category = config['singular']
+            last_key = f"last_{category}_posted"
+            if last_key in self.state and self.state[last_key] is not None:
+                last_posted = self.state[last_key]
+                if not isinstance(last_posted, dict):
+                    issues.append(f"'{last_key}' の型が不正です")
+                elif 'id' not in last_posted or 'timestamp' not in last_posted:
+                    issues.append(f"'{last_key}' に 'id' または 'timestamp' が存在しません")
+
+        passed = len(issues) == 0
+
+        if verbose or not passed:
+            print(f"{'✓' if passed else '✗'} データ構造: {'合格' if passed else '不合格'}")
+            for issue in issues:
+                print(f"  - {issue}")
+
+        return {
+            "passed": passed,
+            "issues": issues
+        }
+
+    def validate_ids(
+        self,
+        categories: List[str],
+        verbose: bool = False,
+        fix: bool = False,
+        save_state_func: Optional[callable] = None
+    ) -> Dict:
+        """
+        posted_* 配列内のIDが実際のデータファイルに存在するか検証
+
+        Args:
+            categories: 検証するカテゴリのリスト
+            verbose: 詳細情報を表示
+            fix: 孤立IDを自動削除
+            save_state_func: 状態を保存する関数（自動修正用）
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        fixed_count = 0
+        project_root = Path(__file__).parent.parent
+
+        print(f"{'✓' if True else '✗'} ID存在チェック:")
+
+        for category in categories:
+            # 古いstateではcreaturesフィールドがない可能性がある
+            posted_key = f"posted_{category}"
+            if posted_key not in self.state:
+                if verbose:
+                    print(f"  ⚠️  {category}: state に '{posted_key}' が存在しません（スキップ）")
+                continue
+
+            # データファイル読み込み
+            data_file = project_root / DATA_DIR / PRODUCTION_DIR / GLOSSARY_DIR / f'{category}.json'
+
+            if not data_file.exists():
+                issues.append(f"{category}: データファイルが見つかりません: {data_file}")
+                print(f"  ✗ {category}: データファイルが見つかりません")
+                continue
+
+            with open(data_file, 'r', encoding='utf-8') as f:
+                file_content = json.load(f)
+
+            # ファイル構造の判定（配列 or metadata+data構造）
+            if isinstance(file_content, list):
+                data_items = file_content
+            elif isinstance(file_content, dict) and 'data' in file_content:
+                data_items = file_content['data']
+            else:
+                issues.append(f"{category}: データファイルの構造が不正です")
+                print(f"  ✗ {category}: データファイルの構造が不正です")
+                continue
+
+            valid_ids = {item['id'] for item in data_items}
+            posted_ids = set(self.state.get(posted_key, []))
+
+            # 孤立ID（データファイルに存在しないID）を検出
+            orphaned_ids = posted_ids - valid_ids
+
+            if orphaned_ids:
+                issues.append(f"{category}: 孤立ID {len(orphaned_ids)} 件検出")
+                print(f"  ⚠️  {category}: 孤立ID {len(orphaned_ids)} 件検出")
+                if verbose:
+                    for orphaned_id in list(orphaned_ids)[:5]:
+                        print(f"      - {orphaned_id}")
+                    if len(orphaned_ids) > 5:
+                        print(f"      ... (他 {len(orphaned_ids) - 5} 件)")
+
+                # 自動修正
+                if fix:
+                    self.state[posted_key] = [pid for pid in self.state[posted_key] if pid not in orphaned_ids]
+                    fixed_count += len(orphaned_ids)
+                    print(f"      → {len(orphaned_ids)} 件の孤立IDを削除しました")
+            else:
+                print(f"  ✓ {category}: {len(posted_ids)}/{len(valid_ids)} (全て有効)")
+
+        if fix and fixed_count > 0 and save_state_func:
+            save_state_func()
+            print(f"\n✓ {fixed_count} 件の孤立IDを削除し、状態を保存しました")
+
+        passed = len(issues) == 0
+
+        return {
+            "passed": passed,
+            "issues": issues,
+            "fixed": fixed_count if fix else 0
+        }
+
+    def validate_cycle_counts(self, categories: List[str], verbose: bool = False) -> Dict:
+        """
+        サイクルカウントの妥当性を検証
+
+        Args:
+            categories: 検証するカテゴリのリスト
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+
+        print(f"\n{'✓' if True else '✗'} サイクルカウント:")
+
+        for category in categories:
+            cycle_count = self.state.get('cycle_count', {}).get(category)
+
+            # 古いstateではcreaturesがない可能性がある
+            if cycle_count is None:
+                if verbose:
+                    print(f"  ⚠️  {category}: cycle_count が存在しません（スキップ）")
+                continue
+
+            cycle_count = cycle_count or 0
+
+            # 非負数チェック
+            if cycle_count < 0:
+                issues.append(f"{category}: サイクルカウントが負数です: {cycle_count}")
+                print(f"  ✗ {category}: {cycle_count} (負数)")
+                continue
+
+            # 上限チェック
+            if cycle_count > MAX_CYCLE_COUNT:
+                issues.append(f"{category}: サイクルカウントが上限を超えています: {cycle_count} > {MAX_CYCLE_COUNT}")
+                print(f"  ✗ {category}: {cycle_count} (上限超過)")
+                continue
+
+            print(f"  ✓ {category}: {cycle_count} (範囲内)")
+
+        passed = len(issues) == 0
+
+        return {
+            "passed": passed,
+            "issues": issues
+        }
+
+    def validate_timestamps(self, verbose: bool = False) -> Dict:
+        """
+        タイムスタンプの妥当性を検証
+
+        Args:
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        warnings = []
+
+        print(f"\n{'✓' if True else '✗'} タイムスタンプ:")
+
+        # 現在時刻
+        now = datetime.now(timezone.utc)
+        one_year_ago = now.replace(year=now.year - TIMESTAMP_PAST_TOLERANCE_YEARS)
+        future_tolerance = now.replace(minute=now.minute + TIMESTAMP_FUTURE_TOLERANCE_MINUTES)
+
+        # last_updated 検証
+        last_updated_str = self.state.get('last_updated')
+        if not last_updated_str:
+            issues.append("last_updated が存在しません")
+            print(f"  ✗ last_updated: 存在しません")
+        else:
+            try:
+                last_updated = datetime.fromisoformat(last_updated_str.replace('Z', '+00:00'))
+
+                # 未来日時チェック
+                if last_updated > future_tolerance:
+                    issues.append(f"last_updated が未来日時です: {last_updated_str}")
+                    print(f"  ✗ last_updated: {last_updated_str} (未来日時)")
+                # 極端に古いチェック
+                elif last_updated < one_year_ago:
+                    warnings.append(f"last_updated が1年以上前です: {last_updated_str}")
+                    print(f"  ⚠️  last_updated: {last_updated_str} (1年以上前)")
+                else:
+                    print(f"  ✓ last_updated: {last_updated_str} (有効)")
+
+            except (ValueError, AttributeError):
+                issues.append(f"last_updated のフォーマットが不正です: {last_updated_str}")
+                print(f"  ✗ last_updated: {last_updated_str} (フォーマット不正)")
+
+        # last_*_posted 検証
+        for config in CATEGORY_CONFIG.values():
+            category = config['singular']
+            last_key = f"last_{category}_posted"
+            last_posted = self.state.get(last_key)
+
+            if last_posted is None:
+                continue
+
+            timestamp_str = last_posted.get('timestamp')
+            if not timestamp_str:
+                issues.append(f"{last_key} に timestamp が存在しません")
+                print(f"  ✗ {last_key}: timestamp が存在しません")
+                continue
+
+            try:
+                timestamp = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+
+                # 未来日時チェック
+                if timestamp > future_tolerance:
+                    issues.append(f"{last_key}.timestamp が未来日時です: {timestamp_str}")
+                    print(f"  ✗ {last_key}: {timestamp_str} (未来日時)")
+                # last_updated との整合性チェック
+                elif last_updated_str:
+                    try:
+                        last_updated = datetime.fromisoformat(last_updated_str.replace('Z', '+00:00'))
+                        if timestamp > last_updated:
+                            issues.append(f"{last_key}.timestamp が last_updated より新しいです")
+                            print(f"  ✗ {last_key}: {timestamp_str} (last_updated より新しい)")
+                        else:
+                            if verbose:
+                                print(f"  ✓ {last_key}: {timestamp_str} (有効)")
+                    except:
+                        pass
+                else:
+                    if verbose:
+                        print(f"  ✓ {last_key}: {timestamp_str} (有効)")
+
+            except (ValueError, AttributeError):
+                issues.append(f"{last_key}.timestamp のフォーマットが不正です: {timestamp_str}")
+                print(f"  ✗ {last_key}: {timestamp_str} (フォーマット不正)")
+
+        passed = len(issues) == 0
+        warning = len(warnings) > 0 and passed
+
+        return {
+            "passed": passed,
+            "warning": warning,
+            "issues": issues,
+            "warnings": warnings
+        }
+
+    def validate_consistency(self, categories: List[str], verbose: bool = False) -> Dict:
+        """
+        論理的整合性を検証
+
+        Args:
+            categories: 検証するカテゴリのリスト
+            verbose: 詳細情報を表示
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        project_root = Path(__file__).parent.parent
+
+        print(f"\n{'✓' if True else '✗'} 論理的整合性:")
+
+        for category in categories:
+            # データファイル読み込み
+            data_file = project_root / DATA_DIR / PRODUCTION_DIR / GLOSSARY_DIR / f'{category}.json'
+
+            if not data_file.exists():
+                continue
+
+            with open(data_file, 'r', encoding='utf-8') as f:
+                file_content = json.load(f)
+
+            # ファイル構造の判定（配列 or metadata+data構造）
+            if isinstance(file_content, list):
+                data_items = file_content
+            elif isinstance(file_content, dict) and 'data' in file_content:
+                data_items = file_content['data']
+            else:
+                continue
+
+            total_count = len(data_items)
+            posted_key = f"posted_{category}"
+            posted_ids = set(self.state.get(posted_key, []))
+            posted_count = len(posted_ids)
+
+            # posted数が総数を超えていないかチェック
+            if posted_count > total_count:
+                issues.append(f"{category}: posted数({posted_count})が総数({total_count})を超えています")
+                print(f"  ✗ {category}: posted数 {posted_count} > 総数 {total_count}")
+                continue
+
+            # last_*_posted.id が posted_* に含まれているかチェック
+            last_key = f"last_{category[:-1]}_posted"  # 'spells' -> 'spell'
+            last_posted = self.state.get(last_key)
+
+            if last_posted and 'id' in last_posted:
+                last_id = last_posted['id']
+                if last_id not in posted_ids:
+                    issues.append(f"{category}: last_posted.id が posted配列に含まれていません: {last_id}")
+                    print(f"  ✗ {category}: last_posted.id が posted配列に含まれていません")
+                    continue
+
+            print(f"  ✓ {category}: 整合性OK (posted {posted_count}/{total_count})")
+
+        passed = len(issues) == 0
+
+        return {
+            "passed": passed,
+            "issues": issues
+        }
+
+    def validate_sync_status(
+        self,
+        verbose: bool = False,
+        load_gist_state_func: Optional[callable] = None
+    ) -> Dict:
+        """
+        Gist-ローカル同期状態を検証
+
+        Args:
+            verbose: 詳細情報を表示
+            load_gist_state_func: Gist状態を読み込む関数
+
+        Returns:
+            検証結果
+        """
+        issues = []
+        warnings = []
+
+        print(f"\n{'✓' if True else '✗'} 同期状態:")
+
+        # Gistから読み込み（関数が提供されている場合のみ）
+        gist_state = None
+        if load_gist_state_func:
+            gist_state = load_gist_state_func()
+
+        # ローカルから読み込み
+        project_root = Path(__file__).parent.parent
+        state_file = project_root / DATA_DIR / STATE_FILE_NAME
+        local_state = None
+        if state_file.exists():
+            with open(state_file, 'r', encoding='utf-8') as f:
+                local_state = json.load(f)
+
+        # Gistが存在しない場合
+        if not gist_state:
+            warnings.append("Gistが存在しません")
+            print(f"  ⚠️  Gistが存在しません")
+            return {
+                "passed": True,
+                "warning": True,
+                "issues": issues,
+                "warnings": warnings
+            }
+
+        # ローカルが存在しない場合
+        if not local_state:
+            warnings.append("ローカルファイルが存在しません")
+            print(f"  ⚠️  ローカルファイルが存在しません")
+            return {
+                "passed": True,
+                "warning": True,
+                "issues": issues,
+                "warnings": warnings
+            }
+
+        # 状態比較用に一時的なStateManagerインスタンスを作成
+        # （循環インポートを避けるため、実行時にインポート）
+        temp_manager = StateManager.__new__(StateManager)
+        comparison = temp_manager.compare_states(gist_state, local_state)
+
+        if comparison["is_identical"]:
+            print(f"  ✓ Gistとローカルは同期されています")
+        else:
+            warnings.append("Gistとローカルに差異があります")
+            print(f"  ⚠️  Gistとローカルに差異があります")
+
+            if verbose:
+                # 差異の詳細表示
+                if comparison["posted_diff"]:
+                    for category, diff in comparison["posted_diff"].items():
+                        gist_only = len(diff["only_in_1"])
+                        local_only = len(diff["only_in_2"])
+                        if gist_only or local_only:
+                            print(f"      {category}: Gist専用 {gist_only} 件, ローカル専用 {local_only} 件")
+
+            print(f"      推奨: python scripts/state_manager.py sync --auto")
+
+        passed = len(issues) == 0
+        warning = len(warnings) > 0 and passed
+
+        return {
+            "passed": passed,
+            "warning": warning,
+            "issues": issues,
+            "warnings": warnings
+        }
+
+    def _print_validation_result(self, result: Dict, verbose: bool = False):
+        """
+        検証結果を出力
+
+        Args:
+            result: 検証結果
+            verbose: 詳細情報を表示
+        """
+        summary = result["summary"]
+
+        print(f"\n{'='*40}")
+        print(f"検証結果: {summary['passed']}/{summary['total_checks']} 合格", end="")
+
+        if summary['failed'] > 0:
+            print(f", {summary['failed']} エラー", end="")
+        if summary['warnings'] > 0:
+            print(f", {summary['warnings']} 警告", end="")
+
+        print()
+
+        if result["valid"]:
+            print("✓ 状態は正常です")
+        else:
+            print("✗ 状態に問題があります")
+
+        print(f"{'='*40}\n")
+
+    def _generate_validation_report(self, result: Dict, report_file: str):
+        """
+        検証レポートをMarkdown形式で生成
+
+        Args:
+            result: 検証結果
+            report_file: レポートファイルパス
+        """
+        lines = [
+            "# 状態検証レポート",
+            "",
+            f"**検証日時:** {result['timestamp']}",
+            "",
+            "## 概要",
+            "",
+            f"- **総チェック数:** {result['summary']['total_checks']}",
+            f"- **合格:** {result['summary']['passed']}",
+            f"- **エラー:** {result['summary']['failed']}",
+            f"- **警告:** {result['summary']['warnings']}",
+            f"- **判定:** {'✓ 正常' if result['valid'] else '✗ 異常'}",
+            "",
+            "## 詳細",
+            ""
+        ]
+
+        # 各チェックの詳細
+        check_names = {
+            "structure": "データ構造",
+            "id_existence": "ID存在チェック",
+            "cycle_counts": "サイクルカウント",
+            "timestamps": "タイムスタンプ",
+            "consistency": "論理的整合性",
+            "sync_status": "同期状態"
+        }
+
+        for check_key, check_name in check_names.items():
+            check_result = result["checks"].get(check_key, {})
+            passed = check_result.get("passed", False)
+            warning = check_result.get("warning", False)
+
+            if passed and not warning:
+                lines.append(f"### ✓ {check_name}: 合格")
+            elif warning:
+                lines.append(f"### ⚠️ {check_name}: 警告")
+            else:
+                lines.append(f"### ✗ {check_name}: 不合格")
+
+            lines.append("")
+
+            # Issues
+            issues = check_result.get("issues", [])
+            if issues:
+                lines.append("**問題:**")
+                lines.append("")
+                for issue in issues:
+                    lines.append(f"- {issue}")
+                lines.append("")
+
+            # Warnings
+            warnings = check_result.get("warnings", [])
+            if warnings:
+                lines.append("**警告:**")
+                lines.append("")
+                for warning in warnings:
+                    lines.append(f"- {warning}")
+                lines.append("")
+
+        # ファイルに書き込み
+        report_path = Path(report_file)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(lines))
+
+        print(f"✓ 検証レポートを生成しました: {report_file}")
+
+
 class StateManager:
     """用語集投稿の状態を管理するクラス"""
 
@@ -1134,95 +1840,19 @@ class StateManager:
                 }
             }
         """
-        print("=== 状態検証 ===\n")
+        # StateValidatorを使用して検証を実行
+        validator = StateValidator(self.state, self.gist_id, self.github_token)
+        return validator.validate(
+            verbose=verbose,
+            fix=fix,
+            category=category,
+            report_file=report_file,
+            load_gist_state_func=self._load_gist_state,
+            save_state_func=self._save_state
+        )
 
-        # 検証するカテゴリを決定
-        categories_to_check = [category] if category else list(CATEGORY_CONFIG.keys())
 
-        # 検証実行
-        validation_result = {
-            "valid": True,
-            "timestamp": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
-            "checks": {},
-            "summary": {
-                "total_checks": 0,
-                "passed": 0,
-                "failed": 0,
-                "warnings": 0
-            }
-        }
-
-        # データ構造検証
-        structure_result = self._validate_structure(verbose=verbose)
-        validation_result["checks"]["structure"] = structure_result
-        validation_result["summary"]["total_checks"] += 1
-        if structure_result["passed"]:
-            validation_result["summary"]["passed"] += 1
-        else:
-            validation_result["summary"]["failed"] += 1
-            validation_result["valid"] = False
-
-        # ID存在チェック
-        id_result = self._validate_ids(categories_to_check, verbose=verbose, fix=fix)
-        validation_result["checks"]["id_existence"] = id_result
-        validation_result["summary"]["total_checks"] += 1
-        if id_result["passed"]:
-            validation_result["summary"]["passed"] += 1
-        else:
-            validation_result["summary"]["failed"] += 1
-            validation_result["valid"] = False
-
-        # サイクルカウント検証
-        cycle_result = self._validate_cycle_counts(categories_to_check, verbose=verbose)
-        validation_result["checks"]["cycle_counts"] = cycle_result
-        validation_result["summary"]["total_checks"] += 1
-        if cycle_result["passed"]:
-            validation_result["summary"]["passed"] += 1
-        else:
-            validation_result["summary"]["failed"] += 1
-            validation_result["valid"] = False
-
-        # タイムスタンプ検証
-        timestamp_result = self._validate_timestamps(verbose=verbose)
-        validation_result["checks"]["timestamps"] = timestamp_result
-        validation_result["summary"]["total_checks"] += 1
-        if timestamp_result["passed"]:
-            validation_result["summary"]["passed"] += 1
-        elif timestamp_result.get("warning"):
-            validation_result["summary"]["warnings"] += 1
-        else:
-            validation_result["summary"]["failed"] += 1
-            validation_result["valid"] = False
-
-        # 論理的整合性検証
-        consistency_result = self._validate_consistency(categories_to_check, verbose=verbose)
-        validation_result["checks"]["consistency"] = consistency_result
-        validation_result["summary"]["total_checks"] += 1
-        if consistency_result["passed"]:
-            validation_result["summary"]["passed"] += 1
-        else:
-            validation_result["summary"]["failed"] += 1
-            validation_result["valid"] = False
-
-        # Gist-ローカル同期状態検証
-        sync_result = self._validate_sync_status(verbose=verbose)
-        validation_result["checks"]["sync_status"] = sync_result
-        validation_result["summary"]["total_checks"] += 1
-        if sync_result["passed"]:
-            validation_result["summary"]["passed"] += 1
-        elif sync_result.get("warning"):
-            validation_result["summary"]["warnings"] += 1
-
-        # 結果出力
-        self._print_validation_result(validation_result, verbose=verbose)
-
-        # レポート生成
-        if report_file:
-            self._generate_validation_report(validation_result, report_file)
-
-        return validation_result
-
-    def _validate_structure(self, verbose: bool = False) -> Dict:
+def create_gist(github_token: str, description: str = "Potterpedia Bot Glossary State") -> str:
         """
         データ構造の検証
 
