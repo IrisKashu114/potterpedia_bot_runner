@@ -12,12 +12,31 @@ import json
 import os
 import random
 import shutil
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
 import requests
+
+# Import centralized config
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from config import (
+    DATA_DIR,
+    PRODUCTION_DIR,
+    GLOSSARY_SUBDIR,
+    STATE_FILE_NAME,
+    GIST_FILE_NAME,
+    GIST_API_TIMEOUT,
+    GIST_API_MAX_RETRIES,
+    GIST_API_RETRY_DELAY,
+    GIST_API_RETRY_BACKOFF,
+    MAX_CYCLE_COUNT,
+    TIMESTAMP_PAST_TOLERANCE_YEARS,
+    TIMESTAMP_FUTURE_TOLERANCE_MINUTES,
+    CATEGORY_CONFIG,
+)
 
 
 # エラークラス定義
@@ -58,35 +77,27 @@ class GistServerError(GistAPIError):
     pass
 
 
-# カテゴリ設定
-CATEGORY_CONFIG = {
-    'spells': {'singular': 'spell', 'display_name': '呪文'},
-    'potions': {'singular': 'potion', 'display_name': 'ポーション'},
-    'creatures': {'singular': 'creature', 'display_name': '魔法生物'},
-    'objects': {'singular': 'object', 'display_name': '物体'},
-    'locations': {'singular': 'location', 'display_name': '場所'},
-    'organizations': {'singular': 'organization', 'display_name': '組織'},
-    'concepts': {'singular': 'concept', 'display_name': '概念'},
-    'characters': {'singular': 'character', 'display_name': 'キャラクター'}
+# カテゴリ設定 (now using config)
+# CATEGORY_CONFIG is already imported from config
+# Note: The config version uses singular form keys like 'spell', 'potion'
+# We need to convert to plural form for this script
+CATEGORY_CONFIG_PLURAL = {
+    config['plural']: {
+        'singular': config['singular'],
+        'display_name': config['display_name']
+    }
+    for config in CATEGORY_CONFIG.values()
+    if config['type'] == 'glossary'
 }
 
-# ファイルパス設定
-DATA_DIR = 'data'
-PRODUCTION_DIR = 'production'
-GLOSSARY_DIR = 'glossary'
-STATE_FILE_NAME = 'glossary_state.json'
-GIST_FILE_NAME = 'glossary_state.json'
+# ファイルパス設定 (now using config)
+# DATA_DIR, PRODUCTION_DIR, GLOSSARY_SUBDIR, STATE_FILE_NAME, GIST_FILE_NAME are imported from config
 
-# 検証設定
-MAX_CYCLE_COUNT = 1000  # サイクルカウントの合理的な上限
-TIMESTAMP_PAST_TOLERANCE_YEARS = 1  # タイムスタンプの過去許容範囲（年）
-TIMESTAMP_FUTURE_TOLERANCE_MINUTES = 5  # タイムスタンプの未来許容範囲（分）
+# 検証設定 (now using config)
+# MAX_CYCLE_COUNT, TIMESTAMP_PAST_TOLERANCE_YEARS, TIMESTAMP_FUTURE_TOLERANCE_MINUTES imported from config
 
-# API設定
-GIST_API_TIMEOUT = 10  # Gist API タイムアウト（秒）
-GIST_API_MAX_RETRIES = 3  # 最大リトライ回数
-GIST_API_RETRY_DELAY = 1  # 初回リトライ遅延（秒）
-GIST_API_RETRY_BACKOFF = 2  # バックオフ係数（指数関数的増加）
+# API設定 (now using config)
+# GIST_API_TIMEOUT, GIST_API_MAX_RETRIES, GIST_API_RETRY_DELAY, GIST_API_RETRY_BACKOFF imported from config
 
 
 class StateValidator:
@@ -149,7 +160,7 @@ class StateValidator:
         print("=== 状態検証 ===\n")
 
         # 検証するカテゴリを決定
-        categories_to_check = [category] if category else list(CATEGORY_CONFIG.keys())
+        categories_to_check = [category] if category else list(CATEGORY_CONFIG_PLURAL.keys())
 
         # 検証実行
         validation_result = {
@@ -274,7 +285,7 @@ class StateValidator:
 
         # cycle_count の内容チェック
         if 'cycle_count' in self.state and isinstance(self.state['cycle_count'], dict):
-            for category in CATEGORY_CONFIG.keys():
+            for category in CATEGORY_CONFIG_PLURAL.keys():
                 if category not in self.state['cycle_count']:
                     if category in ['creatures', 'objects', 'locations', 'organizations', 'concepts'] and verbose:
                         # 新しいカテゴリは古いバージョンにはない可能性がある
@@ -285,7 +296,7 @@ class StateValidator:
                     issues.append(f"cycle_count['{category}'] の型が不正です")
 
         # last_*_posted の内容チェック
-        for config in CATEGORY_CONFIG.values():
+        for config in CATEGORY_CONFIG_PLURAL.values():
             category = config['singular']
             last_key = f"last_{category}_posted"
             if last_key in self.state and self.state[last_key] is not None:
@@ -328,7 +339,6 @@ class StateValidator:
         """
         issues = []
         fixed_count = 0
-        project_root = Path(__file__).parent.parent
 
         print(f"{'✓' if True else '✗'} ID存在チェック:")
 
@@ -341,7 +351,7 @@ class StateValidator:
                 continue
 
             # データファイル読み込み
-            data_file = project_root / DATA_DIR / PRODUCTION_DIR / GLOSSARY_DIR / f'{category}.json'
+            data_file = PRODUCTION_DIR / GLOSSARY_SUBDIR / f'{category}.json'
 
             if not data_file.exists():
                 issues.append(f"{category}: データファイルが見つかりません: {data_file}")
@@ -551,13 +561,12 @@ class StateValidator:
             検証結果
         """
         issues = []
-        project_root = Path(__file__).parent.parent
 
         print(f"\n{'✓' if True else '✗'} 論理的整合性:")
 
         for category in categories:
             # データファイル読み込み
-            data_file = project_root / DATA_DIR / PRODUCTION_DIR / GLOSSARY_DIR / f'{category}.json'
+            data_file = PRODUCTION_DIR / GLOSSARY_SUBDIR / f'{category}.json'
 
             if not data_file.exists():
                 continue
@@ -630,8 +639,7 @@ class StateValidator:
             gist_state = load_gist_state_func()
 
         # ローカルから読み込み
-        project_root = Path(__file__).parent.parent
-        state_file = project_root / DATA_DIR / STATE_FILE_NAME
+        state_file = DATA_DIR / STATE_FILE_NAME
         local_state = None
         if state_file.exists():
             with open(state_file, 'r', encoding='utf-8') as f:
@@ -679,7 +687,7 @@ class StateValidator:
                         if gist_only or local_only:
                             print(f"      {category}: Gist専用 {gist_only} 件, ローカル専用 {local_only} 件")
 
-            print(f"      推奨: python scripts/state_manager.py sync --auto")
+            print(f"      推奨: python scripts/sync/state_manager.py sync --auto")
 
         passed = len(issues) == 0
         warning = len(warnings) > 0 and passed
@@ -966,8 +974,7 @@ class StateManager:
         Returns:
             状態データ
         """
-        project_root = Path(__file__).parent.parent
-        state_file = project_root / DATA_DIR / STATE_FILE_NAME
+        state_file = DATA_DIR / STATE_FILE_NAME
 
         if state_file.exists():
             with open(state_file, 'r', encoding='utf-8') as f:
@@ -988,12 +995,12 @@ class StateManager:
             マイグレーション済み状態データ
         """
         # 新しいカテゴリを追加（存在しない場合のみ）
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             posted_key = f"posted_{category}"
             if posted_key not in state:
                 state[posted_key] = []
 
-            last_posted_key = f"last_{CATEGORY_CONFIG[category]['singular']}_posted"
+            last_posted_key = f"last_{CATEGORY_CONFIG_PLURAL[category]['singular']}_posted"
             if last_posted_key not in state:
                 state[last_posted_key] = None
 
@@ -1002,7 +1009,7 @@ class StateManager:
             state["cycle_count"] = {}
 
         # 新しいカテゴリのcycle_countを追加
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             if category not in state["cycle_count"]:
                 state["cycle_count"][category] = 0
 
@@ -1018,18 +1025,18 @@ class StateManager:
         state = {}
 
         # posted_* 配列の初期化
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             state[f"posted_{category}"] = []
 
         # last_*_posted の初期化
-        for category, config in CATEGORY_CONFIG.items():
+        for category, config in CATEGORY_CONFIG_PLURAL.items():
             state[f"last_{config['singular']}_posted"] = None
 
         # メタデータ
         state["last_updated"] = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
 
         # サイクルカウントの初期化
-        state["cycle_count"] = {category: 0 for category in CATEGORY_CONFIG.keys()}
+        state["cycle_count"] = {category: 0 for category in CATEGORY_CONFIG_PLURAL.keys()}
 
         return state
 
@@ -1093,8 +1100,7 @@ class StateManager:
 
     def _save_local_state(self):
         """ローカルファイルに状態を保存（フォールバック）"""
-        project_root = Path(__file__).parent.parent
-        state_file = project_root / DATA_DIR / STATE_FILE_NAME
+        state_file = DATA_DIR / STATE_FILE_NAME
 
         # data ディレクトリが存在しない場合は作成
         state_file.parent.mkdir(parents=True, exist_ok=True)
@@ -1182,7 +1188,7 @@ class StateManager:
         """
         stats = {}
 
-        for category, config in CATEGORY_CONFIG.items():
+        for category, config in CATEGORY_CONFIG_PLURAL.items():
             stats[category] = {
                 "posted": len(self.state.get(f'posted_{category}', [])),
                 "cycles": self.state.get('cycle_count', {}).get(category, 0),
@@ -1254,8 +1260,7 @@ class StateManager:
         Returns:
             ローカル状態ファイルのPath
         """
-        project_root = Path(__file__).parent.parent
-        return project_root / DATA_DIR / STATE_FILE_NAME
+        return DATA_DIR / STATE_FILE_NAME
 
     def _backup_local_state(self) -> bool:
         """
@@ -1315,7 +1320,7 @@ class StateManager:
                 result["is_identical"] = False
 
         # 各カテゴリーの投稿済みID比較
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             posted_key = f"posted_{category}"
             set1 = set(state1.get(posted_key, []))
             set2 = set(state2.get(posted_key, []))
@@ -1335,7 +1340,7 @@ class StateManager:
                     result["has_conflict"] = True
 
         # サイクルカウント比較
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             count1 = state1.get('cycle_count', {}).get(category, 0)
             count2 = state2.get('cycle_count', {}).get(category, 0)
 
@@ -1368,14 +1373,14 @@ class StateManager:
         newer_state = state1 if ts1 >= ts2 else state2
 
         # posted_* 配列はunion（重複なし結合）
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             posted_key = f"posted_{category}"
             set1 = set(state1.get(posted_key, []))
             set2 = set(state2.get(posted_key, []))
             merged[posted_key] = list(set1 | set2)
 
         # last_*_posted は新しいタイムスタンプを優先
-        for config in CATEGORY_CONFIG.values():
+        for config in CATEGORY_CONFIG_PLURAL.values():
             category = config['singular']
             last_key = f"last_{category}_posted"
             last1 = state1.get(last_key)
@@ -1391,7 +1396,7 @@ class StateManager:
                 merged[last_key] = last2
 
         # cycle_count は大きい方を採用
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             count1 = state1.get('cycle_count', {}).get(category, 0)
             count2 = state2.get('cycle_count', {}).get(category, 0)
             merged['cycle_count'][category] = max(count1, count2)
@@ -1654,7 +1659,7 @@ class StateManager:
 
         # マージ結果の統計
         print("マージ結果:")
-        for category in CATEGORY_CONFIG.keys():
+        for category in CATEGORY_CONFIG_PLURAL.keys():
             posted_key = f"posted_{category}"
             gist_count = len(gist_state.get(posted_key, []))
             local_count = len(local_state.get(posted_key, []))
@@ -1797,7 +1802,7 @@ class StateManager:
             # 競合の有無
             if comparison["has_conflict"]:
                 print("\n⚠️  競合が存在します（両方に異なる変更）")
-                print("  推奨: python scripts/state_manager.py sync --auto")
+                print("  推奨: python scripts/sync/state_manager.py sync --auto")
             else:
                 print("\n競合なし（マージ可能）")
 
@@ -1975,36 +1980,36 @@ if __name__ == '__main__':
         epilog="""
 使用例:
   # 状態確認
-  python scripts/state_manager.py
+  python scripts/sync/state_manager.py
 
   # Gist作成
-  python scripts/state_manager.py create-gist
+  python scripts/sync/state_manager.py create-gist
 
   # Gistからローカルに同期
-  python scripts/state_manager.py sync --from-gist
-  python scripts/state_manager.py sync --from-gist --force
+  python scripts/sync/state_manager.py sync --from-gist
+  python scripts/sync/state_manager.py sync --from-gist --force
 
   # ローカルからGistに同期
-  python scripts/state_manager.py sync --to-gist
-  python scripts/state_manager.py sync --to-gist --force
+  python scripts/sync/state_manager.py sync --to-gist
+  python scripts/sync/state_manager.py sync --to-gist --force
 
   # 自動同期（スマートマージ）
-  python scripts/state_manager.py sync --auto
+  python scripts/sync/state_manager.py sync --auto
 
   # 同期状態確認
-  python scripts/state_manager.py sync --status
-  python scripts/state_manager.py sync --status --verbose
+  python scripts/sync/state_manager.py sync --status
+  python scripts/sync/state_manager.py sync --status --verbose
 
   # Dry-run（変更せずシミュレート）
-  python scripts/state_manager.py sync --from-gist --dry-run
-  python scripts/state_manager.py sync --auto --dry-run
+  python scripts/sync/state_manager.py sync --from-gist --dry-run
+  python scripts/sync/state_manager.py sync --auto --dry-run
 
   # 状態検証
-  python scripts/state_manager.py validate
-  python scripts/state_manager.py validate --verbose
-  python scripts/state_manager.py validate --report-file docs/validation_report.md
-  python scripts/state_manager.py validate --category spells
-  python scripts/state_manager.py validate --fix
+  python scripts/sync/state_manager.py validate
+  python scripts/sync/state_manager.py validate --verbose
+  python scripts/sync/state_manager.py validate --report-file docs/validation_report.md
+  python scripts/sync/state_manager.py validate --category spells
+  python scripts/sync/state_manager.py validate --fix
         """
     )
 
@@ -2029,7 +2034,7 @@ if __name__ == '__main__':
     parser_validate.add_argument('--verbose', action='store_true', help='詳細情報を表示')
     parser_validate.add_argument('--fix', action='store_true', help='軽微な問題を自動修正（孤立IDの削除など）')
     parser_validate.add_argument('--report-file', type=str, help='検証レポートの出力先ファイルパス')
-    parser_validate.add_argument('--category', choices=list(CATEGORY_CONFIG.keys()), help='特定のカテゴリのみ検証')
+    parser_validate.add_argument('--category', choices=list(CATEGORY_CONFIG_PLURAL.keys()), help='特定のカテゴリのみ検証')
 
     args = parser.parse_args()
 
@@ -2084,7 +2089,7 @@ if __name__ == '__main__':
         stats = manager.get_stats()
 
         print("=== 用語集投稿状態 ===\n")
-        for category, config in CATEGORY_CONFIG.items():
+        for category, config in CATEGORY_CONFIG_PLURAL.items():
             if category in stats:
                 print(f"{config['display_name']}:")
                 print(f"  投稿済み: {stats[category]['posted']} 個")

@@ -6,25 +6,25 @@ X (Twitter) 投稿スクリプト
 
 使用例:
     # 今日の誕生日・命日・イベントを投稿（Dry-run）
-    python scripts/post_tweet.py --dry-run today
+    python scripts/posting/post_tweet.py --dry-run today
 
     # 特定の日付のイベントを投稿
-    python scripts/post_tweet.py event 1998-05-02
+    python scripts/posting/post_tweet.py event 1998-05-02
 
     # ランダムに呪文を投稿
-    python scripts/post_tweet.py spell
+    python scripts/posting/post_tweet.py spell
 
     # ランダムにポーションを投稿
-    python scripts/post_tweet.py potion
+    python scripts/posting/post_tweet.py potion
 
     # ランダムに魔法生物を投稿
-    python scripts/post_tweet.py creature
+    python scripts/posting/post_tweet.py creature
 
     # ランダムに用語集（呪文・ポーション・魔法生物）を投稿
-    python scripts/post_tweet.py glossary
+    python scripts/posting/post_tweet.py glossary
 
     # テスト投稿
-    python scripts/post_tweet.py test "テストツイート"
+    python scripts/posting/post_tweet.py test "テストツイート"
 """
 
 import random
@@ -33,12 +33,22 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from data_loader import load_data_file
-from twitter_client import XPoster
+# Import centralized config - must be before scripts imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from scripts.utils.data_loader import load_data_file
+from scripts.posting.twitter_client import XPoster
+from config import (
+    CALENDAR_DIR,
+    GLOSSARY_DIR,
+    GLOSSARY_CATEGORIES,
+    TWEET_MAX_LENGTH,
+    get_category_display_name,
+)
 
 # 状態管理モジュールをインポート
 try:
-    from state_manager import StateManager
+    from scripts.sync.state_manager import StateManager
     STATE_MANAGEMENT_AVAILABLE = True
 except ImportError:
     STATE_MANAGEMENT_AVAILABLE = False
@@ -48,63 +58,48 @@ except ImportError:
 # 定数定義
 # ============================================================
 
-# データディレクトリ
-DATA_DIR = Path(__file__).parent.parent / 'data' / 'posts'
+# データファイルパス (using CALENDAR_DIR and GLOSSARY_DIR from config)
+# Calendar files (date-based tweets)
+BIRTHDAYS_FILE = CALENDAR_DIR / 'birthdays.json'
+DEATHDAYS_FILE = CALENDAR_DIR / 'deathdays.json'
+EVENTS_FILE = CALENDAR_DIR / 'events.json'
 
-# データファイルパス
-BIRTHDAYS_FILE = DATA_DIR / 'birthdays.json'
-DEATHDAYS_FILE = DATA_DIR / 'deathdays.json'
-EVENTS_FILE = DATA_DIR / 'events.json'
-SPELLS_FILE = DATA_DIR / 'spells.json'
-POTIONS_FILE = DATA_DIR / 'potions.json'
-CREATURES_FILE = DATA_DIR / 'creatures.json'
-OBJECTS_FILE = DATA_DIR / 'objects.json'
-LOCATIONS_FILE = DATA_DIR / 'locations.json'
-ORGANIZATIONS_FILE = DATA_DIR / 'organizations.json'
-CONCEPTS_FILE = DATA_DIR / 'concepts.json'
-CHARACTERS_FILE = DATA_DIR / 'characters.json'
+# Glossary files (random glossary tweets)
+SPELLS_FILE = GLOSSARY_DIR / 'spells.json'
+POTIONS_FILE = GLOSSARY_DIR / 'potions.json'
+CREATURES_FILE = GLOSSARY_DIR / 'creatures.json'
+OBJECTS_FILE = GLOSSARY_DIR / 'objects.json'
+LOCATIONS_FILE = GLOSSARY_DIR / 'locations.json'
+ORGANIZATIONS_FILE = GLOSSARY_DIR / 'organizations.json'
+CONCEPTS_FILE = GLOSSARY_DIR / 'concepts.json'
+CHARACTERS_FILE = GLOSSARY_DIR / 'characters.json'
 
-# 用語集カテゴリリスト
-GLOSSARY_CATEGORIES = ['spell', 'potion', 'creature', 'object', 'location', 'organization', 'concept', 'character']
+# 用語集カテゴリリスト (now using config)
+# GLOSSARY_CATEGORIES is already imported from config
 
 # カテゴリー情報のマッピング
-CATEGORY_CONFIG = {
-    'spell': {
-        'file': SPELLS_FILE,
-        'display_name': '呪文',
-    },
-    'potion': {
-        'file': POTIONS_FILE,
-        'display_name': 'ポーション',
-    },
-    'creature': {
-        'file': CREATURES_FILE,
-        'display_name': '魔法生物',
-    },
-    'object': {
-        'file': OBJECTS_FILE,
-        'display_name': '魔法道具',
-    },
-    'location': {
-        'file': LOCATIONS_FILE,
-        'display_name': '場所',
-    },
-    'organization': {
-        'file': ORGANIZATIONS_FILE,
-        'display_name': '組織',
-    },
-    'concept': {
-        'file': CONCEPTS_FILE,
-        'display_name': '魔法概念',
-    },
-    'character': {
-        'file': CHARACTERS_FILE,
-        'display_name': 'キャラクター',
-    },
+# Build from config to maintain compatibility
+_CATEGORY_FILE_MAPPING = {
+    'spell': SPELLS_FILE,
+    'potion': POTIONS_FILE,
+    'creature': CREATURES_FILE,
+    'object': OBJECTS_FILE,
+    'location': LOCATIONS_FILE,
+    'organization': ORGANIZATIONS_FILE,
+    'concept': CONCEPTS_FILE,
+    'character': CHARACTERS_FILE,
+}
+
+CATEGORY_CONFIG_LOCAL = {
+    category: {
+        'file': _CATEGORY_FILE_MAPPING[category],
+        'display_name': get_category_display_name(category),
+    }
+    for category in GLOSSARY_CATEGORIES
 }
 
 # ツイート最大文字数（全角半角関係なく140字）
-TWEET_MAX_LENGTH = 140
+# TWEET_MAX_LENGTH is already imported from config
 
 
 def post_birthday(date_str: str, dry_run: bool = False) -> bool:
@@ -286,11 +281,11 @@ def post_glossary_item(
         投稿成功時はTrue
     """
     # カテゴリー設定を取得
-    if category not in CATEGORY_CONFIG:
+    if category not in CATEGORY_CONFIG_LOCAL:
         print(f"無効なカテゴリーです: {category}")
         return False
 
-    config = CATEGORY_CONFIG[category]
+    config = CATEGORY_CONFIG_LOCAL[category]
     data_file = config['file']
     display_name = config['display_name']
 
