@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "source": "Original Harry Potter Books (1-7)",
+    "created_at": "2025-11-09",
+    "total_count": 13,
+    "note": "このファイルは原作7巻で明示された正確な日付を持つイベントのみを含みます。event_ja と tweet_text_ja フィールドは手動で追加する必要があります。年が不明でも月日が正確であれば採用しています。",
+    "last_updated": "2025-11-09T01:12:30.734658",
+    "statistics": {
+      "by_importance": {
+        "major": 13
+      },
+      "by_book": {
+        "1": 1,
+        "2": 2,
+        "3": 1,
+        "4": 4,
+        "5": 1,
+        "6": 1,
+        "7": 3
+      }
+    }
+  },
+  "data": [
+    {
+      "event_date": "1991-09-01",
+      "event_date_original": "1 September 1991",
+      "event_en": "Harry Potter's first day at Hogwarts",
+      "event_ja": "ハリー・ポッター、ホグワーツ入学",
+      "book": 1,
+      "book_title_en": "Harry Potter and the Philosopher's Stone",
+      "chapter": 7,
+      "chapter_title_en": "The Sorting Hat",
+      "importance": "major",
+      "description_en": "Harry Potter arrives at Hogwarts School of Witchcraft and Wizardry for the first time and is sorted into Gryffindor House",
+      "tweet_text_ja": "1991年9月1日、ハリー・ポッターがホグワーツ魔法魔術学校に入学しました。組分け帽子によってグリフィンドール寮に組み分けられ、魔法界での冒険が始まります。"
+    },
+    {
+      "event_date": "1992-10-31",
+      "event_date_original": "31 October 1992",
+      "event_en": "Nearly Headless Nick's 500th Deathday Party",
+      "event_ja": "ほとんど首なしニックの命日パーティー",
+      "book": 2,
+      "book_title_en": "Harry Potter and the Chamber of Secrets",
+      "chapter": 8,
+      "chapter_title_en": "The Deathday Party",
+      "importance": "major",
+      "description_en": "Nearly Headless Nick's 500th deathday party takes place in the dungeons. This is the most important date in the HP timeline as it establishes the year 1992.",
+      "tweet_text_ja": "1992年10月31日、グリフィンドール寮のゴースト「ほとんど首なしニック」の500回目の命日パーティーが開かれました。ハロウィーンの夜、地下牢で開催された幽霊たちの宴。"
+    },
+    {
+      "event_date": "1992-10-31",
+      "event_date_original": "31 October 1992",
+      "event_en": "Mrs Norris petrified - Chamber of Secrets opened",
+      "event_ja": "秘密の部屋が開かれる",
+      "book": 2,
+      "book_title_en": "Harry Potter and the Chamber of Secrets",
+      "chapter": 8,
+      "chapter_title_en": "The Deathday Party",
+      "importance": "major",
+      "description_en": "Mrs Norris is found petrified. The Chamber of Secrets has been opened. Warning written on the wall.",
+      "tweet_text_ja": "1992年10月31日、ミセス・ノリスが石化されているのが発見されました。壁には「秘密の部屋は開かれたり」の文字が。ホグワーツに恐怖が訪れた夜。"
+    },
+    {
+      "event_date": "1993-06-06",
+      "event_date_original": "6 June 1993",
+      "event_en": "Buckbeak's scheduled execution (saved by time travel)",
+      "event_ja": "バックビークの処刑予定日（逆転時計で救出）",
+      "book": 3,
+      "book_title_en": "Harry Potter and the Prisoner of Azkaban",
+      "chapter": 21,
+      "chapter_title_en": "Hermione's Secret",
+      "importance": "major",
+      "description_en": "Buckbeak was scheduled to be executed, but was saved by Harry and Hermione using the Time-Turner",
+      "tweet_text_ja": "1993年6月6日、ヒッポグリフのバックビークの処刑が予定されていました。しかし逆転時計を使ったハリーとハーマイオニーによって救出され、運命が変わりました。"
+    },
+    {
+      "event_date": "1994-11-24",
+      "event_date_original": "24 November 1994",
+      "event_en": "First Task of the Triwizard Tournament",
+      "event_ja": "三大魔法学校対抗試合・第一の課題",
+      "book": 4,
+      "book_title_en": "Harry Potter and the Goblet of Fire",
+      "chapter": 20,
+      "chapter_title_en": "The First Task",
+      "importance": "major",
+      "description_en": "The First Task of the Triwizard Tournament - champions face dragons",
+      "tweet_text_ja": "1994年11月24日、三大魔法学校対抗試合の第一の課題が行われました。代表選手たちがドラゴンと対峙する、命がけの試練。"
+    },
+    {
+      "event_date": "1994-12-25",
+      "event_date_original": "25 December 1994",
+      "event_en": "Yule Ball",
+      "event_ja": "クリスマスの舞踏会",
+      "book": 4,
+      "book_title_en": "Harry Potter and the Goblet of Fire",
+      "chapter": 23,
+      "chapter_title_en": "The Yule Ball",
+      "importance": "major",
+      "description_en": "The Yule Ball is held as part of the Triwizard Tournament tradition",
+      "tweet_text_ja": "1994年12月25日、ホグワーツでクリスマスの舞踏会が開催されました。三大魔法学校対抗試合の伝統行事として、華やかな一夜が繰り広げられました。"
+    },
+    {
+      "event_date": "1995-02-24",
+      "event_date_original": "24 February 1995",
+      "event_en": "Second Task of the Triwizard Tournament",
+      "event_ja": "三大魔法学校対抗試合・第二の課題",
+      "book": 4,
+      "book_title_en": "Harry Potter and the Goblet of Fire",
+      "chapter": 26,
+      "chapter_title_en": "The Second Task",
+      "importance": "major",
+      "description_en": "The Second Task of the Triwizard Tournament - champions dive into the Black Lake",
+      "tweet_text_ja": "1995年2月24日、三大魔法学校対抗試合の第二の課題が行われました。代表選手たちが大湖に潜り、大切な人を救出する水中での戦い。"
+    },
+    {
+      "event_date": "1995-06-24",
+      "event_date_original": "24 June 1995",
+      "event_en": "Third Task of the Triwizard Tournament / Return of Voldemort",
+      "event_ja": "ヴォルデモート卿の復活",
+      "book": 4,
+      "book_title_en": "Harry Potter and the Goblet of Fire",
+      "chapter": 31,
+      "chapter_title_en": "The Third Task",
+      "importance": "major",
+      "description_en": "The Third Task of the Triwizard Tournament. Cedric Diggory is killed. Lord Voldemort returns to power.",
+      "tweet_text_ja": "1995年6月24日、三大魔法学校対抗試合の第三の課題が行われました。セドリック・ディゴリーが命を落とし、ヴォルデモート卿が完全な肉体を取り戻した、魔法界の歴史を変えた夜。"
+    },
+    {
+      "event_date": "1996-06-18",
+      "event_date_original": "18 June 1996",
+      "event_en": "Battle of the Department of Mysteries",
+      "event_ja": "神秘部の戦い",
+      "book": 5,
+      "book_title_en": "Harry Potter and the Order of the Phoenix",
+      "chapter": 35,
+      "chapter_title_en": "Beyond the Veil",
+      "importance": "major",
+      "description_en": "Battle at the Department of Mysteries. Sirius Black dies.",
+      "tweet_text_ja": "1996年6月18日、魔法省神秘部で戦いが起こりました。シリウス・ブラックが「ベールの彼方」へ消えた日。ハリーにとって忘れられない悲しみの夜。"
+    },
+    {
+      "event_date": "1997-06-30",
+      "event_date_original": "30 June 1997",
+      "event_en": "Battle of the Astronomy Tower",
+      "event_ja": "天文台の塔の戦い",
+      "book": 6,
+      "book_title_en": "Harry Potter and the Half-Blood Prince",
+      "chapter": 27,
+      "chapter_title_en": "The Lightning-Struck Tower",
+      "importance": "major",
+      "description_en": "Battle of the Astronomy Tower. Albus Dumbledore is killed by Severus Snape.",
+      "tweet_text_ja": "1997年6月30日、天文台の塔で戦いが起こりました。アルバス・ダンブルドアがセブルス・スネイプによって命を落とした、魔法界最大の喪失の夜。"
+    },
+    {
+      "event_date": "1997-07-27",
+      "event_date_original": "27 July 1997",
+      "event_en": "Battle of the Seven Potters",
+      "event_ja": "七人のポッター作戦",
+      "book": 7,
+      "book_title_en": "Harry Potter and the Deathly Hallows",
+      "chapter": 4,
+      "chapter_title_en": "The Seven Potters",
+      "importance": "major",
+      "description_en": "The Battle of the Seven Potters. Hedwig and Mad-Eye Moody are killed.",
+      "tweet_text_ja": "1997年7月27日、七人のポッター作戦が実行されました。ヘドウィグとマッドアイ・ムーディが命を落とした、ハリーの旅立ちの夜。"
+    },
+    {
+      "event_date": "1997-07-31",
+      "event_date_original": "31 July 1997",
+      "event_en": "Harry Potter's 17th birthday",
+      "event_ja": "ハリー・ポッター、成人",
+      "book": 7,
+      "book_title_en": "Harry Potter and the Deathly Hallows",
+      "chapter": 7,
+      "chapter_title_en": "The Will of Albus Dumbledore",
+      "importance": "major",
+      "description_en": "Harry Potter comes of age in the wizarding world (17 years old)",
+      "tweet_text_ja": "1997年7月31日、ハリー・ポッターが17歳の誕生日を迎えました。魔法界では成人となり、保護の魔法が解ける日。ダンブルドアの遺言が明かされました。"
+    },
+    {
+      "event_date": "1998-05-02",
+      "event_date_original": "2 May 1998",
+      "event_en": "Battle of Hogwarts",
+      "event_ja": "ホグワーツの戦い",
+      "book": 7,
+      "book_title_en": "Harry Potter and the Deathly Hallows",
+      "chapter": 31,
+      "chapter_title_en": "The Battle of Hogwarts",
+      "importance": "major",
+      "description_en": "The Battle of Hogwarts. Final confrontation between Harry Potter and Lord Voldemort. End of the Second Wizarding War.",
+      "tweet_text_ja": "1998年5月2日、ホグワーツの戦いが起こりました。ハリー・ポッターとヴォルデモート卿の最終決戦。第二次魔法戦争が終結し、魔法界に平和が戻った歴史的な日。"
+    }
+  ]
+}
