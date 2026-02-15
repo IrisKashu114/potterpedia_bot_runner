@@ -460,8 +460,25 @@ def post_glossary(dry_run: bool = False) -> bool:
     Returns:
         投稿成功時はTrue
     """
-    # ランダムにカテゴリを選択
-    category = random.choice(GLOSSARY_CATEGORIES)
+    # エントリ数に基づく重み付きランダムでカテゴリを選択
+    weights = []
+    for cat in GLOSSARY_CATEGORIES:
+        config = CATEGORY_CONFIG_LOCAL[cat]
+        try:
+            data = load_data_file(config['file'])
+            weights.append(len(data.get('data', [])))
+        except (FileNotFoundError, Exception):
+            weights.append(0)
+
+    # 全カテゴリのエントリ数が0の場合はフォールバック
+    if sum(weights) == 0:
+        print("警告: すべてのカテゴリのエントリ数が0です。均等選択にフォールバックします。")
+        category = random.choice(GLOSSARY_CATEGORIES)
+    else:
+        category = random.choices(GLOSSARY_CATEGORIES, weights=weights, k=1)[0]
+        total = sum(weights)
+        cat_weight = weights[GLOSSARY_CATEGORIES.index(category)]
+        print(f"重み付き選択: {category} ({cat_weight}/{total}件, {cat_weight/total*100:.1f}%)")
 
     if category == 'spell':
         print("カテゴリ: 呪文")
