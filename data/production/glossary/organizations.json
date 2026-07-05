@@ -1,10 +1,11 @@
 {
   "metadata": {
-    "source": "Manual curation from original 7 books",
+    "source": "Synced from drafts/glossary/organizations.json",
     "category": "organizations",
-    "created_at": "2025-11-23T01:21:16.019404",
+    "type": "glossary",
+    "synced_at": "2026-07-05T18:29:41.267213",
     "total_count": 18,
-    "note": "このファイルは原作7巻に登場する重要な組織の下書きです。日本語翻訳と詳細情報を追加済み。(グリンゴッツはlocationsに移動)"
+    "note": "Translation complete entries only"
   },
   "data": [
     {
@@ -31,7 +32,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 4-7: Voldemort's followers and supporters",
-      "tweet_text_ja": "【死喰い人】ヴォルデモートの配下で、闇の魔術と純血主義を掲げる魔法使いたち。左腕に闇の印を刻まれています。ベラトリックス・レストレンジ、ルシウス・マルフォイ、セブルス・スネイプらが所属。第一次・第二次魔法戦争を引き起こしました。"
+      "tweet_text_ja": "【死喰い人】ヴォルデモートの配下で、闇の魔術と純血主義を掲げる魔法使いたち。左腕に闇の印を刻まれています。ベラトリックス・レストレンジ、ルシウス・マルフォイ、セブルス・スネイプらが所属。第一次・第二次魔法戦争を引き起こしました。",
+      "name_ja_from_wiki": "死喰い人"
     },
     {
       "id": "manual_hogwarts_school_of_witchcraft_and_wizardry",
@@ -55,7 +57,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: British wizarding school",
-      "tweet_text_ja": "【ホグワーツ魔法魔術学校】四大創設者（グリフィンドール、ハッフルパフ、レイブンクロー、スリザリン）が千年以上前に創設した英国の魔法学校。11歳から18歳の生徒が魔法を学びます。シリーズの主要舞台です。"
+      "tweet_text_ja": "【ホグワーツ魔法魔術学校】四大創設者（グリフィンドール、ハッフルパフ、レイブンクロー、スリザリン）が千年以上前に創設した英国の魔法学校。11歳から18歳の生徒が魔法を学びます。シリーズの主要舞台です。",
+      "name_ja_from_wiki": "ホグワーツ魔法魔術学校"
     },
     {
       "id": "manual_ministry_of_magic",
@@ -79,7 +82,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: British wizarding government",
-      "tweet_text_ja": "【魔法省】1707年創設の英国魔法界の政府機関。魔法大臣が統治し、法執行、機密保持法の維持などを担います。当初はヴォルデモートの復活を否定しましたが、後に死喰い人に乗っ取られました。第二次魔法戦争後はキングズリー・シャックルボルトが大臣に就任しました。"
+      "tweet_text_ja": "【魔法省】1707年創設の英国魔法界の政府機関。魔法大臣が統治し、法執行、機密保持法の維持などを担います。当初はヴォルデモートの復活を否定しましたが、後に死喰い人に乗っ取られました。第二次魔法戦争後はキングズリー・シャックルボルトが大臣に就任しました。",
+      "name_ja_from_wiki": "魔法省"
     },
     {
       "id": "manual_gryffindor",
@@ -151,7 +155,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 5-7: Secret organization founded by Dumbledore to fight Voldemort",
-      "tweet_text_ja": "【不死鳥の騎士団】ダンブルドアが創設したヴォルデモートと戦う秘密組織。第一次魔法戦争で結成され、第二次魔法戦争で再結成されました。シリウス・ブラック、リーマス・ルーピン、マッド・アイ・ムーディらが所属。第二次魔法戦争時の本部はグリモールド・プレイス12番地です。"
+      "tweet_text_ja": "【不死鳥の騎士団】ダンブルドアが創設したヴォルデモートと戦う秘密組織。第一次魔法戦争で結成され、第二次魔法戦争で再結成されました。シリウス・ブラック、リーマス・ルーピン、マッド・アイ・ムーディらが所属。第二次魔法戦争時の本部はグリモールド・プレイス12番地です。",
+      "name_ja_from_wiki": "不死鳥の騎士団"
     },
     {
       "id": "manual_dumbledores_army",
@@ -300,7 +305,8 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 4-7: Elite group of Dark wizard catchers",
-      "tweet_text_ja": "【闇祓い局】魔法省の魔法法執行部に属する闇の魔法使いを捕らえるエリート部署。厳しい訓練が必要で、マッド・アイ・ムーディ、キングズリー・シャックルボルト、ニンファドーラ・トンクスらが所属。多くのメンバーが不死鳥の騎士団にも参加しました。"
+      "tweet_text_ja": "【闇祓い局】魔法省の魔法法執行部に属する闇の魔法使いを捕らえるエリート部署。厳しい訓練が必要で、マッド・アイ・ムーディ、キングズリー・シャックルボルト、ニンファドーラ・トンクスらが所属。多くのメンバーが不死鳥の騎士団にも参加しました。",
+      "name_ja_from_wiki": "闇祓い"
     },
     {
       "id": "manual_department_of_magical_law_enforcement",
@@ -324,7 +330,8 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 2-7: Largest department in the Ministry of Magic",
-      "tweet_text_ja": "【魔法法執行部】魔法省で最大の部署。闇祓い局、不適切な魔法使用取締局などを含み、魔法界の法と秩序を維持します。部長はアメリア・ボーンズ（6巻まで）。闇の魔法使いの取締りから未成年の魔法使用まで幅広く担当しています。"
+      "tweet_text_ja": "【魔法法執行部】魔法省で最大の部署。闇祓い局、不適切な魔法使用取締局などを含み、魔法界の法と秩序を維持します。部長はアメリア・ボーンズ（6巻まで）。闇の魔法使いの取締りから未成年の魔法使用まで幅広く担当しています。",
+      "name_ja_from_wiki": "魔法法執行部"
     },
     {
       "id": "manual_department_of_mysteries",

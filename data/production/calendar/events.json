@@ -1,24 +1,11 @@
 {
   "metadata": {
-    "source": "Original Harry Potter Books (1-7)",
-    "created_at": "2025-11-09",
+    "source": "Synced from drafts/calendar/events.json",
+    "category": "events",
+    "type": "calendar",
+    "synced_at": "2026-07-05T18:29:41.276112",
     "total_count": 13,
-    "note": "このファイルは原作7巻で明示された正確な日付を持つイベントのみを含みます。event_ja と tweet_text_ja フィールドは手動で追加する必要があります。年が不明でも月日が正確であれば採用しています。",
-    "last_updated": "2025-11-09T01:12:30.734658",
-    "statistics": {
-      "by_importance": {
-        "major": 13
-      },
-      "by_book": {
-        "1": 1,
-        "2": 2,
-        "3": 1,
-        "4": 4,
-        "5": 1,
-        "6": 1,
-        "7": 3
-      }
-    }
+    "note": "Translation complete entries only"
   },
   "data": [
     {

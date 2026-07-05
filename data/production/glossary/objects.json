@@ -1,10 +1,11 @@
 {
   "metadata": {
-    "source": "Manual curation from original 7 books",
+    "source": "Synced from drafts/glossary/objects.json",
     "category": "objects",
-    "created_at": "2025-11-22T15:29:20.243477",
+    "type": "glossary",
+    "synced_at": "2026-07-05T18:29:41.264732",
     "total_count": 30,
-    "note": "このファイルは原作7巻に登場する重要な魔法の道具の下書きです。以下のフィールドは手動で追加する必要があります: name_ja（日本語名）, name_ja_alt（別名）, description_en（説明・英語）, description_ja（説明・日本語）, powers（魔法の力）, creator（作成者）, owner（所有者）, material（素材）, book_appearances（登場する巻）, first_appearance（初登場）, tweet_text_ja（ツイート本文）"
+    "note": "Translation complete entries only"
   },
   "data": [
     {
@@ -33,7 +34,9 @@
       "type": "object",
       "name_en": "Cloak of Invisibility",
       "name_ja": "透明マント",
-      "name_ja_alt": ["隠れ蓑"],
+      "name_ja_alt": [
+        "隠れ蓑"
+      ],
       "category": "Deathly Hallows",
       "description_en": "A magical cloak that renders the wearer completely invisible",
       "description_ja": "着用者を完全に透明にする魔法のマント",
@@ -54,7 +57,9 @@
       "type": "object",
       "name_en": "Elder Wand",
       "name_ja": "ニワトコの杖",
-      "name_ja_alt": ["死の杖"],
+      "name_ja_alt": [
+        "死の杖"
+      ],
       "category": "Deathly Hallows",
       "description_en": "The most powerful wand ever created, one of the three Deathly Hallows",
       "description_ja": "史上最強の杖で、死の秘宝の一つ",
@@ -68,7 +73,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: The most powerful wand, one of the three Deathly Hallows",
-      "tweet_text_ja": "【ニワトコの杖】死の秘宝の一つで、史上最強の杖。正しく使いこなせば決闘で無敵となります。ニワトコの木とセストラルの尾の毛で作られた15インチの杖で、並外れた威力の魔法を放つことができます。"
+      "tweet_text_ja": "【ニワトコの杖】死の秘宝の一つで、史上最強の杖。正しく使いこなせば決闘で無敵となります。ニワトコの木とセストラルの尾の毛で作られた15インチの杖で、並外れた威力の魔法を放つことができます。",
+      "name_ja_from_wiki": "ニワトコの杖"
     },
     {
       "id": "manual_resurrection_stone",
@@ -89,7 +95,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: Stone that can bring back the dead (as shades), one of the three Deathly Hallows",
-      "tweet_text_ja": "【蘇りの石】死の秘宝の一つで、死者の影を呼び戻す石。完全な復活ではなく、死者は悲しげで現世に属していません。ダンブルドアがスニッチの中に隠し、ハリーは禁じられた森に向かう前に両親やシリウスらを呼び出しました。"
+      "tweet_text_ja": "【蘇りの石】死の秘宝の一つで、死者の影を呼び戻す石。完全な復活ではなく、死者は悲しげで現世に属していません。ダンブルドアがスニッチの中に隠し、ハリーは禁じられた森に向かう前に両親やシリウスらを呼び出しました。",
+      "name_ja_from_wiki": "蘇りの石"
     },
     {
       "id": "manual_helga_hufflepuffs_cup",
@@ -215,7 +222,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: Sorts students into Hogwarts houses, can produce Gryffindor's sword",
-      "tweet_text_ja": "【組分け帽子】ホグワーツ四大創設者が魔法をかけた帽子で、新入生の心を読んで最適な寮を選びます。元々はゴドリック・グリフィンドールの帽子で、真のグリフィンドール生のためにグリフィンドールの剣を出すこともできます。"
+      "tweet_text_ja": "【組分け帽子】ホグワーツ四大創設者が魔法をかけた帽子で、新入生の心を読んで最適な寮を選びます。元々はゴドリック・グリフィンドールの帽子で、真のグリフィンドール生のためにグリフィンドールの剣を出すこともできます。",
+      "name_ja_from_wiki": "組分け帽子"
     },
     {
       "id": "manual_marauders_map",
@@ -278,7 +286,8 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 3: Used by Hermione to attend multiple classes, later used to save Sirius and Buckbeak",
-      "tweet_text_ja": "【逆転時計】時間を遡ることができる魔法の道具。砂時計を1回転させると1時間戻ります。ハーマイオニーは3年生の時、複数の授業に出席するために使用し、後にシリウスとバックビークを救うためにも使いました。"
+      "tweet_text_ja": "【逆転時計】時間を遡ることができる魔法の道具。砂時計を1回転させると1時間戻ります。ハーマイオニーは3年生の時、複数の授業に出席するために使用し、後にシリウスとバックビークを救うためにも使いました。",
+      "name_ja_from_wiki": "逆転時計"
     },
     {
       "id": "manual_sword_of_gryffindor",
@@ -488,7 +497,8 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 6: Pair of cabinets creating a passage into Hogwarts",
-      "tweet_text_ja": "【姿くらましキャビネット】一対のキャビネットで、一方に入ると他方から出られます。ドラコは6年生の時、必要の部屋にあるキャビネットを修理し、ボージン・アンド・バークスのキャビネットとつなげて、死喰い人をホグワーツに侵入させました。"
+      "tweet_text_ja": "【姿くらましキャビネット】一対のキャビネットで、一方に入ると他方から出られます。ドラコは6年生の時、必要の部屋にあるキャビネットを修理し、ボージン・アンド・バークスのキャビネットとつなげて、死喰い人をホグワーツに侵入させました。",
+      "name_ja_from_wiki": "姿をくらますキャビネット棚"
     },
     {
       "id": "manual_dumbledores_army_coin",

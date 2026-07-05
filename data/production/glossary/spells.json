@@ -1,8 +1,9 @@
 {
   "metadata": {
-    "source": "Synced from spells_draft.json",
+    "source": "Synced from drafts/glossary/spells.json",
     "category": "spells",
-    "synced_at": "2025-11-30T23:19:12.580851",
+    "type": "glossary",
+    "synced_at": "2026-07-05T18:29:41.259841",
     "total_count": 28,
     "note": "Translation complete entries only"
   },
@@ -11,7 +12,7 @@
       "id": "wiki_spell_animagus_spell",
       "tweet_text_ja": "【アマート・アニモ・アニマート・アニメガス】アニメーガスになるための複雑な儀式の一部として唱える呪文。ジェームズ、シリウス、ピーターは学生時代にこの難しい変身術を習得しました。",
       "type": "spell",
-      "name_en": "Animagus Spell",
+      "name_en": "Amato Animo Animato Animagus",
       "name_ja": "アマート・アニモ・アニマート・アニメガス",
       "name_ja_alt": [],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Animagus_Spell",
@@ -20,7 +21,7 @@
       "description_ja": null,
       "original_id": null,
       "name_ja_from_wiki": null,
-      "incantation": "Amato Animo Animato Animagus(ah-MAH-toh ah-NEE-moh ah-nee-MAH-toh an-ee-MAY-gus)",
+      "incantation": "Amato Animo Animato Animagus",
       "incantation_ja": "アマート・アニモ・アニマート・アニメガス",
       "incantation_ja_alt": [],
       "category": "Transfiguration",
@@ -37,14 +38,16 @@
       "type": "spell",
       "name_en": "Episkey",
       "name_ja": "エピスキー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "癒えよ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Episkey",
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_episkey",
       "name_ja_from_wiki": null,
-      "incantation": "Episkey(eh-PIS-kee)",
+      "incantation": "Episkey",
       "incantation_ja": "エピスキー",
       "incantation_ja_alt": [
         "癒えよ"
@@ -62,18 +65,16 @@
       "tweet_text_ja": "【カーベ・イニミカム】防御呪文の一つ。ハーマイオニーが7巻でテントの周囲に防御呪文を張る際に使用しました。他の防御呪文と組み合わせることで強力な守りとなります。",
       "type": "spell",
       "name_en": "Cave inimicum",
-      "name_ja": "カーべ・イニミカム",
-      "name_ja_alt": [
-        "敵を警戒せよ"
-      ],
+      "name_ja": "カーベ　イニミカム",
+      "name_ja_alt": [],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Cave_inimicum",
       "book_appearances": "DH",
       "description_en": "",
       "description_ja": "",
       "original_id": null,
       "name_ja_from_wiki": null,
-      "incantation": null,
-      "incantation_ja": "カーべ・イニミカム",
+      "incantation": "Cave inimicum",
+      "incantation_ja": "カーベ　イニミカム",
       "incantation_ja_alt": [
         "敵を警戒せよ"
       ],
@@ -98,8 +99,8 @@
       "description_ja": "",
       "original_id": "wiki_spell_salvio_hexia",
       "name_ja_from_wiki": null,
-      "incantation": "Salvio hexia(SAL-vee-oh HEK-see-uh)",
-      "incantation_ja": "サルビオ　ヘクシア",
+      "incantation": "Salvio hexia",
+      "incantation_ja": "サルビオ・ヘクシア",
       "incantation_ja_alt": [
         "のろいを　さけよ"
       ],
@@ -115,9 +116,11 @@
       "id": "wiki_spell_laceration_curse",
       "tweet_text_ja": "【セクタムセンプラ】見えない刀で切ったような深い傷を負わせる呪文。スネイプが学生時代に開発しました。ハリーは6年生の時にドラコにこの呪文を使い、重傷を負わせてしまいました。",
       "type": "spell",
-      "name_en": "Laceration Curse",
+      "name_en": "Sectumsempra",
       "name_ja": "セクタムセンプラ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "切り裂け"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Laceration_Curse",
       "book_appearances": "DH, HBP",
       "description_en": "",
@@ -139,16 +142,18 @@
       "id": "wiki_spell_wand-extinguishing_charm",
       "tweet_text_ja": "【ノックス】ルーモスで灯した杖の明かりを消す呪文。ルーモスと対になる呪文で、暗闇での行動に欠かせません。",
       "type": "spell",
-      "name_en": "Wand-Extinguishing Charm",
+      "name_en": "Nox",
       "name_ja": "ノックス",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "消えよ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Wand-Extinguishing_Charm",
       "book_appearances": "POA, DH",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_wand-extinguishing_charm",
       "name_ja_from_wiki": null,
-      "incantation": "Nox(NOKSS)",
+      "incantation": "Nox",
       "incantation_ja": "ノックス",
       "incantation_ja_alt": [
         "消えよ",
@@ -166,16 +171,20 @@
       "id": "wiki_spell_general_counter-spell",
       "tweet_text_ja": "【フィニート・インカンターテム】全ての呪文効果を終了させる呪文。決闘クラブでスネイプがロックハートの呪文を解除する際に使用しました。様々な呪文の効果を打ち消すことができます。フィニートという短い呪文も存在します。",
       "type": "spell",
-      "name_en": "General Counter-Spell",
+      "name_en": "Finite Incantatem",
       "name_ja": "フィニート・インカンターテム",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "フィニート",
+        "終われ",
+        "呪文よ終われ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/General_Counter-Spell",
       "book_appearances": "DH, HBP, COS",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_general_counter-spell",
       "name_ja_from_wiki": "フィニート",
-      "incantation": "Finite(fi-NEE-tay), Finite Incantatem'(fi-NEE-tay in-can-TAH-tem)",
+      "incantation": "Finite Incantatem",
       "incantation_ja": "フィニート・インカンターテム",
       "incantation_ja_alt": [
         "呪文よ終われ"
@@ -220,14 +229,16 @@
       "type": "spell",
       "name_en": "Protego horribilis",
       "name_ja": "プロテゴ　ホリビリス",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "恐ろしきものから守れ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Protego_horribilis",
       "book_appearances": "DH",
       "description_en": "",
       "description_ja": "",
       "original_id": null,
       "name_ja_from_wiki": null,
-      "incantation": "Protego Horribilis",
+      "incantation": "Protego horribilis",
       "incantation_ja": "プロテゴ　ホリビリス",
       "incantation_ja_alt": [
         "おそろしきものから　まもれ"
@@ -244,16 +255,18 @@
       "id": "wiki_spell_muffliato_charm",
       "tweet_text_ja": "【マフリアート】周囲の人に正体不明の雑音を聞かせ、会話を盗み聞きされないようにする呪文。スネイプが学生時代に開発しました。ハリーは6年生の時にこの呪文を使い、ロンやハーマイオニーと秘密の会話をしました。",
       "type": "spell",
-      "name_en": "Muffliato Charm",
+      "name_en": "Muffliato",
       "name_ja": "マフリアート",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "耳塞ぎ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Muffliato_Charm",
       "book_appearances": "DH, HBP",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_muffliato_charm",
       "name_ja_from_wiki": "マフリアート",
-      "incantation": "Muffliato(muff-LEE-ah-toe)",
+      "incantation": "Muffliato",
       "incantation_ja": "マフリアート",
       "incantation_ja_alt": [
         "耳塞ぎ"
@@ -270,16 +283,18 @@
       "id": "wiki_spell_boggart-banishing_spell",
       "tweet_text_ja": "【リディクラス】まね妖怪を滑稽な姿に変える呪文。ルーピン先生が3年生の闇の魔術に対する防衛術の授業で教えました。笑いがこの呪文の鍵となります。",
       "type": "spell",
-      "name_en": "Boggart-Banishing Spell",
+      "name_en": "Riddikulus",
       "name_ja": "リディクラス",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ばかばかしい"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Boggart-Banishing_Spell",
       "book_appearances": "POA, GOF",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_boggart-banishing_spell",
       "name_ja_from_wiki": null,
-      "incantation": "Riddikulus(ri-di-KULL-lis)",
+      "incantation": "Riddikulus",
       "incantation_ja": "リディクラス",
       "incantation_ja_alt": [
         "ばかばかしい"
@@ -296,9 +311,11 @@
       "id": "wiki_spell_dangling_jinx",
       "tweet_text_ja": "【レビコーパス】対象を足首で逆さ吊りにする呪文。スネイプが学生時代に開発しました。ハリーは6年生の時に「半純血のプリンス」の教科書でこの呪文を見つけ、使用しました。",
       "type": "spell",
-      "name_en": "Dangling Jinx",
+      "name_en": "Levicorpus",
       "name_ja": "レビコーパス",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "身体浮上"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Dangling_Jinx",
       "book_appearances": "DH, HBP, GOF",
       "description_en": "",
@@ -322,16 +339,18 @@
       "id": "wiki_spell_mending_charm",
       "tweet_text_ja": "【レパロ（修復魔法）】壊れた物を修復する呪文。作中では割れたコップや破れた本など、様々な物の修復に使われています。魔法使いの日常生活で便利な呪文の一つです。",
       "type": "spell",
-      "name_en": "Mending Charm",
-      "name_ja": "修復魔法",
-      "name_ja_alt": [],
+      "name_en": "Reparo",
+      "name_ja": "レパロ",
+      "name_ja_alt": [
+        "直せ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Mending_Charm",
       "book_appearances": "DH, HBP, GOF",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_mending_charm",
       "name_ja_from_wiki": "レパロ",
-      "incantation": "Reparo(reh-PAH-roh)",
+      "incantation": "Reparo",
       "incantation_ja": "レパロ",
       "incantation_ja_alt": [
         "直せ"
@@ -348,16 +367,18 @@
       "id": "wiki_spell_wand-lighting_charm",
       "tweet_text_ja": "【ルーモス（光を出す魔法）】杖の先を光らせる呪文。暗闇を照らす最も基本的で便利な呪文です。作中で何度も使われており、魔法使いにとって必須の呪文の一つです。",
       "type": "spell",
-      "name_en": "Wand-Lighting Charm",
-      "name_ja": "光を出す魔法",
-      "name_ja_alt": [],
+      "name_en": "Lumos",
+      "name_ja": "ルーモス",
+      "name_ja_alt": [
+        "光よ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Wand-Lighting_Charm",
       "book_appearances": "HBP, DH, GOF, POA, COS",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_wand-lighting_charm",
       "name_ja_from_wiki": null,
-      "incantation": "Lumos(LOO-mos)",
+      "incantation": "Lumos",
       "incantation_ja": "ルーモス",
       "incantation_ja_alt": [
         "光よ"
@@ -377,7 +398,8 @@
       "name_en": "Summoning Charm",
       "name_ja": "呼び寄せ呪文",
       "name_ja_alt": [
-        "召喚魔法"
+        "アクシオ",
+        "出てこい"
       ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Summoning_Charm",
       "book_appearances": "DH, HBP, GOF",
@@ -405,7 +427,8 @@
       "name_en": "Stunning Spell",
       "name_ja": "失神呪文",
       "name_ja_alt": [
-        "麻痺呪文"
+        "ステューピファイ",
+        "麻痺せよ"
       ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Stunning_Spell",
       "book_appearances": "DH, HBP, GOF, POA",
@@ -432,7 +455,10 @@
       "type": "spell",
       "name_en": "Patronus Charm",
       "name_ja": "守護霊の呪文",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "エクスペクト・パトローナム",
+        "守護霊よ来たれ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Patronus_Charm",
       "book_appearances": "DH, HBP, GOF, POA",
       "description_en": "",
@@ -458,7 +484,11 @@
       "type": "spell",
       "name_en": "Memory Charm",
       "name_ja": "忘却術",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "オブリビエイト",
+        "忘れよ",
+        "忘却呪文"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Memory_Charm",
       "book_appearances": "POA, DH, GOF, COS",
       "description_en": "",
@@ -508,7 +538,10 @@
       "type": "spell",
       "name_en": "Imperius Curse",
       "name_ja": "服従の呪文",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "インペリオ",
+        "服従せよ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Imperius_Curse",
       "book_appearances": "DH, HBP, GOF",
       "description_en": "",
@@ -535,7 +568,8 @@
       "name_en": "Disarming Charm",
       "name_ja": "武装解除術",
       "name_ja_alt": [
-        "武装解除の術"
+        "エクスペリアームス",
+        "武器よ去れ"
       ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Disarming_Charm",
       "book_appearances": "HBP, DH, GOF, POA, COS",
@@ -562,7 +596,10 @@
       "type": "spell",
       "name_en": "Killing Curse",
       "name_ja": "死の呪い",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "アバダケダブラ",
+        "死の呪文"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Killing_Curse",
       "book_appearances": "DH, HBP, GOF",
       "description_en": "",
@@ -584,16 +621,18 @@
       "id": "wiki_spell_water-making_spell",
       "tweet_text_ja": "【アグアメンティ（水を出す呪文）】杖から水を出す呪文。ハリーは6年生の時、ダンブルドアがホークラックスの洞窟で毒薬を飲んだ後、この呪文で水を与えようとしました。",
       "type": "spell",
-      "name_en": "Water-Making Spell",
-      "name_ja": "水を出す呪文",
-      "name_ja_alt": [],
+      "name_en": "Aguamenti",
+      "name_ja": "アグアメンティ",
+      "name_ja_alt": [
+        "水よ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Water-Making_Spell",
       "book_appearances": "DH, HBP, GOF",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_water-making_spell",
       "name_ja_from_wiki": null,
-      "incantation": "Aguamenti(AH-gwah-MEN-tee)",
+      "incantation": "Aguamenti",
       "incantation_ja": "アグアメンティ",
       "incantation_ja_alt": [
         "水増し"
@@ -610,9 +649,12 @@
       "id": "wiki_spell_levitation_charm",
       "tweet_text_ja": "【ウィンガーディアム・レヴィオーサ（浮遊呪文）】物を浮遊させる呪文。1年生の最初の呪文の授業で習います。ハーマイオニーがロンに「レヴィオーサよ」と発音を訂正した有名なシーンがあります。",
       "type": "spell",
-      "name_en": "Levitation Charm",
-      "name_ja": "浮遊呪文",
-      "name_ja_alt": [],
+      "name_en": "Hover Charm",
+      "name_ja": "浮遊術",
+      "name_ja_alt": [
+        "ウィンガーディアム　レビオーサ",
+        "浮遊せよ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Levitation_Charm",
       "book_appearances": "PS, DH, GOF",
       "description_en": "",
@@ -638,7 +680,10 @@
       "type": "spell",
       "name_en": "Shield Charm",
       "name_ja": "盾の呪文",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "プロテゴ",
+        "護れ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Shield_Charm",
       "book_appearances": "DH, HBP, GOF, COS",
       "description_en": "",
@@ -664,7 +709,10 @@
       "type": "spell",
       "name_en": "Cruciatus Curse",
       "name_ja": "磔の呪文",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "クルーシオ",
+        "苦しめ"
+      ],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Cruciatus_Curse",
       "book_appearances": "DH, HBP, GOF",
       "description_en": "",
@@ -712,18 +760,16 @@
       "id": "wiki_spell_unlocking_charm",
       "tweet_text_ja": "【アロホモラ（鍵開けの呪文）】鍵のかかった物を開ける呪文。ハリー、ロン、ハーマイオニーが1年生の時に三頭犬から逃げる際、ハーマイオニーがこの呪文で扉を開けました。ただし強力な魔法による錠前には効きません。",
       "type": "spell",
-      "name_en": "Unlocking Charm",
-      "name_ja": "鍵開けの呪文",
-      "name_ja_alt": [
-        "解錠魔法"
-      ],
+      "name_en": "Alohomora",
+      "name_ja": "アロホモラ",
+      "name_ja_alt": [],
       "wiki_url": "https://harrypotter.fandom.com/wiki/Unlocking_Charm",
       "book_appearances": "HBP, DH, POA, PS, COS",
       "description_en": "",
       "description_ja": "",
       "original_id": "wiki_spell_unlocking_charm",
       "name_ja_from_wiki": "アロホモラ",
-      "incantation": "Alohomora(ah-LOH-ho-MOR-ah)",
+      "incantation": "Alohomora",
       "incantation_ja": "アロホモラ",
       "incantation_ja_alt": null,
       "category": "Charm",

@@ -1,9 +1,11 @@
 {
   "metadata": {
-    "source": "Potter-DB API (filtered by wiki_character_index.json)",
-    "filtered_at": "2025-11-08T21:24:27.085757",
+    "source": "Synced from drafts/calendar/birthdays.json",
+    "category": "birthdays",
+    "type": "calendar",
+    "synced_at": "2026-07-05T18:29:41.274483",
     "total_count": 14,
-    "note": "不確定な日付（Between, Before, After等）を除外し、正確な月日のみを保持しています。name_ja と tweet_text_ja フィールドは手動で追加する必要があります"
+    "note": "Translation complete entries only"
   },
   "data": [
     {
@@ -46,7 +48,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/f/fe/Rubeus_Hagrid.png",
       "wiki": "https://harrypotter.fandom.com/wiki/Rubeus_Hagrid",
-      "tweet_text_ja": "今日はルビウス・ハグリッドの誕生日です。ホグワーツの森番にして、ハリーの最初の友人。お誕生日おめでとう、ハグリッド！"
+      "tweet_text_ja": "今日はルビウス・ハグリッドの誕生日です。ホグワーツの森番にして、ハリーの最初の友人。お誕生日おめでとう、ハグリッド！",
+      "name_ja_from_wiki": "ルビウス・ハグリッド"
     },
     {
       "id": "9f5d1a86-e66b-44d3-a307-2678c133a5c9",
@@ -74,7 +77,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/a/a3/Severus_Snape.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Severus_Snape",
-      "tweet_text_ja": "今日はセブルス・スネイプの誕生日です。最も勇敢な男の一人。彼の真実を忘れません。"
+      "tweet_text_ja": "今日はセブルス・スネイプの誕生日です。最も勇敢な男の一人。彼の真実を忘れません。",
+      "name_ja_from_wiki": "セブルス・スネイプ"
     },
     {
       "id": "d7f7efc2-ffba-48c7-aab5-4f2fbc99bab0",
@@ -88,7 +92,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/e/e2/Remus_Lupin_Deathly_Hallows_promo_image.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Remus_Lupin",
-      "tweet_text_ja": "今日はリーマス・ジョン・ルーピンの誕生日です。親愛なるムーニー、優しき狼人間。お誕生日おめでとうございます！"
+      "tweet_text_ja": "今日はリーマス・ジョン・ルーピンの誕生日です。親愛なるムーニー、優しき狼人間。お誕生日おめでとうございます！",
+      "name_ja_from_wiki": "リーマス・ルーピン"
     },
     {
       "id": "00a14b36-1b72-4790-82a4-a431eaf6abaf",

@@ -1,9 +1,11 @@
 {
   "metadata": {
-    "source": "Potter-DB API (filtered by wiki_character_index.json)",
-    "filtered_at": "2025-11-08T21:24:27.087870",
+    "source": "Synced from drafts/calendar/deathdays.json",
+    "category": "deathdays",
+    "type": "calendar",
+    "synced_at": "2026-07-05T18:29:41.275304",
     "total_count": 17,
-    "note": "不確定な日付（Between, Before, After等）を除外し、正確な月日のみを保持しています。映画限定の死亡（ラベンダー・ブラウン等）も除外。name_ja と tweet_text_ja フィールドは手動で追加する必要があります"
+    "note": "Translation complete entries only"
   },
   "data": [
     {
@@ -32,7 +34,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/d/d2/Quirinus_Quirrell_PS_promo.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Quirinus_Quirrell",
-      "tweet_text_ja": "今日はクィリナス・クィレルの命日です。闇の魔術に魅入られた元ホグワーツ教授。"
+      "tweet_text_ja": "今日はクィリナス・クィレルの命日です。闇の魔術に魅入られた元ホグワーツ教授。",
+      "name_ja_from_wiki": "クィリナス・クィレル"
     },
     {
       "id": "695688ef-43e5-4a06-91f9-9cf798b80eee",
@@ -88,7 +91,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/7/75/Albus_Dumbledore_%28HBPF_promo%29.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Albus_Dumbledore",
-      "tweet_text_ja": "今日はアルバス・ダンブルドアの命日です。偉大なる魔法使い、ホグワーツの守護者。彼の知恵と勇気を忘れません。"
+      "tweet_text_ja": "今日はアルバス・ダンブルドアの命日です。偉大なる魔法使い、ホグワーツの守護者。彼の知恵と勇気を忘れません。",
+      "name_ja_from_wiki": "アルバス・ダンブルドア"
     },
     {
       "id": "bfab67d9-3f15-4da1-83ee-a599bd2f524b",
@@ -158,7 +162,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/4/48/Colin_Creevey.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Colin_Creevey",
-      "tweet_text_ja": "今日はコリン・クリービーの命日です。ホグワーツの戦いで散った若き勇者。カメラを持つ少年の笑顔を忘れません。"
+      "tweet_text_ja": "今日はコリン・クリービーの命日です。ホグワーツの戦いで散った若き勇者。カメラを持つ少年の笑顔を忘れません。",
+      "name_ja_from_wiki": "コリン・クリービー"
     },
     {
       "id": "95b627ae-ce70-4ab4-ba10-491fd5fcf4e4",
@@ -186,7 +191,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/e/e2/Remus_Lupin_Deathly_Hallows_promo_image.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Remus_Lupin",
-      "tweet_text_ja": "今日はリーマス・ルーピンの命日です。親愛なるムーニー、最後まで戦い抜いた勇者。彼の優しさを忘れません。"
+      "tweet_text_ja": "今日はリーマス・ルーピンの命日です。親愛なるムーニー、最後まで戦い抜いた勇者。彼の優しさを忘れません。",
+      "name_ja_from_wiki": "リーマス・ルーピン"
     },
     {
       "id": "ba48a873-cb19-4e84-a46e-4876dccd8983",
@@ -214,7 +220,8 @@
       "gender": "Male",
       "image": "https://static.wikia.nocookie.net/harrypotter/images/a/a3/Severus_Snape.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Severus_Snape",
-      "tweet_text_ja": "今日はセブルス・スネイプの命日です。最も勇敢な男。リリーへの愛を貫き、真実を守り抜きました。Always."
+      "tweet_text_ja": "今日はセブルス・スネイプの命日です。最も勇敢な男。リリーへの愛を貫き、真実を守り抜きました。Always.",
+      "name_ja_from_wiki": "セブルス・スネイプ"
     },
     {
       "id": "83512b73-0464-4bef-961a-67dd8cbd967c",
