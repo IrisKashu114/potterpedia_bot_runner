@@ -3,8 +3,8 @@
     "source": "Synced from drafts/glossary/characters.json",
     "category": "characters",
     "type": "glossary",
-    "synced_at": "2026-02-11T09:04:59.388174",
-    "total_count": 150,
+    "synced_at": "2026-07-05T21:26:07.965996",
+    "total_count": 160,
     "note": "Translation complete entries only"
   },
   "data": [
@@ -659,6 +659,19 @@
       "id": "wiki_char_archie_aymslowe"
     },
     {
+      "tweet_text_ja": "【アークタルス・ブラック】シリウスとレギュラスの祖父。ブラック家の当主でした。シリウス曰く、魔法省に大量の金貨を寄付したためマーリン勲章を授与されました。",
+      "name_en": "Arcturus Black (III)",
+      "name_ja_from_wiki": null,
+      "name_ja": "アークタルス・ブラック",
+      "name_ja_alt": [],
+      "book_appearances": "OOTP",
+      "description_en": "Arcturus Black (1901 – 1991) was a pure-blood wizard and a member of the noble House of Black. He was the eldest son of Sirius Black (II) and his wife Hesper Gamp, and the older brother of Lycoris and Regulus. He married Melania Macmillan, who bore him a daughter, Lucretia, and a son, Orion.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Arcturus_Black_(III)",
+      "type": "character",
+      "id": "wiki_char_arcturus_black_iii"
+    },
+    {
       "tweet_text_ja": "【アーカス】ニワトコの杖を求めてエグバートを殺した魔法使い。",
       "name_en": "Arcus",
       "name_ja_from_wiki": null,
@@ -709,6 +722,19 @@
       "wiki_url": "https://harrypotter.fandom.com/wiki/Arkie_Alderton",
       "type": "character",
       "id": "wiki_char_arkie_alderton"
+    },
+    {
+      "tweet_text_ja": "【アーキー・フィルポット】魔法使い。6巻で、グリンゴッツの警備が厳重になった一例として、『潔白検査棒』で検査されたことがビル・ウィーズリーによって語られました。",
+      "name_en": "Arkie Philpott",
+      "name_ja_from_wiki": null,
+      "name_ja": "アーキー・フィルポット",
+      "name_ja_alt": [],
+      "book_appearances": "HBP",
+      "description_en": "Arkie Philpott was a wizard who was on the receiving end of a Probity Probe at Gringotts Wizarding Bank in the summer of 1996, after the goblins who ran the bank tightened security in the wake of Lord Voldemort's return.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Arkie_Philpott",
+      "type": "character",
+      "id": "wiki_char_arkie_philpott"
     },
     {
       "tweet_text_ja": "【アーマンド・ディペット】トム・リドルがホグワーツに在籍していた時代の校長。リドルの秘密の部屋事件を見抜けず、無実のハグリッドを退学処分にしてしまいました。",
@@ -865,6 +891,19 @@
       "wiki_url": "https://harrypotter.fandom.com/wiki/Avery_(Riddle-era)",
       "type": "character",
       "id": "wiki_char_avery_riddle_era"
+    },
+    {
+      "tweet_text_ja": "【バビティ・ラビティ】「吟遊詩人ビードルの物語」に登場する、うさぎに変身するアニメーガスの魔女。",
+      "name_en": "Babbitty Rabbity",
+      "name_ja_from_wiki": null,
+      "name_ja": "バビティ・ラビティ",
+      "name_ja_alt": [],
+      "book_appearances": "DH",
+      "description_en": "#REDIRECT Babbitty Rabbitty",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Babbitty_Rabbity",
+      "type": "character",
+      "id": "wiki_char_babbitty_rabbity"
     },
     {
       "tweet_text_ja": "【ベイン】禁じられた森に住むケンタウルスの一人。フィレンツェが人間に協力したことに強く反対し、群れの伝統を重んじる頑固な性格です。",
@@ -1166,6 +1205,19 @@
       "id": "wiki_char_blaise_zabini"
     },
     {
+      "tweet_text_ja": "【ブレッチリー】魔法省の魔法使い。7巻で、部屋が雨降りになる現象に対しウィーズリー氏が『メテオロジンクス レカント（気象呪い崩し）』を勧めた際、『ブレッチリーには効いた』と名前が挙がりました。",
+      "name_en": "Bletchley",
+      "name_ja_from_wiki": null,
+      "name_ja": "ブレッチリー",
+      "name_ja_alt": [],
+      "book_appearances": "DH",
+      "description_en": "Bletchley was a Ministry of Magic employee whose office was hit by the indoor rain phenomenon that swept through the Ministry headquarters in September of 1997. The rain was successfully stopped in Bletchley's office with the spell meteolojinx recanto.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Bletchley",
+      "type": "character",
+      "id": "wiki_char_bletchley"
+    },
+    {
       "tweet_text_ja": "【血みどろ男爵】スリザリン寮専属のゴースト。銀色の血痕に覆われた姿で、ホグワーツで最も恐れられるゴーストです。唯一ピーブズを制御できる存在で、その過去には灰色のレディとの悲劇が隠されています。",
       "name_en": "Bloody Baron",
       "name_ja_from_wiki": null,
@@ -1348,6 +1400,84 @@
       "wiki_url": "https://harrypotter.fandom.com/wiki/Bungy",
       "type": "character",
       "id": "wiki_char_bungy"
+    },
+    {
+      "tweet_text_ja": "【カドマス・ペベレル】ペベレル三兄弟の次男で、復活の石の最初の所有者。亡くなった恋人を蘇らせましたが、悲しみに耐えられず自ら命を絶ちました。",
+      "name_en": "Cadmus Peverell",
+      "name_ja_from_wiki": null,
+      "name_ja": "カドマス・ペベレル",
+      "name_ja_alt": [],
+      "book_appearances": "DH",
+      "description_en": "Cadmus Peverell (fl. 1214) was a pure-blood wizard, the middle of the Peverell brothers. Cadmus, like his brothers, was skilled in the magical arts, but personally was described as being an \"arrogant man\".",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Cadmus_Peverell",
+      "type": "character",
+      "id": "wiki_char_cadmus_peverell"
+    },
+    {
+      "tweet_text_ja": "【カドガン卿】ホグワーツの肖像画に描かれた騎士。向こう見ずで勇敢な性格で、太った婦人の代わりにグリフィンドール塔の番人を務めたことがあります。",
+      "name_en": "Cadogan",
+      "name_ja_from_wiki": "カドガン",
+      "name_ja": "カドガン卿",
+      "name_ja_alt": [],
+      "book_appearances": "POA, GOF, OOTP, DH",
+      "description_en": "Sir Cadogan was a wizard and sworn Knight of the Round Table, albeit not a very well known one, being only included in wizarding versions of the tales of King Arthur. He was most famous for his defeat of the Wyvern of Wye at great personal risk.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Cadogan",
+      "type": "character",
+      "id": "wiki_char_cadogan"
+    },
+    {
+      "tweet_text_ja": "【キャッドワラダー】ハッフルパフ寮のクィディッチチームでチェイサーを務めた生徒。",
+      "name_en": "Cadwallader",
+      "name_ja_from_wiki": null,
+      "name_ja": "キャッドワラダー",
+      "name_ja_alt": [],
+      "book_appearances": "HBP",
+      "description_en": "Cadwallader was a wizard who was Sorted into Hufflepuff house at Hogwarts School of Witchcraft and Wizardry. He played the position of Chaser for his house Quidditch team.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Cadwallader",
+      "type": "character",
+      "id": "wiki_char_cadwallader"
+    },
+    {
+      "tweet_text_ja": "【カラクタカス・バーク】夜の闇横丁のボージン・アンド・バークスの設立に関わった魔法使い。メローピー・ゴーントからスリザリンのロケットを安く買い叩きました。",
+      "name_en": "Caractacus Burke",
+      "name_ja_from_wiki": "カラクタス・バーク",
+      "name_ja": "カラクタカス・バーク",
+      "name_ja_alt": [],
+      "book_appearances": "COS, DH",
+      "description_en": "Caractacus Burke (fl. 1863) was a Dark wizard, who was one of the original founders of Borgin and Burkes. After Tom Riddle had graduated from Hogwarts, Burke hired him to research and acquire items for him.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Caractacus_Burke",
+      "type": "character",
+      "id": "wiki_char_caractacus_burke"
+    },
+    {
+      "tweet_text_ja": "【キャラドック・ディアボーン】初代不死鳥の騎士団のメンバー。第一次魔法戦争中に行方不明となり、死亡したと推定されています。",
+      "name_en": "Caradoc Dearborn",
+      "name_ja_from_wiki": null,
+      "name_ja": "キャラドック・ディアボーン",
+      "name_ja_alt": [],
+      "book_appearances": "OOTP, DH",
+      "description_en": "Caradoc Dearborn was a British wizard and member of the original Order of the Phoenix. He fought in the First Wizarding War and was presumably murdered by Death Eaters or Lord Voldemort himself before the end of the war. His body was never found.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Caradoc_Dearborn",
+      "type": "character",
+      "id": "wiki_char_caradoc_dearborn"
+    },
+    {
+      "tweet_text_ja": "【カッサンドラ・トレローニー】シビル・トレローニーの曾々祖母で有名な予見者。真の予見能力を持っていたとされています。",
+      "name_en": "Cassandra Trelawney",
+      "name_ja_from_wiki": null,
+      "name_ja": "カッサンドラ・トレローニー",
+      "name_ja_alt": [],
+      "book_appearances": "OOTP, HBP",
+      "description_en": "Cassandra Trelawney was a famous, celebrated witch and Seer. She was the great-great-grandmother to Sybill Trelawney, the Professor of Divination at Hogwarts School of Witchcraft and Wizardry. She possessed the Inner Eye, which was passed on into generations later.",
+      "importance": "minor",
+      "wiki_url": "https://harrypotter.fandom.com/wiki/Cassandra_Trelawney",
+      "type": "character",
+      "id": "wiki_char_cassandra_trelawney"
     },
     {
       "tweet_text_ja": "【チャーリー・ウィーズリー】ウィーズリー家の次男。ホグワーツではクィディッチのシーカーとして活躍し、プロになれる実力でしたが、ルーマニアでドラゴンの研究をする道を選びました。",
