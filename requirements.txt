@@ -7,6 +7,9 @@ tweepy>=4.14.0
 # Data handling
 python-dotenv>=1.0.0
 
+# hp-glossary の yaml 参照（glossary_reconcile.py）
+PyYAML>=6.0
+
 # Testing dependencies
 pytest>=7.4.0
 pytest-cov>=4.1.0
