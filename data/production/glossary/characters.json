@@ -3,7 +3,7 @@
     "source": "Synced from drafts/glossary/characters.json",
     "category": "characters",
     "type": "glossary",
-    "synced_at": "2026-07-05T21:26:07.965996",
+    "synced_at": "2026-08-30T07:27:30.072285",
     "total_count": 160,
     "note": "Translation complete entries only"
   },
@@ -13,7 +13,9 @@
       "name_en": "Albus Dumbledore",
       "name_ja_from_wiki": "アルバス・ダンブルドア",
       "name_ja": "アルバス・ダンブルドア",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "アルバス・パーシバル・ウルフリック・ブライアン・ダンブルドア"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP",
       "description_en": "Professor Albus Percival Wulfric Brian Dumbledore, , Grand Sorc., D. Wiz., X.J. (sorc.), S.",
       "importance": "main",
@@ -39,7 +41,15 @@
       "name_en": "Harry Potter",
       "name_ja_from_wiki": "ハリー・ポッター",
       "name_ja": "ハリー・ポッター",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ハリー・ジェームズ・ポッター",
+        "生き残った男の子",
+        "選ばれし者",
+        "問題分子ナンバーワン",
+        "バーニー・ウィーズリー",
+        "ポッティ",
+        "ポッティー"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Auror Harry James Potter (b. 31 July 1980) This powerful charm would protect him until he either came of age, or no longer called his aunt's house home. Due to Petunia's resentment of her sister and her magical abilities, Harry grew up abused and neglected.",
       "importance": "main",
@@ -52,7 +62,9 @@
       "name_en": "Hermione Granger",
       "name_ja_from_wiki": "ハーマイオニー・グレンジャー",
       "name_ja": "ハーマイオニー・グレンジャー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ハーマイオニー・ジーン・グレンジャー"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Minister Hermione Jean Granger (b. 19 September 1979) was an English Muggle-born witch born to Mr and Mrs Granger. At the age of eleven, she learned about her magical nature and was accepted into Hogwarts School of Witchcraft and Wizardry.",
       "importance": "main",
@@ -104,7 +116,11 @@
       "name_en": "Remus Lupin",
       "name_ja_from_wiki": "リーマス・ルーピン",
       "name_ja": "リーマス・ルーピン",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "リーマス・ジョン・ルーピン",
+        "ムーニー",
+        "ロムルス"
+      ],
       "book_appearances": "PS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Professor Remus John Lupin, , (10 March 1960 – 2 May 1998), also known as Moony, was a half-blood wizard and the only son of Lyall and Hope Lupin . He was attacked by werewolf Fenrir Greyback when he was a child, a result of Greyback's revenge against Lyall, leaving Remus afflicted with lycanthropy for life. He attended Hogwarts School of Witchcraft and Wizardry from 1971 to 1978 and was Sorted into Gryffindor House.",
       "importance": "main",
@@ -130,7 +146,13 @@
       "name_en": "Severus Snape",
       "name_ja_from_wiki": "セブルス・スネイプ",
       "name_ja": "セブルス・スネイプ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "半純血のプリンス",
+        "スニベルス",
+        "なきみそ",
+        "スニベリー",
+        "セブ"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Professor Severus Snape (9 January 1960 Snape joined the Death Eaters along with a group of his fellow Slytherins. Severus was made a member of the Slug Club presumably because of his talent in Potion-making. Horace Slughorn even kept a picture of him as a student, clutching his copy of Advanced Potion-Making.",
       "importance": "main",
@@ -143,7 +165,10 @@
       "name_en": "Sirius Black",
       "name_ja_from_wiki": "シリウス・ブラック",
       "name_ja": "シリウス・ブラック",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "パッドフット",
+        "スナッフルズ"
+      ],
       "book_appearances": "PS, POA, GOF, OOTP, HBP",
       "description_en": "Sirius Black III (3 November 1959 – 18 June 1996), also known as Padfoot or Snuffles (in his Animagus form), was an English pure-blood wizard, the eldest son of Orion and Walburga Black, the older brother of Regulus Black, and godfather of Harry Potter. Although he was the heir of the House of Black, Sirius disagreed with his family's belief in blood purity and defied tradition when he was Sorted into Gryffindor House instead of Slytherin at Hogwarts School of Witchcraft and Wizardry, which he attended from 1971 to 1978. As the rest of his family had been in Slytherin, he was the odd one out.",
       "importance": "main",
@@ -208,7 +233,9 @@
       "name_en": "Adalbert Waffling",
       "name_ja_from_wiki": null,
       "name_ja": "アドルバート・ワフリング",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "アダルバート・ワッフリング"
+      ],
       "book_appearances": "PS, POA, DH",
       "description_en": "Adalbert Waffling (d. 1981) and wrote Magical Theory, a most popular textbook still being used today by the young witches and wizards at Hogwarts School of Witchcraft and Wizardry.",
       "importance": "minor",
@@ -221,7 +248,9 @@
       "name_en": "Adrian Pucey",
       "name_ja_from_wiki": null,
       "name_ja": "エイドリアン・ピュシー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "エイドリアン・ピューシー"
+      ],
       "book_appearances": "PS, COS, POA, OOTP",
       "description_en": "Adrian Pucey (born c. 1977–1979) was a wizard who likely began attending Hogwarts School of Witchcraft and Wizardry in 1989 or 1990. He was a member of Slytherin house, and was a Chaser on the Slytherin Quidditch team.",
       "importance": "minor",
@@ -273,7 +302,9 @@
       "name_en": "Alastor Moody",
       "name_ja_from_wiki": null,
       "name_ja": "アラスター・ムーディ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "マッド‐アイ"
+      ],
       "book_appearances": "GOF, OOTP, HBP, DH",
       "description_en": "Auror Alastor \"Mad-Eye\" Moody (died 27 July 1997) As an Auror, he played a role in the imprisonment of many of the inhabitants of Azkaban. According to Charlie Weasley \"half the cells in Azkaban are full because of him.\" This activity led to his gaining many enemies and resulted in his becoming overly-cautious and paranoid about his security later in life. Following his rescue from Barty Crouch Jnr, Moody joined the second Order of the Phoenix and fought in a number of the Second Wizarding War's battles, including the Battle of the Department of Mysteries in 1996 and the Battle of the Seven Potters in 1997, dying during the latter.",
       "importance": "minor",
@@ -311,8 +342,10 @@
       "tweet_text_ja": "【アルバス・セブルス・ポッター】ハリーとジニーの次男。2人の偉大な校長にちなんで名付けられました。",
       "name_en": "Albus Potter",
       "name_ja_from_wiki": null,
-      "name_ja": "アルバス・セブルス・ポッター",
-      "name_ja_alt": [],
+      "name_ja": "アルバス・ポッター",
+      "name_ja_alt": [
+        "アルバス・セブルス・ポッター"
+      ],
       "book_appearances": "DH",
       "description_en": "Albus Severus Potter (b. c. 2006) was an English half-blood wizard, the second and middle son of Harry and Ginevra Potter and the godson of Neville Longbottom.",
       "importance": "minor",
@@ -442,7 +475,9 @@
       "name_en": "Amelia Bones",
       "name_ja_from_wiki": null,
       "name_ja": "アメリア・ボーンズ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "アメリア・スーザン・ボーンズ"
+      ],
       "book_appearances": "OOTP, HBP",
       "description_en": "Amelia Susan Bones (d. June/July 1996) Born to Mr and Mrs Bones, she likely attended Hogwarts School of Witchcraft and Wizardry before joining the Ministry of Magic. Madam Bones, having a seat on the Wizengamot, presided over the disciplinary hearing of Harry Potter.",
       "importance": "minor",
@@ -507,7 +542,10 @@
       "name_en": "Andromeda Tonks",
       "name_ja_from_wiki": "アンドロメダ・トンクス",
       "name_ja": "アンドロメダ・トンクス",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "アンドロメダ・ブラック",
+        "ドロメダ"
+      ],
       "book_appearances": "OOTP, DH",
       "description_en": "Andromeda \"Dromeda\" Tonks (née Black) (b. between 1951 and 1955) was an English pure-blood witch and the middle daughter of Cygnus and Druella Black , as well as the middle sister of Bellatrix and Narcissa. She attended Hogwarts School of Witchcraft and Wizardry in the 1960s and was sorted into Slytherin House.",
       "importance": "minor",
@@ -611,7 +649,9 @@
       "name_en": "Arabella Figg",
       "name_ja_from_wiki": null,
       "name_ja": "アラベラ・フィッグ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "アラベラ・ドーリーン・フィッグ"
+      ],
       "book_appearances": "PS, GOF, OOTP, HBP",
       "description_en": "Mrs Arabella Doreen Figg was a Squib, a dealer of cross-bred cats and kneazles, She lived near Harry Potter and the Dursley family, and used to babysit Harry in the 1980s and the early 1990s, mainly to keep an eye on him for Albus Dumbledore. Mrs Figg supported the Order to the best of her abilities, but probably did not fight at the Battle of Hogwarts. She most likely survived the war and continued cross-breeding and trading part-kneazle cats.",
       "importance": "minor",
@@ -767,7 +807,9 @@
       "name_en": "Arnold Peasegood",
       "name_ja_from_wiki": null,
       "name_ja": "アーノルド・ピースグッド",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "アーニー"
+      ],
       "book_appearances": "GOF",
       "description_en": "Arnold \"Arnie\" Peasegood was a wizard who worked at the British Ministry of Magic. By 1994, he worked in the capacity of Obliviator for the Accidental Magic Reversal Squad and also as a Hit Wizard.",
       "importance": "minor",
@@ -1066,7 +1108,9 @@
       "name_en": "Bellatrix Lestrange",
       "name_ja_from_wiki": "ベラトリックス・レストレンジ",
       "name_ja": "ベラトリックス・レストレンジ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ベラトリックス・ブラック"
+      ],
       "book_appearances": "OOTP, HBP, DH",
       "description_en": "Bellatrix \"Bella\" Lestrange (née Black) (1951 – 2 May 1998) was a British pure-blood Dark witch and a member of the noble House of Black. She was the eldest daughter of Cygnus and Druella Black, the elder sister of Andromeda Tonks and Narcissa Malfoy, and the older cousin of Sirius and Regulus Black. Bellatrix started her education at Hogwarts School of Witchcraft and Wizardry in the early sixties (either 1962 or 1963), and was Sorted into Slytherin.",
       "importance": "minor",
@@ -1380,7 +1424,9 @@
       "name_en": "Buckbeak",
       "name_ja_from_wiki": null,
       "name_ja": "バックビーク",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ウィザウィングズ"
+      ],
       "book_appearances": "POA, GOF, OOTP, HBP, DH",
       "description_en": "Buckbeak, He was later unfairly sentenced to death, when he attacked Draco Malfoy after being taunted and provoked. Though the attack was Draco’s fault for not listening to Hagrid, Buckbeak's death sentence was delivered from the Committee for the Disposal of Dangerous Creatures. Many of the members of this committee had been threatened by Draco's father, Lucius Malfoy, into voting for that verdict.",
       "importance": "minor",
@@ -1510,7 +1556,9 @@
       "name_en": "Cornelius Fudge",
       "name_ja_from_wiki": "コーネリウス・ファッジ",
       "name_ja": "コーネリウス・ファッジ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "コーネリウス・オズワルド・ファッジ"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Minister Cornelius Oswald Fudge, , was a British wizard who served as the thirty-second Minister for Magic of the British Ministry of Magic, in office from 1990 to 1996. Although reliant on the advice of Albus Dumbledore at first, by the height of his power, he had complete control of the Ministry of Magic, as well as extensive influence over the publishing of the Daily Prophet. Fudge began his career in the Ministry as Junior Minister in the Department of Magical Accidents and Catastrophes.",
       "importance": "minor",
@@ -1562,7 +1610,14 @@
       "name_en": "Dudley Dursley",
       "name_ja_from_wiki": "ダドリー・ダーズリー",
       "name_ja": "ダドリー・ダーズリー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ダッダーちゃん",
+        "ダドリー坊や",
+        "ダドリー坊や",
+        "かわい子ちゃん",
+        "ビッグ D",
+        "ダドちゃん"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Dudley Dursley (b. 23 June 1980) was the Muggle son and only child of Vernon and Petunia Dursley and the cousin of Harry Potter. He was obese and insolent as a result of his parents spoiling him throughout his childhood, although he became muscular in his teens.",
       "importance": "minor",
@@ -1640,7 +1695,10 @@
       "name_en": "Fred Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "フレッド・ウィーズリー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "レイピア",
+        "ローデント"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Fred Weasley (1 April 1978–2 May 1998) was an English pure-blood wizard and the fourth son and the middle child, the most daring and dominant among the twins of Arthur Weasley and Molly Weasley , younger brother to Bill, Charlie and Percy, older twin brother and best friend to George Weasley, and older brother of Ron and Ginny Potter . Fred's first few years were marked by the height of the First Wizarding War and when Lord Voldemort fell for the first time. He attended Hogwarts School of Witchcraft and Wizardry from 1989 to 1996 and was sorted into Gryffindor House.",
       "importance": "minor",
@@ -1653,7 +1711,9 @@
       "name_en": "George Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "ジョージ・ウィーズリー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "耳無し"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "George Weasley (b. 1 April 1978) was an English pure-blood wizard, the fifth son and the less dominant among the twins of Arthur Weasley and Molly Weasley , younger brother of Bill, Charlie and Percy, younger twin brother and best friend of the late Fred Weasley, and older brother to Ron and Ginny. George's first few years were marked by the height of the First Wizarding War and Lord Voldemort's first fall.",
       "importance": "minor",
@@ -1766,11 +1826,13 @@
       "id": "wiki_char_hogwarts_giant_squid"
     },
     {
-      "tweet_text_ja": "【イルマ・ピンス】ホグワーツ図書館の司書。蔵書を我が子のように大切にし、本を汚したり傷つけたりする者には容赦しません。生徒たちからは近寄りがたい存在として恐れられています。",
+      "tweet_text_ja": "【イルマ・ピンス】ホグワーツ図書室の司書。蔵書を我が子のように大切にし、本を汚したり傷つけたりする者には容赦しません。生徒たちからは近寄りがたい存在として恐れられています。",
       "name_en": "Irma Pince",
       "name_ja_from_wiki": "イルマ・ピンス",
       "name_ja": "イルマ・ピンス",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "マダム・ピンス"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP",
       "description_en": "Madam Irma Pince (fl. 1971–2010s) was a witch and librarian at the library of Hogwarts School of Witchcraft and Wizardry. She was highly possessive and protective of the school's books and was deemed highly unpleasant by most of the student body.",
       "importance": "minor",
@@ -1809,7 +1871,9 @@
       "name_en": "Lee Jordan",
       "name_ja_from_wiki": "リー・ジョーダン",
       "name_ja": "リー・ジョーダン",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "リバー"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Lee Jordan (b. 1977/1978) was a British wizard, son of Mr and Mrs Jordan, and a Gryffindor student at Hogwarts School of Witchcraft and Wizardry from 1989 to 1996 (a couple of years before Harry). During his years at Hogwarts, he became best friends with Fred and George Weasley and liked doing pranks with them.",
       "importance": "minor",
@@ -1848,7 +1912,10 @@
       "name_en": "Molly Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "モリー・ウィーズリー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "モリー・プルウェット",
+        "かわいいモリウォブル"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Molly Weasley (née Prewett) (b. 30 October Hugo Granger-Weasley, James Sirius Potter, Albus Severus Potter, and Lily Luna Potter.",
       "importance": "minor",
@@ -1939,7 +2006,9 @@
       "name_en": "Percy Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "パーシー・ウィーズリー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "パーシー・イグネイシャス・ウィーズリー"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Percy Ignatius \"Perce\" Weasley (b. 22 August 1976) was an English pure-blood wizard, the third child of Arthur and Molly Weasley . He was the younger brother of Bill and Charlie, the older brother of the late Fred, George, Ron and Ginny Weasley.",
       "importance": "minor",
@@ -1952,7 +2021,11 @@
       "name_en": "Peter Pettigrew",
       "name_ja_from_wiki": "ピーター・ペティグリュー",
       "name_ja": "ピーター・ペティグリュー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ワームテール",
+        "スキャバーズ",
+        "ワーミー"
+      ],
       "book_appearances": "PS, COS, POA, GOF, HBP, DH",
       "description_en": "Peter Pettigrew, , (c. 1960 – March 1998), usually referred to as Wormtail or, in his Animagus form, Scabbers was a wizard who began attending Hogwarts School of Witchcraft and Wizardry in 1971 and was sorted into Gryffindor House after the Sorting Hat pondered over which house he belonged in for over five minutes, making him a true Hatstall. During his years at Hogwarts, he became one of the Marauders; he was best friends with Sirius Black, James Potter, and Remus Lupin, and together they created the Marauder's Map.",
       "importance": "minor",
@@ -1965,7 +2038,10 @@
       "name_en": "Petunia Dursley",
       "name_ja_from_wiki": "ペチュニア・ダーズリー",
       "name_ja": "ペチュニア・ダーズリー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ペチュニア・エバンズ",
+        "チュニー"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Petunia Dursley (née Evans) (pre-1960–pre-2020) was an English Muggle woman, the eldest daughter of Mr and Mrs Evans, and the older sister of the Muggle-born witch Lily Potter. During her childhood, she became resentful of her sister for being a witch, broke off contact with her and refused to have any contact with the wizarding world. She married a Muggle, Vernon Dursley, and they had a son, Dudley.",
       "importance": "minor",
@@ -1991,7 +2067,9 @@
       "name_en": "Poppy Pomfrey",
       "name_ja_from_wiki": "ポピー・ポンフリー",
       "name_ja": "ポピー・ポンフリー",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "マダム・ポンフリー"
+      ],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "Madam Poppy Pomfrey was a British or Irish witch and the matron at Hogwarts School of Witchcraft and Wizardry.",
       "importance": "minor",
@@ -2042,7 +2120,7 @@
       "tweet_text_ja": "【組み分け帽子】ホグワーツ創設者ゴドリック・グリフィンドールの帽子。新入生の頭に被せると、その人物の資質を見抜き、グリフィンドール、ハッフルパフ、レイブンクロー、スリザリンのいずれかに組み分けます。",
       "name_en": "Sorting Hat",
       "name_ja_from_wiki": "組分け帽子",
-      "name_ja": "組み分け帽子",
+      "name_ja": "組分け帽子",
       "name_ja_alt": [],
       "book_appearances": "PS, COS, POA, GOF, OOTP, HBP, DH",
       "description_en": "The Sorting Hat was a sentient magical hat at Hogwarts that was used to determine which of the four school Houses was the best fit for each new student. These four Houses were Gryffindor, the house of bravery, Hufflepuff, the house of hard work, Ravenclaw, the house of intelligence, and Slytherin, the house of ambition. The Sorting Hat originally belonged to Godric Gryffindor, one of the four founders of Hogwarts.",

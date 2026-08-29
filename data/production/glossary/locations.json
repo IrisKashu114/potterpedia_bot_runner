@@ -3,7 +3,7 @@
     "source": "Synced from drafts/glossary/locations.json",
     "category": "locations",
     "type": "glossary",
-    "synced_at": "2026-07-05T18:29:41.265990",
+    "synced_at": "2026-08-30T07:27:29.892991",
     "total_count": 27,
     "note": "Translation complete entries only"
   },
@@ -152,8 +152,10 @@
       "id": "manual_privet_drive",
       "type": "location",
       "name_en": "Privet Drive",
-      "name_ja": "プリベット通り4番地",
-      "name_ja_alt": [],
+      "name_ja": "プリベット通り",
+      "name_ja_alt": [
+        "プリベット通り4番地"
+      ],
       "category": "Residence",
       "location_type": "House",
       "description_en": "The Dursley family home where Harry grew up",
@@ -294,7 +296,7 @@
       "id": "manual_platform_nine_and_three-quarters",
       "type": "location",
       "name_en": "Platform Nine and Three-Quarters",
-      "name_ja": "9と4分の3番線",
+      "name_ja": "九と四分の三番線",
       "name_ja_alt": [],
       "category": "Station",
       "location_type": "Train Platform",
@@ -341,8 +343,10 @@
       "id": "manual_hogsmeade",
       "type": "location",
       "name_en": "Hogsmeade",
-      "name_ja": "ホグズミード村",
-      "name_ja_alt": [],
+      "name_ja": "ホグズミード",
+      "name_ja_alt": [
+        "ホグズミード村"
+      ],
       "category": "Village",
       "location_type": "Village",
       "description_en": "The only all-wizarding village in Britain",
@@ -387,12 +391,12 @@
       "id": "manual_hogwarts_library",
       "type": "location",
       "name_en": "Hogwarts Library",
-      "name_ja": "ホグワーツ図書館",
+      "name_ja": "ホグワーツ図書室",
       "name_ja_alt": [],
       "category": "Library",
       "location_type": "Library",
       "description_en": "A vast library containing thousands of magical books",
-      "description_ja": "数千冊の魔法の本を所蔵する広大な図書館",
+      "description_ja": "数千冊の魔法の本を所蔵する広大な図書室",
       "geographical_location": "Hogwarts Castle",
       "residents": "Madam Pince (librarian)",
       "features": "Thousands of books on magic; Restricted Section with dangerous books requiring permission",
@@ -404,7 +408,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1-7: Large library with Restricted Section",
-      "tweet_text_ja": "【ホグワーツ図書館】数千冊の魔法の本を所蔵する広大な図書館。マダム・ピンスが司書を務めています。禁書の棚には危険な本があり、教師の許可証が必要です。ハーマイオニーのお気に入りの場所で、三人組の重要な調査の場となりました。"
+      "tweet_text_ja": "【ホグワーツ図書室】数千冊の魔法の本を所蔵する広大な図書室。マダム・ピンスが司書を務めています。禁書の棚には危険な本があり、教師の許可証が必要です。ハーマイオニーのお気に入りの場所で、三人組の重要な調査の場となりました。"
     },
     {
       "id": "manual_dumbledores_office",
@@ -455,7 +459,7 @@
     {
       "id": "manual_the_three_broomsticks",
       "type": "location",
-      "name_en": "The Three Broomsticks",
+      "name_en": "Three Broomsticks",
       "name_ja": "三本の箒",
       "name_ja_alt": [],
       "category": "Pub",
