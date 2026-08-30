@@ -460,9 +460,17 @@ def post_glossary(dry_run: bool = False) -> bool:
     Returns:
         投稿成功時はTrue
     """
+    # 設定が存在するカテゴリのみを候補にする
+    # （CATEGORY_CONFIG_LOCAL は GLOSSARY_CATEGORIES から組み立てるので通常は全件一致するが、
+    #  テストなどで一部だけ差し替えられた場合に KeyError で落ちないようにする）
+    candidates = [cat for cat in GLOSSARY_CATEGORIES if cat in CATEGORY_CONFIG_LOCAL]
+    if not candidates:
+        print("投稿可能なカテゴリの設定がありません")
+        return False
+
     # エントリ数に基づく重み付きランダムでカテゴリを選択
     weights = []
-    for cat in GLOSSARY_CATEGORIES:
+    for cat in candidates:
         config = CATEGORY_CONFIG_LOCAL[cat]
         try:
             data = load_data_file(config['file'])
@@ -473,11 +481,11 @@ def post_glossary(dry_run: bool = False) -> bool:
     # 全カテゴリのエントリ数が0の場合はフォールバック
     if sum(weights) == 0:
         print("警告: すべてのカテゴリのエントリ数が0です。均等選択にフォールバックします。")
-        category = random.choice(GLOSSARY_CATEGORIES)
+        category = random.choice(candidates)
     else:
-        category = random.choices(GLOSSARY_CATEGORIES, weights=weights, k=1)[0]
+        category = random.choices(candidates, weights=weights, k=1)[0]
         total = sum(weights)
-        cat_weight = weights[GLOSSARY_CATEGORIES.index(category)]
+        cat_weight = weights[candidates.index(category)]
         print(f"重み付き選択: {category} ({cat_weight}/{total}件, {cat_weight/total*100:.1f}%)")
 
     if category == 'spell':
