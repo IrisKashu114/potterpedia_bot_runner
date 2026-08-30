@@ -3,8 +3,8 @@
     "source": "Synced from drafts/calendar/deathdays.json",
     "category": "deathdays",
     "type": "calendar",
-    "synced_at": "2026-07-05T18:29:41.275304",
-    "total_count": 17,
+    "synced_at": "2026-08-30T09:25:21.958165",
+    "total_count": 13,
     "note": "Translation complete entries only"
   },
   "data": [
@@ -23,47 +23,18 @@
       "tweet_text_ja": "今日はジェームズ・ポッターの命日です。家族を守るため命を捧げた勇敢な父。彼の愛は永遠に。"
     },
     {
-      "id": "e67890e2-6a5a-420a-8e2b-7db2b035716f",
-      "slug": "quirinus-quirrell",
-      "name_en": "Quirinus Quirrell",
-      "name_ja": "クィリナス・クィレル",
-      "deathday": "1992-06-04",
-      "deathday_original": "4 June 1992, Underground Chambers, Hogwarts Castle, Highlands, Scotland, Great Britain",
-      "house": "Ravenclaw",
+      "id": "wiki_char_lily_potter_(i)",
+      "slug": "lily-potter-(i)",
+      "name_en": "Lily Potter",
+      "name_ja": "リリー・ポッター",
+      "deathday": "1981-10-31",
+      "deathday_original": "31 October 1981 (aged 21), Godric's Hollow, West Country, England, Great Britain",
+      "house": "Gryffindor",
       "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/d/d2/Quirinus_Quirrell_PS_promo.jpg",
-      "wiki": "https://harrypotter.fandom.com/wiki/Quirinus_Quirrell",
-      "tweet_text_ja": "今日はクィリナス・クィレルの命日です。闇の魔術に魅入られた元ホグワーツ教授。",
-      "name_ja_from_wiki": "クィリナス・クィレル"
-    },
-    {
-      "id": "695688ef-43e5-4a06-91f9-9cf798b80eee",
-      "slug": "frank-bryce",
-      "name_en": "Frank Bryce",
-      "name_ja": "フランク・ブライス",
-      "deathday": "1994-08-16",
-      "deathday_original": "16 August 1994 (aged 76), Riddle House, Little Hangleton, England, Great Britain",
-      "house": null,
-      "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/d/d4/Frankbryce2.jpg",
-      "wiki": "https://harrypotter.fandom.com/wiki/Frank_Bryce",
-      "tweet_text_ja": "今日はフランク・ブライスの命日です。リドル家の庭師、無実の罪で疑われ続けた彼に。"
-    },
-    {
-      "id": "88df8d7e-6d9b-451e-be60-0a6e8a37791f",
-      "slug": "bartemius-crouch-senior",
-      "name_en": "Bartemius Crouch Senior",
-      "name_ja": "バーテミウス・クラウチ・シニア",
-      "deathday": "1995-05-27",
-      "deathday_original": "27 May 1995, Forbidden Forest, Hogwarts grounds, Highlands, Scotland, Great Britain",
-      "house": null,
-      "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/3/37/Barty_Crouch_Senior_GOFF_promo.jpg",
-      "wiki": "https://harrypotter.fandom.com/wiki/Bartemius_Crouch_Senior",
-      "tweet_text_ja": "今日はバーテミウス・クラウチ・シニアの命日です。魔法省国際魔法協力部部長、悲劇の最期を遂げた彼に。"
+      "gender": "Female",
+      "image": null,
+      "wiki": "https://harrypotter.fandom.com/wiki/Lily_Potter_(I)",
+      "tweet_text_ja": "今日はリリー・ポッターの命日です。息子の前に立ちはだかり、身を挺して守った母。その愛がハリーを生かしました。"
     },
     {
       "id": "f21418ac-c5f2-4279-a7eb-673f94c1da56",
@@ -78,35 +49,6 @@
       "image": "https://static.wikia.nocookie.net/harrypotter/images/9/90/Cedric_Diggory_Profile.png",
       "wiki": "https://harrypotter.fandom.com/wiki/Cedric_Diggory",
       "tweet_text_ja": "今日はセドリック・ディゴリーの命日です。三大魔法学校対抗試合の真の勇者。彼の死を忘れません。"
-    },
-    {
-      "id": "51bdb221-8b63-4a6b-8746-7b147ffbcd95",
-      "slug": "albus-dumbledore",
-      "name_en": "Albus Percival Wulfric Brian Dumbledore",
-      "name_ja": "アルバス・パーシバル・ウルフリック・ブライアン・ダンブルドア",
-      "deathday": "1997-06-30",
-      "deathday_original": "30 June 1997 (aged 115), Astronomy Tower, Hogwarts Castle, Highlands, Scotland, Great Britain",
-      "house": "Gryffindor",
-      "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/7/75/Albus_Dumbledore_%28HBPF_promo%29.jpg",
-      "wiki": "https://harrypotter.fandom.com/wiki/Albus_Dumbledore",
-      "tweet_text_ja": "今日はアルバス・ダンブルドアの命日です。偉大なる魔法使い、ホグワーツの守護者。彼の知恵と勇気を忘れません。",
-      "name_ja_from_wiki": "アルバス・ダンブルドア"
-    },
-    {
-      "id": "bfab67d9-3f15-4da1-83ee-a599bd2f524b",
-      "slug": "gibbon",
-      "name_en": "Gibbon",
-      "name_ja": "ギボン",
-      "deathday": "1997-06-30",
-      "deathday_original": "30 June 1997, Astronomy Tower, Hogwarts Castle, Highlands, Scotland, Great Britain",
-      "house": null,
-      "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/1/13/Gibbon.jpg",
-      "wiki": "https://harrypotter.fandom.com/wiki/Gibbon",
-      "tweet_text_ja": "今日はギボンの命日です。死喰い人の一人、天文台の塔での戦いで命を落としました。"
     },
     {
       "id": "9c682e4a-0dd4-4abe-a6a4-b2ba6f2f5e2c",
@@ -166,6 +108,20 @@
       "name_ja_from_wiki": "コリン・クリービー"
     },
     {
+      "id": "wiki_char_fred_weasley",
+      "slug": "fred-weasley",
+      "name_en": "Fred Weasley",
+      "name_ja": "フレッド・ウィーズリー",
+      "deathday": "1998-05-02",
+      "deathday_original": "2 May 1998 (aged 20), Hogwarts Castle, Highlands, Scotland, Great Britain",
+      "house": "Gryffindor",
+      "species": "Human",
+      "gender": "Male",
+      "image": null,
+      "wiki": "https://harrypotter.fandom.com/wiki/Fred_Weasley",
+      "tweet_text_ja": "今日はフレッド・ウィーズリーの命日です。ホグワーツの戦いに散った双子の片割れ。最後の笑いの名残を、その顔に刻んだまま。"
+    },
+    {
       "id": "95b627ae-ce70-4ab4-ba10-491fd5fcf4e4",
       "slug": "nagini",
       "name_en": "Nagini",
@@ -193,20 +149,6 @@
       "wiki": "https://harrypotter.fandom.com/wiki/Remus_Lupin",
       "tweet_text_ja": "今日はリーマス・ルーピンの命日です。親愛なるムーニー、最後まで戦い抜いた勇者。彼の優しさを忘れません。",
       "name_ja_from_wiki": "リーマス・ルーピン"
-    },
-    {
-      "id": "ba48a873-cb19-4e84-a46e-4876dccd8983",
-      "slug": "scabior",
-      "name_en": "Scabior",
-      "name_ja": "スカビオール",
-      "deathday": "1998-05-02",
-      "deathday_original": "2 May 1998, Hogwarts Castle, Highlands, Scotland, Great Britain",
-      "house": "Slytherin",
-      "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/9/93/ScabiorDH2.png",
-      "wiki": "https://harrypotter.fandom.com/wiki/Scabior",
-      "tweet_text_ja": "今日はスカビオールの命日です。人さらいのリーダー、ホグワーツの戦いで命を落としました。"
     },
     {
       "id": "c8969c84-0a22-44c1-bc40-067bdb3def0c",

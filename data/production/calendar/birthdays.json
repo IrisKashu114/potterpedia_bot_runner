@@ -3,25 +3,11 @@
     "source": "Synced from drafts/calendar/birthdays.json",
     "category": "birthdays",
     "type": "calendar",
-    "synced_at": "2026-07-05T18:29:41.274483",
-    "total_count": 14,
+    "synced_at": "2026-08-30T09:25:21.876860",
+    "total_count": 13,
     "note": "Translation complete entries only"
   },
   "data": [
-    {
-      "id": "695b5193-10ac-4740-aed6-70799675057f",
-      "slug": "celestina-warbeck",
-      "name_en": "Celestina Warbeck",
-      "name_ja": "セレスティナ・ワーベック",
-      "birthday": "1917-08-18",
-      "birthday_original": "18 August 1917, Wales",
-      "house": "Gryffindor",
-      "species": "Human",
-      "gender": "Female",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/7/73/Celestina_Warbeck_Wizarding_World.png",
-      "wiki": "https://harrypotter.fandom.com/wiki/Celestina_Warbeck",
-      "tweet_text_ja": "今日はセレスティナ・ワーベックの誕生日です。魔法界で最も愛される歌姫、お誕生日おめでとうございます！"
-    },
     {
       "id": "83512b73-0464-4bef-961a-67dd8cbd967c",
       "slug": "tom-riddle",
@@ -81,6 +67,20 @@
       "name_ja_from_wiki": "セブルス・スネイプ"
     },
     {
+      "id": "wiki_char_lily_potter_(i)",
+      "slug": "lily-potter-(i)",
+      "name_en": "Lily Potter",
+      "name_ja": "リリー・ポッター",
+      "birthday": "1960-01-30",
+      "birthday_original": "30 January 1960",
+      "house": "Gryffindor",
+      "species": "Human",
+      "gender": "Female",
+      "image": null,
+      "wiki": "https://harrypotter.fandom.com/wiki/Lily_Potter_(I)",
+      "tweet_text_ja": "今日はリリー・ポッターの誕生日です。ハリーの母。息子の前に立ちはだかったその愛が、古い守りの魔法となって遺されました。"
+    },
+    {
       "id": "d7f7efc2-ffba-48c7-aab5-4f2fbc99bab0",
       "slug": "remus-lupin",
       "name_en": "Remus John Lupin",
@@ -110,20 +110,6 @@
       "tweet_text_ja": "今日はジェームズ・ポッターの誕生日です。ハリーの父、プロングズ。その勇気と愛は息子に受け継がれました。"
     },
     {
-      "id": "9e4d37c5-d9c3-420a-8c7a-c4f642aaf15b",
-      "slug": "gilderoy-lockhart",
-      "name_en": "Gilderoy Lockhart",
-      "name_ja": "ギルデロイ・ロックハート",
-      "birthday": "1964-01-26",
-      "birthday_original": "26 January 1964",
-      "house": "Ravenclaw",
-      "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/7/7b/Gilderoy_Lockhart_promotional_image_COSF.jpg",
-      "wiki": "https://harrypotter.fandom.com/wiki/Gilderoy_Lockhart",
-      "tweet_text_ja": "今日はギルデロイ・ロックハートの誕生日です。魔法界で最も有名な（自称）英雄。お誕生日おめでとうございます！"
-    },
-    {
       "id": "049e5917-e5ac-4716-bea8-f51008b744f1",
       "slug": "george-weasley",
       "name_en": "George Weasley",
@@ -136,6 +122,20 @@
       "image": "https://static.wikia.nocookie.net/harrypotter/images/b/b5/George_Weasley_promo_DHF1.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/George_Weasley",
       "tweet_text_ja": "今日はジョージ・ウィーズリーの誕生日です。双子のいたずら職人、フレッドとともに笑いをもたらした彼に。お誕生日おめでとう！"
+    },
+    {
+      "id": "wiki_char_fred_weasley",
+      "slug": "fred-weasley",
+      "name_en": "Fred Weasley",
+      "name_ja": "フレッド・ウィーズリー",
+      "birthday": "1978-04-01",
+      "birthday_original": "1 April 1978",
+      "house": "Gryffindor",
+      "species": "Human",
+      "gender": "Male",
+      "image": null,
+      "wiki": "https://harrypotter.fandom.com/wiki/Fred_Weasley",
+      "tweet_text_ja": "今日はフレッド・ウィーズリーの誕生日です。ジョージとともにエイプリルフールに生まれた、いたずらの天才。お誕生日おめでとう、フレッド！"
     },
     {
       "id": "4888c004-eeba-4b67-8883-c610e55b89cf",
@@ -164,20 +164,6 @@
       "image": "https://static.wikia.nocookie.net/harrypotter/images/4/44/Ronald_Weasley_DHF1.jpg",
       "wiki": "https://harrypotter.fandom.com/wiki/Ronald_Weasley",
       "tweet_text_ja": "今日はロナルド・ビリウス・ウィーズリーの誕生日です。ハリーの親友、忠実なる騎士。お誕生日おめでとう、ロン！"
-    },
-    {
-      "id": "e64e0a06-5855-447e-bb5c-16694897e665",
-      "slug": "dudley-dursley",
-      "name_en": "Dudley Dursley",
-      "name_ja": "ダドリー・ダーズリー",
-      "birthday": "1980-06-23",
-      "birthday_original": "23 June 1980",
-      "house": null,
-      "species": "Human",
-      "gender": "Male",
-      "image": "https://static.wikia.nocookie.net/harrypotter/images/1/19/Dudley_DH.png",
-      "wiki": "https://harrypotter.fandom.com/wiki/Dudley_Dursley",
-      "tweet_text_ja": "今日はダドリー・ダーズリーの誕生日です。ハリーのいとこ、後に心を開いた彼に。お誕生日おめでとう！"
     },
     {
       "id": "30b98fc3-50b5-4c60-9664-c81cff674ae5",

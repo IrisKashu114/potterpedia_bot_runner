@@ -3,8 +3,8 @@
     "source": "Synced from drafts/calendar/events.json",
     "category": "events",
     "type": "calendar",
-    "synced_at": "2026-07-05T18:29:41.276112",
-    "total_count": 13,
+    "synced_at": "2026-08-30T09:25:22.024917",
+    "total_count": 11,
     "note": "Translation complete entries only"
   },
   "data": [
@@ -111,32 +111,6 @@
       "importance": "major",
       "description_en": "The Third Task of the Triwizard Tournament. Cedric Diggory is killed. Lord Voldemort returns to power.",
       "tweet_text_ja": "1995年6月24日、三大魔法学校対抗試合の第三の課題が行われました。セドリック・ディゴリーが命を落とし、ヴォルデモート卿が完全な肉体を取り戻した、魔法界の歴史を変えた夜。"
-    },
-    {
-      "event_date": "1996-06-18",
-      "event_date_original": "18 June 1996",
-      "event_en": "Battle of the Department of Mysteries",
-      "event_ja": "神秘部の戦い",
-      "book": 5,
-      "book_title_en": "Harry Potter and the Order of the Phoenix",
-      "chapter": 35,
-      "chapter_title_en": "Beyond the Veil",
-      "importance": "major",
-      "description_en": "Battle at the Department of Mysteries. Sirius Black dies.",
-      "tweet_text_ja": "1996年6月18日、魔法省神秘部で戦いが起こりました。シリウス・ブラックが「ベールの彼方」へ消えた日。ハリーにとって忘れられない悲しみの夜。"
-    },
-    {
-      "event_date": "1997-06-30",
-      "event_date_original": "30 June 1997",
-      "event_en": "Battle of the Astronomy Tower",
-      "event_ja": "天文台の塔の戦い",
-      "book": 6,
-      "book_title_en": "Harry Potter and the Half-Blood Prince",
-      "chapter": 27,
-      "chapter_title_en": "The Lightning-Struck Tower",
-      "importance": "major",
-      "description_en": "Battle of the Astronomy Tower. Albus Dumbledore is killed by Severus Snape.",
-      "tweet_text_ja": "1997年6月30日、天文台の塔で戦いが起こりました。アルバス・ダンブルドアがセブルス・スネイプによって命を落とした、魔法界最大の喪失の夜。"
     },
     {
       "event_date": "1997-07-27",

@@ -169,10 +169,16 @@ EXCLUDE_FIELDS_VALIDATION = {
 }
 
 # Fields to exclude when syncing to production
+# キュレーション用のメタデータは production（＝公開リポジトリ potterpedia_bot_runner への
+# 同期対象）に流さない。drafts が SOURCE OF TRUTH なので、記録はそちらに残る。
 EXCLUDE_FIELDS_PRODUCTION = {
     "exclude_reasons",
     "is_valid",
     "ready_for_production",
+    # calendar の正典裏取り監査（2026-08-30）で付与。出典・探索範囲を書いた長い日本語メモで、
+    # 投稿には使わないため drafts 限定にする
+    "source",
+    "source_status",
 }
 
 # Required fields for sync validation (category-specific)
