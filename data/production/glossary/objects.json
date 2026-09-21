@@ -3,8 +3,8 @@
     "source": "Synced from drafts/glossary/objects.json",
     "category": "objects",
     "type": "glossary",
-    "synced_at": "2026-07-05T18:29:41.264732",
-    "total_count": 30,
+    "synced_at": "2026-09-20T14:39:01.091773",
+    "total_count": 29,
     "note": "Translation complete entries only"
   },
   "data": [
@@ -32,7 +32,7 @@
     {
       "id": "manual_cloak_of_invisibility",
       "type": "object",
-      "name_en": "Cloak of Invisibility",
+      "name_en": "Invisibility Cloak",
       "name_ja": "透明マント",
       "name_ja_alt": [
         "隠れ蓑"
@@ -50,7 +50,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: Harry's invisibility cloak, one of the three Deathly Hallows",
-      "tweet_text_ja": "【透明マント】死の秘宝の一つで、着用者を完全に透明にする魔法のマント。時が経っても効力が衰えず、どんな呪文にも耐性があります。ハリーは1年生のクリスマスに父の形見として受け取りました。"
+      "tweet_text_ja": "【透明マント】着た者の姿を隠すマント。デミガイズの毛を織るなどして作られますが、多くは年月とともに効力を失います。ハリーが父から受け継いだ一枚だけは死の秘宝の一つで、衰えることがありません。"
     },
     {
       "id": "manual_elder_wand",
@@ -58,7 +58,8 @@
       "name_en": "Elder Wand",
       "name_ja": "ニワトコの杖",
       "name_ja_alt": [
-        "死の杖"
+        "死の杖",
+        "宿命の杖"
       ],
       "category": "Deathly Hallows",
       "description_en": "The most powerful wand ever created, one of the three Deathly Hallows",
@@ -73,7 +74,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: The most powerful wand, one of the three Deathly Hallows",
-      "tweet_text_ja": "【ニワトコの杖】死の秘宝の一つで、史上最強の杖。正しく使いこなせば決闘で無敵となります。ニワトコの木とセストラルの尾の毛で作られた15インチの杖で、並外れた威力の魔法を放つことができます。",
+      "tweet_text_ja": "【ニワトコの杖】死の秘宝の一つ。「三人兄弟の物語」では、決闘に必ず勝つ杖を望んだ長男に「死」が与えたとされます。所有権は前の持ち主を打ち負かした者へ移るため、「死の杖」「宿命の杖」の名で歴史に現れます。",
       "name_ja_from_wiki": "ニワトコの杖"
     },
     {
@@ -95,14 +96,14 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: Stone that can bring back the dead (as shades), one of the three Deathly Hallows",
-      "tweet_text_ja": "【蘇りの石】死の秘宝の一つで、死者の影を呼び戻す石。完全な復活ではなく、死者は悲しげで現世に属していません。ダンブルドアがスニッチの中に隠し、ハリーは禁じられた森に向かう前に両親やシリウスらを呼び出しました。",
+      "tweet_text_ja": "【蘇りの石】死の秘宝の一つ。手の中で三度回すと、亡き人の姿が現れます。「三人兄弟の物語」では、「死」が川岸から拾って次男に与えた石で、呼び戻された許嫁は沈黙して冷たかったと語られます。",
       "name_ja_from_wiki": "蘇りの石"
     },
     {
       "id": "manual_helga_hufflepuffs_cup",
       "type": "object",
       "name_en": "Helga Hufflepuff's Cup",
-      "name_ja": "ヘルガ・ハッフルパフのカップ",
+      "name_ja": "ハッフルパフのカップ",
       "name_ja_alt": [],
       "category": "Horcrux",
       "description_en": "A small golden cup with two finely-wrought handles and a badger engraved on the side",
@@ -117,14 +118,16 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: Stolen from Gringotts, destroyed by Hermione with a Basilisk fang",
-      "tweet_text_ja": "【ヘルガ・ハッフルパフのカップ】ホグワーツ創設者の一人、ハッフルパフの遺品。ヴォルデモートが分霊箱にしました。ベラトリックス・レストレンジのグリンゴッツの金庫に隠されていましたが、ハーマイオニーがバジリスクの牙で破壊しました。"
+      "tweet_text_ja": "【ハッフルパフのカップ】取っ手が二つある小さな金のカップで、穴熊の紋章が彫られています。ハッフルパフの遠い子孫ヘプジバ・スミスの家に代々伝わっていたものを、店員時代のトム・リドルが盗み出しました。"
     },
     {
       "id": "manual_marvolo_gaunts_ring",
       "type": "object",
       "name_en": "Marvolo Gaunt's Ring",
       "name_ja": "マールヴォロ・ゴーントの指輪",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ゴーントの指輪"
+      ],
       "category": "Horcrux",
       "description_en": "A gold ring with the Peverell coat of arms engraved on the black stone",
       "description_ja": "ペベレル家の紋章が刻まれた黒い石がついた金の指輪",
@@ -143,9 +146,12 @@
     {
       "id": "manual_rowena_ravenclaws_diadem",
       "type": "object",
-      "name_en": "Rowena Ravenclaw's Diadem",
-      "name_ja": "ロウェナ・レイブンクローの髪飾り",
-      "name_ja_alt": [],
+      "name_en": "Ravenclaw's Diadem",
+      "name_ja": "レイブンクローの髪飾り",
+      "name_ja_alt": [
+        "ロウェナ・レイブンクローの髪飾り",
+        "黒ずんだティアラ"
+      ],
       "category": "Horcrux",
       "description_en": "A beautiful diadem with the inscription 'Wit beyond measure is man's greatest treasure'",
       "description_ja": "「計り知れぬ英知こそ、われらが最大の宝なり」という銘文が刻まれた美しい髪飾り",
@@ -159,14 +165,17 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: Hidden in Room of Requirement, destroyed by Fiendfyre",
-      "tweet_text_ja": "【ロウェナ・レイブンクローの髪飾り】ホグワーツ創設者の一人、レイブンクローの遺品で、着用者の知恵を高めるとされました。ヴォルデモートが分霊箱にし、必要の部屋に隠しましたが、クラッブが放った悪霊の火で破壊されました。"
+      "tweet_text_ja": "【レイブンクローの髪飾り】身につけると知恵が増すとされた冠。レイブンクロー本人とともに姿を消したと伝えられ、何世代もの生徒が探しても手がかりは見つかりませんでした。銘は「計り知れぬ英知こそ、われらが最大の宝なり」。"
     },
     {
       "id": "manual_salazar_slytherins_locket",
       "type": "object",
-      "name_en": "Salazar Slytherin's Locket",
-      "name_ja": "サラザール・スリザリンのロケット",
-      "name_ja_alt": [],
+      "name_en": "Slytherin's locket",
+      "name_ja": "スリザリンのロケット",
+      "name_ja_alt": [
+        "サラザール・スリザリンのロケット",
+        "誰も開けることができない重いロケット"
+      ],
       "category": "Horcrux",
       "description_en": "A heavy gold locket with an ornate serpentine S in glittering green stones",
       "description_ja": "緑色の宝石で蛇のようなSの文字が施された重い金のロケット",
@@ -180,14 +189,16 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: Retrieved from Umbridge, destroyed by Ron with Gryffindor's sword",
-      "tweet_text_ja": "【サラザール・スリザリンのロケット】スリザリンの遺品でヴォルデモートが分霊箱にしました。レギュラスが洞窟から盗み出しクリーチャーに破壊を命じましたが失敗。マンダンガスからアンブリッジの手に渡り、取り戻したロンが剣で破壊しました。"
+      "tweet_text_ja": "【スリザリンのロケット】ゴーント家に代々伝わった重い金のロケット。装飾的なS字の飾り文字がスリザリンの印です。困窮したメローピー・ゴーントが、出産間際にわずか10ガリオンで手放しました。"
     },
     {
       "id": "manual_tom_riddles_diary",
       "type": "object",
-      "name_en": "Tom Riddle's Diary",
-      "name_ja": "トム・リドルの日記",
-      "name_ja_alt": [],
+      "name_en": "T. M. Riddle's diary",
+      "name_ja": "リドルの日記",
+      "name_ja_alt": [
+        "トム・リドルの日記"
+      ],
       "category": "Horcrux",
       "description_en": "A plain black diary that can possess the reader and show memories",
       "description_ja": "読者を操り、記憶を見せることができる黒い日記帳",
@@ -201,7 +212,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 2: First Horcrux encountered, destroyed by Harry with a Basilisk fang",
-      "tweet_text_ja": "【トム・リドルの日記】ヴォルデモートが最初に作った分霊箱。書き込んだ者を操り、16歳のリドルの記憶を蘇らせます。ジニーを操って秘密の部屋を開きましたが、ハリーがバジリスクの牙で破壊しました。"
+      "tweet_text_ja": "【リドルの日記】書き込むと返事を書く日記帳。トム・リドルが16歳の自分をその中に保存したもので、読み手を五十年前のホグワーツの記憶へ引き込みます。裏表紙にはロンドンの雑誌店の名が印刷されていました。"
     },
     {
       "id": "manual_sorting_hat",
@@ -222,7 +233,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: Sorts students into Hogwarts houses, can produce Gryffindor's sword",
-      "tweet_text_ja": "【組分け帽子】ホグワーツ四大創設者が魔法をかけた帽子で、新入生の心を読んで最適な寮を選びます。元々はゴドリック・グリフィンドールの帽子で、真のグリフィンドール生のためにグリフィンドールの剣を出すこともできます。",
+      "tweet_text_ja": "【組分け帽子】新入生の頭の中を覗いて寮を決める、意思を持つ帽子。四人の創設者の知性を宿し、開心術に長けています。組分けに五分以上かかる「組分け困難者」は稀で、五十年に一度ほどだそうです。",
       "name_ja_from_wiki": "組分け帽子"
     },
     {
@@ -244,7 +255,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 3-7: Shows everyone's location in Hogwarts in real-time",
-      "tweet_text_ja": "【忍びの地図】ムーニー、ワームテール、パッドフット、プロングズ（ルーピン、ピーター、シリウス、ジェームズ）が作った魔法の地図。ホグワーツ内の全員の居場所と秘密の通路を表示します。フレッドとジョージがハリーに贈りました。"
+      "tweet_text_ja": "【忍びの地図】ホグワーツ城と敷地にいる全員を、名前つきの点で映し出す羊皮紙。フィルチも知らない秘密の抜け道七本まで載っています。透明マントを着ていても、姿を変えていても、地図には本名で現れます。"
     },
     {
       "id": "manual_pensieve",
@@ -265,7 +276,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 4-7: Dumbledore's pensieve used to view memories",
-      "tweet_text_ja": "【憂いの篩】記憶を保存し、再体験できる魔法の盆。ダンブルドアはこれを使ってヴォルデモートの過去を調査し、ハリーに重要な記憶を見せました。記憶の中に入り込んで、過去の出来事を観察することができます。"
+      "tweet_text_ja": "【憂いの篩】記憶や想いを頭から抜き出して蓄え、その中へ入って追体験できる石の水盆。縁にはルーン文字が彫られ、中身は液体とも気体ともつかない白みがかった銀色の物質が、絶え間なく動いています。"
     },
     {
       "id": "manual_time-turner",
@@ -286,13 +297,13 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 3: Used by Hermione to attend multiple classes, later used to save Sirius and Buckbeak",
-      "tweet_text_ja": "【逆転時計】時間を遡ることができる魔法の道具。砂時計を1回転させると1時間戻ります。ハーマイオニーは3年生の時、複数の授業に出席するために使用し、後にシリウスとバックビークを救うためにも使いました。",
+      "tweet_text_ja": "【逆転時計】鎖に下がった小さな砂時計。回した回数だけ時間をさかのぼります。安全にさかのぼれるのは五時間ほどまでで、それを超える時間旅行は使う者にも時間そのものにも致命的な害を及ぼすとされます。",
       "name_ja_from_wiki": "逆転時計"
     },
     {
       "id": "manual_sword_of_gryffindor",
       "type": "object",
-      "name_en": "Sword of Gryffindor",
+      "name_en": "Gryffindor's sword",
       "name_ja": "グリフィンドールの剣",
       "name_ja_alt": [],
       "category": "Weapon",
@@ -308,7 +319,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 2,7: Goblin-made sword that absorbs what makes it stronger, destroys Horcruxes",
-      "tweet_text_ja": "【グリフィンドールの剣】ゴブリン製の銀の剣で、自身を強くするものを吸収します。真のグリフィンドール生が必要とする時に現れます。ハリーは2年生の時にバジリスクを倒し、剣はバジリスクの毒を吸収して分霊箱を破壊できるようになりました。"
+      "tweet_text_ja": "【グリフィンドールの剣】千年前に小鬼が鍛えた純銀の剣。小鬼製の刃は自らを強くするものだけを吸収するため、バジリスクの毒を吸ったこの剣は分霊箱を破壊できます。真のグリフィンドール生の前に現れます。"
     },
     {
       "id": "manual_two-way_mirror",
@@ -329,7 +340,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 5,7: Sirius's mirror for communication",
-      "tweet_text_ja": "【両面鏡】一対の鏡の所有者同士が顔を見て会話できる魔法の道具。シリウスがハリーに渡しましたが、ハリーは5年生の時には使いませんでした。7巻でハリーは割れた鏡の破片を通してアバフォース・ダンブルドアと連絡を取りました。"
+      "tweet_text_ja": "【両面鏡】対になった二枚組の鏡。片方に相手の名を呼びかけると、その姿がもう片方に映ります。シリウスがハリーに贈った一枚は割れてしまいますが、ハリーはその欠片を形見として持ち歩き続けました。"
     },
     {
       "id": "manual_deluminator",
@@ -350,7 +361,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1,7: Dumbledore's device to extinguish/restore lights, later helps Ron find Harry",
-      "tweet_text_ja": "【灯消しライター】ダンブルドアが発明した道具で、光を吸収したり復元したりできます。ダンブルドアはロンに遺贈し、ロンが仲間から離れた後、この灯消しライターがロンをハリーとハーマイオニーの元へ導きました。"
+      "tweet_text_ja": "【灯消しライター】銀の煙草ライターのような道具。鳴らすとその場の明かりをすべて吸い取り、もう一度押すと元に戻します。吸い取った光は、戻る先がないと小さな太陽のように宙に浮いて周りを照らします。"
     },
     {
       "id": "manual_mirror_of_erised",
@@ -371,7 +382,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1: Shows the deepest desire of one's heart",
-      "tweet_text_ja": "【みぞの鏡】見る者の心の奥底にある望みを映し出す鏡。ハリーは両親と家族を見ましたが、ダンブルドアは「厚手のウールの靴下を一足、手に持っているのが見える」と言いました。この鏡は賢者の石を守る仕掛けの一部として使われました。"
+      "tweet_text_ja": "【みぞの鏡】覗き込んだ者の心の一番奥にある、一番強い望みを映す鏡。知識も真実も与えません。見入るあまり衰弱したり、気が触れたりした者がいるとダンブルドアは警告しました。"
     },
     {
       "id": "manual_prophecy_orb",
@@ -413,28 +424,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1-7: Quidditch ball, also contains the Resurrection Stone in Book 7",
-      "tweet_text_ja": "【金のスニッチ】クィディッチで使われる翼の付いた小さな金色のボール。シーカーがこれを捕まえると150点獲得し試合終了となります。スニッチには肉の記憶があり、ダンブルドアはハリーの初めて捕まえたスニッチの中に蘇りの石を隠しました。"
-    },
-    {
-      "id": "manual_goblet_of_fire",
-      "type": "object",
-      "name_en": "Goblet of Fire",
-      "name_ja": "炎のゴブレット",
-      "name_ja_alt": [],
-      "category": "Selection Device",
-      "description_en": "A magical goblet that selects champions for the Triwizard Tournament",
-      "description_ja": "三大魔法学校対抗試合の代表選手を選ぶ魔法の杯",
-      "powers": "Selects the most worthy candidates from those who submit their names; creates a binding magical contract",
-      "creator": "Unknown",
-      "owner": "Used for Triwizard Tournament",
-      "material": "Wooden goblet that produces blue-white flames",
-      "book_appearances": "GOF",
-      "first_appearance": "Book 4",
-      "wiki_url": "https://harrypotter.fandom.com/wiki/Goblet_of_Fire",
-      "image_url": "",
-      "importance": "important",
-      "note": "Book 4: Selects champions for the Triwizard Tournament",
-      "tweet_text_ja": "【炎のゴブレット】三大魔法学校対抗試合の代表選手を選ぶ魔法の杯。青白い炎を出し、最もふさわしい候補者を選びます。選ばれた者は魔法の契約に縛られます。クラウチJr.がこれを操作してハリーを第四の代表に選ばせました。"
+      "tweet_text_ja": "【金のスニッチ】大きなクルミほどの金色の球に、銀の羽が絶えず羽ばたくクィディッチのボール。発明したのはゴドリックの谷の魔法使いボーマン・ライトです。最速の捕獲記録は1921年の3.5秒。"
     },
     {
       "id": "manual_flying_broomstick",
@@ -476,13 +466,13 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 4-7: Objects enchanted to transport people to specific locations",
-      "tweet_text_ja": "【移動キー】触れた人を別の場所へ移動させる魔法の道具。古いブーツやヘアブラシなど、目立たない日用品が使われます。4年生の時、ハリーは優勝カップが移動キーになっていることに気づかず、墓地に移動させられました。"
+      "tweet_text_ja": "【移動キー】決められた時刻に、触れた者を別の場所へ運ぶ品。マグルが拾って遊ばないよう、ただのゴミに見える物が選ばれます。移動の瞬間は、へその裏あたりを鉤で急に引っ張られるような感覚だそうです。"
     },
     {
       "id": "manual_vanishing_cabinet",
       "type": "object",
       "name_en": "Vanishing Cabinet",
-      "name_ja": "姿をくらますキャビネット",
+      "name_ja": "姿をくらますキャビネット棚",
       "name_ja_alt": [],
       "category": "Transportation",
       "description_en": "A pair of cabinets that create a passage between two locations",
@@ -497,7 +487,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 6: Pair of cabinets creating a passage into Hogwarts",
-      "tweet_text_ja": "【姿くらましキャビネット】一対のキャビネットで、一方に入ると他方から出られます。ドラコは6年生の時、必要の部屋にあるキャビネットを修理し、ボージン・アンド・バークスのキャビネットとつなげて、死喰い人をホグワーツに侵入させました。",
+      "tweet_text_ja": "【姿をくらますキャビネット棚】対になった二つの棚のあいだに魔法の通路ができ、片方に入った者はもう片方から出てきます。片割れはホグワーツの必要の部屋に、もう一方は夜の闇横丁の店の中にありました。",
       "name_ja_from_wiki": "姿をくらますキャビネット棚"
     },
     {
@@ -540,7 +530,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 2,6: Gives light only to the holder",
-      "tweet_text_ja": "【輝きの手】持ち主にだけ光を与える干からびた手。泥棒の道具として使われます。ドラコは6年生の時、これを使ってホグワーツ内を誰にも見つからずに移動しました。ボージン・アンド・バークスで売られています。"
+      "tweet_text_ja": "【輝きの手】蝋燭を挿すと、持っている者にだけ明かりが見える萎びた手。夜の闇横丁のボージン・アンド・バークスで、泥棒や強盗にとって最高の味方だと売り込まれていました。"
     },
     {
       "id": "manual_foe-glass",
@@ -582,7 +572,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 3-4: Detects untrustworthy people nearby",
-      "tweet_text_ja": "【かくれん防止器】近くに信頼できない人物がいると回転して笛を鳴らす装置。ロンがハリーの誕生日プレゼントとして贈りました。小さなガラスのコマのような形をしています。"
+      "tweet_text_ja": "【かくれん防止器】信用のおけない人物が近くにいると光って回り、甲高い笛のような音を立てる道具。ガラスの独楽のような形で先端で立ちます。18世紀の魔法使いエドガー・ストラウルガーの発明とされます。"
     },
     {
       "id": "manual_howler",
@@ -603,7 +593,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 2-5: Screaming letter that shouts the message",
-      "tweet_text_ja": "【吼えメール】送り主のメッセージを大音量で叫ぶ魔法の手紙。すぐに開けないと爆発します。ロンは2年生の時、空飛ぶ車を盗んだことで母親のモリーから吼えメールを受け取りました。"
+      "tweet_text_ja": "【吼えメール】赤い封筒で届く手紙。開くと差出人の声が魔法で百倍に拡大されて響き渡ります。すぐ開けないと爆発し、放っておけば燃え上がりながら喋り出します。朝食の席で受け取る最悪のものとされています。"
     },
     {
       "id": "manual_remembrall",

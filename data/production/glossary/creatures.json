@@ -3,7 +3,7 @@
     "source": "Synced from drafts/glossary/creatures.json",
     "category": "creatures",
     "type": "glossary",
-    "synced_at": "2026-07-05T18:29:41.263416",
+    "synced_at": "2026-09-20T14:39:01.089857",
     "total_count": 29,
     "note": "Translation complete entries only"
   },
@@ -27,16 +27,17 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 2: Main antagonist in Chamber of Secrets",
-      "tweet_text_ja": "【バジリスク】「蛇の王」と呼ばれる巨大な蛇。その目を直接見た者は即死し、間接的に見た者は石化します。秘密の部屋にはサラザール・スリザリンが残したバジリスクが千年以上も潜んでいました。",
+      "tweet_text_ja": "【バジリスク】「蛇の王」とも呼ばれる巨大な蛇。ヒキガエルの下で鶏の卵を孵すことで生まれます。その目を直接見た者は即死し、鏡やカメラ越しに間接的に見た者は石化にとどまります。",
       "name_ja_from_wiki": "バジリスク"
     },
     {
       "id": "manual_dementor",
       "type": "creature",
       "name_en": "Dementor",
-      "name_ja": "ディメンター",
+      "name_ja": "吸魂鬼",
       "name_ja_alt": [
-        "吸魂鬼"
+        "吸魂鬼",
+        "ディメンター"
       ],
       "classification": "Non-Being (Dark creature)",
       "description_en": "Dark creatures that feed on human happiness and can consume a person's soul",
@@ -90,7 +91,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 3: Buckbeak (later renamed Witherwings)",
-      "tweet_text_ja": "【ヒッポグリフ】鷲の上半身と馬の下半身を持つ高貴な生物。プライドが高く、接近する際は必ずお辞儀をして敬意を示す必要があります。バックビークはハリーの大切な仲間でした。"
+      "tweet_text_ja": "【ヒッポグリフ】巨大な鷲の頭と馬の胴体を持つ生き物。誇り高く、侮辱すればそれが最後になりかねません。近づくときは目を合わせたままお辞儀をし、相手が辞儀を返すのを待つのが作法です。"
     },
     {
       "id": "manual_house_elf",
@@ -133,7 +134,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Fawkes, Dumbledore's companion",
-      "tweet_text_ja": "【不死鳥】死が近づくと燃え上がり、自らの灰から再生する美しい鳥。その涙には傷を癒す力があり、歌声は心の清い者を勇気づけます。ダンブルドアの相棒フォークスはハリーを何度も救いました。",
+      "tweet_text_ja": "【不死鳥】白鳥ほどの大きさの真紅の鳥。体が衰えはじめると炎となって燃え上がり、灰の中から雛として蘇ります。殺生をした記録のない穏やかな生き物で、その歌は心正しき者の勇気を増すといわれます。",
       "name_ja_from_wiki": "不死鳥"
     },
     {
@@ -142,7 +143,9 @@
       "name_en": "Werewolf",
       "name_ja": "狼人間",
       "name_ja_alt": [
-        "ウェアウルフ"
+        "ウェアウルフ",
+        "狼男",
+        "人狼"
       ],
       "classification": "XXXXX (as werewolf)",
       "description_en": "A human who transforms into a savage wolf-like creature during the full moon",
@@ -155,7 +158,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Remus Lupin, Fenrir Greyback",
-      "tweet_text_ja": "【狼人間】満月の夜に凶暴な狼に変身する人間。リーマス・ルーピン先生は脱狼薬を服用することで理性を保つことができました。フェンリール・グレイバックは意図的に人を噛む邪悪な狼人間でした。",
+      "tweet_text_ja": "【狼人間】満月の夜に、人としての善悪の感覚を失った獣へ変身してしまう人間。狼の姿の狼人間に噛まれることでのみ感染し、治療法は知られていません。満月でないときは、ほかの人と同じように無害です。",
       "name_ja_from_wiki": "人狼"
     },
     {
@@ -163,7 +166,9 @@
       "type": "creature",
       "name_en": "Acromantula",
       "name_ja": "アクロマンチュラ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ヒトの言葉が話せる八つ目の怪物蜘蛛"
+      ],
       "classification": "XXXXX",
       "description_en": "A monstrous eight-eyed spider capable of human speech",
       "description_ja": "人間の言葉を話すことができる八つ目の巨大な蜘蛛。",
@@ -175,7 +180,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 2: Aragog and his colony",
-      "tweet_text_ja": "【アクロマンチュラ】人間の言葉を話す巨大な八つ目の蜘蛛。ハグリッドが育てたアラゴグは禁じられた森に巨大なコロニーを作りました。その毒は非常に貴重で高値で取引されます。"
+      "tweet_text_ja": "【アクロマンチュラ】人の言葉を話す八つ目の巨大な蜘蛛。ボルネオ原産で、脚を広げると4メートル半に達します。ほとんど人並みの知能を持ちながら訓練は不可能で、近づく人を貪り食おうとします。"
     },
     {
       "id": "manual_boggart",
@@ -237,7 +242,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Firenze, Bane, Ronan",
-      "tweet_text_ja": "【ケンタウルス】高い知性を持ち、天文学と占いに優れた生物。誇り高く、魔法使いとは一定の距離を保ちます。フィレンツェは禁じられた森を離れてホグワーツで占い学を教えました。"
+      "tweet_text_ja": "【ケンタウルス】人の頭と胴を馬の体につないだ姿の種族。森に十頭から五十頭ほどの群れで暮らします。魔法省の危険度評価が高いのは、凶暴だからではなく、大いなる敬意をもって扱われるべきだからです。"
     },
     {
       "id": "manual_giant",
@@ -245,7 +250,8 @@
       "name_en": "Giant",
       "name_ja": "巨人",
       "name_ja_alt": [
-        "ジャイアント"
+        "ジャイアント",
+        "女巨人"
       ],
       "classification": "Non-Being",
       "description_en": "Enormous humanoids reaching heights of 20-25 feet",
@@ -258,13 +264,13 @@
       "image_url": "",
       "importance": "important",
       "note": "Hagrid (half-giant), Grawp, Olympe Maxime",
-      "tweet_text_ja": "【巨人】身長6〜7メートルにもなる巨体を持つ種族。ハグリッドとマダム・マクシームは半巨人です。ハグリッドの異母弟グロウプは純血の巨人で、最初は粗暴でしたが次第に穏やかになりました。"
+      "tweet_text_ja": "【巨人】身の丈六メートルほどの種族。大集団で暮らすようにはできておらず、数週間おきに殺し合いになるとハグリッドは言います。前世紀の同族どうしの抗争で、自滅寸前まで数を減らしました。"
     },
     {
       "id": "manual_goblin",
       "type": "creature",
       "name_en": "Goblin",
-      "name_ja": "ゴブリン",
+      "name_ja": "小鬼",
       "name_ja_alt": [
         "小鬼"
       ],
@@ -286,7 +292,7 @@
       "id": "manual_owl",
       "type": "creature",
       "name_en": "Owl",
-      "name_ja": "フクロウ",
+      "name_ja": "ふくろう",
       "name_ja_alt": [],
       "classification": "XX",
       "description_en": "Birds used by wizards to deliver mail and messages",
@@ -318,7 +324,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 5: Important for transportation and symbolism",
-      "tweet_text_ja": "【セストラル】死を目撃し理解した者にしか見えない翼を持つ馬。不吉の象徴とされますが、実際は穏やかで優れた方向感覚を持ちます。ハリーはセドリックの死後、セストラルが見えるようになりました。"
+      "tweet_text_ja": "【セストラル】骸骨のような胴に大きな黒い翼を持つ馬。死を目撃し、その意味を心から理解した者にしか見えません。飼い慣らせば驚異的な方向感覚を発揮し、行き先を告げるだけで連れていってくれます。"
     },
     {
       "id": "manual_three_headed_dog",
@@ -381,13 +387,13 @@
       "image_url": "",
       "importance": "important",
       "note": "Books 1 and 7: Symbol of purity",
-      "tweet_text_ja": "【ユニコーン（一角獣）】純粋さと無垢の象徴。その血には命を救う力がありますが、飲んだ者は呪われた生を送ります。角や尾の毛は貴重な魔法材料です。ヴォルデモートはユニコーンの血を飲んで生き延びました。"
+      "tweet_text_ja": "【ユニコーン】北ヨーロッパの森に棲む、角のある純白の馬。仔馬は黄金色で、二歳ごろに銀色になり、四歳ごろに角が生えます。その血は死の淵にある者をも生かしますが、代償に呪われた命を生きることになります。"
     },
     {
       "id": "manual_blast_ended_skrewt",
       "type": "creature",
       "name_en": "Blast-Ended Skrewt",
-      "name_ja": "スクリュート",
+      "name_ja": "尻尾爆発スクリュート",
       "name_ja_alt": [
         "爆発尾スクリュート"
       ],
@@ -402,7 +408,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 4: Hagrid's breeding project",
-      "tweet_text_ja": "【尻尾爆発スクリュート】ハグリッドが繁殖させた危険な交配種。おそらくマンティコアと火蟹の交配種で、尻尾から炎を噴射します。急速に成長し、最終的には3メートルにも達します。"
+      "tweet_text_ja": "【尻尾爆発スクリュート】ハグリッドがマンティコアと火蟹を掛け合わせて生み出した生物。孵ったばかりの姿は殻のない奇形のロブスターのようで、腐った魚のような臭いを放ち、尾から火花を吹き出します。"
     },
     {
       "id": "manual_bowtruckle",
@@ -423,14 +429,14 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Care of Magical Creatures lessons",
-      "tweet_text_ja": "【ボウトラックル】木の守り番で、普通は杖に使う木に住んでいます。小枝のような姿で、自分の木が脅かされない限りは平和的です。餌はワラジムシです。グラブリー-プランク先生の授業で登場しました。",
+      "tweet_text_ja": "【ボウトラックル】樹皮と小枝でできているような姿の、木の守り番。住処の木が脅かされると、長く鋭い指で目をえぐろうと飛びかかります。ダンゴムシを差し出せばなだめられ、その隙に杖材を切り出せます。",
       "name_ja_from_wiki": "ボウトラックル"
     },
     {
       "id": "manual_ghoul",
       "type": "creature",
       "name_en": "Ghoul",
-      "name_ja": "グール",
+      "name_ja": "グールお化け",
       "name_ja_alt": [],
       "classification": "XX",
       "description_en": "A simple-minded creature that lives in attics and barns",
@@ -443,13 +449,13 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Lives in the Weasleys' attic",
-      "tweet_text_ja": "【グールお化け】ウィーズリー家の屋根裏部屋に住む生物。ほぼ無害ですが、物を投げたりうめき声を上げたりします。第7巻では、ロンに化けて寝たきりになり、ロンの不在を隠す役割を果たしました。"
+      "tweet_text_ja": "【グールお化け】魔法使いの家の屋根裏や納屋に棲む、ぬるぬるした出っ歯の生き物。醜いけれど危険はほとんどありません。ウィーズリー家の一匹は、静かすぎると感じるとパイプを鳴らして吠えます。"
     },
     {
       "id": "manual_gnome",
       "type": "creature",
       "name_en": "Gnome",
-      "name_ja": "ノーム",
+      "name_ja": "庭小人",
       "name_ja_alt": [
         "庭小人"
       ],
@@ -464,15 +470,16 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Garden pests at the Burrow",
-      "tweet_text_ja": "【庭小人】ジャガイモのような頭を持つ小さな庭の害虫。ウィーズリー家の庭にたくさん住んでおり、定期的に「庭小人駆除」が必要です。掴んでぐるぐる回して遠くに投げ飛ばします。"
+      "tweet_text_ja": "【庭小人】ジャガイモそっくりの大きな禿頭を持つ、背丈三十センチほどの庭の害獣。カミソリのように鋭い歯で噛みついてきます。駆除は痛めつけるのではなく、目を回させて巣穴への道をわからなくするのが目的です。"
     },
     {
       "id": "manual_grindylow",
       "type": "creature",
       "name_en": "Grindylow",
-      "name_ja": "グリンディロー",
+      "name_ja": "グリンデロー",
       "name_ja_alt": [
-        "水鬼"
+        "水鬼",
+        "水魔"
       ],
       "classification": "XX",
       "description_en": "A water demon with sharp horns and long fingers",
@@ -485,7 +492,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 4: Second Triwizard task",
-      "tweet_text_ja": "【グリンデロー】湖や池に住む小さな水魔。長い指で泳ぐ者を掴みますが、指はすぐに折れるので引き剥がせます。三大魔法学校対抗試合の第二課題で登場しました。",
+      "tweet_text_ja": "【グリンデロー】湖に棲む、角のある薄緑色の水魔。緑の歯を持ち、水草の茂みに潜みます。異常に長い指は強いけれどとても脆く、掴まれたら握りを折るのが対処のこつです。水中人が飼い慣らすこともあります。",
       "name_ja_from_wiki": "グリンデロー"
     },
     {
@@ -505,7 +512,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 4: Harry's dragon in first task",
-      "tweet_text_ja": "【ハンガリー・ホーンテール】最も危険なドラゴンの一種。黒い鱗とブロンズ色の角を持ち、最長15メートルの炎を吹きます。三大魔法学校対抗試合でハリーが対決した相手です。"
+      "tweet_text_ja": "【ハンガリー・ホーンテール】ドラゴンのなかで最も危険とされる種。黒い鱗に黄色い目、青銅色の角を持ち、長い尾にも同じ色の棘が並びます。火を吹く射程はドラゴンのなかでも最長級で、15メートルほど届きます。"
     },
     {
       "id": "manual_kneazle",
@@ -529,11 +536,12 @@
     {
       "id": "manual_mermaid",
       "type": "creature",
-      "name_en": "Mermaid",
-      "name_ja": "人魚",
+      "name_en": "merpeople",
+      "name_ja": "水中人",
       "name_ja_alt": [
         "マーメイド",
-        "マーピープル"
+        "マーピープル",
+        "人魚"
       ],
       "classification": "XXXX",
       "description_en": "Aquatic humanoids that live in underwater communities",
@@ -546,7 +554,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 4: Second Triwizard task (Merpeople)",
-      "tweet_text_ja": "【人魚】高い知性を持つ水生生物で、独自の言語（マーミッシュ）と社会を持っています。ホグワーツの大湖に住む人魚たちは、三大魔法学校対抗試合の第二課題で人質を守っていました。"
+      "tweet_text_ja": "【水中人】マグルの絵画でおなじみの美しい人魚は、温暖な海域に棲むもの。スコットランドの湖にいるのはセルキーで、ホグワーツの湖の水中人は灰色がかった肌に深緑の荒れた髪、黄色い目をしています。"
     },
     {
       "id": "manual_niffler",
@@ -585,13 +593,13 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 4: Third Triwizard task",
-      "tweet_text_ja": "【スフィンクス】人間の頭とライオンの体を持つ、非常に賢い生物。謎かけを出し、正解すれば通してくれますが、間違えると攻撃されます。三大魔法学校対抗試合の第三課題の迷路に登場しました。"
+      "tweet_text_ja": "【スフィンクス】人の頭と獅子の体を持つ生き物。千年以上ものあいだ、魔法使いが貴重品や秘密の隠れ家を守らせるために用いてきました。なぞなぞでしか話さず、誤った答えには狂暴になります。"
     },
     {
       "id": "manual_flobberworm",
       "type": "creature",
       "name_en": "Flobberworm",
-      "name_ja": "フロバーワーム",
+      "name_ja": "レタス食い虫",
       "name_ja_alt": [],
       "classification": "X",
       "description_en": "A thick brown worm reaching up to 10 inches in length",
@@ -604,7 +612,7 @@
       "image_url": "",
       "importance": "minor",
       "note": "Care of Magical Creatures lessons",
-      "tweet_text_ja": "【レタス食い虫】魔法生物の中で最も退屈な生物。太い茶色の芋虫で、主な食べ物はレタス。その粘液は薬の材料として使われます。ハグリッドの授業で生徒たちを退屈させました。"
+      "tweet_text_ja": "【レタス食い虫】じめじめした溝に棲む、太い茶色の芋虫。どちらが頭でどちらが尾か見分けがつかず、両端から粘液を出します。レタスを好んで食べますが、たいていの植物なら何でも食べます。"
     }
   ]
 }

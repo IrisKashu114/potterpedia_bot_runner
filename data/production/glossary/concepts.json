@@ -3,7 +3,7 @@
     "source": "Synced from drafts/glossary/concepts.json",
     "category": "concepts",
     "type": "glossary",
-    "synced_at": "2026-07-05T18:29:41.268654",
+    "synced_at": "2026-09-20T14:39:01.097175",
     "total_count": 29,
     "note": "Translation complete entries only"
   },
@@ -56,7 +56,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 2,6-7: Object containing a fragment of a wizard's soul, achieved through murder",
-      "tweet_text_ja": "【分霊箱】魔法使いの魂の一部を封じ込めた物体。殺人によって魂を引き裂き作られます。分霊箱が存在する限り作成者は死ねませんが、魂は不安定になります。ヴォルデモートは7つの分霊箱を作り、それを破壊することが7巻の中心となりました。",
+      "tweet_text_ja": "【分霊箱】自らの魂の一部を切り離して隠した物。作るには殺人を犯さねばならず、殺人が魂を引き裂きます。ホグワーツでは禁じられた話題で、詳しく書かれた資料はほとんど残っていません。",
       "name_ja_from_wiki": "ホークラックス"
     },
     {
@@ -81,7 +81,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 4-7: Three most powerful and sinister Dark spells (Killing, Cruciatus, Imperius)",
-      "tweet_text_ja": "【許されざる呪文】使用するとアズカバン終身刑となる三つの闇の呪文。死の呪い（アバダ・ケダブラ）、磔の呪い（クルーシオ）、服従の呪い（インペリオ）。本物の悪意が必要で、ヴォルデモートと死喰い人の代表的な呪文です。",
+      "tweet_text_ja": "【許されざる呪文】アバダ ケダブラ・服従の呪文・磔の呪文の三つをまとめて呼ぶ名。同じ人間に対して使えば、アズカバン行きは免れません。この三つが初めて「許されざる」と分類されたのは1717年のことです。",
       "name_ja_from_wiki": "許されざる呪文"
     },
     {
@@ -234,7 +234,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 2-7: The language of snakes, rare ability associated with Salazar Slytherin",
-      "tweet_text_ja": "【蛇語】蛇と会話できる稀な能力。サラザール・スリザリンに関連し、通常は遺伝します。ハリーはヴォルデモートから受け継ぎました。秘密の部屋を開けたり、ナギニと会話したりできましたが、ヴォルデモートの死後この能力を失いました。",
+      "tweet_text_ja": "【蛇語】蛇と会話する能力で、長らく闇の魔術と見なされてきました。使えない者には不気味なヒスヒスという音に聞こえますが、話者にはその音が言葉として聞き分けられます。",
       "name_ja_from_wiki": "パーセルタング"
     },
     {
@@ -405,7 +405,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1,7: The study of wands and their allegiance",
-      "tweet_text_ja": "【杖の術】杖とその忠誠心、魔法使いとの関係を研究する複雑な学問。杖が魔法使いを選び、決闘での敗北によって忠誠が変わります。ハリーとヴォルデモートの双子の杖、ニワトコの杖の忠誠などを説明します。7巻ではこの理解がハリーを救いました。"
+      "tweet_text_ja": "【杖の術】複雑で神秘的な魔法の一分野。「杖が魔法使いを選ぶ」ことは、この道を学ぶ者には常に明らかでした。通じた者は、杖の備える特徴から、記録に空白があってもその来歴をたどることができます。"
     },
     {
       "id": "manual_legilimency",
@@ -429,7 +429,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 5-7: The magical ability to extract feelings and memories from another's mind",
-      "tweet_text_ja": "【開心術】他人の心から思考、感情、記憶を読み取る魔法能力。目を合わせて集中する必要があり、習得は困難です。閉心術で防げます。スネイプとヴォルデモートは熟練した開心術師で、5巻でスネイプはハリーに閉心術を教えようとしました。"
+      "tweet_text_ja": "【開心術】この術を極めた者は、一定の条件のもとで他人の心に分け入り、そこで見たものを正しく読み取ることができます。魔法では時間と空間が重要で、しばしば視線を合わせることが欠かせません。"
     },
     {
       "id": "manual_occlumency",
@@ -453,7 +453,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 5-7: The magical defense against Legilimency",
-      "tweet_text_ja": "【閉心術】開心術から心を守る魔法の防御。感情を消して心を空にする必要があり、非常に習得困難です。5巻でスネイプがハリーに教えましたが、ハリーは習得できず、失敗がシリウスの死につながりました。感情のコントロールが不可欠です。"
+      "tweet_text_ja": "【閉心術】外部からの侵入に対する、心の魔法的な防御。あまり知られていない魔法の分野です。これを極めた者だけが、嘘と矛盾する感情や記憶を封じ込め、開心術の使い手の前でも見抜かれずに偽りを述べられます。"
     },
     {
       "id": "manual_fidelius_charm",
@@ -477,7 +477,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 3-7: Charm that conceals a secret within a person's soul",
-      "tweet_text_ja": "【忠誠の術】秘密を秘密の守人の魂の中に隠す極めて複雑な呪文。守人だけが秘密を明かせます。ポッター家を守っていましたがピーターが裏切りました。グリモールド・プレイス12番地も守っています。守人は信頼できる人物である必要があります。"
+      "tweet_text_ja": "【忠誠の術】秘密を一人の生きた人間――秘密の守人――の魂の中に隠し込む、途方もなく複雑な呪文。守人が死ぬと、隠されていた場所は誰の目にも見えるようになります。"
     },
     {
       "id": "manual_pure_blood",
@@ -501,7 +501,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 2-7: Wizard with purely magical ancestry",
-      "tweet_text_ja": "【純血】完全に魔法使いの血統のみを持つ者。マルフォイ家やブラック家などが純血の誇りを持っています。純血主義者は優位性を主張しますが、実際には魔法能力に差はありません。多くの純血家系も過去にマグルの血が混じっている可能性があります。",
+      "tweet_text_ja": "【純血】マグルの血が混じっていない一族や個人を指す語。1930年代初頭に匿名で出された『純血一族一覧』は、間違いなく純血だとする28の家系を挙げました。ブラック家の家訓は「純血よ永遠なれ」です。",
       "name_ja_from_wiki": "純血"
     },
     {
@@ -528,7 +528,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 2-7: Wizard with both magical and Muggle ancestry",
-      "tweet_text_ja": "【半純血（混血）】魔法使いとマグルの両方の血統を持つ者。ハリー、ヴォルデモート、スネイプが該当します。最も一般的な血統で、純血主義者からも完全には受け入れられませんが、マグル生まれほどの差別は受けません。スネイプは自らを「半純血のプリンス」と呼びました。",
+      "tweet_text_ja": "【半純血】魔法族とマグルの双方の血を引く者。ロンいわく、マグルと結婚してこなければ魔法族は絶えていたはずで、今日ほとんどの魔法使いは半純血です。ヴォルデモート自身も、母は魔女、父はマグルの半純血でした。",
       "name_ja_from_wiki": "半純血"
     },
     {
@@ -586,7 +586,8 @@
       "name_en": "Animagus",
       "name_ja": "動物もどき",
       "name_ja_alt": [
-        "アニメーガス"
+        "アニメーガス",
+        "アニマーガス"
       ],
       "category": "Transfiguration",
       "concept_type": "Magical Ability",
@@ -628,7 +629,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 6-7: Reanimated corpses controlled by Dark wizards",
-      "tweet_text_ja": "【亡者】闇の魔法使いに操られる蘇った死体。青白く腐敗した体で、操り人形のように動きます。意志はなく、命令で攻撃します。火に弱く、6巻ではロケットを守る洞窟に大量の亡者がいました。"
+      "tweet_text_ja": "【亡者】闇の魔法使いが呪いで蘇らせた死体。不気味な操り人形と化し、使い捨ての下僕として使われます。闇の魔術で保存された亡者を滅ぼせるのは火だけです。"
     },
     {
       "id": "manual_divination",
@@ -700,7 +701,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 2-7: Non-magical person born to at least one magical parent",
-      "tweet_text_ja": "【スクイブ】魔法使いの親から生まれながら魔法が使えない人。純血の家系では恥として隠されることが多く、ホグワーツには通えません。フィルチ、アラベラ・フィッグがスクイブです。差別の象徴でもあります。"
+      "tweet_text_ja": "【スクイブ】魔法族の家に生まれながら、魔力を持たない者。マグル生まれの魔法使いとは逆のケースで、こちらのほうがずっと珍しいとされます。かつてはよく隠され、マグルの学校へ厄介払いされるのが常でした。"
     },
     {
       "id": "manual_quidditch",

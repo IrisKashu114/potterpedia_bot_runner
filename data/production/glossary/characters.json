@@ -3,13 +3,13 @@
     "source": "Synced from drafts/glossary/characters.json",
     "category": "characters",
     "type": "glossary",
-    "synced_at": "2026-08-30T07:27:30.072285",
-    "total_count": 160,
+    "synced_at": "2026-09-20T14:39:01.111207",
+    "total_count": 156,
     "note": "Translation complete entries only"
   },
   "data": [
     {
-      "tweet_text_ja": "【アルバス・ダンブルドア】ホグワーツ魔法魔術学校の校長。20世紀最大の魔法使いと評され、ヴォルデモート卿が唯一恐れた人物。不死鳥の騎士団の創設者として、闇の魔法使いとの戦いを指揮しました。",
+      "tweet_text_ja": "【アルバス・ダンブルドア】20世紀の偉大な魔法使い。もとは変身術の教授で、のちにホグワーツの校長になりました。ドラゴンの血液の十二種類の利用法を発見し、1945年にグリンデルバルドを破ったことで知られます。",
       "name_en": "Albus Dumbledore",
       "name_ja_from_wiki": "アルバス・ダンブルドア",
       "name_ja": "アルバス・ダンブルドア",
@@ -24,7 +24,7 @@
       "id": "wiki_char_albus_dumbledore"
     },
     {
-      "tweet_text_ja": "【ドラコ・マルフォイ】純血主義を信奉するスリザリン生。ハリーの学生時代のライバルで、後にヴォルデモート卿からダンブルドア殺害の任務を与えられますが、完遂はできませんでした。",
+      "tweet_text_ja": "【ドラコ・マルフォイ】ルシウスとナルシッサの一人息子で、ハリーと同学年のスリザリン生。ホグワーツ特急で握手を断られたときから敵対しました。6年生のとき、父の失態への罰としてダンブルドア殺害を命じられます。",
       "name_en": "Draco Malfoy",
       "name_ja_from_wiki": "ドラコ・マルフォイ",
       "name_ja": "ドラコ・マルフォイ",
@@ -37,7 +37,7 @@
       "id": "wiki_char_draco_malfoy"
     },
     {
-      "tweet_text_ja": "【ハリー・ポッター】他でもない、「生き残った男の子」として知られる主人公。1歳の時にヴォルデモート卿の攻撃から生き延び、ホグワーツで魔法を学びながらヴォルデモートと対峙しました。",
+      "tweet_text_ja": "【ハリー・ポッター】シリーズの主人公。1980年7月31日にゴドリックの谷で生まれた混血で、父は純血、母はマグル生まれです。「生き残った男の子」「選ばれし者」と呼ばれ、のちに闇祓い局の局長を務めました。",
       "name_en": "Harry Potter",
       "name_ja_from_wiki": "ハリー・ポッター",
       "name_ja": "ハリー・ポッター",
@@ -58,7 +58,7 @@
       "id": "wiki_char_harry_potter"
     },
     {
-      "tweet_text_ja": "【ハーマイオニー・グレンジャー】マグル生まれの優秀な魔女。ホグワーツ史上最も聡明な生徒の一人で、ハリーとロンとともに数々の冒険を経験し、後に魔法省に入省なりました。",
+      "tweet_text_ja": "【ハーマイオニー・グレンジャー】両親がともに歯科医という、マグル生まれの魔女。守護霊はカワウソで、ボガートは全科目落第を告げるマクゴナガル先生です。ハリーとロンに出会ったのは、ネビルのヒキガエルを探していたときでした。",
       "name_en": "Hermione Granger",
       "name_ja_from_wiki": "ハーマイオニー・グレンジャー",
       "name_ja": "ハーマイオニー・グレンジャー",
@@ -86,7 +86,7 @@
       "id": "wiki_char_luna_lovegood"
     },
     {
-      "tweet_text_ja": "【ミネルバ・マクゴナガル】ホグワーツの変身術教授でグリフィンドール寮の寮監。厳格ながら公正な教師で、不死鳥の騎士団のメンバーとしても活躍しました。",
+      "tweet_text_ja": "【ミネルバ・マクゴナガル】変身術の教授で、グリフィンドールの寮監・副校長を務めたのち校長になりました。目の周りに四角い眼鏡の模様がある銀毛のトラ猫の動物もどきです。趣味は刺繍と、『変身現代』の記事の訂正。",
       "name_en": "Minerva McGonagall",
       "name_ja_from_wiki": "ミネルバ・マクゴナガル",
       "name_ja": "ミネルバ・マクゴナガル",
@@ -99,7 +99,7 @@
       "id": "wiki_char_minerva_mcgonagall"
     },
     {
-      "tweet_text_ja": "【ネビル・ロングボトム】グリフィンドール生でハリーのルームメイト。両親を死喰い人に拷問され、当初は自信のない少年でしたが、ホグワーツの戦いでナギニを倒す英雄となりました。",
+      "tweet_text_ja": "【ネビル・ロングボトム】ハリーの一日前、1980年7月30日の生まれ。組分け帽子は最初からグリフィンドールと決めていたのに、勇敢さで知られる寮だという評判におじけづいたのは本人のほうでした。のちに薬草学の教授に。",
       "name_en": "Neville Longbottom",
       "name_ja_from_wiki": "ネビル・ロングボトム",
       "name_ja": "ネビル・ロングボトム",
@@ -112,7 +112,7 @@
       "id": "wiki_char_neville_longbottom"
     },
     {
-      "tweet_text_ja": "【リーマス・ルーピン】ホグワーツの闇の魔術に対する防衛術教授を務めた魔法使い。悪戯仕掛け人の一員で、ハリーの父ジェームズの親友でした。幼い息子を残し、ホグワーツの戦いで戦死しました。",
+      "tweet_text_ja": "【リーマス・ルーピン】五歳になる直前に狼人間のフェンリール・グレイバックに襲われ、以後は満月のたびに変身することになりました。ハリーが3年生の年、闇の魔術に対する防衛術の教授として赴任し、守護霊の呪文を教えます。",
       "name_en": "Remus Lupin",
       "name_ja_from_wiki": "リーマス・ルーピン",
       "name_ja": "リーマス・ルーピン",
@@ -129,7 +129,7 @@
       "id": "wiki_char_remus_lupin"
     },
     {
-      "tweet_text_ja": "【ルビウス・ハグリッド】ホグワーツの森番で半巨人の魔法使い。心優しく魔法生物を愛し、ハリーを魔法界に導いた最初の人物です。後に魔法生物飼育学の教授となりました。",
+      "tweet_text_ja": "【ルビウス・ハグリッド】魔法使いの父と女巨人フリドウルファのあいだに生まれた半巨人。1943年に秘密の部屋の事件で濡れ衣を着せられて退学になりますが、ダンブルドアの計らいで森番見習いとして学校に残りました。",
       "name_en": "Rubeus Hagrid",
       "name_ja_from_wiki": "ルビウス・ハグリッド",
       "name_ja": "ルビウス・ハグリッド",
@@ -161,7 +161,7 @@
       "id": "wiki_char_severus_snape"
     },
     {
-      "tweet_text_ja": "【シリウス・ブラック】ハリーの名付け親で悪戯仕掛け人の一人。未登録のアニメーガスで犬に変身できます。無実の罪でアズカバンに投獄されましたが、脱獄してハリーを守りました。",
+      "tweet_text_ja": "【シリウス・ブラック】魔法界の旧家ブラック家の嫡男でありながら、一族の純血主義に反発した人物。ハリーの後見人です。犬に変身してアズカバンを脱獄し、自力での脱獄に成功した最初の人物となりました。",
       "name_en": "Sirius Black",
       "name_ja_from_wiki": "シリウス・ブラック",
       "name_ja": "シリウス・ブラック",
@@ -203,7 +203,7 @@
       "id": "wiki_char_abbott_godrics_hollow"
     },
     {
-      "tweet_text_ja": "【アバーフォース・ダンブルドア】アルバス・ダンブルドアの弟で、ホッグズ・ヘッドの店主。兄との確執を抱えながらも、ホグワーツの戦いでは不死鳥の騎士団を支援し、ハリーたちをホグワーツへ導きました。",
+      "tweet_text_ja": "【アバーフォース・ダンブルドア】アルバス・ダンブルドアの弟で、ホグズミードの酒場「ホッグズ・ヘッド」の店主。守護霊は山羊です。妹アリアナの肖像画の裏の通路からハリーたちを城へ導き、必要の部屋にこもる生徒たちへ食料を届け続けました。",
       "name_en": "Aberforth Dumbledore",
       "name_ja_from_wiki": "アバーフォース・ダンブルドア",
       "name_ja": "アバーフォース・ダンブルドア",
@@ -216,7 +216,7 @@
       "id": "wiki_char_aberforth_dumbledore"
     },
     {
-      "tweet_text_ja": "【アブラクサス・マルフォイ】ルシウス・マルフォイの父でドラコの祖父。純血主義者の名門マルフォイ家の当主でした。ホラス・スラグホーンと面識があります。",
+      "tweet_text_ja": "【アブラクサス・マルフォイ】ルシウス・マルフォイの父で、ドラコの祖父。ハリーが6年生になる前に龍痘で亡くなりました。スラグホーン先生とは面識があり、ドラコはその縁を頼って取り入ろうとします。",
       "name_en": "Abraxas Malfoy",
       "name_ja_from_wiki": null,
       "name_ja": "アブラクサス・マルフォイ",
@@ -229,7 +229,7 @@
       "id": "wiki_char_abraxas_malfoy"
     },
     {
-      "tweet_text_ja": "【アドルバート・ワフリング】『魔法論』の著者として知られる魔法使い。その著書はホグワーツの教科書として使用されています。",
+      "tweet_text_ja": "【アドルバート・ワフリング】魔法理論家で、ホグワーツ1年生の指定教科書『魔法論』の著者。「ワッフリングの魔法基本法則」の定式者でもあり、学生時代のダンブルドアと定期的に文通する間柄でした。",
       "name_en": "Adalbert Waffling",
       "name_ja_from_wiki": null,
       "name_ja": "アドルバート・ワフリング",
@@ -244,7 +244,7 @@
       "id": "wiki_char_adalbert_waffling"
     },
     {
-      "tweet_text_ja": "【エイドリアン・ピュシー】スリザリン寮のクィディッチチームでチェイサーを務めた魔法使い。",
+      "tweet_text_ja": "【エイドリアン・ピュシー】スリザリン寮のクィディッチ・チームのチェイサー。ハリーが初めて出場したグリフィンドール対スリザリン戦で、相手チームのチェイサーの一人として名が挙がります。",
       "name_en": "Adrian Pucey",
       "name_ja_from_wiki": null,
       "name_ja": "エイドリアン・ピュシー",
@@ -285,7 +285,7 @@
       "id": "wiki_char_agnes_20th_century"
     },
     {
-      "tweet_text_ja": "【エイダン・リンチ】1994年クィディッチワールドカップでアイルランド代表のシーカーを務めた魔法使い。",
+      "tweet_text_ja": "【エイダン・リンチ】1994年のクィディッチ・ワールドカップ決勝に出たアイルランド代表のシーカー。クラムのウロンスキー・フェイントに誘われて地面に激突し、試合終盤にもう一度墜落してヴィーラの群れに踏まれました。",
       "name_en": "Aidan Lynch",
       "name_ja_from_wiki": null,
       "name_ja": "エイダン・リンチ",
@@ -313,7 +313,7 @@
       "id": "wiki_char_alastor_moody"
     },
     {
-      "tweet_text_ja": "【アルベリック・グラニオン】糞爆弾を発明した19世紀の魔法使い。",
+      "tweet_text_ja": "【アルベリック・グラニオン】クソ爆弾を発明した19世紀の魔法使い。蛙チョコレートのカードの一枚にもなっています。",
       "name_en": "Alberic Grunnion",
       "name_ja_from_wiki": null,
       "name_ja": "アルベリック・グラニオン",
@@ -326,7 +326,7 @@
       "id": "wiki_char_alberic_grunnion"
     },
     {
-      "tweet_text_ja": "【アルバート・ランコーン】魔法省の高官で、マグル生まれ調査を担当。ハリーがポリジュース薬で変身して魔法省に侵入しました。",
+      "tweet_text_ja": "【アルバート・ランコーン】魔法省の職員。長身で低く響く声を持ち、周囲から威圧的な人物と見られていました。家系図を偽造した魔法使いを摘発したとされ、ダーク・クレスウェルの密告者としてアーサー・ウィーズリーに詰め寄られます。",
       "name_en": "Albert Runcorn",
       "name_ja_from_wiki": null,
       "name_ja": "アルバート・ランコーン",
@@ -354,7 +354,7 @@
       "id": "wiki_char_albus_potter"
     },
     {
-      "tweet_text_ja": "【アレクト・カロー】死喰い人で、兄弟アミカスの姉妹。ダンブルドア死後、ホグワーツでマグル学を教え、生徒たちを虐待しました。",
+      "tweet_text_ja": "【アレクト・カロー】死喰い人で、アミカス・カローの妹。スネイプが校長になった年にホグワーツの「マグル学」の教師となり、マグルを獣のように愚かで不潔な存在だと生徒全員に教えました。",
       "name_en": "Alecto Carrow",
       "name_ja_from_wiki": null,
       "name_ja": "アレクト・カロー",
@@ -406,7 +406,7 @@
       "id": "wiki_char_algie_longbottom"
     },
     {
-      "tweet_text_ja": "【アリ・バシール】空飛ぶ絨毯の商人。絨毯の輸入を英国に認めさせようとしていました。",
+      "tweet_text_ja": "【アリ・バシール】空飛ぶ絨毯をイギリスへ輸出しようとしていた人物。絨毯は魔法省の登録簿でマグルの製品と定義され輸入できないと再三伝えられても聞き入れず、ついに密輸入をはかって捕まりました。",
       "name_en": "Ali Bashir",
       "name_ja_from_wiki": null,
       "name_ja": "アリ・バシール",
@@ -419,7 +419,7 @@
       "id": "wiki_char_ali_bashir"
     },
     {
-      "tweet_text_ja": "【アリス・ロングボトム】ネビル・ロングボトムの母で元闇祓い。不死鳥の騎士団のメンバーでしたが、息子が幼い頃に死喰い人に拷問され、夫フランクとともに聖マンゴ魔法疾患傷害病院に入院しています。",
+      "tweet_text_ja": "【アリス・ロングボトム】ネビル・ロングボトムの母。初代不死鳥の騎士団の写真に夫フランクと並んで写っています。ヴォルデモートの消息を聞き出そうとする者たちに夫ともども拷問され、正気を失ったまま聖マンゴに入院しています。",
       "name_en": "Alice Longbottom",
       "name_ja_from_wiki": null,
       "name_ja": "アリス・ロングボトム",
@@ -432,7 +432,7 @@
       "id": "wiki_char_alice_longbottom"
     },
     {
-      "tweet_text_ja": "【アリシア・スピネット】グリフィンドール・クィディッチチームのチェイサー。ハリーの先輩として活躍し、ダンブルドア軍団のメンバーとしてホグワーツの戦いにも参加しました。",
+      "tweet_text_ja": "【アリシア・スピネット】グリフィンドールのクィディッチ・チームのチェイサー。ウッドがすばらしいチェイサー三人の一人として名を挙げた選手で、ホグワーツの戦いを前に必要の部屋へ駆けつけた仲間でもあります。",
       "name_en": "Alicia Spinnet",
       "name_ja_from_wiki": "アリシア・スピネット",
       "name_ja": "アリシア・スピネット",
@@ -512,7 +512,7 @@
       "id": "wiki_char_amy_benson"
     },
     {
-      "tweet_text_ja": "【アミカス・カロー】死喰い人で、姉妹アレクトの兄弟。ダンブルドア死後、ホグワーツで闇の魔術を教え、生徒への磔の呪文を奨励しました。",
+      "tweet_text_ja": "【アミカス・カロー】死喰い人で、アレクト・カローの兄。スネイプが校長になった年に「闇の魔術に対する防衛術」を受け持ち、罰則を受けた生徒への磔の呪文を実践させました。拷問を娯楽として楽しむ人物です。",
       "name_en": "Amycus Carrow",
       "name_ja_from_wiki": "アミカス・カロー",
       "name_ja": "アミカス・カロー",
@@ -538,7 +538,7 @@
       "id": "wiki_char_andrew_kirke"
     },
     {
-      "tweet_text_ja": "【アンドロメダ・トンクス】ブラック家出身の魔女でトンクスの母。純血主義を捨てマグル生まれのテッドと結婚し、家族から勘当されました。",
+      "tweet_text_ja": "【アンドロメダ・トンクス】ブラック家の生まれで、シリウスの「お気に入りのいとこ」だった魔女。マグル生まれのテッド・トンクスと結婚したため、家系図のタペストリーから名を焼き消されました。戦後は孫のテディを育てます。",
       "name_en": "Andromeda Tonks",
       "name_ja_from_wiki": "アンドロメダ・トンクス",
       "name_ja": "アンドロメダ・トンクス",
@@ -554,7 +554,7 @@
       "id": "wiki_char_andromeda_tonks"
     },
     {
-      "tweet_text_ja": "【アンジェリーナ・ジョンソン】グリフィンドール・クィディッチチームのチェイサーで、後にキャプテンを務めた魔女。卒業後はフレッド・ウィーズリーと結婚し、ホグワーツの戦いにも参加しました。",
+      "tweet_text_ja": "【アンジェリーナ・ジョンソン】グリフィンドール・クィディッチチームのチェイサーで、後にキャプテンを務めた魔女。卒業後はジョージ・ウィーズリーと結婚し、ホグワーツの戦いにも参加しました。",
       "name_en": "Angelina Johnson",
       "name_ja_from_wiki": "アンジェリーナ・ジョンソン",
       "name_ja": "アンジェリーナ・ジョンソン",
@@ -580,7 +580,7 @@
       "id": "wiki_char_angus_fleet"
     },
     {
-      "tweet_text_ja": "【アンソニー・ゴールドスタイン】レイブンクロー寮の監督生でダンブルドア軍団のメンバー。ホグワーツの戦いを生き延びました。",
+      "tweet_text_ja": "【アンソニー・ゴールドスタイン】レイブンクロー寮の男子監督生で、ダンブルドア軍団のメンバー。ホグワーツ特急でのマルフォイたちの襲撃を撃退し、ホグワーツの戦いの直前にも必要の部屋に集まりました。",
       "name_en": "Anthony Goldstein",
       "name_ja_from_wiki": "アンソニー・ゴールドスタイン",
       "name_ja": "アンソニー・ゴールドスタイン",
@@ -606,7 +606,7 @@
       "id": "wiki_char_antioch_peverell"
     },
     {
-      "tweet_text_ja": "【アントニン・ドロホフ】ヴォルデモート卿に仕えた死喰い人。神秘部の戦いでハーマイオニーに重傷を負わせ、ホグワーツの戦いではリーマス・ルーピンを殺害したとされています。",
+      "tweet_text_ja": "【アントニン・ドロホフ】プルウェット兄弟を惨殺した罪で有罪となった死喰い人。神秘部の戦いでハーマイオニーに重傷を負わせ、長い治療が必要になりました。この呪いは無言だったぶん、本来より弱かったといいます。",
       "name_en": "Antonin Dolohov",
       "name_ja_from_wiki": null,
       "name_ja": "アントニン・ドロホフ",
@@ -619,7 +619,7 @@
       "id": "wiki_char_antonin_dolohov"
     },
     {
-      "tweet_text_ja": "【アポリーヌ・デラクール】フラーとガブリエルの母で半ヴィーラ。娘たちと同じ銀色のブロンドの髪を持つ美しい魔女です。",
+      "tweet_text_ja": "【アポリーヌ・デラクール】フラーとガブリエールの母。若葉色の裾長のドレスをまとった美しい魔女です。家事の呪文に長け、「隠れ穴」のオーブンをまたたく間に磨き上げました。",
       "name_en": "Apolline Delacour",
       "name_ja_from_wiki": null,
       "name_ja": "アポリーヌ・デラクール",
@@ -645,7 +645,7 @@
       "id": "wiki_char_apollyon_pringle"
     },
     {
-      "tweet_text_ja": "【アラベラ・フィッグ】プリベット通りの近くに住むスクイブの老婦人。ダンブルドアの依頼でハリーを見守り、吸魂鬼襲撃事件の裁判で証人として証言しました。",
+      "tweet_text_ja": "【アラベラ・フィッグ】リトル・ウィンジングに住む猫好きの老婦人。実はスクイブで、ダンブルドアの指示でハリーを見張る役目を負っていました。そのことを本人が明かしたのは、吸魂鬼の襲撃の直後です。",
       "name_en": "Arabella Figg",
       "name_ja_from_wiki": null,
       "name_ja": "アラベラ・フィッグ",
@@ -660,7 +660,7 @@
       "id": "wiki_char_arabella_figg"
     },
     {
-      "tweet_text_ja": "【アラゴグ】ハグリッドに育てられた巨大蜘蛛（アクロマンチュラ）。禁じられた森に巣を作り、巨大な蜘蛛のコロニーを築きました。人間を食べる種族ですが、ハグリッドへの恩義から彼だけは襲いませんでした。",
+      "tweet_text_ja": "【アラゴグ】ハグリッドが卵から育てた、小型の象ほどもある巨大な蜘蛛。城の戸棚で食卓の残飯を与えられて育ちました。人間を襲ったことは一度もないと語り、秘密の部屋の怪物の正体は誰にも明かしませんでした。",
       "name_en": "Aragog",
       "name_ja_from_wiki": null,
       "name_ja": "アラゴグ",
@@ -712,7 +712,7 @@
       "id": "wiki_char_arcturus_black_iii"
     },
     {
-      "tweet_text_ja": "【アーカス】ニワトコの杖を求めてエグバートを殺した魔法使い。",
+      "tweet_text_ja": "【アーカス】ゼノフィリウス・ラブグッドが語ったニワトコの杖の来歴で、リビウスと並べて名の挙がる魔法使い。杖の足跡はこの二人のところで途絶え、どちらがロクシアスを倒したのかは伝わっていません。",
       "name_en": "Arcus",
       "name_ja_from_wiki": null,
       "name_ja": "アーカス",
@@ -738,7 +738,7 @@
       "id": "wiki_char_argus_filch"
     },
     {
-      "tweet_text_ja": "【アリアナ・ダンブルドア】アルバスとアバーフォースの妹。幼い頃にマグルに襲われ、魔力を制御できなくなりました。アルバス、アバーフォース、グリンデルバルドの三者間の決闘に巻き込まれ命を落としました。",
+      "tweet_text_ja": "【アリアナ・ダンブルドア】アルバスとアバーフォースの妹。6歳のとき、魔法を使うのを見た3人のマグルの少年に襲われ、以後は魔力を抑えきれず内側から暴発するようになりました。兄たちとグリンデルバルドの決闘の中で命を落とします。",
       "name_en": "Ariana Dumbledore",
       "name_ja_from_wiki": null,
       "name_ja": "アリアナ・ダンブルドア",
@@ -751,7 +751,7 @@
       "id": "wiki_char_ariana_dumbledore"
     },
     {
-      "tweet_text_ja": "【アーキー・アルダートン】有名な箒設計士。マグル生まれ登録委員会に召喚されたある男性が、この人の息子であると主張していました。",
+      "tweet_text_ja": "【アーキー・アルダートン】有名な箒設計士として名前だけが語られる魔法使い。マグル生まれ登録委員会の審問で、半純血だと訴える男が父の名として挙げました。本文はその真偽を確かめていません。",
       "name_en": "Arkie Alderton",
       "name_ja_from_wiki": null,
       "name_ja": "アーキー・アルダートン",
@@ -818,7 +818,7 @@
       "id": "wiki_char_arnold_peasegood"
     },
     {
-      "tweet_text_ja": "【アージニウス・ジガー】『魔法薬調合法』の著者。ホグワーツの教科書として使用されています。",
+      "tweet_text_ja": "【アージニウス・ジガー】ホグワーツ1年生の指定教科書『魔法薬調合法』の著者。ハリーの入学許可証に同封された教科書リストに、書名とともにその名が載っています。",
       "name_en": "Arsenius Jigger",
       "name_ja_from_wiki": null,
       "name_ja": "アージニウス・ジガー",
@@ -831,7 +831,7 @@
       "id": "wiki_char_arsenius_jigger"
     },
     {
-      "tweet_text_ja": "【アーサー・ウィーズリー】魔法省のマグル製品不正使用取締局に勤務する純血の魔法使い。ウィーズリー家の父で、マグル文化に深い興味を持ち、不死鳥の騎士団のメンバーとして活動しました。",
+      "tweet_text_ja": "【アーサー・ウィーズリー】魔法省マグル製品不正使用取締局の局長を務めた純血の魔法使い。妻モリーとのあいだに七人の子をもうけ、「隠れ穴」で暮らしました。マグルの道具と暮らしに人一倍の関心を寄せ、守護霊はイタチです。",
       "name_en": "Arthur Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "アーサー・ウィーズリー",
@@ -857,7 +857,7 @@
       "id": "wiki_char_astoria_malfoy"
     },
     {
-      "tweet_text_ja": "【オーガスタ・ロングボトム】ネビル・ロングボトムの祖母。厳格な性格で孫に高い期待を寄せました。ルーピン先生のまね妖怪についての授業で服装が詳細に語られていました。",
+      "tweet_text_ja": "【オーガスタ・ロングボトム】ネビルの祖母。剥製のハゲタカを載せた尖り帽子と、虫食いの狐の毛皮が目印です。孫には厳しくあたりましたが、神秘部の戦いでネビルが戦ったと報じられると、怒るどころか大いに喜びました。",
       "name_en": "Augusta Longbottom",
       "name_ja_from_wiki": null,
       "name_ja": "オーガスタ・ロングボトム",
@@ -883,7 +883,7 @@
       "id": "wiki_char_augustus_pye"
     },
     {
-      "tweet_text_ja": "【オーガスタス・ルックウッド】死喰い人で、神秘部で「無言者」として働いていたスパイ。仲間のイゴール・カルカロフに売られてアズカバンに投獄されました。",
+      "tweet_text_ja": "【オーガスタス・ルックウッド】神秘部に勤めながら、ヴォルデモートのスパイとして魔法省の内部から情報を流していた死喰い人。痘痕面で脂っこい髪をしています。のちにアズカバンを脱獄した死喰い人の一人です。",
       "name_en": "Augustus Rookwood",
       "name_ja_from_wiki": null,
       "name_ja": "オーガスタス・ルックウッド",
@@ -948,7 +948,7 @@
       "id": "wiki_char_babbitty_rabbity"
     },
     {
-      "tweet_text_ja": "【ベイン】禁じられた森に住むケンタウルスの一人。フィレンツェが人間に協力したことに強く反対し、群れの伝統を重んじる頑固な性格です。",
+      "tweet_text_ja": "【ベイン】禁じられた森に棲むケンタウルス。黒い毛並みと黒髪を持ちます。ケンタウルスは惑星の動きに記された未来を読むことに専念すべきだと考え、人間を背に乗せたフィレンツェを「ただのロバ」と呼んで面罵しました。",
       "name_en": "Bane",
       "name_ja_from_wiki": null,
       "name_ja": "ベイン",
@@ -974,7 +974,7 @@
       "id": "wiki_char_barnabas_cuffe"
     },
     {
-      "tweet_text_ja": "【バーナバス・デベリル】ニワトコの杖を所持していた魔法使い。ロクシアスに殺されました。",
+      "tweet_text_ja": "【バーナバス・デベリル】十八世紀初頭、自ら「庭床の杖」と呼ぶ杖を持って現れた魔法使い。その杖で恐ろしい魔法戦士だという評判を打ち立て、恐怖統治を敷きましたが、同じく悪名高いロクシアスに終止符を打たれました。",
       "name_en": "Barnabas Deverill",
       "name_ja_from_wiki": null,
       "name_ja": "バーナバス・デベリル",
@@ -987,7 +987,7 @@
       "id": "wiki_char_barnabas_deverill"
     },
     {
-      "tweet_text_ja": "【バカのバーナバス】トロールにバレエを教えようとした愚かな試みで知られる魔法使い。その様子を描いたタペストリーがホグワーツ7階に飾られています。",
+      "tweet_text_ja": "【バカのバーナバス】トロールにバレエを教えようとする愚かな試みが、巨大なタペストリーに描かれている人物。そのタペストリーの向かい側の何もない壁が、必要の部屋の入口になっています。",
       "name_en": "Barnabas the Barmy",
       "name_ja_from_wiki": null,
       "name_ja": "バカのバーナバス",
@@ -1000,7 +1000,7 @@
       "id": "wiki_char_barnabas_the_barmy"
     },
     {
-      "tweet_text_ja": "【バーリー・ライアン】1994年クィディッチワールドカップでアイルランド代表のキーパーを務めた魔法使い。",
+      "tweet_text_ja": "【バーリー・ライアン】アイルランド代表クィディッチ・チームのキーパー。1994年のワールドカップ決勝に出場し、イワノバにかわされてブルガリアの最初のゴールを許しました。翌年も代表のキーパーを務めています。",
       "name_en": "Barry Ryan",
       "name_ja_from_wiki": null,
       "name_ja": "バーリー・ライアン",
@@ -1078,7 +1078,7 @@
       "id": "wiki_char_basil"
     },
     {
-      "tweet_text_ja": "【バチルダ・バグショット】『魔法史』の著者で高名な魔法史家。ゴドリックの谷に住み、ポッター家の隣人でした。晩年にナギニに殺害されました。",
+      "tweet_text_ja": "【バチルダ・バグショット】ホグワーツの標準教科書『魔法史』の著者で、魔法史家として知られた魔女。ゴドリックの谷ではダンブルドア家の隣人であり、ポッター一家とも親しく、ハリーを可愛がっていました。",
       "name_en": "Bathilda Bagshot",
       "name_ja_from_wiki": "バチルダ・バグショット",
       "name_ja": "バチルダ・バグショット",
@@ -1104,7 +1104,7 @@
       "id": "wiki_char_beedle_the_bard"
     },
     {
-      "tweet_text_ja": "【ベラトリックス・レストレンジ】ヴォルデモート卿に最も忠実な死喰い人。ネビルの両親を拷問し、シリウス・ブラックを殺害しました。ホグワーツの戦いでモリー・ウィーズリーに倒されました。",
+      "tweet_text_ja": "【ベラトリックス・レストレンジ】純血の名門ブラック家に生まれ、ヴォルデモートに最も深く帰依した死喰い人。杖は鬼胡桃とドラゴンの琴線、三十二センチ。ホグワーツの戦いでモリー・ウィーズリーに敗れました。",
       "name_en": "Bellatrix Lestrange",
       "name_ja_from_wiki": "ベラトリックス・レストレンジ",
       "name_ja": "ベラトリックス・レストレンジ",
@@ -1119,7 +1119,7 @@
       "id": "wiki_char_bellatrix_lestrange"
     },
     {
-      "tweet_text_ja": "【ベンジー・フェンウィック】初代不死鳥の騎士団のメンバー。死喰い人に殺害され、遺体の一部しか見つかりませんでした。",
+      "tweet_text_ja": "【ベンジー・フェンウィック】初代不死鳥の騎士団のメンバー。ムーディが騎士団の写真を見せながら語ったところでは、死喰い人に殺され、遺体のかけらしか見つかりませんでした。",
       "name_en": "Benjy Fenwick",
       "name_ja_from_wiki": null,
       "name_ja": "ベンジー・フェンウィック",
@@ -1145,11 +1145,13 @@
       "id": "wiki_char_bertha_jorkins"
     },
     {
-      "tweet_text_ja": "【バーティ・ボッツ】「バーティ・ボッツの百味ビーンズ」を作った魔法使い。蛙チョコレートのカードの1枚になっています。",
+      "tweet_text_ja": "【バーティー・ボッツ】あらゆる味が入った菓子「バーティー・ボッツの百味ビーンズ」を発明した魔法使い。蛙チョコレートのカードの一枚にもなっています。",
       "name_en": "Bertie Bott",
       "name_ja_from_wiki": null,
-      "name_ja": "バーティ・ボッツ",
-      "name_ja_alt": [],
+      "name_ja": "バーティー・ボッツ",
+      "name_ja_alt": [
+        "バーティ・ボッツ"
+      ],
       "book_appearances": "PS, GOF, DH",
       "description_en": "Bertie Bott (b. 1935) was a wizarding confectioner, who accidentally created Bertie Bott's Every Flavour Beans. For this, he was featured on a Chocolate Frog Card.",
       "importance": "minor",
@@ -1158,7 +1160,7 @@
       "id": "wiki_char_bertie_bott"
     },
     {
-      "tweet_text_ja": "【バーティ・ヒッグズ】コーマック・マクラーゲンのおじ、チベリウスやルーファス・スクリムジョールの友人。ノーフォークにノグテイル狩りに行っていたようです。",
+      "tweet_text_ja": "【バーティ・ヒッグズ】コーマック・マクラーゲンの叔父チベリウスの知人。ノグテイル狩りに同行したことがあり、そのときはのちに魔法大臣となるルーファス・スクリムジョールも一緒でした。",
       "name_en": "Bertie Higgs",
       "name_ja_from_wiki": null,
       "name_ja": "バーティ・ヒッグズ",
@@ -1210,7 +1212,7 @@
       "id": "wiki_char_bilius"
     },
     {
-      "tweet_text_ja": "【ビリー・スタッブズ】ヴォルデモートと同時期に同じ孤児院で暮らしていた少年。トム・リドルにペットのうさぎを殺されました。",
+      "tweet_text_ja": "【ビリー・スタッブズ】幼いトム・リドルと同じ孤児院で育った子供の一人。飼っていたウサギが梁から吊られて死んでいるのが見つかり、院長はトムの仕業だと疑いましたが、本人はやっていないと言い張りました。",
       "name_en": "Billy Stubbs",
       "name_ja_from_wiki": null,
       "name_ja": "ビリー・スタッブズ",
@@ -1236,7 +1238,7 @@
       "id": "wiki_char_binky"
     },
     {
-      "tweet_text_ja": "【ブレーズ・ザビニ】スリザリン寮の生徒でドラコ・マルフォイの取り巻きの一人。スラグホーン教授のスラグ・クラブのメンバーでした。",
+      "tweet_text_ja": "【ブレーズ・ザビニ】ハリーと同学年のスリザリン生。頬骨が張り、細長い目が吊り上がった背の高い生徒で、終始人を見下した態度をとります。母親は七回結婚し、そのたびに夫が不審死を遂げて莫大な財産を残しました。",
       "name_en": "Blaise Zabini",
       "name_ja_from_wiki": null,
       "name_ja": "ブレーズ・ザビニ",
@@ -1249,7 +1251,7 @@
       "id": "wiki_char_blaise_zabini"
     },
     {
-      "tweet_text_ja": "【ブレッチリー】魔法省の魔法使い。7巻で、部屋が雨降りになる現象に対しウィーズリー氏が『メテオロジンクス レカント（気象呪い崩し）』を勧めた際、『ブレッチリーには効いた』と名前が挙がりました。",
+      "tweet_text_ja": "【ブレッチリー】魔法省で、部屋に雨が降るという事態に見舞われた人物。アーサー・ウィーズリーの台詞の中に名前だけが登場します。スリザリンのキーパー、マイルズ・ブレッチリーと同じ人物かは原作からは決められません。",
       "name_en": "Bletchley",
       "name_ja_from_wiki": null,
       "name_ja": "ブレッチリー",
@@ -1262,7 +1264,7 @@
       "id": "wiki_char_bletchley"
     },
     {
-      "tweet_text_ja": "【血みどろ男爵】スリザリン寮専属のゴースト。銀色の血痕に覆われた姿で、ホグワーツで最も恐れられるゴーストです。唯一ピーブズを制御できる存在で、その過去には灰色のレディとの悲劇が隠されています。",
+      "tweet_text_ja": "【血みどろ男爵】スリザリン寮のゴースト。全身銀色の血にまみれ、げっそりとした顔の無口な亡霊です。ホグワーツで唯一、ピーブズを本当に統制できる存在でもあります。",
       "name_en": "Bloody Baron",
       "name_ja_from_wiki": null,
       "name_ja": "血みどろ男爵",
@@ -1288,7 +1290,7 @@
       "id": "wiki_char_bob"
     },
     {
-      "tweet_text_ja": "【ボブ・オグデン】魔法法執行部の職員。ゴーント家を訪れ、マールヴォロを逮捕しました。",
+      "tweet_text_ja": "【ボブ・オグデン】魔法法執行部の職員。ゴーント家の小屋を訪ね、モーフィンがマグルの前で魔法を使った件を調査しました。その記憶はのちにダンブルドアの手で「憂いの篩」に映され、ヴォルデモートの出自を明かします。",
       "name_en": "Bob Ogden",
       "name_ja_from_wiki": null,
       "name_ja": "ボブ・オグデン",
@@ -1314,7 +1316,7 @@
       "id": "wiki_char_bodrod_the_bearded"
     },
     {
-      "tweet_text_ja": "【ボグロッド】グリンゴッツ銀行のゴブリン。ハリーたちに服従の呪文をかけられ、レストレンジ家の金庫に案内させられました。",
+      "tweet_text_ja": "【ボグロッド】グリンゴッツのカウンター業務にあたる年老いたゴブリン。ハリーに「服従の呪文」をかけられ、レストレンジ家の金庫の扉に手のひらを押し当てさせられて、金庫を開けてしまいました。",
       "name_en": "Bogrod",
       "name_ja_from_wiki": null,
       "name_ja": "ボグロッド",
@@ -1342,7 +1344,7 @@
       "id": "wiki_char_bones_family"
     },
     {
-      "tweet_text_ja": "【ボージン】ノクターン横丁でボージン・アンド・バークスを経営する闇の魔法使い。闇の魔法道具を売買しています。",
+      "tweet_text_ja": "【ボージン】夜の闇横丁でボージン・アンド・バークスを経営する闇の魔法使い。闇の魔法道具を売買しています。",
       "name_en": "Borgin",
       "name_ja_from_wiki": null,
       "name_ja": "ボージン",
@@ -1368,7 +1370,7 @@
       "id": "wiki_char_boris_the_bewildered"
     },
     {
-      "tweet_text_ja": "【ボーマン・ライト】金のスニッチを発明した金属細工師。蛙チョコレートのカードの1枚です。",
+      "tweet_text_ja": "【ボーマン・ライト】ゴドリックの谷の魔法界の金属細工師で、最初の金のスニッチを鋳た人物。腕利きの「金属呪文」使いで、死後には国中から受けた注文を記した羊皮紙の巻物が多数残されていました。",
       "name_en": "Bowman Wright",
       "name_ja_from_wiki": null,
       "name_ja": "ボーマン・ライト",
@@ -1420,7 +1422,7 @@
       "id": "wiki_char_broderick_bode"
     },
     {
-      "tweet_text_ja": "【バックビーク】ハグリッドが飼育したヒッポグリフ。ドラコ・マルフォイを攻撃したため死刑を宣告されますが、ハリーとハーマイオニーに救われ、シリウス・ブラックの逃亡を助けました。",
+      "tweet_text_ja": "【バックビーク】ハグリッドが飼育したヒッポグリフ。ハグリッドは「ビーキー」と呼びます。シリウスの死後はハリーのものとなりましたが、ハグリッドのもとへ戻され、安全のため「ウィザウィングズ」と改名されました。",
       "name_en": "Buckbeak",
       "name_ja_from_wiki": null,
       "name_ja": "バックビーク",
@@ -1487,7 +1489,7 @@
       "id": "wiki_char_cadwallader"
     },
     {
-      "tweet_text_ja": "【カラクタカス・バーク】夜の闇横丁のボージン・アンド・バークスの設立に関わった魔法使い。メローピー・ゴーントからスリザリンのロケットを安く買い叩きました。",
+      "tweet_text_ja": "【カラクタカス・バーク】夜の闇横丁の店「ボージン・アンド・バークス」の経営者。クリスマス直前、金に困って身重だった若い魔女メローピー・ゴーントから、スリザリンのロケットを二束三文で買い取りました。",
       "name_en": "Caractacus Burke",
       "name_ja_from_wiki": "カラクタス・バーク",
       "name_ja": "カラクタカス・バーク",
@@ -1500,7 +1502,7 @@
       "id": "wiki_char_caractacus_burke"
     },
     {
-      "tweet_text_ja": "【キャラドック・ディアボーン】初代不死鳥の騎士団のメンバー。第一次魔法戦争中に行方不明となり、死亡したと推定されています。",
+      "tweet_text_ja": "【キャラドック・ディアボーン】初代不死鳥の騎士団のメンバー。ムーディが見せた騎士団の写真が撮られた六ヵ月後に姿を消し、遺体は見つかりませんでした。",
       "name_en": "Caradoc Dearborn",
       "name_ja_from_wiki": null,
       "name_ja": "キャラドック・ディアボーン",
@@ -1513,7 +1515,7 @@
       "id": "wiki_char_caradoc_dearborn"
     },
     {
-      "tweet_text_ja": "【カッサンドラ・トレローニー】シビル・トレローニーの曾々祖母で有名な予見者。真の予見能力を持っていたとされています。",
+      "tweet_text_ja": "【カッサンドラ・トレローニー】高名な予見者で、シビル・トレローニーの曾々祖母。正真正銘の予見者でしたが、その力は代を重ねるにつれ薄まり、子孫でふたたび受け継いだのはシビルが初めてでした。",
       "name_en": "Cassandra Trelawney",
       "name_ja_from_wiki": null,
       "name_ja": "カッサンドラ・トレローニー",
@@ -1539,7 +1541,7 @@
       "id": "wiki_char_charles_weasley"
     },
     {
-      "tweet_text_ja": "【コリン・クリービー】マグル生まれのグリフィンドール生で、ハリー・ポッターの熱烈なファン。常にカメラを持ち歩きハリーを撮影しようとしました。未成年ながらホグワーツの戦いに参加し、命を落としました。",
+      "tweet_text_ja": "【コリン・クリービー】マグルのカメラを手放さないグリフィンドール生。バジリスクに石化されたときも、カメラを握りしめたまま硬直していました。ホグワーツの戦いでは未成年として避難を命じられましたが、15歳で戦死します。",
       "name_en": "Colin Creevey",
       "name_ja_from_wiki": "コリン・クリービー",
       "name_ja": "コリン・クリービー",
@@ -1606,7 +1608,7 @@
       "id": "wiki_char_dobby"
     },
     {
-      "tweet_text_ja": "【ダドリー・ダーズリー】ハリーの従兄弟でマグル。両親に溺愛され傲慢に育ちましたが、吸魂鬼に襲われた後、ハリーに対する態度を改めました。",
+      "tweet_text_ja": "【ダドリー・ダーズリー】バーノンとペチュニアの一人息子で、ハリーのいとこ。散々甘やかされて育ち、いじめっ子になりました。厳しいダイエットとボクシングで体型は変わり、戦後はハリーとクリスマスカードを交わす仲になります。",
       "name_en": "Dudley Dursley",
       "name_ja_from_wiki": "ダドリー・ダーズリー",
       "name_ja": "ダドリー・ダーズリー",
@@ -1639,7 +1641,7 @@
       "id": "wiki_char_ernest_macmillan"
     },
     {
-      "tweet_text_ja": "【ファング】ハグリッドの飼い犬で大型のボアハウンド。見た目は恐ろしいものの、実際は臆病で優しい性格をしています。",
+      "tweet_text_ja": "【ファング】ハグリッドの飼い犬で、巨大な黒いボアハウンド。見た目の獰猛さに反して気は優しく、ハグリッド同様、見かけほど恐ろしくはありません。禁じられた森ではマルフォイと一緒に悲鳴を上げて逃げ出しました。",
       "name_en": "Fang",
       "name_ja_from_wiki": null,
       "name_ja": "ファング",
@@ -1665,7 +1667,7 @@
       "id": "wiki_char_fat_friar"
     },
     {
-      "tweet_text_ja": "【太った婦人】グリフィンドール塔の入口を守る肖像画の魔女。合言葉を知る者だけを通し、シリウス・ブラックに襲撃されたこともあります。",
+      "tweet_text_ja": "【太った婦人】グリフィンドール塔の入口を守る肖像画の魔女。合言葉を持たない者は取り澄ました態度で厳しく拒みますが、持ち場でうたた寝していることも多く、眠ったまま機械的に合言葉を確かめるだけのこともあります。",
       "name_en": "Fat Lady",
       "name_ja_from_wiki": "太った婦人",
       "name_ja": "太った婦人",
@@ -1691,7 +1693,7 @@
       "id": "wiki_char_filius_flitwick"
     },
     {
-      "tweet_text_ja": "【フレッド・ウィーズリー】ジョージと双子のいたずら好きな魔法使い。ウィーズリー・ウィザード・ウィーズを開店し、ホグワーツの戦いで戦死しました。",
+      "tweet_text_ja": "【フレッド・ウィーズリー】ジョージと双子のいたずら好きな魔法使い。生まれたのは、ほかでもないエイプリルフールの4月1日でした。ホグワーツの戦いで戦死し、トンクスやルーピンとともに大広間に安置されました。",
       "name_en": "Fred Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "フレッド・ウィーズリー",
@@ -1707,7 +1709,7 @@
       "id": "wiki_char_fred_weasley"
     },
     {
-      "tweet_text_ja": "【ジョージ・ウィーズリー】フレッドと双子のいたずら好きな魔法使い。ウィーズリー・ウィザード・ウィーズを開店し、双子の片割れを失った後も店を続けました。",
+      "tweet_text_ja": "【ジョージ・ウィーズリー】ウィーズリー7兄妹の五男で、フレッドとは双子。誕生日もそろって4月1日です。卒業を待たずに学校を離れ、ダイアゴン横丁で双子の兄フレッドと悪戯専門店ウィーズリー・ウィザード・ウィーズを開きました。",
       "name_en": "George Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "ジョージ・ウィーズリー",
@@ -1748,7 +1750,7 @@
       "id": "wiki_char_gregory_goyle"
     },
     {
-      "tweet_text_ja": "【ハンナ・アボット】ハッフルパフ寮の魔女でダンブルドア軍団のメンバー。卒業後はネビル・ロングボトムと結婚し、パブ「三本の箒」のオーナーとなりました。",
+      "tweet_text_ja": "【ハンナ・アボット】ハリーと同学年のハッフルパフ生。5年生でハッフルパフの監督生に選ばれ、ダンブルドア軍団に参加しました。O.W.L.を前に泣き出し、マダム・ポンフリーの鎮静水薬を処方された第一号でもあります。",
       "name_en": "Hannah Abbott",
       "name_ja_from_wiki": "ハンナ・アボット",
       "name_ja": "ハンナ・アボット",
@@ -1774,7 +1776,7 @@
       "id": "wiki_char_hedwig"
     },
     {
-      "tweet_text_ja": "【ヘルガ・ハッフルパフ】ホグワーツ創設者の一人でハッフルパフ寮の名の由来となった魔女。ウェールズ出身と考えられています。他の創設者が選ばなかった生徒も分け隔てなく受け入れました。彼女のカップはやがてヴォルデモートの分霊箱の一つとなりました。",
+      "tweet_text_ja": "【ヘルガ・ハッフルパフ】ホグワーツを創設した4人のひとりで、ハッフルパフ寮の名の由来となった中世の魔女。生徒を選り好みせず、すべての者を分け隔てなく教えました。食べ物に関わる呪文を得意としたといいます。",
       "name_en": "Helga Hufflepuff",
       "name_ja_from_wiki": "ヘルガ・ハッフルパフ",
       "name_ja": "ヘルガ・ハッフルパフ",
@@ -1787,46 +1789,7 @@
       "id": "wiki_char_helga_hufflepuff"
     },
     {
-      "tweet_text_ja": "",
-      "name_en": "Hermione Granger's father",
-      "name_ja_from_wiki": null,
-      "name_ja": "",
-      "name_ja_alt": [],
-      "book_appearances": "PS, COS, POA, OOTP, HBP, DH",
-      "description_en": "Mr Granger (temporarily known as Wendell Wilkins) was a Muggle, the husband of Mrs Granger, and father of Hermione Jean Granger. Working as a dentist alongside his wife, he and his family lived in a house located on the outskirts of London. He and his wife were proud and accepting of their daughter's identity as a witch, which explained some strange things which happened around her when she was a child.",
-      "importance": "minor",
-      "wiki_url": "https://harrypotter.fandom.com/wiki/Hermione_Granger's_father",
-      "type": "character",
-      "id": "wiki_char_hermione_grangers_father"
-    },
-    {
-      "tweet_text_ja": "",
-      "name_en": "Hermione Granger's mother",
-      "name_ja_from_wiki": null,
-      "name_ja": "",
-      "name_ja_alt": [],
-      "book_appearances": "PS, COS, POA, OOTP, HBP, DH",
-      "description_en": "Mrs Granger (temporarily known as Monica Wilkins) was an English Muggle woman, the wife of Mr Granger, and mother of Hermione Jean Granger. Working as a dentist alongside her husband, she and her family lived in a house located in England. She and her husband were proud and accepting of their daughter's identity as a witch, which explained some strange things which happened around her when she was a child.",
-      "importance": "minor",
-      "wiki_url": "https://harrypotter.fandom.com/wiki/Hermione_Granger's_mother",
-      "type": "character",
-      "id": "wiki_char_hermione_grangers_mother"
-    },
-    {
-      "tweet_text_ja": "",
-      "name_en": "Hogwarts Giant Squid",
-      "name_ja_from_wiki": null,
-      "name_ja": "",
-      "name_ja_alt": [],
-      "book_appearances": "PS, COS, POA, GOF, OOTP, HBP",
-      "description_en": "The Hogwarts Giant Squid, also known as the bane by a few Hogwarts students during the 1980s and named Horace by Liz Tuttle, was a male Giant Squid that lived in the Great Lake, on the grounds of Hogwarts Castle. Despite the generalised fear of him and a Chocolate Frog Card describing him as \"the bane\" of Hogwarts students, the Giant Squid was actually semi-domesticated.",
-      "importance": "minor",
-      "wiki_url": "https://harrypotter.fandom.com/wiki/Hogwarts_Giant_Squid",
-      "type": "character",
-      "id": "wiki_char_hogwarts_giant_squid"
-    },
-    {
-      "tweet_text_ja": "【イルマ・ピンス】ホグワーツ図書室の司書。蔵書を我が子のように大切にし、本を汚したり傷つけたりする者には容赦しません。生徒たちからは近寄りがたい存在として恐れられています。",
+      "tweet_text_ja": "【イルマ・ピンス】ホグワーツ図書室の司書。痩せて怒りっぽく、飢えたハゲタカを思わせる容姿で描かれます。蔵書の扱いには極端に神経質で、ハリーが初めて図書室を訪れたときも羽根ばたきを振りかざして追い出しました。",
       "name_en": "Irma Pince",
       "name_ja_from_wiki": "イルマ・ピンス",
       "name_ja": "イルマ・ピンス",
@@ -1882,7 +1845,7 @@
       "id": "wiki_char_lee_jordan"
     },
     {
-      "tweet_text_ja": "【ルシウス・マルフォイ】ドラコの父で純血主義を信奉するマルフォイ家当主。第一次魔法戦争では死喰い人として活動し、ヴォルデモート復活後は再び従いましたが、次第に信頼を失っていきました。",
+      "tweet_text_ja": "【ルシウス・マルフォイ】ドラコの父で、ナルシッサの夫。ドラコと同じ血の気のない尖った顔と、冷たい灰色の目をしています。杖は楡とドラゴンの心臓の琴線。その杖はヴォルデモートに取り上げられ、追跡の際に壊されました。",
       "name_en": "Lucius Malfoy",
       "name_ja_from_wiki": "ルシウス・マルフォイ",
       "name_ja": "ルシウス・マルフォイ",
@@ -1895,7 +1858,7 @@
       "id": "wiki_char_lucius_malfoy"
     },
     {
-      "tweet_text_ja": "【マーリン】中世の伝説的な魔法使いで、アーサー王の宮廷に仕えました。ホグワーツではスリザリン寮に所属したとされ、マーリン勲章は彼の名を冠しています。「マーリンの髭！」は驚きの表現として広く使われます。",
+      "tweet_text_ja": "【マーリン】史上もっとも有名な魔法使いで、アーサー王の宮廷の一員でした。ホグワーツではスリザリン寮の生徒だったとされ、マーリン勲章・勲一等の緑のリボンは、彼が在学中に所属した寮に由来するという言い伝えがあります。",
       "name_en": "Merlin",
       "name_ja_from_wiki": "マーリン",
       "name_ja": "マーリン",
@@ -1908,7 +1871,7 @@
       "id": "wiki_char_merlin"
     },
     {
-      "tweet_text_ja": "【モリー・ウィーズリー】ウィーズリー家の母で7人の子を育てた肝っ玉母さん。不死鳥の騎士団のメンバーとして活躍し、ホグワーツの戦いでは息子フレッドを殺した仇であるベラトリックスを倒しました。",
+      "tweet_text_ja": "【モリー・ウィーズリー】ウィーズリー7兄妹の母親で、旧姓はプルウェット。夫アーサーが魔法省に勤めるかたわら、7人の子どもたちを育てました。不死鳥の騎士団に加わり、ホグワーツの戦いではベラトリックスを打ち負かします。",
       "name_en": "Molly Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "モリー・ウィーズリー",
@@ -2002,7 +1965,7 @@
       "id": "wiki_char_peeves"
     },
     {
-      "tweet_text_ja": "【パーシー・ウィーズリー】ウィーズリー家の三男。監督生から首席となり、魔法省入省後はヴォルデモート卿の復活を認めるかをめぐって家族と決裂。しかしホグワーツの戦いで和解し、弟フレッドの最期を目撃することになりました。",
+      "tweet_text_ja": "【パーシー・ウィーズリー】ウィーズリー夫妻の第三子で三男。グリフィンドールの監督生から首席となり、卒業後は魔法省の国際魔法協力部に入りました。ヴォルデモートの復活をめぐって父と言い争い、家族と縁を切ります。",
       "name_en": "Percy Weasley",
       "name_ja_from_wiki": null,
       "name_ja": "パーシー・ウィーズリー",
@@ -2034,7 +1997,7 @@
       "id": "wiki_char_peter_pettigrew"
     },
     {
-      "tweet_text_ja": "【ペチュニア・ダーズリー】ハリーの伯母でリリー・ポッターの姉。幼少期に妹が魔女と判明して以来、魔法界への嫉妬と嫌悪を抱き続けました。妹の血を引く彼女がハリーを引き取ったことで、護りの魔法が成立しました。",
+      "tweet_text_ja": "【ペチュニア・ダーズリー】両親を失ったハリーを引き取った伯母。妹リリーとは違い、魔力を持たないマグルです。リリーがホグワーツの入学許可証を受け取ったとき、自分も入れてほしいとダンブルドアに手紙を送ったことがあります。",
       "name_en": "Petunia Dursley",
       "name_ja_from_wiki": "ペチュニア・ダーズリー",
       "name_ja": "ペチュニア・ダーズリー",
@@ -2063,7 +2026,7 @@
       "id": "wiki_char_pomona_sprout"
     },
     {
-      "tweet_text_ja": "【ポピー・ポンフリー】ホグワーツの医務室を取り仕切る校医。骨折から石化まであらゆる症状を治療する腕を持ち、患者の安静を何より重視します。クィディッチの試合後は特に忙しくなります。",
+      "tweet_text_ja": "【ポピー・ポンフリー】ホグワーツの校医。骨折は一瞬で治せますが、失われた骨を生やし直すには骨生え薬を一晩かけて飲ませる必要があります。患者の安静のためなら、魔法大臣にも校長にも退去を求めました。",
       "name_en": "Poppy Pomfrey",
       "name_ja_from_wiki": "ポピー・ポンフリー",
       "name_ja": "ポピー・ポンフリー",
@@ -2104,20 +2067,7 @@
       "id": "wiki_char_seamus_finnigan"
     },
     {
-      "tweet_text_ja": "",
-      "name_en": "Serpent of Slytherin",
-      "name_ja_from_wiki": null,
-      "name_ja": "",
-      "name_ja_alt": [],
-      "book_appearances": "COS, POA, GOF, OOTP, HBP, DH",
-      "description_en": "The Serpent of Slytherin (c. 993 - 29 May 1993) was a female Basilisk that was placed by Salazar Slytherin in the Chamber of Secrets at Hogwarts School of Witchcraft and Wizardry. The Basilisk could only be controlled by the Heir of Slytherin, Tom Riddle.",
-      "importance": "minor",
-      "wiki_url": "https://harrypotter.fandom.com/wiki/Serpent_of_Slytherin",
-      "type": "character",
-      "id": "wiki_char_serpent_of_slytherin"
-    },
-    {
-      "tweet_text_ja": "【組み分け帽子】ホグワーツ創設者ゴドリック・グリフィンドールの帽子。新入生の頭に被せると、その人物の資質を見抜き、グリフィンドール、ハッフルパフ、レイブンクロー、スリザリンのいずれかに組み分けます。",
+      "tweet_text_ja": "【組分け帽子】ホグワーツの新入生を寮に振り分ける、意思を持つ帽子。グリフィンドールの剣の隠し場所という、もう一つの役割も持ちます。ホグワーツの戦いでは燃やされながら、ネビルにその剣を渡しました。",
       "name_en": "Sorting Hat",
       "name_ja_from_wiki": "組分け帽子",
       "name_ja": "組分け帽子",
@@ -2130,7 +2080,7 @@
       "id": "wiki_char_sorting_hat"
     },
     {
-      "tweet_text_ja": "【バーノン・ダーズリー】ハリーの叔父でペチュニアの夫。グラニングズ社の重役を務めるマグル。魔法や魔法使いを極端に嫌い、ハリーの存在を近所に隠し、彼を階段下の物置部屋に住まわせていました。",
+      "tweet_text_ja": "【バーノン・ダーズリー】ハリーのおじで、ペチュニアの夫。血の繋がりはなく、魔法を非常に恐れています。穴あけドリルを作るグラニングズ社の社長。ペチュニアとは職場で出会い、自分の母親の部屋で片ひざをついてプロポーズしました。",
       "name_en": "Vernon Dursley",
       "name_ja_from_wiki": "バーノン・ダーズリー",
       "name_ja": "バーノン・ダーズリー",
@@ -2156,7 +2106,7 @@
       "id": "wiki_char_vincent_crabbe"
     },
     {
-      "tweet_text_ja": "【ビル・ウィーズリー】ウィーズリー家の長男。首席でホグワーツを卒業後、グリンゴッツ魔法銀行で呪い破りとして働きました。神秘部の戦いの際、フェンリール・グレイバックに襲われた傷跡が顔に残っています。フラー・デラクールと結婚しました。",
+      "tweet_text_ja": "【ビル・ウィーズリー】ウィーズリー家の長男。首席でホグワーツを卒業後、グリンゴッツ魔法銀行で呪い破りとして働きました。ダンブルドアが亡くなった夜にフェンリール・グレイバックに襲われた傷跡が顔に残っています。フラー・デラクールと結婚しました。",
       "name_en": "William Weasley",
       "name_ja_from_wiki": "ウィリアム・ウィーズリー",
       "name_ja": "ビル・ウィーズリー",

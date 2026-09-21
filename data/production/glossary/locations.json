@@ -3,7 +3,7 @@
     "source": "Synced from drafts/glossary/locations.json",
     "category": "locations",
     "type": "glossary",
-    "synced_at": "2026-08-30T07:27:29.892991",
+    "synced_at": "2026-09-20T14:39:01.093670",
     "total_count": 27,
     "note": "Translation complete entries only"
   },
@@ -53,7 +53,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: Gryffindor common room and dormitories",
-      "tweet_text_ja": "【グリフィンドール塔】ホグワーツで最も高い塔の一つ。入口は太った婦人の肖像画が守っており、合言葉が必要です。暖炉と快適な肘掛け椅子のある談話室は、ハリー、ロン、ハーマイオニーが学生時代を過ごした大切な場所です。"
+      "tweet_text_ja": "【グリフィンドール塔】談話室の入口は七階にあり、ピンクの絹のドレスを着た「太った婦人」の肖像画が守っています。合言葉を知らなければ通してもらえません。男子が女子寮の階段を上ろうとすると、階段は石の滑り台に変わります。"
     },
     {
       "id": "manual_forbidden_forest",
@@ -129,7 +129,7 @@
       "id": "manual_number_twelve_grimmauld_place",
       "type": "location",
       "name_en": "Number Twelve, Grimmauld Place",
-      "name_ja": "グリモールド・プレイス12番地",
+      "name_ja": "グリモールド・プレイス十二番地",
       "name_ja_alt": [],
       "category": "Residence",
       "location_type": "House",
@@ -146,7 +146,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 5-7: Black family home, headquarters of the Order of the Phoenix",
-      "tweet_text_ja": "【グリモールド・プレイス12番地】ロンドンにあるブラック家の屋敷。忠誠の術で隠されており、不死鳥の騎士団の本部として使われました。シリウスの死後、ハリーが相続し、7巻では重要な隠れ家となりました。"
+      "tweet_text_ja": "【グリモールド・プレイス十二番地】ロンドンにあるブラック家の屋敷。忠誠の術で隠されており、不死鳥の騎士団の本部として使われました。シリウスの死後、ハリーが相続し、7巻では重要な隠れ家となりました。"
     },
     {
       "id": "manual_privet_drive",
@@ -154,7 +154,8 @@
       "name_en": "Privet Drive",
       "name_ja": "プリベット通り",
       "name_ja_alt": [
-        "プリベット通り4番地"
+        "プリベット通り4番地",
+        "プリベット通り四番地"
       ],
       "category": "Residence",
       "location_type": "House",
@@ -171,7 +172,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: The Dursleys' home in Little Whinging, Surrey",
-      "tweet_text_ja": "【プリベット通り4番地】サレー州リトル・ウィンジングにあるダーズリー家の家。ハリーは階段下の物置で育ちました。リリーの犠牲による血の魔法で守られていましたが、17歳の誕生日に魔法の保護は消えました。"
+      "tweet_text_ja": "【プリベット通り四番地】サレー州リトル・ウィンジングにあるダーズリー家の家。ハリーは階段下の物置で育ちました。リリーの犠牲による血の魔法で守られていましたが、17歳の誕生日に魔法の保護は消えました。"
     },
     {
       "id": "manual_the_burrow",
@@ -241,7 +242,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 2,7: Secret chamber built by Salazar Slytherin, houses the Basilisk",
-      "tweet_text_ja": "【秘密の部屋】サラザール・スリザリンがホグワーツ地下深くに作った隠し部屋。蛇語話者のみが開けられます。千年以上前から巨大なバジリスクが潜んでおり、2巻でハリーが倒しました。その牙は7巻で分霊箱破壊に使われました。",
+      "tweet_text_ja": "【秘密の部屋】サラザール・スリザリンが他の三人の創設者に知らせず、単独で城の地下に築いた部屋。入口は「嘆きのマートル」の女子トイレの洗面台にあり、蛇の彫刻に蛇語で話しかけると開きます。",
       "name_ja_from_wiki": "秘密の部屋"
     },
     {
@@ -267,7 +268,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 5-7: Appears only when a person needs it, used by Dumbledore's Army",
-      "tweet_text_ja": "【必要の部屋】必要とする人の前にだけ現れる魔法の部屋。5巻ではダンブルドア軍団の訓練場、6巻ではドラコが死喰い人を侵入させる通路として使用。7巻では悪霊の火で破壊され、レイブンクローの髪飾りも破壊されました。"
+      "tweet_text_ja": "【必要の部屋】必要のある者にだけ現れる部屋。屋敷しもべ妖精のあいだでは「あったりなかったり部屋」とも呼ばれます。誰かが中にいるあいだは姿を変えられません。"
     },
     {
       "id": "manual_diagon_alley",
@@ -336,7 +337,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 7: Village where Harry's parents were killed, resting place of Dumbledore's family",
-      "tweet_text_ja": "【ゴドリックの谷】ゴドリック・グリフィンドールの生誕地。ハリーの両親がヴォルデモートに殺された場所でもあります。魔法使いには戦争記念碑がポッター家の像に見えます。墓地にはポッター夫妻とダンブルドア家の墓があります。",
+      "tweet_text_ja": "【ゴドリックの谷】西部地域の村で、ゴドリック・グリフィンドールの生誕地。金のスニッチを発明した魔法使いボーマン・ライトもここの出身です。広場の戦没者慰霊碑は、魔法使いが通ると三人の像に姿を変えます。",
       "name_ja_from_wiki": "ゴドリックの谷"
     },
     {
@@ -385,7 +386,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 3: Most haunted building in Britain, connected to Hogwarts via secret passage",
-      "tweet_text_ja": "【叫びの屋敷】英国で最も呪われた建物とされますが、実はルーピンが学生時代に狼人間に変身するために使っていた場所。暴れ柳から秘密の通路でつながっています。3巻ではシリウスとピーターとの対決が行われました。"
+      "tweet_text_ja": "【叫びの屋敷】イギリスで最も激しく取り憑かれた建物という評判の家。実際は幽霊屋敷ではなく、村人が聞いた叫び声の正体は、ここで変身していた狼人間でした。ダンブルドアはその噂をあえて助長したといいます。"
     },
     {
       "id": "manual_hogwarts_library",
@@ -431,7 +432,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 2-7: Headmaster's office with many magical instruments and portraits",
-      "tweet_text_ja": "【ダンブルドアの校長室】ホグワーツの塔にある校長室。憂いの篩、組分け帽子、グリフィンドールの剣、多くの魔法の道具、歴代校長の肖像画があります。ダンブルドアとの重要な会話や、ヴォルデモートの過去を学ぶ授業の舞台となりました。"
+      "tweet_text_ja": "【ダンブルドアの校長室】入口は石の怪獣像が守り、合言葉を唱えると像が飛びのいて螺旋階段が現れます。部屋は正当な校長にのみ従い、歴代校長の肖像画が壁に並びます。亡くなった校長の肖像は、その列に新たに加わります。"
     },
     {
       "id": "manual_hogs_head",
@@ -454,7 +455,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 5-7: Shady pub run by Aberforth Dumbledore, where DA was formed",
-      "tweet_text_ja": "【ホッグズ・ヘッド】ホグズミード村にある汚いパブ。ダンブルドアの弟アバーフォースが経営しています。5巻ではダンブルドア軍団の結成会議が、7巻では肖像画を通した秘密の通路でハリーたちをホグワーツに導きました。"
+      "tweet_text_ja": "【ホッグズ・ヘッド】ホグズミードの表通りから外れた横道にある、小さく薄暗い宿屋。看板は血を流す猪の生首で、店内はヤギのような臭いが漂います。ダンブルドアは、三本の箒より客層が面白いと評しました。"
     },
     {
       "id": "manual_the_three_broomsticks",
@@ -477,7 +478,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 3-7: Popular pub in Hogsmeade run by Madam Rosmerta",
-      "tweet_text_ja": "【三本の箒】ホグズミードで最も人気のあるパブ。マダム・ロスメルタが経営し、バタービールなど様々な飲み物を提供しています。温かく賑やかな雰囲気で、生徒や地元住民に愛されています。3巻でハリーはシリウスについての会話を盗み聞きしました。",
+      "tweet_text_ja": "【三本の箒】ホグズミードの酒場。女主人はマダム・ロスメルタ。泡立ったジョッキで熱いバタービールが飲める店として知られ、いつも暖かく清潔で混み合っています。",
       "name_ja_from_wiki": "三本の箒"
     },
     {
@@ -524,7 +525,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 7: Bill and Fleur's home, where Harry plans the Gringotts break-in",
-      "tweet_text_ja": "【貝殻の家】コーンウォール州ティンワースにあるビルとフラーのコテージ。海を見下ろす静かで孤立した場所です。マルフォイの館から脱出後の避難所となり、ドビーが埋葬されました。ここでグリンゴッツ侵入の計画を立てました。"
+      "tweet_text_ja": "【貝殻の家】ティンワース郊外、海を見下ろす崖の上に一軒だけ建つ、白壁に貝殻を埋め込んだコテージ。ビルとフラーの家で、忠誠の術に守られ、ビルが秘密の守人を務めています。"
     },
     {
       "id": "manual_honeydukes",
@@ -547,7 +548,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 3-7: Famous sweet shop in Hogsmeade with secret passage to Hogwarts",
-      "tweet_text_ja": "【ハニーデュークス】ホグズミードで最も人気のあるお菓子屋。百味ビーンズ、蛙チョコレートなど様々な魔法のお菓子を販売しています。地下室から隻眼の魔女の像を通ってホグワーツへの秘密の通路があります。"
+      "tweet_text_ja": "【ハニーデュークス】ホグズミードの菓子店。店主一家は店の上階に住んでいます。ホグワーツ三階の隻眼の魔女像のこぶの下から、この店の地下室まで地下道が通じています。"
     },
     {
       "id": "manual_ollivanders",
@@ -570,7 +571,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1,7: Famous wand shop in Diagon Alley",
-      "tweet_text_ja": "【オリバンダーの店】ダイアゴン横丁にある紀元前382年創業の杖店。オリバンダー氏は販売した杖を全て記憶しています。ハリーはここでヴォルデモートの杖と双子の杖（柊と不死鳥の尾羽根）を手に入れました。"
+      "tweet_text_ja": "【オリバンダーの店】ダイアゴン横丁の狭くみすぼらしい店。扉の上には剥げかかった金文字で「紀元前382年創業」とあります。店主は自分が売った杖をすべて記憶しており、杖の代金は7ガリオンでした。"
     },
     {
       "id": "manual_knockturn_alley",
@@ -593,7 +594,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 2,6: Dark Arts shopping area near Diagon Alley",
-      "tweet_text_ja": "【夜の闇横丁】ダイアゴン横丁の脇道にある闇の魔術の品を扱う怪しい通り。ボージン・アンド・バークスなどの店があります。2巻でハリーは煙突飛行粉で誤ってここに到着。6巻ではドラコとボージンの会話を盗み聞きしました。"
+      "tweet_text_ja": "【夜の闇横丁】ダイアゴン横丁の脇から入る、闇の魔術専門の店が並ぶうらぶれた路地。最大の店はボージン・アンド・バークスで、向かいには縮んだ生首の陳列窓、二軒先には巨大な黒い蜘蛛の檻が並びます。"
     },
     {
       "id": "manual_quidditch_pitch",
@@ -616,7 +617,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1-7: Hogwarts Quidditch stadium",
-      "tweet_text_ja": "【クィディッチ競技場】ホグワーツの敷地にあるクィディッチの試合会場。高いゴールポストがあります。ハリーは1年生で初試合を経験し、箒に呪いをかけられましたが金のスニッチを捕まえました。グリフィンドールの勝利の舞台です。"
+      "tweet_text_ja": "【クィディッチ競技場】城の敷地の傾斜した芝生を下った先、禁じられた森を望む位置にあります。ピッチを囲むスタンドは座席が高く設けられ、試合を見やすくするため双眼鏡を持ち込む生徒もいます。ゴールポストは三本。"
     },
     {
       "id": "manual_little_hangleton",
@@ -639,7 +640,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 4,6: Village where Riddle House is located and Voldemort was reborn",
-      "tweet_text_ja": "【リトル・ハングルトン】リドル家が住んでいた小さな村。丘の上にリドル家の屋敷があります。4巻の墓地でヴォルデモートが復活し、ハリーと決闘しました。フランク・ブライスもここで殺されました。ヴォルデモートの父親の故郷です。"
+      "tweet_text_ja": "【リトル・ハングルトン】二つの急な丘に挟まれた谷にある村。丘の上の屋敷は、リドル家がもう長年住んでいないのに、村人からいまも「リドルの館」と呼ばれています。谷を挟んだ対岸には教会と墓地が見えます。"
     }
   ]
 }

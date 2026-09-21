@@ -3,7 +3,7 @@
     "source": "Synced from drafts/glossary/potions.json",
     "category": "potions",
     "type": "glossary",
-    "synced_at": "2026-07-05T06:27:11.241150",
+    "synced_at": "2026-09-20T14:39:01.087953",
     "total_count": 36,
     "note": "Translation complete entries only"
   },
@@ -34,7 +34,7 @@
       "book_appearances": "GOF, COS, DH",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【骨生え薬（スケレ・グロ）】骨を再生させる魔法薬です。ハリーはクィディッチの試合で骨が折れた際、ギルデロイ・ロックハートの失敗により腕の骨が全て消えてしまい、一晩かけて骨生え薬で治療しました。非常に不味く、飲むと焼けるような痛みがあります。",
+      "tweet_text_ja": "【骨生え薬】消えた骨を生やし直す薬。マダム・ポンフリーが「骨生え薬のスケレ・グロ」とラベルの貼られた大瓶から処方します。飲むと口と喉が焼け、骨が戻るまでは一晩がかりのつらい夜になります。",
       "effect_en": "Restored bones",
       "effect_ja": "骨を再生させる",
       "characteristics": "Smoked when poured, Vile taste, Burned on the way down, Yellow in colour",
@@ -93,7 +93,7 @@
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【十秒で取れる保証つきニキビ取り】10秒でニキビを消すという整肌薬。6年生の時、ウィーズリー・ウィザード・ウィーズでフレッドがこの商品名を挙げながら、ジニーにディーン・トーマスとの交際について尋ねる場面で言及されます。",
+      "tweet_text_ja": "【十秒で取れる保証つきニキビ取り】ウィーズリー・ウィザード・ウィーズで売られている、小さなピンクの壺入りの商品。フレッドいわく、おできから黒ニキビまでよく効くそうです。",
       "effect_ja": "ニキビを10秒で消す"
     },
     {
@@ -121,7 +121,7 @@
       "book_appearances": "GOF, PS, HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【命の水】賢者の石から作られる魔法薬で、飲んだ者に不老不死をもたらします。開発者ニコラス・フラメルは665歳まで生きましたが、ダンブルドアと相談のうえ石は破壊され、妻ペレネレと共に死を受け入れました。",
+      "tweet_text_ja": "【命の水】賢者の石が生み出す霊薬で、飲んだ者を不死にします。ただし保つには永遠に飲み続けねばならず、尽きたり不純物が混ざったり石を盗まれたりすれば、ほかの人間と同じように死にます。",
       "effect_en": "Immortality",
       "effect_ja": "不老不死を実現する",
       "side_effects": "Drinker became dependent upon advanced age",
@@ -139,7 +139,7 @@
       "book_appearances": "GOF, COS, DH, HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【ポリジュース薬】飲んだ者が一時的に別の人の姿を取ることを可能にする魔法薬です。動物への変身には使ってはいけません。",
+      "tweet_text_ja": "【ポリジュース薬】飲むと別人の姿になれる薬。ちょうど一時間で元に戻ります。変身は苦痛を伴い、内臓がのたうつ感覚から始まって全身が熱くなり、皮膚が熱い蝋のように溶ける心地がするそうです。",
       "effect_en": "Allowed a human drinker to temporarily assume the form of another person",
       "effect_ja": "飲んだ人間が一時的に別人の姿になることを可能にする",
       "characteristics": "Thick and mud-like, Bubbles slowly, Taste and colour varied depending on the person being turned into",
@@ -173,7 +173,7 @@
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【しゃっくり咳薬】しゃっくりを引き起こす魔法薬。6年生の時、スラグホーン先生の魔法薬の授業でマルフォイが調合し、「まあまあ」と評価されました。",
+      "tweet_text_ja": "【しゃっくり咳薬】6年生の魔法薬学の授業で、マルフォイが調合した薬。どんな効き目なのかは原作で説明されず、スラグホーン先生の評価もまずまずといったところでした。",
       "effect_ja": "しゃっくりを引き起こす"
     },
     {
@@ -186,7 +186,7 @@
       "book_appearances": "GOF, POA, DH, PS, COS, HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【解毒剤】毒の効果を打ち消す魔法薬の総称。6年生の時、スラグホーン先生の授業で「ゴルパロットの第三の法則」に基づく解毒剤作りに挑戦し、ハリーはベゾアール石を使う裏技で合格をもらいました。",
+      "tweet_text_ja": "【解毒剤】毒を打ち消す薬の総称。マンドレイクはたいていの解毒剤に欠かせない材料です。すべての毒に解毒剤があるわけではなく、古い呪いと同じように、治療法のない毒も存在します。",
       "effect_ja": "毒の効果を打ち消す"
     },
     {
@@ -214,7 +214,7 @@
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【フェリックス・フェリシス（幸運の液体）】飲んだ者に幸運をもたらす魔法薬です。調合には6か月かかり、大量に飲むと有毒で、飲みすぎると無謀さや軽率さを引き起こします。金色で、金魚のように飛び跳ねる雫が特徴です。",
+      "tweet_text_ja": "【フェリックス・フェリシス】飲んだ者を幸運にする金色の薬で、「幸運の液体」とも呼ばれます。小瓶一本で十二時間ぶん。スポーツ競技や試験、選挙では禁止薬物で、大量に摂ると猛毒になります。",
       "effect_en": "Makes the drinker lucky",
       "effect_ja": "飲んだ者に幸運をもたらす",
       "characteristics": "Molten gold in colour, Droplets leap like goldfish above potion's surface when in cauldron",
@@ -244,7 +244,7 @@
       "inventors": null,
       "wiki_url": "https://harrypotter.fandom.com/wiki/Amortentia",
       "image_url": "https://static.wikia.nocookie.net/harrypotter/images/4/4f/B6C9M1_cropped_Amortentia.png",
-      "tweet_text_ja": "【アモルテンシア（魅惑万能薬）】飲んだ者は特定の人物に強烈にのぼせ上がったり、執着心を抱いたりする魔法薬。惹かれているものによって、感じる香りが異なります。"
+      "tweet_text_ja": "【アモルテンシア（魅惑万能薬）】世界一強力な愛の妙薬。真珠貝のような光沢と、螺旋を描いて立ちのぼる湯気で見分けられます。匂いは人によって違い、その人が惹かれるものに応じて感じられます。"
     },
     {
       "id": "wiki_potion_draught_of_living_death",
@@ -262,7 +262,7 @@
       "inventors": null,
       "wiki_url": "https://harrypotter.fandom.com/wiki/Draught_of_Living_Death",
       "image_url": "https://static.wikia.nocookie.net/harrypotter/images/e/e8/Draught_of_living_death.gif",
-      "tweet_text_ja": "【生ける屍の水薬】飲んだ者を死んだように深い眠りに陥らせる魔法薬です。高度な魔法薬で、ハリーは「プリンス」の古い教科書のメモのおかげで、見事に完成させることができました。"
+      "tweet_text_ja": "【生ける屍の水薬】飲んだ者を死んだような眠りに落とす、非常に強力な眠り薬。アスフォデルとニガヨモギを合わせて作ります。うまく煎じると、途中でなめらかなカシスの実の色になります。"
     },
     {
       "id": "wiki_potion_pepperup_potion",
@@ -300,7 +300,7 @@
       "inventors": null,
       "wiki_url": "https://harrypotter.fandom.com/wiki/Veritaserum",
       "image_url": "https://static.wikia.nocookie.net/harrypotter/images/a/a0/Truth_sperum.gif",
-      "tweet_text_ja": "【真実薬（ベリタセラム）】飲んだ者に真実を語らせる、非常に強力な魔法薬です。4年生の時、スネイプ先生が保管していたこの薬をダンブルドアがバーティ・クラウチ・ジュニアに3滴飲ませたところ、アズカバン脱出からムーディに変装してハリーを捕らえるまでの計画を洗いざらい自白しました。"
+      "tweet_text_ja": "【真実薬（ベリタセラム）】完全に透明な液体で、飲んだ者に真実を語らせます。三滴で心の奥底の秘密まで喋らせてしまうほど強力なため、使用は魔法省の非常に厳格な規則で管理されています。"
     },
     {
       "id": "wiki_potion_wolfsbane_potion",
@@ -322,7 +322,7 @@
       "inventors": "Damocles Belby",
       "wiki_url": "https://harrypotter.fandom.com/wiki/Wolfsbane_Potion",
       "image_url": "https://static.wikia.nocookie.net/harrypotter/images/0/01/PA_C8.jpg",
-      "tweet_text_ja": "【脱狼薬】狼人間が変身後も理性を保つことを可能にする魔法薬です。リーマス・ルーピンは満月の前の週、毎日この薬を飲んでいました。非常に不味く、砂糖を入れると効果が失われます。"
+      "tweet_text_ja": "【脱狼薬】狼人間が満月の変身の苦しみを抑えられる薬。「トリカブト系の脱狼薬」とも呼ばれます。発明したのはダモクレス・ベルビー。マーリン勲章を受けた傑出した魔法使いです。"
     },
     {
       "id": "wiki_potion_babbling_beverage",
@@ -373,7 +373,7 @@
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【痣消し】塗ると1時間以内にあざが消えるという魔法薬。ハリーが6年生の時、ウィーズリー・ウィザード・ウィーズの店内で「パンチ望遠鏡」のせいで黒い目のあざができたハーマイオニーに、フレッドがこの薬を手渡し「自分たちで商品を試すから、ちゃんとした痣消しが必要だった」と語りました。",
+      "tweet_text_ja": "【痣消し】ウィーズリー・ウィザード・ウィーズが自分たちで試して開発した軟膏。とろりとした黄色いペースト状で、塗ると一時間以内に痣が消えます。",
       "effect_ja": "塗ると1時間以内にあざを消す"
     },
     {
@@ -425,7 +425,7 @@
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【陶酔感を誘う霊薬】太陽のような黄色をした、飲むと多幸感に包まれる魔法薬。副作用で歌い出したり人の鼻をつまんだりします。ハリーが6年生の時、「半純血プリンス」の教科書の書き込み通りハッカを加えて副作用を抑え、スラグホーン先生を上機嫌にさせることに成功しました。",
+      "tweet_text_ja": "【陶酔感を誘う霊薬】飲むと多幸感に包まれる、太陽のように輝かしい黄金色の薬。歌いまくったり、やたらと人の鼻をつまんだりする副作用があり、ハッカを加えるとそれを抑えられます。",
       "effect_ja": "飲んだ者に強い多幸感をもたらす。副作用で歌い出したり人の鼻をつまんだりする"
     },
     {
@@ -438,7 +438,7 @@
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【万年万能薬】「上級魔法薬」の教科書に登場する魔法薬の名前。ハリーが6年生の時、図書室でハーマイオニーとロン・ラベンダーの関係について気まずい会話をしながら、このノートを取り続けていました。具体的な効能や調合の描写はありません。",
+      "tweet_text_ja": "【万年万能薬】『上級魔法薬』の教科書に載っている項目。実際に調合されたり使われたりする場面は原作になく、ハーマイオニーが夜の図書室でこれについてノートを取っていた、という現れ方をします。",
       "effect_ja": "上級魔法薬の教科書に登場する魔法薬名（効能の描写はなし）"
     },
     {
@@ -464,7 +464,7 @@
       "book_appearances": "COS, POA, GOF, HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【愛の妙薬】飲んだ相手に強い恋愛感情を抱かせる魔法薬。ハリーが6年生の時、ロミルダ・ベインからもらった「大鍋チョコレート」に仕込まれていたこの薬をロンが誤って食べてしまい、スラグホーン先生に解毒してもらう騒動になりました。",
+      "tweet_text_ja": "【愛の妙薬】飲んだ者に一時的な恋慕や執着を引き起こす薬の総称。ホグワーツでは禁止されています。闇の魔術ではないため秘密探知器には引っかからず、寝かせるほど効き目が強くなることがあります。",
       "effect_ja": "飲んだ相手に強い恋愛感情を抱かせる"
     },
     {
@@ -529,7 +529,7 @@
       "book_appearances": "HBP",
       "description_en": "",
       "description_ja": "",
-      "tweet_text_ja": "【ウンのない人】\"You-Know-Who\"（例のあの人）をもじった商品名の便秘薬で、キャッチコピーは「国中を虜にする便秘センセーション」。ハリーが6年生の時、ウィーズリー・ウィザード・ウィーズの店の窓に貼られたこの商品ポスターを見て、ウィーズリーおばさんが絶句してしまいました。",
+      "tweet_text_ja": "【ウンのない人】ウィーズリー・ウィザード・ウィーズの店頭に掲げられた巨大ポスターの商品名。「例のあの人」をもじった便秘薬で、ウィーズリーおばさんは絶句し、声を出さず口の形だけで商品名をつぶやきました。",
       "effect_ja": "便秘を解消する（商品名は「例のあの人（You-Know-Who）」のもじり）"
     },
     {

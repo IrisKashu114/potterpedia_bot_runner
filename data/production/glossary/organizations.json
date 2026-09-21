@@ -3,7 +3,7 @@
     "source": "Synced from drafts/glossary/organizations.json",
     "category": "organizations",
     "type": "glossary",
-    "synced_at": "2026-07-05T18:29:41.267213",
+    "synced_at": "2026-09-20T14:39:01.095485",
     "total_count": 18,
     "note": "Translation complete entries only"
   },
@@ -107,7 +107,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: One of the four Hogwarts houses, values courage and bravery",
-      "tweet_text_ja": "【グリフィンドール】勇気、勇敢さ、騎士道精神を重んじる寮。寮監はミネルバ・マクゴナガル先生。ハリー、ハーマイオニー、ロン、ダンブルドアなどが所属。寮のシンボルは獅子で、色は深紅と金。真の勇気を持つ者にグリフィンドールの剣が現れます。"
+      "tweet_text_ja": "【グリフィンドール】創設者ゴドリック・グリフィンドールの名を冠した寮。組分け帽子の歌では、最も勇敢で大胆な者たちがここへ送られたと語られます。紋章はあらゆる生き物のうち最も勇敢とされるライオンで、寮色は真紅と金です。"
     },
     {
       "id": "manual_slytherin",
@@ -131,7 +131,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 1-7: One of the four Hogwarts houses, values ambition and cunning",
-      "tweet_text_ja": "【スリザリン】野心、狡猾さ、純血主義を重んじる寮。寮監はセブルス・スネイプ先生（後にホラス・スラグホーン）。ドラコ・マルフォイ、トム・リドル（ヴォルデモート）らが所属。シンボルは蛇で、色は緑と銀。多くの闇の魔法使いを輩出しましたが、スネイプのように複雑な人物もいます。"
+      "tweet_text_ja": "【スリザリン】創設者サラザール・スリザリンの名を冠した寮。組分け帽子の歌では、目的のためには手段を選ばない狡猾な者たちの寮と説かれます。紋章は最も賢い生物とされる蛇で、寮色はエメラルドグリーンと銀です。"
     },
     {
       "id": "manual_order_of_the_phoenix",
@@ -155,7 +155,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 5-7: Secret organization founded by Dumbledore to fight Voldemort",
-      "tweet_text_ja": "【不死鳥の騎士団】ダンブルドアが創設したヴォルデモートと戦う秘密組織。第一次魔法戦争で結成され、第二次魔法戦争で再結成されました。シリウス・ブラック、リーマス・ルーピン、マッド・アイ・ムーディらが所属。第二次魔法戦争時の本部はグリモールド・プレイス12番地です。",
+      "tweet_text_ja": "【不死鳥の騎士団】ダンブルドアが創設したヴォルデモートと戦う秘密組織。第一次魔法戦争で結成され、第二次魔法戦争で再結成されました。シリウス・ブラック、リーマス・ルーピン、マッド・アイ・ムーディらが所属。第二次魔法戦争時の本部はグリモールド・プレイス十二番地です。",
       "name_ja_from_wiki": "不死鳥の騎士団"
     },
     {
@@ -165,7 +165,8 @@
       "name_ja": "ダンブルドア軍団",
       "name_ja_alt": [
         "DA",
-        "ディー・エー"
+        "ディー・エー",
+        "ＤＡ"
       ],
       "category": "Student Organization",
       "organization_type": "Defense Group",
@@ -183,7 +184,7 @@
       "image_url": "",
       "importance": "main",
       "note": "Book 5-7: Student defense group formed by Harry, Hermione, and Ron",
-      "tweet_text_ja": "【ダンブルドア軍団】アンブリッジが実践的な闇の魔術に対する防衛術を教えなかったため、ハリー、ハーマイオニー、ロンが結成した生徒組織。必要の部屋で28人の生徒がハリーから学びました。神秘部とホグワーツの戦いで活躍しました。"
+      "tweet_text_ja": "【ダンブルドア軍団】アンブリッジの授業に反発した生徒たちが必要の部屋で結成した組織。名はジニーの案で、ハーマイオニーが署名入りの羊皮紙の上部に大きく書き加えました。集合の連絡には熱くなる偽ガリオン金貨を使います。"
     },
     {
       "id": "manual_hufflepuff",
@@ -207,7 +208,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1-7: One of the four Hogwarts houses, values loyalty and hard work",
-      "tweet_text_ja": "【ハッフルパフ】忠誠心、勤勉さ、公正さ、忍耐を重んじる寮。寮監はポモーナ・スプラウト先生。セドリック・ディゴリー、ニンファドーラ・トンクスらが所属。シンボルはアナグマで、色は黄と黒。過小評価されがちですが、忠実で勇敢な魔法使いを輩出しています。"
+      "tweet_text_ja": "【ハッフルパフ】組分け帽子の歌で、公正で忠実、忍耐強く労苦を厭わない者たちの寮と説かれます。他の三寮が勇気・知性・純血を入学の基準としたのに対し、創設者ヘルガ・ハッフルパフは残る生徒すべてを分け隔てなく教えたと歌われます。"
     },
     {
       "id": "manual_ravenclaw",
@@ -231,14 +232,17 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 1-7: One of the four Hogwarts houses, values intelligence and wisdom",
-      "tweet_text_ja": "【レイブンクロー】知性、学び、知恵、機知を重んじる寮。寮監はフィリウス・フリットウィック先生。ルーナ・ラブグッド、チョウ・チャンらが所属。シンボルは鷲で、色は青とブロンズ。寮に入るには問題に答える必要があります。"
+      "tweet_text_ja": "【レイブンクロー】組分け帽子の歌で、機知と学びを友とする賢き者の寮と説かれます。談話室の扉には取っ手も鍵穴もなく、鷲の形のノッカーが出す問いに答えないと入れません。間違えれば、正解できる誰かが来るまで待つことになります。"
     },
     {
       "id": "manual_wizengamot",
       "type": "organization",
       "name_en": "Wizengamot",
       "name_ja": "ウィゼンガモット",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ウィゼンガモット法廷",
+        "ウィゼンガモット最高裁"
+      ],
       "category": "Judicial Body",
       "organization_type": "Court",
       "description_en": "The highest court of law in wizarding Britain",
@@ -255,7 +259,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 5,7: Wizarding high court of law",
-      "tweet_text_ja": "【ウィゼンガモット】英国魔法界の最高裁判所。約50人の魔法使いが紫色のローブを着て重大な魔法犯罪を裁きます。首席魔法戦士はアルバス・ダンブルドア（5巻まで）。5巻ではハリーの未成年魔法使用が裁かれました。"
+      "tweet_text_ja": "【ウィゼンガモット】魔法省より歴史の古い組織で、いまは法廷と議会を兼ねます。通称は魔法使いの最高裁判所、議長職は主席魔法戦士。構成員は約五十名で、胸の左側に銀糸で「W」の意匠を凝らしたローブをまといます。"
     },
     {
       "id": "manual_the_daily_prophet",
@@ -305,7 +309,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 4-7: Elite group of Dark wizard catchers",
-      "tweet_text_ja": "【闇祓い局】魔法省の魔法法執行部に属する闇の魔法使いを捕らえるエリート部署。厳しい訓練が必要で、マッド・アイ・ムーディ、キングズリー・シャックルボルト、ニンファドーラ・トンクスらが所属。多くのメンバーが不死鳥の騎士団にも参加しました。",
+      "tweet_text_ja": "【闇祓い局】魔法法執行部に置かれた部局。闇祓いを志す者は、ここで「一連の厳しい性格・適性テスト」を受けることになります。建物に闇の印が現れたときは、中に入らずただちにここへ通報するよう案内されています。",
       "name_ja_from_wiki": "闇祓い"
     },
     {
@@ -330,7 +334,7 @@
       "image_url": "",
       "importance": "important",
       "note": "Book 2-7: Largest department in the Ministry of Magic",
-      "tweet_text_ja": "【魔法法執行部】魔法省で最大の部署。闇祓い局、不適切な魔法使用取締局などを含み、魔法界の法と秩序を維持します。部長はアメリア・ボーンズ（6巻まで）。闇の魔法使いの取締りから未成年の魔法使用まで幅広く担当しています。",
+      "tweet_text_ja": "【魔法法執行部】魔法省で最大の部局。本部2階にあり、魔法不適正使用取締局・闇祓い本部・ウィゼンガモット最高裁事務局を傘下に含みます。部長を務めたアメリア・ボーンズは、ヴォルデモート自身の手にかかったと見られています。",
       "name_ja_from_wiki": "魔法法執行部"
     },
     {
@@ -379,14 +383,16 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 5-7: Alternative magazine run by Xenophilius Lovegood",
-      "tweet_text_ja": "【ザ・クィブラー】ゼノフィリウス・ラブグッドが編集する型破りな雑誌。主流メディアが無視する代替理論を報道します。しばしば馬鹿にされますが、5巻ではヴォルデモート復活についてのハリーの独占インタビューを掲載し、真実を伝えました。"
+      "tweet_text_ja": "【ザ・クィブラー】ゼノフィリウス・ラブグッドが編集する雑誌。根拠の薄い説や雑多な話題が中心で評価は低いものの、アンブリッジが教育令で所持を禁じると爆発的に売れ、増刷される事態になりました。"
     },
     {
       "id": "manual_slug_club",
       "type": "organization",
       "name_en": "Slug Club",
       "name_ja": "スラグ・クラブ",
-      "name_ja_alt": [],
+      "name_ja_alt": [
+        "ナメクジ・クラブ"
+      ],
       "category": "Social Club",
       "organization_type": "Club",
       "description_en": "Exclusive club for talented and well-connected Hogwarts students",
@@ -403,14 +409,16 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 6-7: Horace Slughorn's club for favored students",
-      "tweet_text_ja": "【スラグ・クラブ】ホラス・スラグホーンが才能ある生徒や有力な家系の生徒を集めて開く社交クラブ。ハリー、ハーマイオニー、ジニーらが招待されました。スラグホーンは人脈作りに長けており、ハリーは何度かこのクラブのパーティーに招待されました。"
+      "tweet_text_ja": "【スラグ・クラブ】スラグホーン先生が、有名・有力な人物と縁のある生徒を集めて開く会。クリスマスのパーティでは、部屋がエメラルド・深紅・金の垂れ幕で覆われ、天井から下がる金色のランプの中で本物の妖精たちが光を放っていました。"
     },
     {
       "id": "manual_gryffindor_quidditch_team",
       "type": "organization",
       "name_en": "Gryffindor Quidditch team",
-      "name_ja": "グリフィンドール・クィディッチチーム",
-      "name_ja_alt": [],
+      "name_ja": "グリフィンドール・チーム",
+      "name_ja_alt": [
+        "グリフィンドール・クィディッチ・チーム"
+      ],
       "category": "Sports Team",
       "organization_type": "Quidditch Team",
       "description_en": "Hogwarts Gryffindor house Quidditch team",
@@ -433,7 +441,7 @@
       "id": "manual_inquisitorial_squad",
       "type": "organization",
       "name_en": "Inquisitorial Squad",
-      "name_ja": "尋問官部隊",
+      "name_ja": "尋問官親衛隊",
       "name_ja_alt": [],
       "category": "Student Organization",
       "organization_type": "Enforcement Group",
@@ -451,7 +459,7 @@
       "image_url": "",
       "importance": "supporting",
       "note": "Book 5: Umbridge's student enforcers at Hogwarts",
-      "tweet_text_ja": "【尋問官部隊】ドローレス・アンブリッジが高等尋問官として創設した生徒組織。主にスリザリン生で構成され、アンブリッジの教育令を施行し、他の生徒を監視しました。ドラコ・マルフォイらが所属し、ダンブルドア軍団と対立しました。"
+      "tweet_text_ja": "【尋問官親衛隊】校長代理となったアンブリッジが、魔法省を支持する生徒から直々に選抜した集団。監督生バッジの下に小さな銀の「I」を付けます。城へ出入りするふくろう便をすべて開封・検閲させられていました。"
     }
   ]
 }
